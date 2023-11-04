@@ -1,8 +1,8 @@
-import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
-import routes from "../../routes";
+import { Suspense } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import routes from '../../routes'
 
-const loading = <div>화면을 불러오는 중 입니다.</div>;
+const loading = <div>화면을 불러오는 중 입니다.</div>
 
 const DefaultLayout = () => {
   return (
@@ -20,14 +20,14 @@ const DefaultLayout = () => {
                     element={<route.element />}
                   />
                 )
-              );
+              )
             })}
           </Routes>
         </Suspense>
       }
       {/* 푸터 자리 */}
     </>
-  );
-};
+  )
+}
 
-export default DefaultLayout;
+export default DefaultLayout
