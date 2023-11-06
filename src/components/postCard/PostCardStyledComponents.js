@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { device } from '../styles'
 
 export const PostCardContainer = styled.div`
   display: flex;
@@ -8,14 +9,21 @@ export const PostCardContainer = styled.div`
   box-shadow: 0px 0.4rem 0.4rem 0px rgba(140, 140, 140, 0.25);
   padding: 3.2rem;
   box-sizing: border-box;
-  width: 68.4rem;
+  max-width: 68.4rem;
   gap: 3.2rem;
+  @media all and ${device.mobile} {
+    padding: 2.4rem;
+    gap: 2.4rem;
+  }
 
   .divider {
     background: var(--gray-30);
     width: 100%;
     height: 0.1rem;
     margin-bottom: -0.8rem;
+    @media all and ${device.mobile} {
+      margin-bottom: 0;
+    }
   }
 `
 export const TitleContainer = styled.div`
@@ -36,6 +44,10 @@ export const TitleContainer = styled.div`
     font-size: 1.8rem;
     font-weight: 400;
     line-height: 2.4rem;
+    @media all and ${device.mobile} {
+      font-size: 1.6rem;
+      line-height: 2.2rem;
+    }
   }
 `
 
@@ -47,6 +59,10 @@ export const MainContainer = styled.div`
   .userIcon {
     width: 4.8rem;
     height: 4.8rem;
+    @media all and ${device.mobile} {
+      width: 3.2rem;
+      height: 3.2rem;
+    }
   }
 
   .main-content-container {
@@ -64,6 +80,10 @@ export const MainContainer = styled.div`
         font-size: 1.8rem;
         font-weight: 400;
         line-height: 2.4rem;
+        @media all and ${device.mobile} {
+          font-size: 1.4rem;
+          line-height: 1.8rem;
+        }
       }
 
       .content-ago {
