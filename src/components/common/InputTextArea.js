@@ -1,20 +1,24 @@
 import styled from 'styled-components'
-import personIcon from '../../asset/inputField/input-icon-person.svg'
 import { useState } from 'react'
 
-const InputFieldStyledComponent = styled.div`
-  padding: 12px 16px;
+const InputTextAreaStyledComponent = styled.div`
+  padding: 16px;
   border-radius: 8px;
   border: 1px solid ${({ $isFocus }) =>
-    $isFocus ? 'var(--brown-40, #542F1A);' : 'var(--gray-40, #818181);'}
+    $isFocus ? 'var(--brown-40, #542F1A);' : 'var(--gray-20, #F9F9F9);'}
   background: var(--gray-10, #fff);
   display: flex;
   align-items: center;
   gap: 4px;
-  width: 336px;
   font-family: Pretendard;
-  input {
+  textarea {
     width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+    &:focus {
+        outline: 0;
+    }
     &::placeholder {
       color: ${({ $isValue }) =>
         $isValue ? 'color: var(--gray-60, #000);' : 'var(--gray-40, #818181);'}
@@ -22,7 +26,7 @@ const InputFieldStyledComponent = styled.div`
   } 
 `
 
-function InputField() {
+function InputTextArea() {
   const [isFocus, setIsFocus] = useState(false)
   const [isValue, setIsValue] = useState(false)
 
@@ -31,15 +35,15 @@ function InputField() {
     e.target.value === '' ? setIsValue(false) : setIsValue(true)
   }
   return (
-    <InputFieldStyledComponent $isFocus={isFocus} $isValue={isValue}>
-      <img src={personIcon} alt="personIcon" />
-      <input
+    <InputTextAreaStyledComponent $isFocus={isFocus} $isValue={isValue}>
+      <textarea
         placeholder="이름을 입력하세요"
         onFocus={inputFocus}
         onBlur={inputFocus}
+        type="textarea"
       />
-    </InputFieldStyledComponent>
+    </InputTextAreaStyledComponent>
   )
 }
 
-export default InputField
+export default InputTextArea
