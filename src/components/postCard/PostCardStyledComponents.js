@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { device } from '../styles'
 
+export const PostCardWrapper = styled.div`
+  position: relative;
+`
+
 export const PostCardContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,6 +18,13 @@ export const PostCardContainer = styled.div`
   @media all and ${device.mobile} {
     padding: 2.4rem;
     gap: 2.4rem;
+  }
+
+  .header-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .divider {
@@ -99,6 +110,33 @@ export const MainContainer = styled.div`
       font-size: 1.6rem;
       font-weight: 400;
       line-height: 2.2rem;
+    }
+  }
+`
+export const OptionMenuContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 2px 8px 0px rgba(51, 50, 54, 0.1);
+  width: 10rem;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 5rem;
+  right: -4.5rem;
+  z-index: 10;
+
+  .optionMenuItem {
+    color: #333236;
+    font-size: 1.4rem;
+    font-weight: 400;
+    background: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.7rem 1.2rem;
+    text-align: center;
+    &:hover {
+      color: #6d6afe;
+      background: #e7effb;
     }
   }
 `
