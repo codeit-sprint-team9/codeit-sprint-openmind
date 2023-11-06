@@ -1,4 +1,4 @@
-import personIcon from '../../asset/images/InputField/input-icon-person.svg'
+import personIcon from '../../asset/InputField/input-icon-person.svg'
 
 function InputField() {
   return (
