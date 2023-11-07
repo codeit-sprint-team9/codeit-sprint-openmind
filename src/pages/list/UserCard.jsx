@@ -79,11 +79,16 @@ const CardListContainer = styled.div`
   @media ${device.tablet} {
     width: calc(100% - 64px);
     max-width: 940px;
-    grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+    @media (max-width: 867px) {
+      max-width: 700px;
+    }
+    grid-template-columns: repeat(auto-fit, minmax(186px, 1fr));
   }
 
   @media ${device.mobile} {
-    grid-template-columns: repeat(2, 1fr);
+    width: calc(100% - 48px);
+    grid-template-columns: repeat(2, 155px);
+    // grid-template-columns: repeat(2, 1fr);
   }
 `
 
