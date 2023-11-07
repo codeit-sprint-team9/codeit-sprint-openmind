@@ -11,11 +11,7 @@ const CardContainer = styled.div`
   justify-content: space-between;
   border-radius: 16px;
   border: 1px solid var(--gray-40);
-
-  @media ${device.tablet} {
-    min-width: 186px;
-    // width: 100%;
-  }
+  width: 100%;
 
   @media ${device.mobile} {
     padding: 16px;
@@ -75,20 +71,15 @@ const CardContent = styled.div`
 `
 
 const CardListContainer = styled.div`
-  // display: grid;
-  // grid-template-columns: repeat(4, 1fr);
-
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 32px;
-  padding-right: 32px;
-  margin: 0 auto;
-
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 220px);
+  grid-gap: 20px;
+  justify-content: center;
 
   @media ${device.tablet} {
-    // grid-template-columns: repeat(3, 1fr);
-    width: 100%;
+    width: calc(100% - 64px);
+    max-width: 940px;
+    grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
   }
 
   @media ${device.mobile} {
@@ -98,25 +89,16 @@ const CardListContainer = styled.div`
 
 function CardList() {
   return (
-    <div
-      style={{
-        display: 'flex',
-        margin: '0 auto',
-        alignContent: 'center',
-        flexDirection: 'column',
-      }}
-    >
-      <CardListContainer>
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-      </CardListContainer>
-    </div>
+    <CardListContainer>
+      <UserCard />
+      <UserCard />
+      <UserCard />
+      <UserCard />
+      <UserCard />
+      <UserCard />
+      <UserCard />
+      <UserCard />
+    </CardListContainer>
   )
 }
 function UserCard() {
