@@ -1,21 +1,7 @@
 import logoImage from '../../asset/logo.svg'
 import styled from 'styled-components'
 import CardList from './UserCard'
-import { device } from '../../components/styles'
 
-const ListContainer = styled.div`
-  width: 100vw;
-  padding: 32px 0;
-
-  
-  @media ${device.tablet} {
-    padding: 32px;
-  }
-
-  @media ${device.mobile} {
-    padding: 24px;
-  }
-`
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -42,11 +28,11 @@ function Header() {
 }
 function List() {
   return (
-    <ListContainer>
+    <>
+    
       <Header />
-
       <CardList />
-    </ListContainer>
+    </>
   )
 }
 
