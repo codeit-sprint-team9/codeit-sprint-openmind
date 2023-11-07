@@ -5,12 +5,18 @@ import { device } from '../../components/styles'
 const CardContainer = styled.div`
   display: flex;
   width: 220px;
-  height: 187px;
+  height: 186px;
   padding: 20px;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 16px;
   border: 1px solid var(--gray-40);
+
+  @media ${device.tablet} {
+    min-width: 186px;
+    width: 100%;
+  }
+
   @media ${device.mobile} {
     padding: 16px;
   }
@@ -19,7 +25,7 @@ const CardContainer = styled.div`
 const CardProfile = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   align-self: stretch;
 
   img {
@@ -30,9 +36,8 @@ const CardProfile = styled.div`
   div {
     color: var(--gray-60);
     font-size: 20px;
-
     font-weight: 400;
-    line-height: 25px;
+    line-height: 32px;
   }
 
   @media ${device.mobile} {
@@ -56,7 +61,7 @@ const CardContent = styled.div`
 
   line-height: 22px;
   img {
-    margin-right: 4px;
+    margin-right: 0.25rem;
   }
   div {
     font-family: Pretendard;
@@ -73,6 +78,19 @@ const CardListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  margin: 0 auto;
+
+  width: 940px;
+
+  @media ${device.tablet} {
+    // grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
+
+  @media ${device.mobile} {
+    grid-template-columns: repeat(2, 1fr);
+    width: 460px;
+  }
 `
 
 function CardList() {
