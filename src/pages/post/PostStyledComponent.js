@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { device } from '../../components/styles'
 
 export const Div = styled.div`
   position: relative;
@@ -56,9 +57,14 @@ export const LinkDiv = styled.div`
 export const ContentWrapper = styled.div`
   padding-top: 54px;
   padding-bottom: 136px;
+  @media (${device.tablet}) {
+    padding: 54px 36px 136px;
+  }
+  @media (${device.mobile}) {
+    padding: 54px 24px 136px;
+  }
 `
 export const Content = styled.div`
-  width: 684px;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -70,7 +76,6 @@ export const Content = styled.div`
   background-color: #f5f1ee;
 `
 export const ContentHeader = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,11 +87,10 @@ export const ContentHeader = styled.div`
   line-height: 25px;
 `
 export const ContentDiv = styled.div`
-    width:100%
-    border-radius: 16px;
-    background-color: #fff;
-    box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
-  `
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+`
 
 export const DivButton = styled.div`
   position: fixed;

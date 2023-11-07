@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import Nav from './Nav'
 import PostContent from './PostContent'
 import * as S from './PostStyledComponent'
-import PostNoContent from './PostNoContent'
-import PostAnswerContent from './PostAnswerContent'
+// import PostNoContent from './PostNoContent'
+// import PostAnswerContent from './PostAnswerContent'
 
 const Div = styled.div`
   position: relative;
@@ -16,8 +16,8 @@ const Post = () => {
       <Nav />
       <S.Div>
         <PostContent />
-        <PostNoContent />
-        <PostAnswerContent />
+        {/* <PostNoContent />
+        <PostAnswerContent /> */}
       </S.Div>
     </Div>
   )
