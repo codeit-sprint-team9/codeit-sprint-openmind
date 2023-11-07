@@ -26,9 +26,8 @@ const InputTextAreaStyledComponent = styled.div`
   } 
 `
 
-function InputTextArea() {
+function InputTextArea({ isValue, setIsValue }) {
   const [isFocus, setIsFocus] = useState(false)
-  const [isValue, setIsValue] = useState(false)
 
   function inputFocus(e) {
     setIsFocus(!isFocus)

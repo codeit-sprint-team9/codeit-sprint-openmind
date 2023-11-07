@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import personIcon from '../../asset/inputField/input-icon-person.svg'
+import personIcon from '../../asset/InputField/input-icon-person.svg'
 import { useState } from 'react'
 
 const InputFieldStyledComponent = styled.div`
@@ -22,9 +22,8 @@ const InputFieldStyledComponent = styled.div`
   } 
 `
 
-function InputField() {
+function InputField({ isValue, setIsValue }) {
   const [isFocus, setIsFocus] = useState(false)
-  const [isValue, setIsValue] = useState(false)
 
   function inputFocus(e) {
     setIsFocus(!isFocus)
