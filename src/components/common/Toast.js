@@ -5,7 +5,7 @@ const ToastStyledComponent = styled.div`
   border-radius: 0.8rem;
   background: var(--gray-60, #000);
   box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
-  color: var(--grayscale-10, #fff);
+  color: var(--gray-10, #fff);
   font-size: 1.4rem;
   font-weight: 500;
   text-align: center;

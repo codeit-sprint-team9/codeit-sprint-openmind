@@ -33,7 +33,7 @@ const DropdownNewItem = styled.div`
   border-bottom-right-radius: 0.8rem;
   color: ${({ $selected }) =>
     $selected === '최신순'
-      ? 'var(--blue-50, #1877F2);'
+      ? 'var(--blue, #1877F2);'
       : 'var(--gray-50, #515151);'};
 `
 

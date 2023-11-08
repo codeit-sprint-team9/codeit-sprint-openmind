@@ -24,7 +24,7 @@ const EditBoxStyledComponent = styled.div`
   }
   &:active {
     background: var(--gray-10, #fff);
-    color: var(--blue-50, #1877f2);
+    color: var(--blue, #1877f2);
     img {
       filter: invert(36%) sepia(100%) saturate(3148%) hue-rotate(203deg)
         brightness(99%) contrast(92%);
