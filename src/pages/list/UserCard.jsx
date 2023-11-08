@@ -2,95 +2,6 @@ import styled from 'styled-components'
 import messageIcon from '../../asset/list/Messages.svg'
 import profileImage from '../../asset/list/profileImg.svg'
 import { device } from '../../components/styles'
-const CardContainer = styled.div`
-  display: flex;
-  width: 220px;
-  height: 186px;
-  padding: 20px;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 16px;
-  border: 1px solid var(--gray-40);
-  width: 100%;
-
-  @media ${device.mobile} {
-    padding: 16px;
-  }
-`
-
-const CardProfile = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  align-self: stretch;
-
-  img {
-    width: 60px;
-    height: 60px;
-  }
-
-  div {
-    color: var(--gray-60);
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 32px;
-  }
-
-  @media ${device.mobile} {
-    img {
-      width: 48px;
-      height: 48px;
-    }
-
-    div {
-      font-size: 18px;
-    }
-  }
-`
-
-const CardContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  color: var(--gray-40);
-  font-size: 16px;
-
-  line-height: 22px;
-  img {
-    margin-right: 0.25rem;
-  }
-  div {
-    font-family: Pretendard;
-    text-align: center;
-    display: flex;
-  }
-
-  @media ${device.mobile} {
-    font-size: 14px;
-  }
-`
-
-const CardListContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 220px);
-  grid-gap: 20px;
-  justify-content: center;
-
-  @media ${device.tablet} {
-    width: calc(100% - 64px);
-    max-width: 940px;
-    @media (max-width: 867px) {
-      max-width: 700px;
-    }
-    grid-template-columns: repeat(auto-fit, minmax(186px, 1fr));
-  }
-
-  @media ${device.mobile} {
-    width: calc(100% - 48px);
-    grid-template-columns: repeat(2, 155px);
-    // grid-template-columns: repeat(2, 1fr);
-  }
-`
 
 function CardList() {
   return (
@@ -124,5 +35,96 @@ function UserCard() {
     </CardContainer>
   )
 }
+
+const CardListContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 22rem);
+  grid-gap: 2rem;
+  justify-content: center;
+  padding: 2.5rem;
+
+  @media ${device.tablet} {
+    width: calc(100% - 6.4rem);
+    max-width: 94rem;
+    @media (max-width: 868px) {
+      max-width: 70rem;
+    }
+    grid-template-columns: repeat(auto-fit, minmax(18.6rem, 1fr));
+  }
+
+  @media ${device.mobile} {
+    width: calc(100% - 4.8rem);
+    grid-template-columns: repeat(2, 15.5rem);
+    // grid-template-columns: repeat(2, 1fr);
+  }
+`
+
+const CardContainer = styled.div`
+  display: flex;
+  width: 22rem;
+  height: 18.6rem;
+  padding: 2rem;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 1.6rem;
+  border: 0.1rem solid var(--gray-40);
+  width: 100%;
+
+  @media ${device.mobile} {
+    padding: 1.6rem;
+  }
+`
+
+const CardProfile = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  align-self: stretch;
+
+  img {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  div {
+    color: var(--gray-60);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 3.2rem;
+  }
+
+  @media ${device.mobile} {
+    img {
+      width: 4.8rem;
+      height: 4.8rem;
+    }
+
+    div {
+      font-size: 1.8rem;
+    }
+  }
+`
+
+const CardContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  color: var(--gray-40);
+  font-size: 1.6rem;
+
+  line-height: 2.2rem;
+  img {
+    margin-right: 0.25rem;
+  }
+  div {
+    font-family: Pretendard;
+    text-align: center;
+    display: flex;
+  }
+
+  @media ${device.mobile} {
+    font-size: 1.4rem;
+  }
+`
 
 export default CardList

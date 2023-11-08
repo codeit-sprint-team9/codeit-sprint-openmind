@@ -8,7 +8,7 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 2.5rem 6.25rem;
+  padding: 2rem 6.25rem;
 
   div {
     color: var(--gray-60);
@@ -19,19 +19,19 @@ const HeaderContainer = styled.div`
 
   // 공용 컴포넌트
   button {
-    border: 1px solid;
-    width: 166px;
-    height: 46px;
+    border: 0.1rem solid;
+    width: 16.6rem;
+    height: 4.6rem;
   }
 
   @media ${device.mobile} {
-    gap: 20px;
+    gap: 2rem;
     flex-direction: column;
     align-items: center;
     button {
-      width: 127px;
-      height: 32px;
-      padding: 8px 12px;
+      width: 12.7rem;
+      height: 3.2rem;
+      padding: 0.8rem 1.2rem;
     }
   }
 `
@@ -40,29 +40,28 @@ const HeaderContainer2 = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap: 12px;
-  margin-bottom: 25px;
+  gap: 1.2rem;
 
   div {
     color: var(--grayscale-60, #000);
-    font-size: 40px;
+    font-size: 4rem;
     font-weight: 400;
   }
 
   //스타일드 컴포넌트
   .sort {
-    font-size: 20px;
+    font-size: 2rem;
   }
 
   @media ${device.mobile} {
     flex-direction: row;
-    gap: 42px;
+    gap: 4.2rem;
 
     div {
-      font-size: 24px;
+      font-size: 2.4rem;
     }
     .sort {
-      font-size: 24px;
+      font-size: 2.4rem;
     }
   }
 `
@@ -84,11 +83,48 @@ function Header() {
     </>
   )
 }
+
+const PaginationContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`
+const PageButton = styled.button`
+  width: 4rem;
+  height: 4rem;
+  color: var(--gray-40);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 400;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--brown-40, #542f1a);
+  }
+`
+
+function Pagination() {
+  // const count = 400
+  return (
+    <PaginationContainer>
+      <PageButton>{1}</PageButton>
+      <PageButton>{2}</PageButton>
+      <PageButton>{3}</PageButton>
+      <PageButton>{4}</PageButton>
+      <PageButton>{5}</PageButton>
+      <PageButton>{6}</PageButton>
+      <PageButton>{7}</PageButton>
+      <PageButton>...</PageButton>
+      <PageButton>25</PageButton>
+    </PaginationContainer>
+  )
+}
 function List() {
   return (
     <>
       <Header />
       <CardList />
+      <Pagination />
     </>
   )
 }
