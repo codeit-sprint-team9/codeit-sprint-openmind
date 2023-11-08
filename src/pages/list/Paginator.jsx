@@ -1,30 +1,10 @@
-import styled from 'styled-components'
-import * as React from 'react'
-
 import Stack from '@mui/material/Stack'
-import { Pagination } from '@mui/material'
-import { makeStyles, createStyles } from '@mui/styles'
-
-// const PageButton = styled.button`
-//   width: 4rem;
-//   height: 4rem;
-//   color: var(--gray-40);
-//   text-align: center;
-//   font-size: 2rem;
-//   font-weight: 400;
-//   cursor: pointer;
-
-//   &:hover {
-//     color: var(--brown-40, #542f1a);
-//   }
-// `
+import { Pagination, debounce } from '@mui/material'
+import { makeStyles } from '@mui/styles'
+import { useEffect, useState } from 'react'
 
 const useStyles = makeStyles({
   PaginatorContainer: {
-    '& div': {
-      display: 'flex',
-      justifyContent: 'center',
-    },
     '& nav > ul > li > button': {
       width: '4rem',
       height: '4rem',
@@ -36,38 +16,47 @@ const useStyles = makeStyles({
       fontFamily: 'Actor',
     },
 
-    '& nav > ul > li > button .Mui-selected button': {
-      backgroundColor: 'transparent',
+    '& nav > ul > li > button.Mui-selected': {
+      // backgroundColor: 'transparent',
+      color: 'var(--brown-40)',
     },
-
   },
 })
 
 function Paginator() {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  })
+
+  const handleResize = debounce(() => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    })
+  }, 1000)
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   const classes = useStyles()
+
   return (
-    <Stack spacing={0} className={classes.PaginatorContainer}>
+    <Stack className={classes.PaginatorContainer}>
       <Pagination
         isSelected={false}
-        count={25}
+        count={34}
         hidePrevButton
         hideNextButton
         size="large"
-        siblingCount={3}
+        siblingCount={windowSize.width < 767 ? 1 : 2}
         boundaryCount={1}
       />
     </Stack>
-    // <PaginatorContainer>
-    //   <PageButton>{1}</PageButton>
-    //   <PageButton>{2}</PageButton>
-    //   <PageButton>{3}</PageButton>
-    //   <PageButton>{4}</PageButton>
-    //   <PageButton>{5}</PageButton>
-    //   <PageButton>{6}</PageButton>
-    //   <PageButton>{7}</PageButton>
-    //   <PageButton>...</PageButton>
-    //   <PageButton>25</PageButton>
-    // </PaginatorContainer>
   )
 }
 

@@ -46,7 +46,7 @@ const CardListContainer = styled.div`
   @media ${device.tablet} {
     width: calc(100% - 6.4rem);
     max-width: 94rem;
-    @media (max-width: 868px) {
+    @media (max-width: 918px) {
       max-width: 70rem;
     }
     grid-template-columns: repeat(auto-fit, minmax(18.6rem, 1fr));
@@ -55,23 +55,21 @@ const CardListContainer = styled.div`
   @media ${device.mobile} {
     width: calc(100% - 4.8rem);
     grid-template-columns: repeat(2, 15.5rem);
-    // grid-template-columns: repeat(2, 1fr);
   }
 `
 
 const CardContainer = styled.div`
   display: flex;
-  width: 22rem;
   height: 18.6rem;
   padding: 2rem;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1.6rem;
   border: 0.1rem solid var(--gray-40);
-  width: 100%;
 
   @media ${device.mobile} {
     padding: 1.6rem;
+    width: 15rem;
   }
 `
 
@@ -117,7 +115,6 @@ const CardContent = styled.div`
     margin-right: 0.25rem;
   }
   div {
-    font-family: Pretendard;
     text-align: center;
     display: flex;
   }
