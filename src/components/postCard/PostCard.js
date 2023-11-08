@@ -1,4 +1,5 @@
 import {
+  BottomContainer,
   MainContainer,
   OptionMenuContainer,
   PostCardContainer,
@@ -12,17 +13,19 @@ import Badge from '../common/Badge'
 import InputTextArea from '../common/InputTextArea'
 import Button from '../common/Button'
 import Reaction from '../common/Reaction'
+import Edit from '../common/Edit'
 
-const PostCard = ({ state = 'answer' }) => {
+const PostCard = ({ state = 'default' }) => {
   const [isOpenOption, setIsOpenOption] = useState(false)
   const [, setSelectedOption] = useState('')
   const [answer, setAnswer] = useState('')
+  const [isAnswered] = useState(true)
 
   return (
     <PostCardWrapper>
       <PostCardContainer>
         <div className="header-container">
-          <Badge isAnswered={true} />
+          <Badge isAnswered={isAnswered} />
           {state === 'answer' && (
             <img
               className="option-btn"
@@ -80,8 +83,12 @@ const PostCard = ({ state = 'answer' }) => {
 
         <div className="divider" />
 
-        <Reaction />
+        <BottomContainer>
+          <Reaction />
+          {isAnswered && <Edit />}
+        </BottomContainer>
       </PostCardContainer>
+
       {isOpenOption && <OptionMenu setSelectOption={setSelectedOption} />}
     </PostCardWrapper>
   )

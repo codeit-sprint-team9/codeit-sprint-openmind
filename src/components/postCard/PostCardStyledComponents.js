@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { device } from '../styles'
 import { InputTextAreaStyledComponent } from '../common/InputTextArea'
+import { EditBoxStyledComponent } from '../common/Edit'
 
 export const PostCardWrapper = styled.div`
   position: relative;
@@ -132,6 +133,19 @@ export const MainContainer = styled.div`
     }
   }
 `
+
+export const BottomContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  @media all and ${device.mobile} {
+    ${EditBoxStyledComponent} {
+      display: none;
+    }
+  }
+`
+
 export const OptionMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
