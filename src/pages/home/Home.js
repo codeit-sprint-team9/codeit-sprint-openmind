@@ -1,32 +1,28 @@
-import { useState } from 'react'
-import Badge from '../../components/common/Badge'
+import styled from 'styled-components'
+import backgroundImg from '../../asset/Home/background.png'
+import logo from '../../asset/Home/pc-logo.png'
 import Button from '../../components/common/Button'
-import Dropdown from '../../components/common/Dropdown'
-import Edit from '../../components/common/Edit'
-import FloatingButton from '../../components/common/FloatingButton'
-import InputField from '../../components/common/InputField'
-import InputTextArea from '../../components/common/InputTextArea'
-import Reaction from '../../components/common/Reaction'
-import Toast from '../../components/common/Toast'
+
+const HomeBackgroundStyledComponent = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-image: url(${backgroundImg});
+  background-repeat: no-repeat;
+  background-position: bottom;
+`
+
+const HomeButtonBoxStyledComponent = styled.div`
+  width: 166px;
+`
 
 const Home = () => {
-  const [isValue, setIsValue] = useState(false)
   return (
-    <div>
-      <h1>home</h1>
-      <InputField isValue={isValue} setIsValue={setIsValue} />
-      <InputTextArea isValue={isValue} setIsValue={setIsValue} />
-      <Badge isAnswered={true} />
-      <Badge isAnswered={false} />
-      <FloatingButton />
-      <Toast />
-      <Reaction like="5" disLike="2" />
-      <Reaction />
-      <Dropdown />
-      <Edit />
-      <Button brown isValue={isValue} />
-      <Button />
-    </div>
+    <HomeBackgroundStyledComponent>
+      <HomeButtonBoxStyledComponent>
+        <Button text="질문하러 가기" />
+      </HomeButtonBoxStyledComponent>
+      <img src={logo} alt="logo" />
+    </HomeBackgroundStyledComponent>
   )
 }
 
