@@ -12,9 +12,8 @@ export const PostCardContainer = styled.div`
   flex-direction: column;
   border-radius: 1.6rem;
   background: var(--gray-10);
-  box-shadow: 0px 0.4rem 0.4rem 0px rgba(140, 140, 140, 0.25);
+  box-shadow: 0 0.4rem 0.4rem 0 rgba(140, 140, 140, 0.25);
   padding: 3.2rem;
-  box-sizing: border-box;
   width: 68.4rem;
   gap: 3.2rem;
   @media all and ${device.tablet} {
@@ -98,7 +97,7 @@ export const MainContainer = styled.div`
       align-items: center;
 
       .user-name {
-        color: var(--gray60);
+        color: var(--gray-60);
         font-size: 1.8rem;
         font-weight: 400;
         line-height: 2.4rem;
@@ -149,7 +148,7 @@ export const BottomContainer = styled.div`
 export const OptionMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 2px 8px 0px rgba(51, 50, 54, 0.1);
+  box-shadow: 0 0.2rem 0.8rem 0 rgba(51, 50, 54, 0.1);
   width: 10rem;
   align-items: center;
   justify-content: center;
@@ -158,18 +157,26 @@ export const OptionMenuContainer = styled.div`
   right: -4.5rem;
   z-index: 10;
 
-  .optionMenuItem {
-    color: #333236;
-    font-size: 1.4rem;
-    font-weight: 400;
-    background: #fff;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 0.7rem 1.2rem;
-    text-align: center;
-    &:hover {
-      color: #6d6afe;
-      background: #e7effb;
-    }
+  @media all and ${device.mobile} {
+    right: -0.9rem;
+  }
+`
+export const OptionMenuItem = styled.div`
+  color: #333236;
+  font-size: 1.4rem;
+  font-weight: 400;
+  background: #fff;
+  width: 100%;
+  padding: 0.7rem 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  display: ${(props) => (props.$display ? 'block' : 'none')};
+  &:hover {
+    color: #6d6afe;
+    background: #e7effb;
+  }
+
+  @media all and ${device.mobile} {
+    display: block;
   }
 `
