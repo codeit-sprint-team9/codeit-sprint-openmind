@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import CardList from './UserCard'
 import { device } from '../../components/styles'
 import { Link } from 'react-router-dom'
+import Paginator from './Paginator'
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -84,47 +85,12 @@ function Header() {
   )
 }
 
-const PaginationContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-`
-const PageButton = styled.button`
-  width: 4rem;
-  height: 4rem;
-  color: var(--gray-40);
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 400;
-  cursor: pointer;
-
-  &:hover {
-    color: var(--brown-40, #542f1a);
-  }
-`
-
-function Pagination() {
-  // const count = 400
-  return (
-    <PaginationContainer>
-      <PageButton>{1}</PageButton>
-      <PageButton>{2}</PageButton>
-      <PageButton>{3}</PageButton>
-      <PageButton>{4}</PageButton>
-      <PageButton>{5}</PageButton>
-      <PageButton>{6}</PageButton>
-      <PageButton>{7}</PageButton>
-      <PageButton>...</PageButton>
-      <PageButton>25</PageButton>
-    </PaginationContainer>
-  )
-}
 function List() {
   return (
     <>
       <Header />
       <CardList />
-      <Pagination />
+      <Paginator />
     </>
   )
 }
