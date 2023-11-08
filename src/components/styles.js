@@ -1,9 +1,9 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 export const device = {
   tablet: `(min-width: 768px) and (max-width: 1199px)`,
   mobile: `(max-width: 767px)`,
-};
+}
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -24,8 +24,8 @@ export const GlobalStyle = createGlobalStyle`
 }
 *{
     box-sizing: border-box;
-    font-family: 'Actor', sans-serif;
-}
+    font-family: 'Pretendard', 'Actor', sans-serif;
+  }
 html {
     font-size: 62.5%;
   }
@@ -68,4 +68,4 @@ html {
     flex-direction: column;
     align-items: center;
   }
-`;
+`

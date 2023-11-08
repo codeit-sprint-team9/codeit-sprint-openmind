@@ -1,0 +1,50 @@
+import styled from 'styled-components'
+import { useState } from 'react'
+
+const InputTextAreaStyledComponent = styled.div`
+  padding: 1.6rem;
+  border-radius: 0.8rem;
+  ${({ $isFocus }) =>
+    $isFocus && 'border: 0.1rem solid var(--brown-40, #542F1A);'}
+  background: var(--gray-20, #F9F9F9);
+  display: flex;
+  align-items: center;
+  textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+    padding: 0;
+    background: var(--gray-20, #f9f9f9);
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    &:focus {
+      outline: 0;
+    }
+    &::placeholder {
+      color: ${({ $isValue }) =>
+        $isValue ? 'color: var(--gray-60, #000);' : 'var(--gray-40, #818181);'};
+    }
+  }
+`
+
+function InputTextArea({ isValue, setIsValue }) {
+  const [isFocus, setIsFocus] = useState(false)
+
+  function inputFocus(e) {
+    setIsFocus(!isFocus)
+    e.target.value === '' ? setIsValue(false) : setIsValue(true)
+  }
+  return (
+    <InputTextAreaStyledComponent $isFocus={isFocus} $isValue={isValue}>
+      <textarea
+        placeholder="이름을 입력하세요"
+        onFocus={inputFocus}
+        onBlur={inputFocus}
+        type="textarea"
+      />
+    </InputTextAreaStyledComponent>
+  )
+}
+
+export default InputTextArea
