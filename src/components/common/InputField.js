@@ -11,7 +11,7 @@ const InputFieldStyledComponent = styled.div`
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  width: 33.6rem  ;
+  width: 100%;
   font-size: 1.6rem;
   line-height: 2.2rem;
   input {
