@@ -108,6 +108,7 @@ export const MainContainer = styled.div`
       }
 
       .content-ago {
+        display: ${(props) => (props.$isAnswered ? 'block' : 'none')};
         color: var(--gray-40);
         font-size: 1.4rem;
         font-weight: 500;

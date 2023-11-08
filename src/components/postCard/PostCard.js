@@ -48,8 +48,8 @@ const PostCard = ({ state = 'default' }) => {
           </div>
         </TitleContainer>
 
-        {isAnswered && (
-          <MainContainer>
+        {!(state === 'default' && !isAnswered) && (
+          <MainContainer $isAnswered={isAnswered}>
             <img src={UserImg} className="user-icon" alt="userIcon" />
             <div className="main-content-container">
               <div className="content-user-info-container">
@@ -57,19 +57,7 @@ const PostCard = ({ state = 'default' }) => {
                 <div className="content-ago">2주전</div>
               </div>
 
-              {state === 'answer' ? (
-                <div className="textarea-container">
-                  <InputTextArea
-                    placeholder="답변을 입력해주세요"
-                    setAnswer={setAnswer}
-                  />
-                  <Button
-                    isValue={answer !== ''}
-                    brown={true}
-                    text="답변 완료"
-                  />
-                </div>
-              ) : (
+              {isAnswered ? (
                 <div className="main-content">
                   그들을 불러 귀는 이상의 오직 피고, 가슴이 이상, 못할
                   봄바람이다. 찾아다녀도, 전인 방황하였으며, 대한 바이며,
@@ -81,6 +69,18 @@ const PostCard = ({ state = 'default' }) => {
                   우는 새 예가 우리의 것은 피다. 피가 그것을 어디 앞이 기쁘며,
                   이상의 열락의 위하여서 끝까지 것이다. 있는 봄바람을
                   방황하여도, 우리의 것은 작고 아니한 영원히 듣기만 운다.
+                </div>
+              ) : (
+                <div className="textarea-container">
+                  <InputTextArea
+                    placeholder="답변을 입력해주세요"
+                    setAnswer={setAnswer}
+                  />
+                  <Button
+                    isValue={answer !== ''}
+                    brown={true}
+                    text="답변 완료"
+                  />
                 </div>
               )}
             </div>
