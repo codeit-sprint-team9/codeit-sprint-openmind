@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { device } from '../styles'
+import { InputTextAreaStyledComponent } from '../common/InputTextArea'
 
 export const PostCardWrapper = styled.div`
   position: relative;
@@ -13,11 +14,15 @@ export const PostCardContainer = styled.div`
   box-shadow: 0px 0.4rem 0.4rem 0px rgba(140, 140, 140, 0.25);
   padding: 3.2rem;
   box-sizing: border-box;
-  max-width: 68.4rem;
+  width: 68.4rem;
   gap: 3.2rem;
+  @media all and ${device.tablet} {
+    width: 67.2rem;
+  }
   @media all and ${device.mobile} {
     padding: 2.4rem;
     gap: 2.4rem;
+    width: 29.5rem;
   }
 
   .header-container {
@@ -25,6 +30,10 @@ export const PostCardContainer = styled.div`
     width: 100%;
     justify-content: space-between;
     align-items: center;
+
+    .option-btn {
+      cursor: pointer;
+    }
   }
 
   .divider {
@@ -67,7 +76,7 @@ export const MainContainer = styled.div`
   gap: 1.2rem;
   width: 100%;
 
-  .userIcon {
+  .user-icon {
     width: 4.8rem;
     height: 4.8rem;
     @media all and ${device.mobile} {
@@ -80,6 +89,7 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    width: 100%;
 
     .content-user-info-container {
       display: flex;
@@ -110,6 +120,15 @@ export const MainContainer = styled.div`
       font-size: 1.6rem;
       font-weight: 400;
       line-height: 2.2rem;
+    }
+  }
+
+  .textarea-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    ${InputTextAreaStyledComponent} {
+      height: 18.6rem;
     }
   }
 `

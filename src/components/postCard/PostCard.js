@@ -8,19 +8,24 @@ import {
 import UserImg from '../../asset/postCard/img_postCardUser.png'
 import OptionIcon from '../../asset/postCard/img_option.svg'
 import { useState } from 'react'
+import Badge from '../common/Badge'
+import InputTextArea from '../common/InputTextArea'
+import Button from '../common/Button'
+import Reaction from '../common/Reaction'
 
-const PostCard = ({ state = 'default' }) => {
+const PostCard = ({ state = 'answer' }) => {
   const [isOpenOption, setIsOpenOption] = useState(false)
   const [, setSelectedOption] = useState('')
+  const [answer, setAnswer] = useState('')
 
   return (
     <PostCardWrapper>
       <PostCardContainer>
         <div className="header-container">
-          <div>답변완료</div>
-          {state === 'answer' ? (
+          <Badge isAnswered={true} />
+          {state === 'answer' && (
             <img
-              className="optionBtn"
+              className="option-btn"
               src={OptionIcon}
               alt="optionIcon"
               onClick={(e) => {
@@ -28,19 +33,19 @@ const PostCard = ({ state = 'default' }) => {
                 setIsOpenOption(!isOpenOption)
               }}
             />
-          ) : (
-            <></>
           )}
         </div>
 
         <TitleContainer>
           <div className="question-ago">질문 · 2주전</div>
 
-          <div className="title">postCard</div>
+          <div className="title">
+            좋아하는 동물은?좋아하는 동물은?좋아하는 동물은? 좋아하동 물은?
+          </div>
         </TitleContainer>
 
         <MainContainer>
-          <img src={UserImg} className="userIcon" alt="userIcon" />
+          <img src={UserImg} className="user-icon" alt="userIcon" />
           <div className="main-content-container">
             <div className="content-user-info-container">
               <div className="user-name">아초는고양이</div>
@@ -49,7 +54,13 @@ const PostCard = ({ state = 'default' }) => {
 
             {/* 답변하기인 경우 textarea 컴포넌트 보여주기 */}
             {state === 'answer' ? (
-              <></>
+              <div className="textarea-container">
+                <InputTextArea
+                  placeholder="답변을 입력해주세요"
+                  setAnswer={setAnswer}
+                />
+                <Button isValue={answer !== ''} brown={true} text="답변 완료" />
+              </div>
             ) : (
               <div className="main-content">
                 그들을 불러 귀는 이상의 오직 피고, 가슴이 이상, 못할 봄바람이다.
@@ -69,7 +80,7 @@ const PostCard = ({ state = 'default' }) => {
 
         <div className="divider" />
 
-        <div>like</div>
+        <Reaction />
       </PostCardContainer>
       {isOpenOption && <OptionMenu setSelectOption={setSelectedOption} />}
     </PostCardWrapper>
@@ -77,27 +88,22 @@ const PostCard = ({ state = 'default' }) => {
 }
 export default PostCard
 
+const OptionMenuArr = ['답변 거절', '답변 삭제', '질문 거절']
+
 const OptionMenu = (porps) => {
   return (
     <OptionMenuContainer>
-      <div
-        className="optionMenuItem"
-        onClick={() => porps.setSelectOption('답변 거절')}
-      >
-        답변 거절
-      </div>
-      <div
-        className="optionMenuItem"
-        onClick={() => porps.setSelectOption('답변 삭제')}
-      >
-        답변 삭제
-      </div>
-      <div
-        className="optionMenuItem"
-        onClick={() => porps.setSelectOption('질문 거절')}
-      >
-        질문 삭제
-      </div>
+      {OptionMenuArr.map((e, index) => {
+        return (
+          <div
+            key={index}
+            className="optionMenuItem"
+            onClick={() => porps.setSelectOption(e)}
+          >
+            {e}
+          </div>
+        )
+      })}
     </OptionMenuContainer>
   )
 }

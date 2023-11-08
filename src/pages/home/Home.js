@@ -8,7 +8,7 @@ import InputField from '../../components/common/InputField'
 import InputTextArea from '../../components/common/InputTextArea'
 import Reaction from '../../components/common/Reaction'
 import Toast from '../../components/common/Toast'
-
+import PostCard from '../../components/postCard/PostCard'
 const Home = () => {
   const [isValue, setIsValue] = useState(false)
   return (
@@ -26,6 +26,7 @@ const Home = () => {
       <Edit />
       <Button brown isValue={isValue} />
       <Button />
+      <PostCard />
     </div>
   )
 }
