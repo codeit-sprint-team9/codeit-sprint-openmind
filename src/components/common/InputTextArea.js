@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useState } from 'react'
 
-const InputTextAreaStyledComponent = styled.div`
+export const InputTextAreaStyledComponent = styled.div`
   padding: 1.6rem;
   border-radius: 0.8rem;
   ${({ $isFocus }) =>
@@ -28,8 +28,9 @@ const InputTextAreaStyledComponent = styled.div`
   }
 `
 
-function InputTextArea({ isValue, setIsValue }) {
+function InputTextArea({ setAnswer, placeholder = '질문을 입력해주세요' }) {
   const [isFocus, setIsFocus] = useState(false)
+  const [isValue, setIsValue] = useState(false)
 
   function inputFocus(e) {
     setIsFocus(!isFocus)
@@ -38,9 +39,10 @@ function InputTextArea({ isValue, setIsValue }) {
   return (
     <InputTextAreaStyledComponent $isFocus={isFocus} $isValue={isValue}>
       <textarea
-        placeholder="이름을 입력하세요"
+        placeholder={placeholder}
         onFocus={inputFocus}
         onBlur={inputFocus}
+        onChange={(e) => setAnswer(e.target.value)}
         type="textarea"
       />
     </InputTextAreaStyledComponent>

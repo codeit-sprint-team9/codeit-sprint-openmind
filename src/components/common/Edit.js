@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import editIcon from '../../asset/Edit/dropdown-list-icon-edit.svg'
 
-const EditBoxStyledComponent = styled.div`
+export const EditBoxStyledComponent = styled.div`
   display: flex;
   width: 10.5rem;
   padding: 1rem 1.6rem;
