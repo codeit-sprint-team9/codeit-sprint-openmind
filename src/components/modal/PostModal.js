@@ -1,11 +1,17 @@
 import styled from 'styled-components'
 import MessageIcon from '../../asset/postModal/img_message.svg'
 import CloseIcon from '../../asset/postModal/img_close.svg'
-import InputTextArea from '../common/InputTextArea'
-import Button from '../common/Button'
+import InputTextArea, {
+  InputTextAreaStyledComponent,
+} from '../common/InputTextArea'
+import Button, { ButtonInteractiveStyledComponent } from '../common/Button'
 import { device } from '../styles'
+import { useState } from 'react'
+import UserIcon from '../../asset/postCard/img_postCardUser.png'
 
 const PostModal = ({ setIsOpened }) => {
+  const [question, setQuestion] = useState('')
+
   return (
     <Overlay>
       <OuterModalContainer onClick={() => setIsOpened(false)} />
@@ -25,13 +31,13 @@ const PostModal = ({ setIsOpened }) => {
         <ContentContainer>
           <div className="userContainer">
             <div className="to">To.</div>
-            <img className="userIcon" />
+            <img className="userIcon" src={UserIcon} alt="userIcon" />
             <div className="userName">아초는고양이</div>
           </div>
 
-          <InputTextArea />
+          <InputTextArea setAnswer={setQuestion} />
 
-          <Button brown={true} text="질문 보내기" />
+          <Button brown={true} text="질문 보내기" isValue={question !== ''} />
         </ContentContainer>
       </ModalMainContainer>
     </Overlay>
@@ -132,6 +138,20 @@ export const ContentContainer = styled.div`
     .userName {
       font-size: 1.6rem;
       line-height: 2.2rem;
+    }
+  }
+
+  ${InputTextAreaStyledComponent} {
+    height: 18rem;
+    @media all and ${device.mobile} {
+      height: 35.8rem;
+    }
+  }
+
+  ${ButtonInteractiveStyledComponent} {
+    @media all and ${device.mobile} {
+      padding: 1.2rem 2.4rem;
+      font-size: 1.6rem;
     }
   }
 `
