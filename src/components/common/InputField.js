@@ -3,16 +3,17 @@ import personIcon from '../../asset/InputField/input-icon-person.svg'
 import { useState } from 'react'
 
 const InputFieldStyledComponent = styled.div`
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid ${({ $isFocus }) =>
+  padding: 1.2rem 1.6rem;
+  border-radius: 0.8rem;
+  border: 0.1rem solid ${({ $isFocus }) =>
     $isFocus ? 'var(--brown-40, #542F1A);' : 'var(--gray-40, #818181);'}
   background: var(--gray-10, #fff);
   display: flex;
   align-items: center;
-  gap: 4px;
-  width: 336px;
-  font-family: Pretendard;
+  gap: 0.4rem;
+  width: 33.6rem  ;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
   input {
     width: 100%;
     &::placeholder {

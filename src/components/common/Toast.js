@@ -1,15 +1,14 @@
 import styled from 'styled-components'
 
 const ToastStyledComponent = styled.div`
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 1.2rem 2rem;
+  border-radius: 0.8rem;
   background: var(--gray-60, #000);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
   color: var(--grayscale-10, #fff);
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
   text-align: center;
-  font-family: Pretendard;
 `
 
 function Toast() {

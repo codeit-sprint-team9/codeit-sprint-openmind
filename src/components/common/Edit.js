@@ -3,18 +3,16 @@ import editIcon from '../../asset/Edit/dropdown-list-icon-edit.svg'
 
 const EditBoxStyledComponent = styled.div`
   display: flex;
-  width: 115px;
-  padding: 10px 16px;
+  width: 10.5rem;
+  padding: 1rem 1.6rem;
   text-align: center;
-  background-color: red;
-  border-radius: 8px;
-  border: 1px solid var(--gray-30, #cfcfcf);
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(--gray-30, #cfcfcf);
   background: var(--gray-10, #fff);
-  box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+  box-shadow: 0 0.4rem 0.4rem 0 rgba(140, 140, 140, 0.25);
   color: var(--gray-50, #515151);
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
-  font-family: Pretendard;
   cursor: pointer;
   &:hover {
     background: var(--gray-20, #f9f9f9);
@@ -38,7 +36,7 @@ const EditStyledComponent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
 `
 
 function Edit() {

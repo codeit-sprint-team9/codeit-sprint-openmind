@@ -17,6 +17,7 @@ const Home = () => {
       <InputField isValue={isValue} setIsValue={setIsValue} />
       <InputTextArea isValue={isValue} setIsValue={setIsValue} />
       <Badge isAnswered={true} />
+      <Badge isAnswered={false} />
       <FloatingButton />
       <Toast />
       <Reaction like="5" disLike="2" />

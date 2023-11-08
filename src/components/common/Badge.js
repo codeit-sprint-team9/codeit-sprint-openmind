@@ -1,30 +1,32 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-const BadgeStyledComponent = styled.div`
-  border-radius: 8px;
-  border: 1px solid var(--brown-40, #542f1a);
+const BadgeStyledComponent = css`
+  border-radius: 0.8rem;
   background: var(--gray-10, #fff);
-  width: 90px;
-  height: 30px;
-  padding: 4px 12px;
-  text-align: center;
-  color: var(--brown-40, #542f1a);
-  font-size: 14px;
+  padding: 0.4rem 1.2rem;
+  font-size: 1.4rem;
   font-weight: 500;
-  font-family: Pretendard;
 `
 
-const BadgeNoAnswerStyledComponent = styled(BadgeStyledComponent)`
-  border: 1px solid var(--grayscale-40, #818181);
+const BadgeAnswerStyledComponent = styled.div`
+  ${BadgeStyledComponent}
+  border: 0.1rem solid var(--brown-40, #542f1a);
+  color: var(--brown-40, #542f1a);
+  width: 7.8rem;
+`
+
+const BadgeNoAnswerStyledComponent = styled.div`
+  ${BadgeStyledComponent}
+  border: 0.1rem solid var(--grayscale-40, #818181);
   color: var(--grayscale-40, #818181);
-  width: 70px;
+  width: 6.3rem;
 `
 
 function Badge({ isAnswered }) {
   return (
     <>
       {isAnswered ? (
-        <BadgeStyledComponent>답변 완료</BadgeStyledComponent>
+        <BadgeAnswerStyledComponent>답변 완료</BadgeAnswerStyledComponent>
       ) : (
         <BadgeNoAnswerStyledComponent>미답변</BadgeNoAnswerStyledComponent>
       )}

@@ -4,19 +4,18 @@ import DisLikeIcon from '../../asset/Reaction/icon-thumbs-down.svg'
 
 const ReactionStyledComponent = styled.div`
   display: flex;
-  gap: 32px;
+  gap: 3.2rem;
   align-items: center;
 `
 
 const LikeStyledComponent = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.6rem;
   color: ${({ $count }) =>
-    $count === '0' ? 'var(--gray-40, #818181);' : 'var(--blue-50, #1877F2);'};
-  font-size: 14px;
+    $count === '0' ? 'var(--gray-40, #818181);' : 'var(--blue, #1877F2);'};
+  font-size: 1.4rem;
   font-weight: 500;
-  font-family: Pretendard;
   img {
     filter: ${({ $count }) =>
       $count === '0'

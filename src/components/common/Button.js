@@ -6,13 +6,14 @@ const ButtonFlexBoxStyledComponent = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
+  gap: 0.8rem;
+  padding: 1.2rem 2.4rem;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
   @media ${device.mobile} {
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.4rem;
   }
 `
 
@@ -23,7 +24,7 @@ const ButtonInteractiveStyledComponent = styled.div`
   color: var(--gray-10, #fff);
   ${({ $isValue }) =>
     $isValue &&
-    'cursor: pointer; &:hover {border: 2px solid var(--brown-50, #341909)}; &:active {background: var(--brown-50, #341909);}'}
+    'cursor: pointer; &:hover {border: 0.2rem solid var(--brown-50, #341909)}; &:active {background: var(--brown-50, #341909);}'}
 `
 
 const ButtonArrowStyledComponent = styled.div`
@@ -31,9 +32,9 @@ const ButtonArrowStyledComponent = styled.div`
   cursor: pointer;
   background: var(--brown-10, #f5f1ee);
   color: var(--brown-40, #542f1a);
-  border: 1px solid var(--brown-40, #542f1a);
+  border: 0.1rem solid var(--brown-40, #542f1a);
   &:hover {
-    border: 2px solid var(--brown-40, #542f1a);
+    border: 0.2rem solid var(--brown-40, #542f1a);
   }
   &:active {
     background: var(--brown-20, #e4d5c9);
