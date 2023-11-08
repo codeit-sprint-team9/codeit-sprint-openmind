@@ -56,7 +56,7 @@ export const Overlay = styled.div`
 export const OuterModalContainer = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #000;
+  background-color: var(--gray-60);
   opacity: 0.4;
 `
 export const ModalMainContainer = styled.div`
@@ -68,11 +68,9 @@ export const ModalMainContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: var(--gray-10);
   border-radius: 2.4rem;
-  border: 1px solid #dee2e6;
   padding: 4rem 4rem 7rem;
-  box-sizing: border-box;
   align-items: center;
   justify-content: center;
   gap: 2.4rem;
