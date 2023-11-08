@@ -73,7 +73,8 @@ export const ModalMainContainer = styled.div`
   padding: 4rem 4rem 7rem;
   align-items: center;
   justify-content: center;
-  gap: 2.4rem;
+  gap: 4rem;
+
   @media all and ${device.mobile} {
     width: 32.7rem;
     padding: 2.4rem;
@@ -82,7 +83,6 @@ export const ModalMainContainer = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 4rem;
 
   .messageIcon {
     margin-right: 0.8rem;
@@ -121,7 +121,7 @@ export const ContentContainer = styled.div`
     align-items: center;
     color: var(--gray-60);
     font-weight: 400;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.4rem;
 
     .to {
       font-size: 1.8rem;
