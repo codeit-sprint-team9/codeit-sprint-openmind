@@ -17,8 +17,8 @@ const BadgeAnswerStyledComponent = styled.div`
 
 const BadgeNoAnswerStyledComponent = styled.div`
   ${BadgeStyledComponent}
-  border: 0.1rem solid var(--grayscale-40, #818181);
-  color: var(--grayscale-40, #818181);
+  border: 0.1rem solid var(--gray-40, #818181);
+  color: var(--gray-40, #818181);
   width: 6.3rem;
 `
 
