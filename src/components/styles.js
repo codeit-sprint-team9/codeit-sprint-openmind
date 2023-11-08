@@ -24,8 +24,8 @@ export const GlobalStyle = createGlobalStyle`
 }
 *{
     box-sizing: border-box;
-    font-family: 'Actor', sans-serif;
-}
+    font-family: 'Pretendard', 'Actor', sans-serif;
+  }
 html {
     font-size: 62.5%;
   }
