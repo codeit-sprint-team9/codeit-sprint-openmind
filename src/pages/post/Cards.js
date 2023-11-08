@@ -1,10 +1,12 @@
 import styled from 'styled-components'
 
 export default function Cards(items) {
+  const itemArr = items.items.items
   return (
     <>
       <div>
-        {items.items.map((item) => (
+        {console.log(itemArr.title)}
+        {itemArr.map((item) => (
           <Card key={item.id} item={item} />
         ))}
       </div>
