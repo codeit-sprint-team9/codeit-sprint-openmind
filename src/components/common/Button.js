@@ -45,11 +45,11 @@ const ButtonArrowStyledComponent = styled.div`
   }
 `
 
-function Button({ brown = false, text = '질문 받기', isValue }) {
+function Button({ brown = false, text = '질문 받기', isValue, onClick }) {
   return (
     <>
       {brown ? (
-        <ButtonInteractiveStyledComponent $isValue={isValue}>
+        <ButtonInteractiveStyledComponent $isValue={isValue} onClick={onClick}>
           {text}
         </ButtonInteractiveStyledComponent>
       ) : (

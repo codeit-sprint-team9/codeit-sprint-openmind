@@ -8,9 +8,26 @@ import Button, { ButtonInteractiveStyledComponent } from '../common/Button'
 import { device } from '../styles'
 import { useState } from 'react'
 import UserIcon from '../../asset/postCard/img_postCardUser.png'
+import useAsync from '../../hooks/useAsync'
+import { postQuestions } from '../../api/postModal'
 
 const PostModal = ({ setIsOpened }) => {
   const [question, setQuestion] = useState('')
+  const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
+
+  const handlePostQuestion = async () => {
+    const result = await postQuestionAsync(225, question)
+
+    if (result) setIsOpened(false)
+  }
+
+  if (isLoading) {
+    return <div>loading</div>
+  }
+
+  if (error) {
+    return <div>error</div>
+  }
 
   return (
     <Overlay>
@@ -37,7 +54,12 @@ const PostModal = ({ setIsOpened }) => {
 
           <InputTextArea setAnswer={setQuestion} />
 
-          <Button brown={true} text="질문 보내기" isValue={question !== ''} />
+          <Button
+            brown={true}
+            text="질문 보내기"
+            isValue={question !== ''}
+            onClick={handlePostQuestion}
+          />
         </ContentContainer>
       </ModalMainContainer>
     </Overlay>
