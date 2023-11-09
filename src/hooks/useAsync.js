@@ -1,26 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
-const useAsync = (fetchFn) => {
-  const [isLoading, setIsLoading] = useState(false)
+const useAsync = (asyncFunction) => {
+  const [pending, setPending] = useState(false)
   const [error, setError] = useState(null)
-  const [data, setData] = useState(null)
 
-  useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true)
+  const wrappedFunction = useCallback(
+    async (...args) => {
+      setPending(true)
+      setError(null)
       try {
-        const res = await fetchFn()
-        setData(res)
+        return await asyncFunction(...args)
       } catch (error) {
         setError(error)
       } finally {
-        setIsLoading(false)
+        setPending(false)
       }
-    }
-    fetchData()
-  }, [fetchFn])
+    },
+    [asyncFunction]
+  )
 
-  return { isLoading, error, data }
+  return [pending, error, wrappedFunction]
 }
 
 export default useAsync
