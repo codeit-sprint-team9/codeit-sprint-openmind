@@ -12,15 +12,17 @@ const theme = createTheme({
 })
 const useStyles = makeStyles({
   PaginatorContainer: {
-    // '& nav > ul': {
-    //   [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-    //     width: '2rem',
-    //   },
-    // },
-    // '& nav > ul': {},
+    '& nav > ul > li': {
+      [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+        width : "40px"
+      }
+
+    },
     '& nav > ul > li > button': {
-      width: '4rem',
-      height: '4rem',
+      [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+        fontSize: '1.6rem',
+      },
+
       color: 'var(--gray-40)',
       textAlign: 'center',
       fontSize: '2rem',

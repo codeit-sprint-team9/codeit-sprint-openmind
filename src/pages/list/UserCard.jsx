@@ -41,7 +41,8 @@ const CardListContainer = styled.div`
   grid-template-columns: repeat(4, 22rem);
   grid-gap: 2rem;
   justify-content: center;
-  padding: 2.5rem;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
   @media ${device.tablet} {
     width: calc(100% - 6.4rem);
@@ -69,7 +70,7 @@ const CardContainer = styled.div`
 
   @media ${device.mobile} {
     padding: 1.6rem;
-    width: 15rem;
+    width: 15.5rem;
   }
 `
 
