@@ -1,5 +1,5 @@
 import Stack from '@mui/material/Stack'
-import { Pagination, createTheme, debounce, useMediaQuery } from '@mui/material'
+import { Pagination, createTheme, debounce } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { useEffect, useState } from 'react'
 
@@ -14,9 +14,8 @@ const useStyles = makeStyles({
   PaginatorContainer: {
     '& nav > ul > li': {
       [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-        width : "40px"
-      }
-
+        width: '40px',
+      },
     },
     '& nav > ul > li > button': {
       [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
@@ -26,7 +25,6 @@ const useStyles = makeStyles({
       color: 'var(--gray-40)',
       textAlign: 'center',
       fontSize: '2rem',
-      fontWeight: 400,
       cursor: 'pointer',
       fontFamily: 'Actor',
     },

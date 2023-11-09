@@ -11,17 +11,21 @@ const HeaderTopContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 2rem 6.25rem;
+  padding: 4rem 13rem;
   align-items: center;
 
   .answer-button {
-    width: 16.6rem;
+    width: 16.8rem;
   }
 
   @media ${device.mobile} {
     gap: 2rem;
     flex-direction: column;
     align-items: center;
+
+    .answer-button {
+      width: 13.1rem;
+    }
   }
 `
 
@@ -33,7 +37,7 @@ const HeaderBottomContainer = styled.div`
   gap: 1.2rem;
 
   .answer-who {
-    color: var(--grayscale-60, #000);
+    color: var(--gray-60, #000);
     font-size: 4rem;
     font-weight: 400;
   }
@@ -41,7 +45,7 @@ const HeaderBottomContainer = styled.div`
   @media ${device.mobile} {
     flex-direction: row;
     gap: 4.2rem;
-
+    margin-top : 1.2rem;
     .answer-who {
       font-size: 2.4rem;
     }
@@ -72,7 +76,6 @@ const MainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 `
 function List() {
   return (

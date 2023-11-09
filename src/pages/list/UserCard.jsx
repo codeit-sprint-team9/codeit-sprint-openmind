@@ -41,21 +41,23 @@ const CardListContainer = styled.div`
   grid-template-columns: repeat(4, 22rem);
   grid-gap: 2rem;
   justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
 
   @media ${device.tablet} {
     width: calc(100% - 6.4rem);
     max-width: 94rem;
-    @media (max-width: 918px) {
+    grid-template-columns: repeat(auto-fit, minmax(18.6rem, 1fr));
+    @media (max-width: 868px) {
       max-width: 70rem;
     }
-    grid-template-columns: repeat(auto-fit, minmax(18.6rem, 1fr));
   }
 
   @media ${device.mobile} {
     width: calc(100% - 4.8rem);
     grid-template-columns: repeat(2, 15.5rem);
+    padding-top: 1.8rem;
+    padding-bottom: 3rem;
   }
 `
 
@@ -77,8 +79,7 @@ const CardContainer = styled.div`
 const CardProfile = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
-  align-self: stretch;
+  gap: 1.2rem;
 
   img {
     width: 6rem;
@@ -89,7 +90,7 @@ const CardProfile = styled.div`
     color: var(--gray-60);
     font-size: 2rem;
     font-weight: 400;
-    line-height: 3.2rem;
+    line-height: 2.4rem;
   }
 
   @media ${device.mobile} {
@@ -113,7 +114,7 @@ const CardContent = styled.div`
 
   line-height: 2.2rem;
   img {
-    margin-right: 0.25rem;
+    margin-right: 0.4rem;
   }
   div {
     text-align: center;
