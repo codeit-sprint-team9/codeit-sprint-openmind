@@ -11,7 +11,7 @@ const InputFieldStyledComponent = styled.div`
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  width: 33.6rem  ;
+  width: 100%;
   font-size: 1.6rem;
   line-height: 2.2rem;
   input {
@@ -26,9 +26,12 @@ const InputFieldStyledComponent = styled.div`
 function InputField({ isValue, setIsValue }) {
   const [isFocus, setIsFocus] = useState(false)
 
-  function inputFocus(e) {
-    setIsFocus(!isFocus)
+  function handleValue(e) {
     e.target.value === '' ? setIsValue(false) : setIsValue(true)
+  }
+
+  function inputFocus() {
+    setIsFocus(!isFocus)
   }
   return (
     <InputFieldStyledComponent $isFocus={isFocus} $isValue={isValue}>
@@ -37,6 +40,7 @@ function InputField({ isValue, setIsValue }) {
         placeholder="이름을 입력하세요"
         onFocus={inputFocus}
         onBlur={inputFocus}
+        onChange={handleValue}
       />
     </InputFieldStyledComponent>
   )
