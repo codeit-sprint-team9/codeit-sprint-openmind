@@ -29,6 +29,7 @@ const ButtonBox = styled.div`
   }
   @media ${device.mobile} {
     position: static;
+    width: 13.1rem;
   }
 `
 
@@ -42,6 +43,7 @@ const InputBox = styled.div`
   gap: 1.6rem;
   @media ${device.mobile} {
     width: 30.5rem;
+    padding: 2.4rem;
   }
 `
 
@@ -71,7 +73,12 @@ const Home = () => {
         <img className="logo" src={logo} alt="logo" />
         <InputBox>
           <InputField isValue={isValue} setIsValue={setIsValue} />
-          <Button brown text="질문 받기" isValue={isValue} />
+          <Button
+            className="brown-button"
+            brown
+            text="질문 받기"
+            isValue={isValue}
+          />
         </InputBox>
       </MainBox>
     </HomeBackground>

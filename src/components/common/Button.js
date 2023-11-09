@@ -11,10 +11,6 @@ const ButtonFlexBoxStyledComponent = css`
   border-radius: 0.8rem;
   font-size: 1.6rem;
   line-height: 2.2rem;
-  @media ${device.mobile} {
-    padding: 0.8rem 1.2rem;
-    font-size: 1.4rem;
-  }
 `
 
 export const ButtonInteractiveStyledComponent = styled.div`
@@ -42,6 +38,10 @@ const ButtonArrowStyledComponent = styled.div`
   img {
     filter: brightness(0) saturate(100%) invert(16%) sepia(7%) saturate(5607%)
       hue-rotate(340deg) brightness(101%) contrast(87%);
+  }
+  @media ${device.mobile} {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.4rem;
   }
 `
 
