@@ -5,6 +5,9 @@ import InputField from '../../components/common/InputField'
 import Button from '../../components/common/Button'
 import bg from '../../asset/Home/bg.png'
 import logo from '../../asset/Home/pc-logo.png'
+import { Link } from 'react-router-dom'
+import useAsync from '../../hooks/useAsync'
+import postSubject from '../../api/home'
 
 const HomeBackground = styled.div`
   width: 100vw;
@@ -65,20 +68,46 @@ const MainBox = styled.div`
 
 const Home = () => {
   const [isValue, setIsValue] = useState(false)
+  const [Name, setName] = useState('')
+  const [subjectPending, subjectError, subjectPost] = useAsync(postSubject)
+
+  const handlePost = async () => {
+    const result = await subjectPost(Name)
+    if (!result) return
+
+    localStorage.setItem('id', result.id)
+    localStorage.setItem('name', result.name)
+    localStorage.setItem('img', result.imageSource)
+    console.log(localStorage.getItem('id'))
+    console.log(localStorage.getItem('name'))
+    console.log(localStorage.getItem('img'))
+
+    console.log(result)
+    console.log(subjectError)
+    console.log(subjectPending)
+  }
+
   return (
     <HomeBackground>
       <MainBox>
-        <ButtonBox>
-          <Button text="질문하러 가기" />
-        </ButtonBox>
+        <Link to="/list">
+          <ButtonBox>
+            <Button text="질문하러 가기" />
+          </ButtonBox>
+        </Link>
         <img className="logo" src={logo} alt="logo" />
         <InputBox>
-          <InputField isValue={isValue} setIsValue={setIsValue} />
+          <InputField
+            isValue={isValue}
+            setIsValue={setIsValue}
+            setName={setName}
+          />
           <Button
             className="brown-button"
             brown
             text="질문 받기"
             isValue={isValue}
+            onClick={handlePost}
           />
         </InputBox>
       </MainBox>
