@@ -55,6 +55,7 @@ const MainBox = styled.div`
   gap: 2.4rem;
   .logo {
     width: 45.6rem;
+    cursor: pointer;
     @media ${device.mobile} {
       width: 24.8rem;
       order: -1;
