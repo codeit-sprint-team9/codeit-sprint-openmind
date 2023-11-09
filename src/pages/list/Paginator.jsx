@@ -1,10 +1,23 @@
 import Stack from '@mui/material/Stack'
-import { Pagination, debounce } from '@mui/material'
+import { Pagination, createTheme, debounce, useMediaQuery } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { useEffect, useState } from 'react'
 
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      tablet: 767,
+    },
+  },
+})
 const useStyles = makeStyles({
   PaginatorContainer: {
+    // '& nav > ul': {
+    //   [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+    //     width: '2rem',
+    //   },
+    // },
+    // '& nav > ul': {},
     '& nav > ul > li > button': {
       width: '4rem',
       height: '4rem',
@@ -17,7 +30,6 @@ const useStyles = makeStyles({
     },
 
     '& nav > ul > li > button.Mui-selected': {
-      // backgroundColor: 'transparent',
       color: 'var(--brown-40)',
     },
   },
