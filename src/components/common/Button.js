@@ -17,7 +17,7 @@ const ButtonFlexBoxStyledComponent = css`
   }
 `
 
-const ButtonInteractiveStyledComponent = styled.div`
+export const ButtonInteractiveStyledComponent = styled.div`
   ${ButtonFlexBoxStyledComponent}
   background: ${({ $isValue }) =>
     $isValue ? 'var(--brown-40, #542f1a);' : 'var(--brown-30, #C7BBB5);'}
