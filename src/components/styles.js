@@ -6,6 +6,7 @@ export const device = {
 }
 
 export const GlobalStyle = createGlobalStyle`
+
 :root{
     --gray-10:#FFFFFF;
     --gray-20:#F9F9F9;
