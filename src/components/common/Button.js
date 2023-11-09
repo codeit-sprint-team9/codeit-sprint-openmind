@@ -11,6 +11,7 @@ const ButtonFlexBoxStyledComponent = css`
   border-radius: 0.8rem;
   font-size: 1.6rem;
   line-height: 2.2rem;
+  height: 5rem;
 `
 
 export const ButtonInteractiveStyledComponent = styled.div`
