@@ -1,11 +1,10 @@
+import { useState } from 'react'
+import { device } from '../../components/styles'
+import styled from 'styled-components'
+import InputField from '../../components/common/InputField'
 import Button from '../../components/common/Button'
 import bg from '../../asset/Home/bg.png'
 import logo from '../../asset/Home/pc-logo.png'
-import styled from 'styled-components'
-import InputField from '../../components/common/InputField'
-<<<<<<< HEAD
-import { useState } from 'react'
-import { device } from '../../components/styles'
 
 const HomeBackground = styled.div`
   width: 100vw;
@@ -60,18 +59,10 @@ const MainBox = styled.div`
     }
   }
 `
-=======
-import InputTextArea from '../../components/common/InputTextArea'
-import Reaction from '../../components/common/Reaction'
-import Toast from '../../components/common/Toast'
-import PostModal from '../../components/modal/PostModal'
->>>>>>> b6957f3f09d579d0ddd66ed6c730302652a5a0ca
 
 const Home = () => {
   const [isValue, setIsValue] = useState(false)
-  const [isOpened, setIsOpened] = useState(false)
   return (
-<<<<<<< HEAD
     <HomeBackground>
       <MainBox>
         <ButtonBox>
@@ -84,27 +75,6 @@ const Home = () => {
         </InputBox>
       </MainBox>
     </HomeBackground>
-=======
-    <>
-      <div>
-        <h1>home</h1>
-        <InputField isValue={isValue} setIsValue={setIsValue} />
-        <InputTextArea isValue={isValue} setIsValue={setIsValue} />
-        <Badge isAnswered={true} />
-        <Badge isAnswered={false} />
-        <FloatingButton />
-        <Toast />
-        <Reaction like="5" disLike="2" />
-        <Reaction />
-        <Dropdown />
-        <Edit />
-        <Button brown isValue={isValue} />
-        <Button />
-        <div onClick={() => setIsOpened(!isOpened)}>ok</div>
-      </div>
-      {isOpened && <PostModal setIsOpened={setIsOpened} />}
-    </>
->>>>>>> b6957f3f09d579d0ddd66ed6c730302652a5a0ca
   )
 }
 
