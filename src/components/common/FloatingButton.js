@@ -6,20 +6,21 @@ const FloatingButtonStyledComponent = styled.div`
   background: var(--brown-40, #542f1a);
   box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
   color: var(--gray-10, #fff);
-  font-size: 2rem;
+  font-size: ${({ $fontSize }) => `${$fontSize}`};
   font-weight: 400;
   text-align: center;
   cursor: pointer;
-  width: 20.8rem;
   height: 5.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
-function FloatingButton() {
+function FloatingButton({ text = '질문 작성하기', fontSize = '2rem' }) {
   return (
-    <FloatingButtonStyledComponent>질문 작성하기</FloatingButtonStyledComponent>
+    <FloatingButtonStyledComponent $fontSize={fontSize}>
+      {text}
+    </FloatingButtonStyledComponent>
   )
 }
 
