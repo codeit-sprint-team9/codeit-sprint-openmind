@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { device } from '../styles'
 
 const FloatingButtonStyledComponent = styled.div`
   padding: 1.2rem 2.4rem;
@@ -10,16 +11,24 @@ const FloatingButtonStyledComponent = styled.div`
   font-weight: 400;
   text-align: center;
   cursor: pointer;
+  width: 20.8rem;
   height: 5.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media ${device.mobile} {
+    width: 12.7rem;
+  }
 `
 
-function FloatingButton({ text = '질문 작성하기', fontSize = '2rem' }) {
+function FloatingButton({
+  text = '질문 작성하기',
+  fontSize = '2rem',
+  onClick,
+}) {
   return (
-    <FloatingButtonStyledComponent $fontSize={fontSize}>
-      {text}
+    <FloatingButtonStyledComponent $fontSize={fontSize} onClick={onClick}>
+      {device.mobile ? '질문 작성' : text}
     </FloatingButtonStyledComponent>
   )
 }

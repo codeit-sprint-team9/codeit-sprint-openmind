@@ -21,7 +21,7 @@ const PostCard = ({ state, title }) => {
   const [, setSelectedOption] = useState('')
   const [answer, setAnswer] = useState('')
   const [isAnswered] = useState(false)
-  console.log(state)
+
   return (
     <PostCardWrapper>
       <PostCardContainer>

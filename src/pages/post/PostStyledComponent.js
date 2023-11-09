@@ -11,7 +11,7 @@ export const Div = styled.div`
 export const Button = styled.button``
 export const TopDiv = styled.div`
   width: 100%;
-  background-color: var(--gray-10);
+  background-color: var(--gray-10, #fff);
   position: relative;
   display: flex;
   justify-content: center;
@@ -38,9 +38,8 @@ export const NavHeader = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 4rem;
-  color: var(--gray-60);
+  color: var(--gray-60, #000);
   font-size: 3.2rem;
-  font-weight: 400;
   line-height: 4rem;
 `
 export const LinkDiv = styled.div`
@@ -53,19 +52,20 @@ export const LinkDiv = styled.div`
 
 export const ContentWrapper = styled.div`
   padding-top: ${({ $state }) => ($state === 'answer' ? '' : '5.4rem')};
-  padding-bottom: 13.6rem;
+  padding-bottom: 3.4rem;
 
   @media (${device.tablet}) {
     padding: ${({ $state }) => ($state === 'answer' ? '0rem' : '5.4rem')} 3.6rem
-      13.6rem;
+      3.4rem;
   }
   @media (${device.mobile}) {
     padding: ${({ $state }) => ($state === 'answer' ? '0rem' : '5.4rem')} 2.4rem
-      13.6rem;
+      3.4rem;
   }
 `
 export const Content = styled.div`
   padding: 1.6rem;
+  background: var(--brown-10, #f5f1ee);
   width: 71.6rem;
   display: flex;
   flex-direction: column;
@@ -73,8 +73,7 @@ export const Content = styled.div`
   justify-content: center;
   gap: 1.6rem;
   border-radius: 1.6rem;
-  border: 0.1rem solid #c7bbb5;
-  background-color: #f5f1ee;
+  border: 0.1rem solid var(--brown-30, #c7bbb5);
   @media (${device.tablet}) {
     width: 70.4rem;
   }
@@ -87,10 +86,8 @@ export const ContentHeader = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  color: var(--brown-40);
-  font-family: Actor;
+  color: var(--brown-40, #542f1a);
   font-size: 2rem;
-  font-weight: 400;
   line-height: 2.5rem;
 `
 export const ContentDiv = styled.div`
@@ -103,16 +100,17 @@ export const ContentDiv = styled.div`
 
 export const DivButton = styled.div`
   position: fixed;
-  right: 2.4rem;
+  right: ${({ $isOpened }) => ($isOpened ? '4.25rem' : '2.4rem')};
   bottom: 2.4rem;
 `
+
 export const ContentNoQuestion = styled.div`
   padding: 7rem 0 4.9rem;
 `
 
 export const CardDiv = styled.div`
   font-size: 2rem;
-  border: 0.1rem solid #fff;
+  border: 0.1rem solid var(--gray-10, #fff);
   margin: 1.2rem;
 `
 
@@ -121,11 +119,11 @@ export const P = styled.p`
   font-size: 2rem;
 `
 export const DeleteButton = styled.div`
-  width: 716px;
+  width: 71.6rem;
   display: flex;
   justify-content: flex-end;
   padding: 1rem 0 0.9rem;
   @media (${device.mobile}) {
-    width: 327px;
+    width: 32.7rem;
   }
 `

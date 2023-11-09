@@ -8,7 +8,7 @@ import FloatingButton from '../../components/common/FloatingButton'
 
 const LIMIT = 5
 
-export default function PostContent({ setIsOpened, state }) {
+export default function PostContent({ setIsOpened, state, isOpened }) {
   const [cnt, setCnt] = useState(0)
   const [items, setItems] = useState([])
   const [offset, setOffset] = useState(0)
@@ -37,13 +37,7 @@ export default function PostContent({ setIsOpened, state }) {
     handleLoad({ offset, limit: LIMIT })
   }
 
-  useEffect(() => {
-    handleLoad({ offset: 0, limit: LIMIT })
-    handleAllReviews()
-  }, [])
-
   const loadMore = () => {
-    //api 불러오는곳
     if (hasNext !== false) {
       handleLoadMore()
     } else {
@@ -54,6 +48,11 @@ export default function PostContent({ setIsOpened, state }) {
   const handleModal = () => {
     setIsOpened(true)
   }
+
+  useEffect(() => {
+    handleLoad({ offset: 0, limit: LIMIT })
+    handleAllReviews()
+  }, [])
 
   return (
     <>
@@ -76,10 +75,10 @@ export default function PostContent({ setIsOpened, state }) {
             </InfiniteScroll>
           </S.ContentDiv>
         </S.Content>
-        <S.DivButton>
-          <FloatingButton onClick={handleModal} />
-        </S.DivButton>
       </S.ContentWrapper>
+      <S.DivButton $isOpened={isOpened}>
+        {state === 'default' && <FloatingButton onClick={handleModal} />}
+      </S.DivButton>
     </>
   )
 }

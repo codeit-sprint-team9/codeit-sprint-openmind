@@ -5,7 +5,7 @@ import * as S from './PostStyledComponent'
 import PostModal from '../../components/modal/PostModal'
 import { useState } from 'react'
 import PostNoContent from '../post/PostNoContent'
-import DeleteButton from '../../components/common/DeleteButton'
+import PostDeleteButton from './PostDeleteButton'
 
 const Div = styled.div`
   position: relative;
@@ -15,12 +15,11 @@ const Div = styled.div`
 const Post = () => {
   const [isOpened, setIsOpened] = useState(false)
   const isData = true
-  const state = 'answer'
+  const state = 'default'
 
   isOpened
     ? (document.body.style.overflowY = 'hidden')
     : (document.body.style.overflowY = 'scroll')
-
   return (
     <>
       <Div isOpened={isOpened}>
@@ -28,18 +27,22 @@ const Post = () => {
         <S.Div state={state}>
           {state === 'answer' && (
             <S.DeleteButton>
-              <DeleteButton className="delete-button" />
+              <PostDeleteButton text="삭제하기" fontSize="1.5rem" />
             </S.DeleteButton>
           )}
 
           {isData ? (
-            <PostContent setIsOpened={setIsOpened} state={state} />
+            <PostContent
+              setIsOpened={setIsOpened}
+              state={state}
+              isOpened={isOpened}
+            />
           ) : (
             <PostNoContent />
           )}
         </S.Div>
       </Div>
-      {isOpened && <PostModal setIsOpened={setIsOpened} />}
+      {isOpened && <PostModal setIsOpened={setIsOpened} isOpened={isOpened} />}
     </>
   )
 }

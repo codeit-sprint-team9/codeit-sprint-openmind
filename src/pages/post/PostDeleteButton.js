@@ -1,13 +1,13 @@
 import styled from 'styled-components'
-import { device } from '../styles'
+import { device } from '../../components/styles'
 
-const DeleteButtonStyledComponent = styled.div`
+const FloatingButtonStyledComponent = styled.div`
   padding: 1.2rem 2.4rem;
   border-radius: 20rem;
   background: var(--brown-40, #542f1a);
   box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
   color: var(--gray-10, #fff);
-  font-size: 1.5rem;
+  font-size: ${({ $fontSize }) => `${$fontSize}`};
   font-weight: 400;
   text-align: center;
   cursor: pointer;
@@ -16,19 +16,20 @@ const DeleteButtonStyledComponent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (${device.mobile}) {
-    width: 8.5rem;
+  @media${device.mobile} {
+    padding: 0.5rem 1.3rem;
+    width: 7rem;
     height: 2.5rem;
     font-size: 1rem;
   }
 `
 
-function DeleteButton({ onClick }) {
+function PostDeleteButton({ text = '삭제하기', fontSize = '1.5rem' }) {
   return (
-    <DeleteButtonStyledComponent onClick={onClick}>
-      삭제하기
-    </DeleteButtonStyledComponent>
+    <FloatingButtonStyledComponent $fontSize={fontSize}>
+      {text}
+    </FloatingButtonStyledComponent>
   )
 }
 
-export default DeleteButton
+export default PostDeleteButton
