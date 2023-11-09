@@ -19,7 +19,7 @@ const HomeBackground = styled.div`
   align-items: center;
 `
 
-const Buttonbox = styled.div`
+const ButtonBox = styled.div`
   width: 16.6rem;
   position: fixed;
   top: 4.5rem;
@@ -65,9 +65,9 @@ const Home = () => {
   return (
     <HomeBackground>
       <MainBox>
-        <Buttonbox>
+        <ButtonBox>
           <Button text="질문하러 가기" />
-        </Buttonbox>
+        </ButtonBox>
         <img className="logo" src={logo} alt="logo" />
         <InputBox>
           <InputField isValue={isValue} setIsValue={setIsValue} />
