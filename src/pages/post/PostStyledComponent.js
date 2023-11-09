@@ -7,32 +7,29 @@ export const Div = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  * {
-    box-sizing: content-box;
-  }
 `
 export const Button = styled.button``
 export const TopDiv = styled.div`
   width: 100%;
-  background-color: white;
+  background-color: var(--gray-10);
   position: relative;
   display: flex;
   justify-content: center;
   .nav-img {
     text-align: center;
-    width: 1200px;
-    height: 234px;
+    width: 120rem;
+    height: 23.4rem;
   }
   .openMind-img {
     z-index: 1;
     position: absolute;
-    top: 50px;
+    top: 5rem;
     left: 50%;
     transform: translate(-50%);
   }
   .cat-img {
     position: absolute;
-    top: 129px;
+    top: 12.9rem;
     left: 50%;
     transform: translate(-50%);
   }
@@ -40,63 +37,95 @@ export const TopDiv = styled.div`
 export const NavHeader = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 40px;
-  color: #000;
-  font-size: 32px;
+  padding-top: 4rem;
+  color: var(--gray-60);
+  font-size: 3.2rem;
   font-weight: 400;
-  line-height: 40px;
+  line-height: 4rem;
 `
 export const LinkDiv = styled.div`
   display: flex;
-  padding-top: 12px;
+  padding-top: 1.2rem;
 
   justify-content: center;
-  gap: 12px;
+  gap: 1.2rem;
 `
 
 export const ContentWrapper = styled.div`
-  padding-top: 54px;
-  padding-bottom: 136px;
+  padding-top: ${({ $state }) => ($state === 'answer' ? '' : '5.4rem')};
+  padding-bottom: 13.6rem;
+
   @media (${device.tablet}) {
-    padding: 54px 36px 136px;
+    padding: ${({ $state }) => ($state === 'answer' ? '0rem' : '5.4rem')} 3.6rem
+      13.6rem;
   }
   @media (${device.mobile}) {
-    padding: 54px 24px 136px;
+    padding: ${({ $state }) => ($state === 'answer' ? '0rem' : '5.4rem')} 2.4rem
+      13.6rem;
   }
 `
 export const Content = styled.div`
-  padding: 16px;
+  padding: 1.6rem;
+  width: 71.6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  border-radius: 16px;
-  border: 1px solid #c7bbb5;
+  gap: 1.6rem;
+  border-radius: 1.6rem;
+  border: 0.1rem solid #c7bbb5;
   background-color: #f5f1ee;
+  @media (${device.tablet}) {
+    width: 70.4rem;
+  }
+  @media (${device.mobile}) {
+    width: 32.7rem;
+  }
 `
 export const ContentHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  color: #542f1a;
+  gap: 1rem;
+  color: var(--brown-40);
   font-family: Actor;
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 400;
-  line-height: 25px;
+  line-height: 2.5rem;
 `
 export const ContentDiv = styled.div`
-  border-radius: 16px;
-  background-color: #fff;
-  box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+  .infinite {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
 `
 
 export const DivButton = styled.div`
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  right: 2.4rem;
+  bottom: 2.4rem;
 `
 export const ContentNoQuestion = styled.div`
-  padding: 70px 0 49px;
+  padding: 7rem 0 4.9rem;
+`
+
+export const CardDiv = styled.div`
+  font-size: 2rem;
+  border: 0.1rem solid #fff;
+  margin: 1.2rem;
+`
+
+export const P = styled.p`
+  text-align: center;
+  font-size: 2rem;
+`
+export const DeleteButton = styled.div`
+  width: 716px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 0 0.9rem;
+  @media (${device.mobile}) {
+    width: 327px;
+  }
 `

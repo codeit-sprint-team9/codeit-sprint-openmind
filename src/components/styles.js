@@ -1,9 +1,9 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 export const device = {
   tablet: `(min-width: 768px) and (max-width: 1199px)`,
   mobile: `(max-width: 767px)`,
-};
+}
 
 export const GlobalStyle = createGlobalStyle`
 :root{
@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     --gray-40:#818181;
     --gray-50:#515151;
     --gray-60:#000000;
+    --brown-10:#F5F1EE;
     --brown-20:#E4D5C9;
     --brown-30:#C7BBB5;
     --brown-40:#542F1A;
@@ -23,14 +24,14 @@ export const GlobalStyle = createGlobalStyle`
 }
 *{
     box-sizing: border-box;
-    font-family: 'Actor', sans-serif;
-}
+    font-family: 'Pretendard', 'Actor', sans-serif;
+  }
 html {
     font-size: 62.5%;
   }
   
   body {
-    background: white;
+    background: var(--gray-20);
     margin: 0;
     padding: 0;
     display: flex;
@@ -67,4 +68,4 @@ html {
     flex-direction: column;
     align-items: center;
   }
-`;
+`
