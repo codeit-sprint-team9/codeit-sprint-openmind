@@ -1,14 +1,16 @@
-import request from './apiConfig';
-import { ApiMapper } from './apiMapper';
+import request from './apiConfig'
+import { URL_PATH } from './apiMapper'
 
-export const getSubject = async() =>{
+export const getSubject = async ({ limit = 8, offset = 0, order = 'time' }) => {
+  const query = `limit=${limit}&offset=${offset}&order=${order}`
   try {
-    const response = await request.get(ApiMapper.subjects);
-    if(response.ok){
-      return response.data;
+    const response = await request.get(
+      `${URL_PATH.SUBJECTS_CONTROLLER}?${query}`
+    )
+    if (response.status == 200) {
+      return response.data
     }
-  }
-  catch(e){
-    throw new Error(e);
+  } catch (e) {
+    throw new Error(e)
   }
 }

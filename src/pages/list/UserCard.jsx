@@ -1,28 +1,57 @@
 import styled from 'styled-components'
 import messageIcon from '../../asset/list/Messages.svg'
-import profileImage from '../../asset/list/profileImg.svg'
 import { device } from '../../components/styles'
+import Dropdown from '../../components/common/Dropdown'
+import { useCallback, useEffect, useState } from 'react'
+import useAsync from '../../hooks/useAsync'
+import { getSubject } from '../../api/api'
 
 function CardList() {
+  const [subjectData, setSubjectData] = useState([])
+  const [order, setOrder] = useState('time')
+  const [offset, setOffset] = useState(0)
+
+  const [isSubjectLoading, isSubjectError, getSubjectAsync] =
+    useAsync(getSubject)
+
+  const handleLoad = useCallback(async (options) => {
+    const { results } = await getSubjectAsync(options)
+    console.log(results)
+    if (!results) return
+    setSubjectData(results)
+  }, [getSubjectAsync])
+
+  useEffect(() => {
+    handleLoad({ order, offset, limit: 8 })
+  }, [])
+
+  if (isSubjectLoading) {
+    return <div>화면 로딩 중</div>
+  }
   return (
-    <CardListContainer>
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-    </CardListContainer>
+    <>
+      <Dropdown />
+      <CardListContainer>
+        {subjectData.map((subject) => {
+          return (
+            <UserCard
+              key={subject.id}
+              name={subject.name}
+              imageSource={subject.imageSource}
+              questionCount={subject.questionCount}
+            />
+          )
+        })}
+      </CardListContainer>
+    </>
   )
 }
-function UserCard() {
+function UserCard({ name, imageSource, questionCount }) {
   return (
     <CardContainer>
       <CardProfile>
-        <img src={profileImage} />
-        <div>아초는 고양이</div>
+        <img src={imageSource} />
+        <div>{name}</div>
       </CardProfile>
 
       <CardContent>
@@ -30,7 +59,7 @@ function UserCard() {
           <img src={messageIcon} />
           <span>받은 질문</span>
         </div>
-        <div>9개</div>
+        <div>{questionCount}개</div>
       </CardContent>
     </CardContainer>
   )
@@ -50,11 +79,8 @@ const CardListContainer = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(18.6rem, 1fr));
     @media (max-width: 868px) {
       max-width: 70rem;
-
     }
   }
-
-
 
   @media ${device.mobile} {
     width: calc(100% - 4.8rem);

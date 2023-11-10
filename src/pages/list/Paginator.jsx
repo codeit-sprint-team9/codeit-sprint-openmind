@@ -60,7 +60,6 @@ function Paginator() {
   return (
     <Stack className={classes.PaginatorContainer}>
       <Pagination
-  
         count={34}
         hidePrevButton
         hideNextButton
