@@ -47,11 +47,14 @@ const CardListContainer = styled.div`
   @media ${device.tablet} {
     width: calc(100% - 6.4rem);
     max-width: 94rem;
-    grid-template-columns: repeat(auto-fit, minmax(18.6rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(18.6rem, 1fr));
     @media (max-width: 868px) {
       max-width: 70rem;
+
     }
   }
+
+
 
   @media ${device.mobile} {
     width: calc(100% - 4.8rem);

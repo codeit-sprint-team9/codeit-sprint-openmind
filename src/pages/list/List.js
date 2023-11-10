@@ -81,10 +81,10 @@ function List() {
   return (
     <>
       <Header />
-      <MainContainer>
+      {/* <MainContainer> */}
         <CardList />
         <Paginator />
-      </MainContainer>
+      {/* </MainContainer> */}
     </>
   )
 }
