@@ -3,9 +3,10 @@ import Nav from './Nav'
 import PostContent from './PostContent'
 import * as S from './PostStyledComponent'
 import PostModal from '../../components/modal/PostModal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import PostNoContent from '../post/PostNoContent'
 import PostDeleteButton from './PostDeleteButton'
+import { useLocation } from 'react-router-dom'
 
 const Div = styled.div`
   position: relative;
@@ -15,30 +16,33 @@ const Div = styled.div`
 const Post = () => {
   const [isOpened, setIsOpened] = useState(false)
   const isData = true
-  const state = 'default'
 
-  isOpened
-    ? (document.body.style.overflowY = 'hidden')
-    : (document.body.style.overflowY = 'scroll')
+  const location = useLocation().pathname.split('/').length
+
+  useEffect(() => {
+    isOpened
+      ? (document.body.style.overflowY = 'hidden')
+      : (document.body.style.overflowY = 'scroll')
+  }, [isOpened])
   return (
     <>
-      <Div isOpened={isOpened}>
+      <Div>
         <Nav />
-        <S.Div state={state}>
-          {state === 'answer' && (
+        <S.Div>
+          {location === 4 && (
             <S.DeleteButton>
-              <PostDeleteButton text="삭제하기" fontSize="1.5rem" />
+              <PostDeleteButton />
             </S.DeleteButton>
           )}
 
           {isData ? (
             <PostContent
               setIsOpened={setIsOpened}
-              state={state}
+              state={location}
               isOpened={isOpened}
             />
           ) : (
-            <PostNoContent />
+            <PostNoContent setIsOpened={setIsOpened} isOpened={isOpened} />
           )}
         </S.Div>
       </Div>

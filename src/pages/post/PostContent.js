@@ -5,6 +5,7 @@ import { getAllReviews, getReviews } from './api'
 import { useEffect, useState } from 'react'
 import PostCard from '../../components/postCard/PostCard'
 import FloatingButton from '../../components/common/FloatingButton'
+import { device } from '../../components/styles'
 
 const LIMIT = 5
 
@@ -13,6 +14,19 @@ export default function PostContent({ setIsOpened, state, isOpened }) {
   const [items, setItems] = useState([])
   const [offset, setOffset] = useState(0)
   const [hasNext, setHasNext] = useState(false)
+
+  const [text, setText] = useState(window.innerWidth < 767 ? true : false)
+
+  const screenChange = (event) => {
+    const matches = event.matches
+    setText(matches)
+  }
+
+  useEffect(() => {
+    let myMedia = window.matchMedia(device.mobile)
+    myMedia.addEventListener('change', screenChange)
+    return () => myMedia.removeEventListener('change', screenChange)
+  }, [])
 
   const handleAllReviews = async () => {
     const result = await getAllReviews()
@@ -59,7 +73,11 @@ export default function PostContent({ setIsOpened, state, isOpened }) {
       <S.ContentWrapper className="wrapper" $state={state}>
         <S.Content className="content">
           <S.ContentHeader>
-            <img src={MessageImg} alt="메세지 이미지" />
+            <img
+              src={MessageImg}
+              alt="메세지 이미지"
+              className="content-header-img"
+            />
             <div>{cnt.length}개의 질문이 있습니다</div>
           </S.ContentHeader>
           <S.ContentDiv>
@@ -77,7 +95,12 @@ export default function PostContent({ setIsOpened, state, isOpened }) {
         </S.Content>
       </S.ContentWrapper>
       <S.DivButton $isOpened={isOpened}>
-        {state === 'default' && <FloatingButton onClick={handleModal} />}
+        {state === 3 && (
+          <FloatingButton
+            text={text ? '질문 작성' : '질문 작성하기'}
+            onClick={handleModal}
+          />
+        )}
       </S.DivButton>
     </>
   )

@@ -27,7 +27,7 @@ const PostCard = ({ state, title }) => {
       <PostCardContainer>
         <div className="header-container">
           <Badge isAnswered={isAnswered} />
-          {state !== 'answer' && (
+          {state !== 4 && (
             <img
               className="option-btn"
               src={OptionIcon}
@@ -46,7 +46,7 @@ const PostCard = ({ state, title }) => {
           <div className="title">{title}</div>
         </TitleContainer>
 
-        {!(state === 'default' && !isAnswered) && (
+        {!(state === 3 && !isAnswered) && (
           <MainContainer $isAnswered={isAnswered}>
             <img src={UserImg} className="user-icon" alt="userIcon" />
             <div className="main-content-container">

@@ -7,7 +7,7 @@ const FloatingButtonStyledComponent = styled.div`
   background: var(--brown-40, #542f1a);
   box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
   color: var(--gray-10, #fff);
-  font-size: ${({ $fontSize }) => `${$fontSize}`};
+  font-size: 1.5rem;
   font-weight: 400;
   text-align: center;
   cursor: pointer;
@@ -24,12 +24,8 @@ const FloatingButtonStyledComponent = styled.div`
   }
 `
 
-function PostDeleteButton({ text = '삭제하기', fontSize = '1.5rem' }) {
-  return (
-    <FloatingButtonStyledComponent $fontSize={fontSize}>
-      {text}
-    </FloatingButtonStyledComponent>
-  )
+function PostDeleteButton() {
+  return <FloatingButtonStyledComponent>삭제하기</FloatingButtonStyledComponent>
 }
 
 export default PostDeleteButton
