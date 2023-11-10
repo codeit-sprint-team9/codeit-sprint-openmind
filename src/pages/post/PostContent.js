@@ -95,7 +95,7 @@ export default function PostContent({ setIsOpened, state, isOpened }) {
         </S.Content>
       </S.ContentWrapper>
       <S.DivButton $isOpened={isOpened}>
-        {state === 3 && (
+        {state === 'default' && (
           <FloatingButton
             text={text ? '질문 작성' : '질문 작성하기'}
             onClick={handleModal}

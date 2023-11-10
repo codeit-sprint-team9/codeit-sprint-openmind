@@ -10,14 +10,15 @@ import { useLocation } from 'react-router-dom'
 
 const Div = styled.div`
   position: relative;
-  width: 100%;
+  width: 100vw;
 `
 
 const Post = () => {
   const [isOpened, setIsOpened] = useState(false)
   const isData = true
 
-  const location = useLocation().pathname.split('/').length
+  const state =
+    useLocation().pathname.split('/').length === 4 ? 'answer' : 'default'
 
   useEffect(() => {
     isOpened
@@ -28,8 +29,8 @@ const Post = () => {
     <>
       <Div>
         <Nav />
-        <S.Div>
-          {location === 4 && (
+        <S.Div className="Div">
+          {state === 'answer' && (
             <S.DeleteButton>
               <PostDeleteButton />
             </S.DeleteButton>
@@ -38,7 +39,7 @@ const Post = () => {
           {isData ? (
             <PostContent
               setIsOpened={setIsOpened}
-              state={location}
+              state={state}
               isOpened={isOpened}
             />
           ) : (

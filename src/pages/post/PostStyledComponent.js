@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { device } from '../../components/styles'
 
 export const Div = styled.div`
+  width: 100vw;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,13 +13,13 @@ export const Button = styled.button`
   cursor: pointer;
 `
 export const TopDiv = styled.div`
-  width: 100%;
+  width: 100vw;
   background-color: var(--gray-10, #fff);
   position: relative;
   display: flex;
   justify-content: center;
+  overflow: hidden;
   .nav-img {
-    text-align: center;
     width: 120rem;
     height: 23.4rem;
     @media (${device.mobile}) {
@@ -40,13 +41,18 @@ export const TopDiv = styled.div`
       top: 4rem;
     }
   }
+`
+
+export const CatDiv = styled.div`
+  position: absolute;
+  top: 12.9rem;
+  left: 50%;
+  transform: translate(-50%);
+  @media (${device.mobile}) {
+    top: 10.1rem;
+  }
   .cat-img {
-    position: absolute;
-    top: 12.9rem;
-    left: 50%;
-    transform: translate(-50%);
     @media (${device.mobile}) {
-      top: 10.1rem;
       width: 10.4rem;
     }
   }
@@ -72,14 +78,16 @@ export const LinkDiv = styled.div`
 `
 
 export const ContentWrapper = styled.div`
-  padding-top: ${({ $state }) => ($state === 4 ? '' : '5.4rem')};
+  padding-top: ${({ $state }) => ($state === 'answer' ? '' : '5.4rem')};
   padding-bottom: 3.4rem;
 
   @media (${device.tablet}) {
-    padding: ${({ $state }) => ($state === 4 ? '0rem' : '5.4rem')} 3.6rem 3.4rem;
+    padding: ${({ $state }) => ($state === 'answer' ? '0rem' : '5.4rem')} 3.6rem
+      3.4rem;
   }
   @media (${device.mobile}) {
-    padding: ${({ $state }) => ($state === 4 ? '0rem' : '5.4rem')} 2.4rem 3.4rem;
+    padding: ${({ $state }) => ($state === 'answer' ? '0rem' : '5.4rem')} 2.4rem
+      3.4rem;
   }
 `
 export const Content = styled.div`

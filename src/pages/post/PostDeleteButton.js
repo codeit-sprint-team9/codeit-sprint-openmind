@@ -16,7 +16,7 @@ const FloatingButtonStyledComponent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media${device.mobile} {
+  @media ${device.mobile} {
     padding: 0.5rem 1.3rem;
     width: 7rem;
     height: 2.5rem;

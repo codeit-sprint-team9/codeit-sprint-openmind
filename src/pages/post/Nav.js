@@ -12,6 +12,7 @@ const { Kakao } = window
 
 export default function Nav() {
   const sharedLink = 'https://20002100.tistory.com/'
+  const BASE_URL = 'http://localhost:3000'
   const location = useLocation()
   const [alert, alertSet] = useState(false)
 
@@ -55,8 +56,8 @@ export default function Nav() {
 
   return (
     <>
-      <S.Div>
-        <S.TopDiv>
+      <S.Div className="Div">
+        <S.TopDiv className="TopDiv">
           <Link to="/">
             <img
               src={OpenMindLogo}
@@ -65,13 +66,17 @@ export default function Nav() {
             />
           </Link>
           <img src={NavImg} alt="Nav 이미지" className="nav-img" />
-          <img src={CatImg} alt="프로필 이미지" className="cat-img" />
         </S.TopDiv>
+        <S.CatDiv>
+          <img src={CatImg} alt="프로필 이미지" className="cat-img" />
+        </S.CatDiv>
         <S.NavHeader>아초는 고양이</S.NavHeader>
         <S.LinkDiv>
           <S.Button
             className="button-container"
-            onClick={() => handleCopyClipBoard(`${location.pathname}`)}
+            onClick={() =>
+              handleCopyClipBoard(`${BASE_URL}${location.pathname}`)
+            }
           >
             <img src={LinkImg} alt="링크 이미지" />
           </S.Button>
