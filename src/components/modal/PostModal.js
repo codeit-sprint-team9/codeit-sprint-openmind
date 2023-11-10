@@ -14,19 +14,21 @@ import { postQuestions } from '../../api/postModal'
 const PostModal = ({ setIsOpened }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
+  // 홈 부분 병합 후 수정 예정
+  const id = localStorage.getItem('userInfo') || 225
 
   const handlePostQuestion = async () => {
-    const result = await postQuestionAsync(225, question)
+    const result = await postQuestionAsync(id, question)
 
     if (result) setIsOpened(false)
   }
 
   if (isLoading) {
-    return <div>loading</div>
+    return <div>질문을 올리는 중입니다. 잠시만 기다려 주세요.</div>
   }
 
   if (error) {
-    return <div>error</div>
+    return <div>문제가 발생했습니다.</div>
   }
 
   return (
