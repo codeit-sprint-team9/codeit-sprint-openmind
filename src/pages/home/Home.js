@@ -75,14 +75,19 @@ const Home = () => {
   const handlePost = async () => {
     const result = await subjectPost(Name)
     if (!result) return
-    if (subjectError)
-      alert('질문대상 생성에 실패했습니다. \n 다시 시도해주세요.')
-    if (subjectPending) alert('로딩중입니다. \n 잠시만 기다려주십시요.')
-    localStorage.setItem('id', result.id)
-    localStorage.setItem('name', result.name)
-    localStorage.setItem('img', result.imageSource)
+    localStorage.setItem(
+      'user',
+      JSON.stringify({
+        id: result.id,
+        name: result.name,
+        user: result.imageSource,
+      })
+    )
     nav(`/post/${result.id}/answer`)
   }
+
+  if (subjectError) return <div>애러가 발생했습니다. 새로고침해주세요.</div>
+  if (subjectPending) return <div>로딩중입니다. 잠시만 기다려주십시요.</div>
 
   useEffect(() => {
     if (localStorage.length !== 0) {
