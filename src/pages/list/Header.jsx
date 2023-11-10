@@ -4,6 +4,25 @@ import { device } from '../../components/styles'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+function Header() {
+  return (
+    <>
+      <HeaderTopContainer>
+        <Link to="/">
+          <img src={logoImage}></img>
+        </Link>
+        <div className="answer-button">
+          <Button text="답변하러 가기" isValue={true} />
+        </div>
+      </HeaderTopContainer>
+
+      <HeaderBottomContainer>
+        <div className="answer-who">누구에게 질문할까요?</div>
+      </HeaderBottomContainer>
+    </>
+  )
+}
+
 const HeaderTopContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -51,23 +70,5 @@ const HeaderBottomContainer = styled.div`
     }
   }
 `
-function Header() {
-  return (
-    <>
-      <HeaderTopContainer>
-        <Link to="/">
-          <img src={logoImage}></img>
-        </Link>
-        <div className="answer-button">
-          <Button text="답변하러 가기" isValue={true} />
-        </div>
-      </HeaderTopContainer>
-
-      <HeaderBottomContainer>
-        <div className="answer-who">누구에게 질문할까요?</div>
-      </HeaderBottomContainer>
-    </>
-  )
-}
 
 export default Header

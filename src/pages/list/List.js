@@ -10,15 +10,14 @@ const MainContainer = styled.div`
   align-items: center;
 `
 
+
+
 function List() {
   return (
     <>
       <Header />
-      {/* <MainContainer> */}
-
       <CardList />
       <Paginator />
-      {/* </MainContainer> */}
     </>
   )
 }
