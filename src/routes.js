@@ -1,11 +1,12 @@
 import React from 'react'
 
 const Home = React.lazy(() => import('./pages/home/Home'))
-const List = React.lazy(() => import('./pages/list/List'))
+
+const Post = React.lazy(() => import('./pages/post/Post'))
 
 const routes = [
   { path: '/', element: Home },
-  { path: '/list', element: List },
+  { path: `/post/:id/*`, element: Post },
 ]
 
 export default routes

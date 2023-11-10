@@ -16,11 +16,11 @@ import Button from '../common/Button'
 import Reaction from '../common/Reaction'
 import Edit from '../common/Edit'
 
-const PostCard = ({ state = 'default' }) => {
+const PostCard = ({ state, title }) => {
   const [isOpenOption, setIsOpenOption] = useState(false)
   const [, setSelectedOption] = useState('')
   const [answer, setAnswer] = useState('')
-  const [isAnswered] = useState(true)
+  const [isAnswered] = useState(false)
 
   return (
     <PostCardWrapper>
@@ -43,9 +43,7 @@ const PostCard = ({ state = 'default' }) => {
         <TitleContainer>
           <div className="question-ago">질문 · 2주전</div>
 
-          <div className="title">
-            좋아하는 동물은?좋아하는 동물은?좋아하는 동물은? 좋아하동 물은?
-          </div>
+          <div className="title">{title}</div>
         </TitleContainer>
 
         {!(state === 'default' && !isAnswered) && (
