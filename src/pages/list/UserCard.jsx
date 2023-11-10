@@ -8,29 +8,40 @@ import { getSubject } from '../../api/api'
 
 function CardList() {
   const [subjectData, setSubjectData] = useState([])
-  const [order, setOrder] = useState('time')
+  const [order, setOrder] = useState('name')
   const [offset, setOffset] = useState(0)
 
   const [isSubjectLoading, isSubjectError, getSubjectAsync] =
     useAsync(getSubject)
 
-  const handleLoad = useCallback(async (options) => {
-    const { results } = await getSubjectAsync(options)
-    console.log(results)
-    if (!results) return
-    setSubjectData(results)
-  }, [getSubjectAsync])
+  const handleLoad = useCallback(
+    async (options) => {
+      const { results } = await getSubjectAsync(options)
+      setSubjectData(results)
+    },
+    [getSubjectAsync]
+  )
+
+  const handleSort = (para) => {
+    setOrder(para)
+  }
+
+
 
   useEffect(() => {
     handleLoad({ order, offset, limit: 8 })
-  }, [])
+  }, [handleLoad, order])
 
   if (isSubjectLoading) {
-    return <div>화면 로딩 중</div>
+    return <div>화면을 불러오는 중입니다.</div>
+  }
+
+  if (isSubjectError) {
+    return <div>문제가 발생했습니다.</div>
   }
   return (
     <>
-      <Dropdown />
+      <Dropdown handleSort = {handleSort} />
       <CardListContainer>
         {subjectData.map((subject) => {
           return (
@@ -113,6 +124,7 @@ const CardProfile = styled.div`
   img {
     width: 6rem;
     height: 6rem;
+    border-radius: 100%;
   }
 
   div {

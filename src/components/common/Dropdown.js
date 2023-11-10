@@ -73,7 +73,7 @@ const DropdownFlexBoxStyledComponent = styled.div`
   font-weight: 500;
 `
 
-function Dropdown() {
+function Dropdown({ handleSort }) {
   const [open, setOpen] = useState(true)
   const [selected, setSelected] = useState('이름순')
 
@@ -83,7 +83,13 @@ function Dropdown() {
 
   function handleSelected(e) {
     setSelected(e.target.textContent)
+    selected === '이름순'
+      ? handleSort('name')
+      : selected === '최신순'
+      ? handleSort('time')
+      : undefined
   }
+
   return (
     <DropdownBoxStyledComponent onClick={handleClick} $open={open}>
       <DropdownFlexBoxStyledComponent>
