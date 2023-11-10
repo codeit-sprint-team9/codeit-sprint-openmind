@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { device } from '../../components/styles'
 import styled from 'styled-components'
 import InputField from '../../components/common/InputField'
 import Button from '../../components/common/Button'
 import bg from '../../asset/Home/bg.png'
 import logo from '../../asset/Home/pc-logo.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import postSubject from '../../api/home'
 
@@ -70,22 +70,28 @@ const Home = () => {
   const [isValue, setIsValue] = useState(false)
   const [Name, setName] = useState('')
   const [subjectPending, subjectError, subjectPost] = useAsync(postSubject)
+  const nav = useNavigate()
 
   const handlePost = async () => {
     const result = await subjectPost(Name)
     if (!result) return
-
+    if (subjectError)
+      alert('질문대상 생성에 실패했습니다. \n 다시 시도해주세요.')
+    if (subjectPending) alert('로딩중입니다. \n 잠시만 기다려주십시요.')
     localStorage.setItem('id', result.id)
     localStorage.setItem('name', result.name)
     localStorage.setItem('img', result.imageSource)
-    console.log(localStorage.getItem('id'))
-    console.log(localStorage.getItem('name'))
-    console.log(localStorage.getItem('img'))
-
-    console.log(result)
-    console.log(subjectError)
-    console.log(subjectPending)
+    nav(`/post/${result.id}/answer`)
   }
+
+  useEffect(() => {
+    if (localStorage.length !== 0) {
+      alert(
+        '이미 질문대상이 존재합니다.\n 삭제 후 새로운 질문 대상을 만들어주세요'
+      )
+      nav('/list')
+    }
+  }, [nav])
 
   return (
     <HomeBackground>
@@ -95,7 +101,9 @@ const Home = () => {
             <Button text="질문하러 가기" />
           </ButtonBox>
         </Link>
-        <img className="logo" src={logo} alt="logo" />
+        <Link to="/">
+          <img className="logo" src={logo} alt="logo" />
+        </Link>
         <InputBox>
           <InputField
             isValue={isValue}
