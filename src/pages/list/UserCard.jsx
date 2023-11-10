@@ -26,10 +26,9 @@ function CardList() {
     setOrder(para)
   }
 
-
-
   useEffect(() => {
     handleLoad({ order, offset, limit: 8 })
+    console.log(order)
   }, [handleLoad, order])
 
   if (isSubjectLoading) {
@@ -41,7 +40,7 @@ function CardList() {
   }
   return (
     <>
-      <Dropdown handleSort = {handleSort} />
+      <Dropdown handleSort={handleSort} order={order} />
       <CardListContainer>
         {subjectData.map((subject) => {
           return (
@@ -109,7 +108,7 @@ const CardContainer = styled.div`
   justify-content: space-between;
   border-radius: 1.6rem;
   border: 0.1rem solid var(--gray-40);
-
+  background-color: var(--gray-10);
   @media ${device.mobile} {
     padding: 1.6rem;
     width: 15.5rem;
