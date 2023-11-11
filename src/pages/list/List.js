@@ -10,19 +10,28 @@ function List() {
   const [order, setOrder] = useState('name')
   const [offset, setOffset] = useState(0)
   const [limit, setLimit] = useState(8)
+  const [lastPage, setLastPage] = useState(0)
 
+  const calculatePage = (num) => {
+    return Math.ceil(num / limit)
+  }
   const [isSubjectLoading, isSubjectError, getSubjectAsync] =
     useAsync(getSubject)
 
   const handleLoad = useCallback(
     async (options) => {
-      const { results } = await getSubjectAsync(options)
-      setSubjectData(results)
+      const data = await getSubjectAsync(options)
+      console.log(data)
+      if (!data) return
+      setLastPage(calculatePage(data?.count))
+      setSubjectData(data?.results)
     },
     [getSubjectAsync]
   )
 
-  // const handleLoadMore =
+  const handleLoadByPage = async (pageIndex) => {
+    await handleLoad({ order, offset: pageIndex * limit, limit })
+  }
   const handleSort = (para) => {
     setOrder(para)
   }
@@ -46,7 +55,7 @@ function List() {
         order={order}
         handleSort={handleSort}
       />
-      <Paginator />
+      <Paginator lastPage={lastPage} handleLoadByPage={handleLoadByPage} />
     </>
   )
 }

@@ -3,7 +3,7 @@ import messageIcon from '../../asset/list/Messages.svg'
 import { device } from '../../components/styles'
 import Dropdown from '../../components/common/Dropdown'
 
-function CardList({ subjectData, handleSort, order }) {
+function CardList({ subjectData, handleSort, order, handleLoadMore }) {
   return (
     <>
       <Dropdown handleSort={handleSort} order={order} />
@@ -66,7 +66,9 @@ const CardListContainer = styled.div`
   }
 `
 
+const Button = styled.button``
 const CardContainer = styled.div`
+  cursor: pointer;
   display: flex;
   height: 18.6rem;
   padding: 2rem;
