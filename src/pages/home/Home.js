@@ -90,7 +90,7 @@ const Home = () => {
   if (subjectPending) return <div>로딩중입니다. 잠시만 기다려주십시요.</div>
 
   useEffect(() => {
-    if (localStorage.length !== 0) {
+    if (localStorage.getItem('user')) {
       alert(
         '이미 질문대상이 존재합니다.\n 삭제 후 새로운 질문 대상을 만들어주세요'
       )
