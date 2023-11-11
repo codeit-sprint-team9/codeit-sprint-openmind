@@ -68,12 +68,12 @@ const MainBox = styled.div`
 
 const Home = () => {
   const [isValue, setIsValue] = useState(false)
-  const [Name, setName] = useState('')
+  const [name, setName] = useState('')
   const [subjectPending, subjectError, subjectPost] = useAsync(postSubject)
   const nav = useNavigate()
 
   const handlePost = async () => {
-    const result = await subjectPost(Name)
+    const result = await subjectPost(name)
     if (!result) return
     localStorage.setItem(
       'user',

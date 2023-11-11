@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import arrowIcon from '../../asset/Button/button-icon-arrow-right.svg'
+import { ReactComponent as ArrowIcon } from '../../asset/Button/button-icon-arrow-right.svg'
 import { device } from '../styles'
 
 const ButtonFlexBoxStyledComponent = css`
@@ -36,13 +36,12 @@ const ButtonArrowStyledComponent = styled.div`
   &:active {
     background: var(--brown-20, #e4d5c9);
   }
-  img {
-    filter: brightness(0) saturate(100%) invert(16%) sepia(7%) saturate(5607%)
-      hue-rotate(340deg) brightness(101%) contrast(87%);
-  }
   @media ${device.mobile} {
     padding: 0.8rem 1.2rem;
     font-size: 1.4rem;
+  }
+  svg > g > path {
+    fill: var(--brown-40, #542f1a);
   }
 `
 
@@ -56,7 +55,7 @@ function Button({ brown = false, text = '질문 받기', isValue, onClick }) {
       ) : (
         <ButtonArrowStyledComponent>
           {text}
-          <img src={arrowIcon} alt="arrowIcon" />
+          <ArrowIcon />
         </ButtonArrowStyledComponent>
       )}
     </>
