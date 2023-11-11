@@ -2,42 +2,8 @@ import styled from 'styled-components'
 import messageIcon from '../../asset/list/Messages.svg'
 import { device } from '../../components/styles'
 import Dropdown from '../../components/common/Dropdown'
-import { useCallback, useEffect, useState } from 'react'
-import useAsync from '../../hooks/useAsync'
-import { getSubject } from '../../api/api'
 
-function CardList() {
-  const [subjectData, setSubjectData] = useState([])
-  const [order, setOrder] = useState('name')
-  const [offset, setOffset] = useState(0)
-
-  const [isSubjectLoading, isSubjectError, getSubjectAsync] =
-    useAsync(getSubject)
-
-  const handleLoad = useCallback(
-    async (options) => {
-      const { results } = await getSubjectAsync(options)
-      setSubjectData(results)
-    },
-    [getSubjectAsync]
-  )
-
-  const handleSort = (para) => {
-    setOrder(para)
-  }
-
-  useEffect(() => {
-    handleLoad({ order, offset, limit: 8 })
-    console.log(order)
-  }, [handleLoad, order])
-
-  if (isSubjectLoading) {
-    return <div>화면을 불러오는 중입니다.</div>
-  }
-
-  if (isSubjectError) {
-    return <div>문제가 발생했습니다.</div>
-  }
+function CardList({ subjectData, handleSort, order }) {
   return (
     <>
       <Dropdown handleSort={handleSort} order={order} />
