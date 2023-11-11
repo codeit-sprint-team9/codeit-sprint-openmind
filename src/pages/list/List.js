@@ -4,19 +4,13 @@ import Paginator from './Paginator'
 import Header from './Header'
 import { useCallback, useEffect, useState } from 'react'
 import useAsync from '../../hooks/useAsync'
-import { getSubject } from '../../api/api'
-
-const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
+import { getSubject } from '../../api/list'
 
 function List() {
   const [subjectData, setSubjectData] = useState([])
   const [order, setOrder] = useState('name')
   const [offset, setOffset] = useState(0)
+  const [limit, setLimit] = useState(8)
 
   const [isSubjectLoading, isSubjectError, getSubjectAsync] =
     useAsync(getSubject)
@@ -29,13 +23,13 @@ function List() {
     [getSubjectAsync]
   )
 
+  // const handleLoadMore = 
   const handleSort = (para) => {
     setOrder(para)
   }
 
   useEffect(() => {
-    handleLoad({ order, offset, limit: 8 })
-    console.log(order)
+    handleLoad({ order, offset, limit })
   }, [handleLoad, order])
 
   if (isSubjectLoading) {
