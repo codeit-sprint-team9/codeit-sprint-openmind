@@ -1,4 +1,3 @@
-import { device } from '../../components/styles'
 import styled from 'styled-components'
 import Button from '../../components/common/Button'
 import bg from '../../asset/Home/bg.png'
@@ -19,25 +18,15 @@ const HomeBackground = styled.div`
 `
 
 const ContentBox = styled.div`
-  padding: 3.2rem;
-  border-radius: 1.6rem;
-  background: var(--gray-10, #fff);
-  width: 40rem;
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
-  @media ${device.mobile} {
-    width: 30.5rem;
-    padding: 2.4rem;
-  }
+  gap: 3.2rem;
 `
 
 const ContentText = styled.div`
-  font-size: 1.6rem;
+  font-size: 4rem;
+  font-weight: 600;
   text-align: center;
-  @media ${device.mobile} {
-    font-size: 1.2rem;
-  }
 `
 
 const MainBox = styled.div`
@@ -45,14 +34,13 @@ const MainBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2.4rem;
+  position: relative;
   .logo {
     width: 45.6rem;
     cursor: pointer;
-    @media ${device.mobile} {
-      width: 24.8rem;
-      order: -1;
-    }
+    position: absolute;
+    left: -2.3rem;
+    top: -20.4rem;
   }
 `
 
