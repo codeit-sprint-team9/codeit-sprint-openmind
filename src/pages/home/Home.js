@@ -80,7 +80,7 @@ const Home = () => {
       JSON.stringify({
         id: result.id,
         name: result.name,
-        user: result.imageSource,
+        imageSource: result.imageSource,
       })
     )
     nav(`/post/${result.id}/answer`)
