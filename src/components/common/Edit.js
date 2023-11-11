@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import editIcon from '../../asset/Edit/dropdown-list-icon-edit.svg'
+import { ReactComponent as EditIcon } from '../../asset/Edit/dropdown-list-icon-edit.svg'
 
 export const EditBoxStyledComponent = styled.div`
   display: flex;
@@ -17,17 +17,15 @@ export const EditBoxStyledComponent = styled.div`
   &:hover {
     background: var(--gray-20, #f9f9f9);
     color: var(--gray-60, #000);
-    img {
-      filter: invert(0%) sepia(4%) saturate(1000%) hue-rotate(100deg)
-        brightness(0%) contrast(105%);
+    svg > g > path {
+      fill: var(--gray-60, #000);
     }
   }
   &:active {
     background: var(--gray-10, #fff);
     color: var(--blue, #1877f2);
-    img {
-      filter: invert(36%) sepia(100%) saturate(3148%) hue-rotate(203deg)
-        brightness(99%) contrast(92%);
+    svg > g > path {
+      fill: var(--blue, #1877f2);
     }
   }
 `
@@ -43,7 +41,7 @@ function Edit() {
   return (
     <EditBoxStyledComponent>
       <EditStyledComponent>
-        <img src={editIcon} alt="editIcon" />
+        <EditIcon />
         수정하기
       </EditStyledComponent>
     </EditBoxStyledComponent>
