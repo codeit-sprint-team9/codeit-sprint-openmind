@@ -40,13 +40,6 @@ function List() {
     handleLoad({ order, offset, limit })
   }, [handleLoad, order])
 
-  if (isSubjectLoading) {
-    return <div>화면을 불러오는 중입니다.</div>
-  }
-
-  if (isSubjectError) {
-    return <div>문제가 발생했습니다.</div>
-  }
   return (
     <>
       <Header />

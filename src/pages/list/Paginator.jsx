@@ -28,8 +28,9 @@ const PaginatorContainer = styled('div')(() => ({
   },
 }))
 
+const mobileSize = 767
 function Paginator({ lastPage, handleLoadByPage }) {
-  // const [page, setPage] = useState(page)
+  const [page, setPage] = useState(1)
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -49,8 +50,9 @@ function Paginator({ lastPage, handleLoadByPage }) {
     }
   }, [])
 
-  const handlePage = async (e) => {
-    await handleLoadByPage(Number(e.target.textContent) - 1)
+  const handlePage = async (ㅡ, value) => {
+    await handleLoadByPage(Number(value - 1))
+    setPage(value)
   }
 
   return (
@@ -61,9 +63,10 @@ function Paginator({ lastPage, handleLoadByPage }) {
           hidePrevButton
           hideNextButton
           size="large"
-          siblingCount={windowSize.width < 767 ? 1 : 2}
+          siblingCount={windowSize.width <= mobileSize ? 1 : 2}
           boundaryCount={1}
-          onChange={(e) => handlePage(e)}
+          onChange={handlePage}
+          page={page}
         />
       </Stack>
     </PaginatorContainer>

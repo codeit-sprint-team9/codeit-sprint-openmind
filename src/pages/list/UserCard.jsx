@@ -3,12 +3,12 @@ import messageIcon from '../../asset/list/Messages.svg'
 import { device } from '../../components/styles'
 import Dropdown from '../../components/common/Dropdown'
 
-function CardList({ subjectData, handleSort, order, handleLoadMore }) {
+function CardList({ subjectData, handleSort, order }) {
   return (
     <>
       <Dropdown handleSort={handleSort} order={order} />
       <CardListContainer>
-        {subjectData.map((subject) => {
+        {subjectData?.map((subject) => {
           return (
             <UserCard
               key={subject.id}
@@ -66,7 +66,6 @@ const CardListContainer = styled.div`
   }
 `
 
-const Button = styled.button``
 const CardContainer = styled.div`
   cursor: pointer;
   display: flex;
