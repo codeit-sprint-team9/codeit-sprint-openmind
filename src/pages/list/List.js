@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import CardList from './UserCard'
 import Paginator from './Paginator'
 import Header from './Header'
@@ -23,7 +22,7 @@ function List() {
     [getSubjectAsync]
   )
 
-  // const handleLoadMore = 
+  // const handleLoadMore =
   const handleSort = (para) => {
     setOrder(para)
   }
