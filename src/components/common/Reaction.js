@@ -30,15 +30,18 @@ const DisLikeStyledComponent = styled(LikeStyledComponent)`
   }
 `
 
-function Reaction({ like = '0', disLike = '0' }) {
+function Reaction({ like = '0', disLike = '0', onClick }) {
   // like 있으면 파란색 disLike 있으면 검은색
   return (
     <ReactionStyledComponent>
-      <LikeStyledComponent $count={like}>
+      <LikeStyledComponent $count={like} onClick={() => onClick('like')}>
         <LikeIcon />
         좋아요 {like !== '0' ? like : ''}
       </LikeStyledComponent>
-      <DisLikeStyledComponent $count={disLike}>
+      <DisLikeStyledComponent
+        $count={disLike}
+        onClick={() => onClick('dislike')}
+      >
         <DisLikeIcon />
         싫어요
       </DisLikeStyledComponent>

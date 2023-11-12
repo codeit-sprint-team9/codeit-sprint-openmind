@@ -14,11 +14,12 @@ import { postQuestions } from '../../api/postModal'
 const PostModal = ({ setIsOpened }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
-  // 홈 부분 병합 후 수정 예정
-  const id = localStorage.getItem('userInfo') || 225
+  const userInfo = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))
+    : 0
 
   const handlePostQuestion = async () => {
-    const result = await postQuestionAsync(id, question)
+    const result = await postQuestionAsync(userInfo.id, question)
 
     if (result) setIsOpened(false)
   }

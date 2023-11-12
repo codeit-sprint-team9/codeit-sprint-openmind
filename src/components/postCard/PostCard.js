@@ -7,7 +7,6 @@ import {
   PostCardWrapper,
   TitleContainer,
 } from './PostCardStyledComponents'
-import UserImg from '../../asset/postCard/img_postCardUser.png'
 import OptionIcon from '../../asset/postCard/img_option.svg'
 import { useState } from 'react'
 import Badge from '../common/Badge'
@@ -15,19 +14,121 @@ import InputTextArea from '../common/InputTextArea'
 import Button from '../common/Button'
 import Reaction from '../common/Reaction'
 import Edit from '../common/Edit'
+import useAsync from '../../hooks/useAsync'
+import {
+  deleteAnswers,
+  deleteQuestions,
+  postAnswers,
+  postReactions,
+  putAnswers,
+} from '../../api/postCard'
 
-const PostCard = ({ state, title }) => {
+const PostCard = ({ state, cardData }) => {
   const [isOpenOption, setIsOpenOption] = useState(false)
-  const [, setSelectedOption] = useState('')
-  const [answer, setAnswer] = useState('')
-  const [isAnswered] = useState(false)
+  const [answer, setAnswer] = useState(
+    cardData.answer ? cardData.answer.content : ''
+  )
+  const isAnswered = cardData.answer ? true : false
+  const [isEdit, setIsEdit] = useState(false)
+
+  const userInfo = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))
+    : 0
+
+  const [isLoadingReactions, errorReactions, postReactionsAsync] =
+    useAsync(postReactions)
+  const [isLoadingAnswers, errorAnswers, postAnswersAsync] =
+    useAsync(postAnswers)
+  const [isLoadingPutAnswers, errorPutAnswers, putAnswersAsync] =
+    useAsync(putAnswers)
+  const [isLoadingDeleteAnswers, errorDeleteAnswers, deleteAnswersAsync] =
+    useAsync(deleteAnswers)
+  const [isLoadingDeleteQuestions, errorDeleteQuestions, deleteQuestionsAsync] =
+    useAsync(deleteQuestions)
+
+  // 답변 등록, 답변 수정
+  const handlePostAnswer = async (isRejected = false) => {
+    // 답변 수정
+    if (answer.length < 1) return
+    if (isAnswered) {
+      const result = await putAnswersAsync(
+        cardData.answer.id,
+        answer,
+        isRejected
+      )
+
+      if (!result) return
+      return
+    }
+    const result = await postAnswersAsync(
+      cardData.id,
+      isRejected ? 'rejected' : answer,
+      isRejected
+    )
+
+    if (!result) return
+  }
+
+  // 리액션
+  const handleReactions = async (type) => {
+    const result = await postReactionsAsync(type, cardData.id)
+
+    if (!result) return
+  }
+
+  // option 버튼 - 답변 삭제, 답변 수정, 질문 삭제
+  const handleOptions = async (menu) => {
+    setIsOpenOption(false)
+    if (menu === '답변 거절') {
+      handlePostAnswer(true)
+      return
+    }
+    if (menu === '답변 삭제') {
+      const result = await deleteAnswersAsync(cardData.answer)
+      if (!result) return
+      return
+    }
+    if (menu === '질문 삭제') {
+      const result = await deleteQuestionsAsync(cardData.id)
+      if (!result) return
+      return
+    }
+    if (menu === '수정하기') {
+      setIsEdit(true)
+      return
+    }
+  }
+
+  if (errorPutAnswers || errorDeleteAnswers || errorDeleteQuestions) {
+    return (
+      <PostCardWrapper>
+        <PostCardContainer>
+          <ErrorContainer />
+        </PostCardContainer>
+      </PostCardWrapper>
+    )
+  }
+
+  if (
+    isLoadingPutAnswers ||
+    isLoadingDeleteAnswers ||
+    isLoadingDeleteQuestions
+  ) {
+    return (
+      <PostCardWrapper>
+        <PostCardContainer>
+          <LoadingContainer />
+        </PostCardContainer>
+      </PostCardWrapper>
+    )
+  }
 
   return (
     <PostCardWrapper>
       <PostCardContainer>
         <div className="header-container">
           <Badge isAnswered={isAnswered} />
-          {state !== 'answer' && (
+          {state === 'answer' && (
             <img
               className="option-btn"
               src={OptionIcon}
@@ -43,43 +144,56 @@ const PostCard = ({ state, title }) => {
         <TitleContainer>
           <div className="question-ago">질문 · 2주전</div>
 
-          <div className="title">{title}</div>
+          <div className="title">{cardData.title}</div>
         </TitleContainer>
 
         {!(state === 'default' && !isAnswered) && (
           <MainContainer $isAnswered={isAnswered}>
-            <img src={UserImg} className="user-icon" alt="userIcon" />
+            <img
+              src={userInfo.imageSource}
+              className="user-icon"
+              alt="userIcon"
+            />
             <div className="main-content-container">
               <div className="content-user-info-container">
-                <div className="user-name">아초는고양이</div>
+                <div className="user-name">{userInfo.name}</div>
                 <div className="content-ago">2주전</div>
               </div>
 
-              {isAnswered ? (
-                <div className="main-content">
-                  그들을 불러 귀는 이상의 오직 피고, 가슴이 이상, 못할
-                  봄바람이다. 찾아다녀도, 전인 방황하였으며, 대한 바이며,
-                  이것이야말로 가치를 청춘의 따뜻한 그리하였는가? 몸이 열락의
-                  청춘의 때문이다. 천고에 피어나는 간에 밝은 이상, 인생의 만물은
-                  피다. 대중을 이성은 방황하여도, 그리하였는가? 크고 평화스러운
-                  품에 방황하였으며, 말이다. 이상은 들어 예수는 크고 긴지라
-                  역사를 피다. 얼음에 있음으로써 꽃 보배를 곧 가는 교향악이다.
-                  우는 새 예가 우리의 것은 피다. 피가 그것을 어디 앞이 기쁘며,
-                  이상의 열락의 위하여서 끝까지 것이다. 있는 봄바람을
-                  방황하여도, 우리의 것은 작고 아니한 영원히 듣기만 운다.
-                </div>
+              {isAnswered && !isEdit ? (
+                <>
+                  {cardData.answer.isRejected ? (
+                    <div>답변 거절</div>
+                  ) : (
+                    <div className="main-content">cardData.answer.content</div>
+                  )}
+                </>
               ) : (
-                <div className="textarea-container">
-                  <InputTextArea
-                    placeholder="답변을 입력해주세요"
-                    setAnswer={setAnswer}
-                  />
-                  <Button
-                    isValue={answer !== ''}
-                    brown={true}
-                    text="답변 완료"
-                  />
-                </div>
+                <>
+                  {isLoadingAnswers ? (
+                    <isLoadingAnswers />
+                  ) : (
+                    <>
+                      {errorAnswers ? (
+                        <ErrorContainer />
+                      ) : (
+                        <div className="textarea-container">
+                          <InputTextArea
+                            placeholder="답변을 입력해주세요"
+                            setAnswer={setAnswer}
+                            answer={answer}
+                          />
+                          <Button
+                            onClick={() => handlePostAnswer()}
+                            isValue={answer !== ''}
+                            brown={true}
+                            text="답변 완료"
+                          />
+                        </div>
+                      )}
+                    </>
+                  )}
+                </>
               )}
             </div>
           </MainContainer>
@@ -88,29 +202,63 @@ const PostCard = ({ state, title }) => {
         <div className="divider" />
 
         <BottomContainer>
-          <Reaction />
-          {isAnswered && <Edit />}
+          {!isLoadingReactions ? (
+            <>
+              {errorReactions ? (
+                <ErrorContainer />
+              ) : (
+                <Reaction
+                  like={cardData.like}
+                  disLike={cardData.disLike}
+                  onClick={handleReactions}
+                />
+              )}
+            </>
+          ) : (
+            <LoadingContainer />
+          )}
+
+          {isAnswered && <Edit onClick={handleOptions} />}
         </BottomContainer>
       </PostCardContainer>
 
-      {isOpenOption && <OptionMenu setSelectOption={setSelectedOption} />}
+      {isOpenOption && (
+        <OptionMenu onClick={handleOptions} isAnswered={isAnswered} />
+      )}
     </PostCardWrapper>
   )
 }
 export default PostCard
 
-const OptionMenuArr = ['답변 거절', '답변 삭제', '질문 거절', '수정하기']
+const ErrorContainer = () => {
+  return <div className="error">문제가 발생했습니다. 다시 시도해주세요.</div>
+}
 
-const OptionMenu = (props) => {
+const LoadingContainer = () => {
+  return <div className="loading">로딩중입니다. 잠시만 기다려주세요.</div>
+}
+
+const OptionMenuArr = ['답변 거절', '답변 삭제', '질문 삭제', '수정하기']
+
+const OptionMenu = ({ onClick, isAnswered }) => {
   return (
     <OptionMenuContainer>
       {OptionMenuArr.map((e, index) => {
         return (
           <OptionMenuItem
             key={index}
-            $display={e !== '수정하기'}
+            $display={
+              !isAnswered
+                ? e === '답변 삭제' || e === '수정하기'
+                  ? false
+                  : true
+                : e === '수정하기'
+                ? false
+                : true
+            }
+            $isEdit={e === '수정하기'}
             className="optionMenuItem"
-            onClick={() => props.setSelectOption(e)}
+            onClick={() => onClick(e)}
           >
             {e}
           </OptionMenuItem>

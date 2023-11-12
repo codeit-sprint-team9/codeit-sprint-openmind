@@ -5,6 +5,18 @@ import { EditBoxStyledComponent } from '../common/Edit'
 
 export const PostCardWrapper = styled.div`
   position: relative;
+
+  .loading {
+    color: var(--blue);
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  .error {
+    color: var(--red);
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
 `
 
 export const PostCardContainer = styled.div`
@@ -79,6 +91,7 @@ export const MainContainer = styled.div`
   .user-icon {
     width: 4.8rem;
     height: 4.8rem;
+    border-radius: 50%;
     @media all and ${device.mobile} {
       width: 3.2rem;
       height: 3.2rem;
@@ -178,6 +191,7 @@ export const OptionMenuItem = styled.div`
   }
 
   @media all and ${device.mobile} {
-    display: block;
+    display: ${(props) =>
+      props.$display ? 'block' : props.$isEdit ? 'block' : 'none'};
   }
 `

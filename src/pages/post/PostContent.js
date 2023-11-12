@@ -87,8 +87,8 @@ export default function PostContent({ setIsOpened, state, isOpened }) {
               hasMore={hasNext}
               className="infinite"
             >
-              {items.map((item, index) => {
-                return <PostCard key={index} title={item.title} state={state} />
+              {items?.map((item, index) => {
+                return <PostCard key={index} cardData={item} state={state} />
               })}
             </InfiniteScroll>
           </S.ContentDiv>
