@@ -132,6 +132,7 @@ export const ContentDiv = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
     @media (${device.mobile}) {
       gap: 1.6rem;
     }
@@ -140,7 +141,7 @@ export const ContentDiv = styled.div`
 
 export const DivButton = styled.div`
   position: fixed;
-  right: ${({ $isOpened }) => ($isOpened ? '4.25rem' : '2.4rem')};
+  right: 2.4rem;
   bottom: 2.4rem;
 `
 

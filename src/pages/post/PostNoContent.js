@@ -5,7 +5,7 @@ import FloatingButton from '../../components/common/FloatingButton'
 import { useEffect, useState } from 'react'
 import { device } from '../../components/styles'
 
-export default function PostNoContent({ setIsOpened, isOpened }) {
+export default function PostNoContent({ setIsOpened, isOpened, state }) {
   const handleModal = () => {
     setIsOpened(true)
   }
@@ -23,7 +23,7 @@ export default function PostNoContent({ setIsOpened, isOpened }) {
   }, [])
   return (
     <>
-      <S.ContentWrapper>
+      <S.ContentWrapper $state={state}>
         <S.Content>
           <S.ContentHeader>
             <img
