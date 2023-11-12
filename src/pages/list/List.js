@@ -9,12 +9,12 @@ import { debounce } from '@mui/material'
 function List() {
   const [subjectData, setSubjectData] = useState([])
   const [order, setOrder] = useState('name')
-  const [limit, setLimit] = useState(8)
   const [lastPage, setLastPage] = useState(0)
   const [pageCount, setPageCount] = useState(0)
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
   })
+  const [limit, setLimit] = useState(window.innerWidth < 868 ? 6 : 8)
 
   const calculatePage = (num) => {
     return Math.ceil(num / limit)
@@ -28,8 +28,8 @@ function List() {
       console.log(data)
       if (!data) return
       setPageCount(data.count)
-      setLastPage(calculatePage(data?.count))
-      setSubjectData(data?.results)
+      setLastPage(calculatePage(data.count))
+      setSubjectData(data.results)
     },
     [getSubjectAsync]
   )
