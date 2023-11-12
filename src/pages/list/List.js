@@ -11,6 +11,10 @@ function List() {
   const [order, setOrder] = useState('name')
   const [limit, setLimit] = useState(8)
   const [lastPage, setLastPage] = useState(0)
+  const [pageCount, setPageCount] = useState(0)
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+  })
 
   const calculatePage = (num) => {
     return Math.ceil(num / limit)
@@ -23,6 +27,7 @@ function List() {
       const data = await getSubjectAsync(options)
       console.log(data)
       if (!data) return
+      setPageCount(data.count)
       setLastPage(calculatePage(data?.count))
       setSubjectData(data?.results)
     },
@@ -40,9 +45,6 @@ function List() {
     handleLoad({ order, offset: 0, limit })
   }, [handleLoad, order, limit])
 
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-  })
   const handleResize = debounce(() => {
     setWindowSize({
       width: window.innerWidth,
@@ -57,13 +59,14 @@ function List() {
   }, [])
 
   useEffect(() => {
-    if (windowSize.width < 1199) {
+    if (windowSize.width < 868) {
       setLimit(6)
+      setLastPage(calculatePage(pageCount))
     }
-    if (windowSize.width > 1199) {
+    if (windowSize.width > 868) {
       setLimit(8)
     }
-  }, [limit])
+  })
 
   return (
     <>
@@ -73,6 +76,7 @@ function List() {
         order={order}
         handleSort={handleSort}
         isLoading={isSubjectLoading}
+        isError={isSubjectError}
       />
       <Paginator lastPage={lastPage} handleLoadByPage={handleLoadByPage} />
     </>

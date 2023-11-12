@@ -4,13 +4,16 @@ import { device } from '../../components/styles'
 import Dropdown from '../../components/common/Dropdown'
 import { Link } from 'react-router-dom'
 
-function CardList({ subjectData, handleSort, order, isLoading }) {
+function CardList({ subjectData, handleSort, order, isLoading, isError }) {
+  if (isError) {
+    return <div>에러가 발생했습니다.</div>
+  }
   return (
     <>
       <Dropdown handleSort={handleSort} order={order} />
       <CardListContainer>
         {isLoading ? (
-          <div>로딩 중입니다</div>
+          <div>로딩 중입니다.</div>
         ) : (
           subjectData?.map((subject) => {
             return (
