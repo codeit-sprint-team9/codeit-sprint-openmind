@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import LikeIcon from '../../asset/Reaction/icon-thumbs-up.svg'
-import DisLikeIcon from '../../asset/Reaction/icon-thumbs-down.svg'
+import { ReactComponent as LikeIcon } from '../../asset/Reaction/icon-thumbs-up.svg'
+import { ReactComponent as DisLikeIcon } from '../../asset/Reaction/icon-thumbs-down.svg'
 
 const ReactionStyledComponent = styled.div`
   display: flex;
@@ -16,23 +16,17 @@ const LikeStyledComponent = styled.div`
     $count === '0' ? 'var(--gray-40, #818181);' : 'var(--blue, #1877F2);'};
   font-size: 1.4rem;
   font-weight: 500;
-  img {
-    filter: ${({ $count }) =>
-      $count === '0'
-        ? ''
-        : 'invert(33%) sepia(86%) saturate(2137%) hue-rotate(202deg)brightness(97%) contrast(96%);'};
-  }
   cursor: pointer;
+  svg > g > path {
+    fill: ${({ $count }) => ($count === '0' ? '' : 'var(--blue, #1877F2);')};
+  }
 `
 
 const DisLikeStyledComponent = styled(LikeStyledComponent)`
   color: ${({ $count }) =>
     $count === '0' ? 'var(--gray-40, #818181);' : 'var(--gray-60, #000);'};
-  img {
-    filter: ${({ $count }) =>
-      $count === '0'
-        ? ''
-        : 'invert(0%) sepia(100%) saturate(100%) hue-rotate(100deg) brightness(0%) contrast(100%);'};
+  svg > g > path {
+    fill: ${({ $count }) => ($count === '0' ? '' : 'var(--gray-60, #000);')};
   }
 `
 
@@ -41,11 +35,11 @@ function Reaction({ like = '0', disLike = '0' }) {
   return (
     <ReactionStyledComponent>
       <LikeStyledComponent $count={like}>
-        <img src={LikeIcon} alt="LikeIcon" />
+        <LikeIcon />
         좋아요 {like !== '0' ? like : ''}
       </LikeStyledComponent>
       <DisLikeStyledComponent $count={disLike}>
-        <img src={DisLikeIcon} alt="LikeIcon" />
+        <DisLikeIcon />
         싫어요
       </DisLikeStyledComponent>
     </ReactionStyledComponent>
