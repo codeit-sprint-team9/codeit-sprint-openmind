@@ -4,11 +4,11 @@ import Header from './Header'
 import { useCallback, useEffect, useState } from 'react'
 import useAsync from '../../hooks/useAsync'
 import { getSubject } from '../../api/list'
+import { debounce } from '@mui/material'
 
 function List() {
   const [subjectData, setSubjectData] = useState([])
   const [order, setOrder] = useState('name')
-  const [offset, setOffset] = useState(0)
   const [limit, setLimit] = useState(8)
   const [lastPage, setLastPage] = useState(0)
 
@@ -37,8 +37,33 @@ function List() {
   }
 
   useEffect(() => {
-    handleLoad({ order, offset, limit })
-  }, [handleLoad, order])
+    handleLoad({ order, offset: 0, limit })
+  }, [handleLoad, order, limit])
+
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+  })
+  const handleResize = debounce(() => {
+    setWindowSize({
+      width: window.innerWidth,
+    })
+  }, 1000)
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (windowSize.width < 1199) {
+      setLimit(6)
+    }
+    if (windowSize.width > 1199) {
+      setLimit(8)
+    }
+  }, [limit])
 
   return (
     <>
@@ -47,6 +72,7 @@ function List() {
         subjectData={subjectData}
         order={order}
         handleSort={handleSort}
+        isLoading={isSubjectLoading}
       />
       <Paginator lastPage={lastPage} handleLoadByPage={handleLoadByPage} />
     </>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 function Header() {
+  const userId = JSON.parse(localStorage.getItem('user')).id
   return (
     <>
       <HeaderTopContainer>
@@ -12,7 +13,9 @@ function Header() {
           <img src={logoImage}></img>
         </Link>
         <div className="answer-button">
-          <Button text="답변하러 가기" isValue={true} />
+          <Link to={`/post/${userId}/answer`}>
+            <Button text="답변하러 가기" isValue={true} />
+          </Link>
         </div>
       </HeaderTopContainer>
 

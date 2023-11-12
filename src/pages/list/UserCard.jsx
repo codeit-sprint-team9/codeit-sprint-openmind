@@ -2,22 +2,28 @@ import styled from 'styled-components'
 import messageIcon from '../../asset/list/Messages.svg'
 import { device } from '../../components/styles'
 import Dropdown from '../../components/common/Dropdown'
+import { Link } from 'react-router-dom'
 
-function CardList({ subjectData, handleSort, order }) {
+function CardList({ subjectData, handleSort, order, isLoading }) {
   return (
     <>
       <Dropdown handleSort={handleSort} order={order} />
       <CardListContainer>
-        {subjectData?.map((subject) => {
-          return (
-            <UserCard
-              key={subject.id}
-              name={subject.name}
-              imageSource={subject.imageSource}
-              questionCount={subject.questionCount}
-            />
-          )
-        })}
+        {isLoading ? (
+          <div>로딩 중입니다</div>
+        ) : (
+          subjectData?.map((subject) => {
+            return (
+              <Link to={`/post/${subject.id}`} key={subject.id}>
+                <UserCard
+                  name={subject.name}
+                  imageSource={subject.imageSource}
+                  questionCount={subject.questionCount}
+                />
+              </Link>
+            )
+          })
+        )}
       </CardListContainer>
     </>
   )

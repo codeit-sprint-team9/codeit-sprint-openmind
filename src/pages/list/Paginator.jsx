@@ -4,17 +4,17 @@ import { styled } from '@mui/material/styles'
 import { useEffect, useState } from 'react'
 
 const breakPoint = createTheme({
-  tablet: 767,
+  mobile: 767,
 })
 
 const PaginatorContainer = styled('div')(() => ({
   '& nav > ul > li': {
-    [breakPoint.breakpoints.down(breakPoint.tablet)]: {
+    [breakPoint.breakpoints.down(breakPoint.mobile)]: {
       width: '40px',
     },
   },
   '& nav > ul > li > button': {
-    [breakPoint.breakpoints.down(breakPoint.tablet)]: {
+    [breakPoint.breakpoints.down(breakPoint.mobile)]: {
       fontSize: '1.6rem',
     },
     color: 'var(--gray-40)',
@@ -50,7 +50,7 @@ function Paginator({ lastPage, handleLoadByPage }) {
     }
   }, [])
 
-  const handlePage = async (ㅡ, value) => {
+  const handlePage = async (_, value) => {
     await handleLoadByPage(Number(value - 1))
     setPage(value)
   }
