@@ -23,10 +23,11 @@ const InputFieldStyledComponent = styled.div`
   } 
 `
 
-function InputField({ isValue, setIsValue }) {
+function InputField({ isValue, setIsValue, setName }) {
   const [isFocus, setIsFocus] = useState(false)
 
   function handleValue(e) {
+    setName(e.target.value)
     e.target.value === '' ? setIsValue(false) : setIsValue(true)
   }
 
