@@ -11,9 +11,7 @@ function List() {
   const [order, setOrder] = useState('name')
   const [lastPage, setLastPage] = useState(0)
   const [pageCount, setPageCount] = useState(0)
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-  })
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const [limit, setLimit] = useState(window.innerWidth < 868 ? 6 : 8)
 
   const calculatePage = (num) => {
@@ -46,9 +44,7 @@ function List() {
   }, [handleLoad, order, limit])
 
   const handleResize = debounce(() => {
-    setWindowSize({
-      width: window.innerWidth,
-    })
+    setWindowWidth(window.innerWidth)
   }, 1000)
 
   useEffect(() => {
@@ -59,11 +55,11 @@ function List() {
   }, [])
 
   useEffect(() => {
-    if (windowSize.width < 868) {
+    if (windowWidth < 868) {
       setLimit(6)
       setLastPage(calculatePage(pageCount))
     }
-    if (windowSize.width > 868) {
+    if (windowWidth > 868) {
       setLimit(8)
     }
   })
