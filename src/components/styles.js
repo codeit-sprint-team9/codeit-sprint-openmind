@@ -23,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     --red:#B93333;
     --yellow:#FEE500;
 }
+
 *{
     box-sizing: border-box;
     font-family: 'Pretendard', 'Actor', sans-serif;

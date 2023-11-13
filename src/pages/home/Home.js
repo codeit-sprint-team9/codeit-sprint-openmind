@@ -3,11 +3,12 @@ import { device } from '../../components/styles'
 import styled from 'styled-components'
 import InputField from '../../components/common/InputField'
 import Button from '../../components/common/Button'
-import bg from '../../asset/Home/bg.png'
-import logo from '../../asset/Home/pc-logo.png'
+import bg from '../../asset/Home/bg-dark.png'
+import logo from '../../asset/Home/pc-logo-dark.png'
 import { Link, useNavigate } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import postSubject from '../../api/home'
+import ToggleButton from '../../components/common/ToggleButton'
 
 const HomeBackground = styled.div`
   width: 100vw;
@@ -39,7 +40,7 @@ const ButtonBox = styled.div`
 const InputBox = styled.div`
   padding: 3.2rem;
   border-radius: 1.6rem;
-  background: var(--gray-10, #fff);
+  background: var(--gray-10);
   width: 40rem;
   display: flex;
   flex-direction: column;
@@ -64,6 +65,11 @@ const MainBox = styled.div`
       order: -1;
     }
   }
+  .toggle-button {
+    position: fixed;
+    top: 4.5rem;
+    left: 12.5rem;
+  }
 `
 
 const Home = () => {
@@ -86,9 +92,6 @@ const Home = () => {
     nav(`/post/${result.id}/answer`)
   }
 
-  if (subjectError) return <div>애러가 발생했습니다. 새로고침해주세요.</div>
-  if (subjectPending) return <div>로딩중입니다. 잠시만 기다려주십시요.</div>
-
   useEffect(() => {
     if (localStorage.getItem('user')) {
       alert(
@@ -97,6 +100,9 @@ const Home = () => {
       nav('/list')
     }
   }, [nav])
+
+  if (subjectError) return <div>애러가 발생했습니다. 새로고침해주세요.</div>
+  if (subjectPending) return <div>로딩중입니다. 잠시만 기다려주십시요.</div>
 
   return (
     <HomeBackground>
@@ -123,6 +129,9 @@ const Home = () => {
             onClick={handlePost}
           />
         </InputBox>
+        <div className="toggle-button">
+          <ToggleButton />
+        </div>
       </MainBox>
     </HomeBackground>
   )
