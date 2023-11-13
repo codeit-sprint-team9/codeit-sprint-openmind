@@ -83,7 +83,13 @@ const Home = () => {
         imageSource: result.imageSource,
       })
     )
-    nav(`/post/${result.id}/answer`)
+    nav(`/post/${result.id}/answer`, {
+      state: {
+        id: result.id,
+        name: result.name,
+        imageSource: result.imageSource,
+      },
+    })
     // window.location.replace(`/post/${result.id}/answer`)
   }
 

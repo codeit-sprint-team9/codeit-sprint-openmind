@@ -15,33 +15,46 @@ const Div = styled.div`
   width: 100vw;
 `
 const userData = JSON.parse(localStorage.getItem('user'))
-const id = userData.id
+const id = 225
+const LIMIT = 4
 
 const Post = () => {
+  const [userId] = useState(id)
   const [isOpened, setIsOpened] = useState(false)
+  const [cnt, setCnt] = useState(0)
+  const [items, setItems] = useState([])
+  const [offset, setOffset] = useState(0)
   const [isLoading, isError, postMainDataAsync] = useAsync(postMainData)
   const [isDeleteLoading, isDeleteError, postMainDeleteAsync] =
     useAsync(postMainDelete)
-  const [item, setItem] = useState([])
-  const [userId, setUserId] = useState(0)
-  const count = item.length
+  const count = items.length
   const state =
     useLocation().pathname.split('/').length === 4 ? 'answer' : 'default'
   const navigate = useNavigate()
-  console.log(userData)
+  const location = useLocation()
 
-  const handlePost = async (userId) => {
-    const result = await postMainDataAsync(userId)
+  const handleLoad = async (options) => {
+    const result = await postMainDataAsync(options)
     if (!result) return
+    console.log(result)
     const { results } = result
-    setItem(results)
+    setCnt(result.count)
+    if (options.offset === 0) {
+      setItems(results)
+    } else {
+      setItems((prevItems) => [...prevItems, ...results])
+    }
+    setOffset(options.offset + options.limit)
     if (isError) return <div>에러!</div>
     if (isLoading) return <div>로딩중!</div>
   }
 
-  const handleDeleteButton = async (userId) => {
-    console.log(id)
-    const result = await postMainDeleteAsync(userId)
+  const handelLoadMore = () => {
+    handleLoad({ id, limit: LIMIT, offset })
+  }
+
+  const handleDeleteButton = async (id) => {
+    const result = await postMainDeleteAsync(id)
     if (!result) return
     window.localStorage.clear()
     if (isDeleteError) return <div>에러!</div>
@@ -56,16 +69,18 @@ const Post = () => {
   }, [isOpened])
 
   useEffect(() => {
-    setUserId(id)
-    handlePost(userId)
-  }, [userId])
+    handleLoad({ id, offset: 0, limit: LIMIT })
+  }, [])
+  // console.log(items)
   return (
     <>
       <Div>
-        <Nav userData={userData} />
+        <Nav userData={location.state || userData} />
         <S.Div className="Div">
           {state === 'answer' && (
-            <S.DeleteButton onClick={() => handleDeleteButton(id)}>
+            <S.DeleteButton
+              onClick={() => handleDeleteButton(location.state?.id || userId)}
+            >
               <PostDeleteButton />
             </S.DeleteButton>
           )}
@@ -74,8 +89,10 @@ const Post = () => {
             <PostContent
               setIsOpened={setIsOpened}
               state={state}
-              items={item}
+              items={items}
               isOpened={isOpened}
+              handleLoadMore={handelLoadMore}
+              cnt={cnt}
             />
           ) : (
             <PostNoContent
@@ -86,7 +103,13 @@ const Post = () => {
           )}
         </S.Div>
       </Div>
-      {isOpened && <PostModal setIsOpened={setIsOpened} isOpened={isOpened} />}
+      {isOpened && (
+        <PostModal
+          onClick={handleLoad}
+          setIsOpened={setIsOpened}
+          isOpened={isOpened}
+        />
+      )}
     </>
   )
 }
