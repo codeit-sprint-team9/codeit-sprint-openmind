@@ -1,6 +1,5 @@
 import NavImg from '../../asset/post/nav-img.svg'
 import OpenMindLogo from '../../asset/post/openmind-logo.svg'
-import CatImg from '../../asset/post/cat.svg'
 import LinkImg from '../../asset/post/link.svg'
 import KakaoImg from '../../asset/post/kakao.svg'
 import FacebookImg from '../../asset/post/facebook.svg'
@@ -10,7 +9,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 const { Kakao } = window
 
-export default function Nav() {
+export default function Nav({ userData }) {
   const sharedLink = 'https://20002100.tistory.com/'
   const BASE_URL = 'http://localhost:3000'
   const location = useLocation()
@@ -68,9 +67,13 @@ export default function Nav() {
           <img src={NavImg} alt="Nav 이미지" className="nav-img" />
         </S.TopDiv>
         <S.CatDiv>
-          <img src={CatImg} alt="프로필 이미지" className="cat-img" />
+          <img
+            src={userData.imageSource}
+            alt="프로필 이미지"
+            className="profile-img"
+          />
         </S.CatDiv>
-        <S.NavHeader>아초는 고양이</S.NavHeader>
+        <S.NavHeader>{userData.name}</S.NavHeader>
         <S.LinkDiv>
           <S.Button
             className="button-container"

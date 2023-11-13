@@ -11,9 +11,10 @@ export default function PostContent({ setIsOpened, state, isOpened, items }) {
   const [page, setPage] = useState(1)
   const [hasNext, setHasNext] = useState(true)
   const result = []
-  for (let i = 0; i < items.length; i += 2) {
+  const cnt = state === 'answer' ? 2 : 4
+  for (let i = 0; i < items.length; i += cnt) {
     let tempArray
-    tempArray = items.slice(i, i + 2)
+    tempArray = items.slice(i, i + cnt)
     result.push(tempArray)
   }
   const [data, setData] = useState(result[0])

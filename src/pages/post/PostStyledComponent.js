@@ -51,7 +51,9 @@ export const CatDiv = styled.div`
   @media (${device.mobile}) {
     top: 10.1rem;
   }
-  .cat-img {
+  .profile-img {
+    width: 13.6rem;
+    border-radius: 70%;
     @media (${device.mobile}) {
       width: 10.4rem;
     }

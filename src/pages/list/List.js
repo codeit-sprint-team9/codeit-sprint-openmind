@@ -45,7 +45,7 @@ const HeaderBottomContainer = styled.div`
   @media ${device.mobile} {
     flex-direction: row;
     gap: 4.2rem;
-    margin-top : 1.2rem;
+    margin-top: 1.2rem;
     .answer-who {
       font-size: 2.4rem;
     }

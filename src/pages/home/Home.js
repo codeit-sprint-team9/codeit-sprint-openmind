@@ -84,10 +84,8 @@ const Home = () => {
       })
     )
     nav(`/post/${result.id}/answer`)
+    // window.location.replace(`/post/${result.id}/answer`)
   }
-
-  if (subjectError) return <div>애러가 발생했습니다. 새로고침해주세요.</div>
-  if (subjectPending) return <div>로딩중입니다. 잠시만 기다려주십시요.</div>
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -97,7 +95,8 @@ const Home = () => {
       nav('/list')
     }
   }, [nav])
-
+  if (subjectError) return <div>애러가 발생했습니다. 새로고침해주세요.</div>
+  if (subjectPending) return <div>로딩중입니다. 잠시만 기다려주십시요.</div>
   return (
     <HomeBackground>
       <MainBox>
@@ -120,7 +119,7 @@ const Home = () => {
             brown
             text="질문 받기"
             isValue={isValue}
-            onClick={handlePost}
+            onClick={() => handlePost()}
           />
         </InputBox>
       </MainBox>

@@ -15,8 +15,8 @@ const PostModal = ({ setIsOpened }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
   // 홈 부분 병합 후 수정 예정
-  const id = localStorage.getItem('userInfo') || 225
-
+  const id = JSON.parse(localStorage.getItem('user')).id || 225
+  console.log(id)
   const handlePostQuestion = async () => {
     const result = await postQuestionAsync(id, question)
 
