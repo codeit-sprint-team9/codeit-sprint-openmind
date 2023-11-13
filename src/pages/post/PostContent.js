@@ -16,7 +16,6 @@ export default function PostContent({
 }) {
   const [text, setText] = useState(window.innerWidth < 767 ? true : false)
   const [hasNext, setHasNext] = useState(true)
-  const [item, setItem] = useState(items)
   const screenChange = (event) => {
     const matches = event.matches
     setText(matches)
@@ -28,9 +27,8 @@ export default function PostContent({
   }, [])
 
   const loadMore = () => {
-    if (hasNext == true) {
+    if (items.length !== cnt) {
       handleLoadMore()
-      setItem(item)
     } else {
       setHasNext(false)
     }
@@ -40,8 +38,8 @@ export default function PostContent({
   }
   return (
     <>
-      <S.ContentWrapper className="wrapper" $state={state}>
-        <S.Content className="content">
+      <S.ContentWrapper $state={state}>
+        <S.Content>
           <S.ContentHeader>
             <img
               src={MessageImg}

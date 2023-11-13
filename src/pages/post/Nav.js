@@ -13,15 +13,16 @@ export default function Nav({ userData }) {
   const sharedLink = 'https://20002100.tistory.com/'
   const BASE_URL = 'http://localhost:3000'
   const location = useLocation()
-  const [alert, alertSet] = useState(false)
+  const [urlAlert, setUrlAlert] = useState(false)
 
   const handleCopyClipBoard = async (text) => {
-    alertSet(true)
+    setUrlAlert(true)
     setTimeout(() => {
-      alertSet(false)
+      setUrlAlert(false)
     }, 5000)
     await navigator.clipboard.writeText(text)
   }
+
   const resultUrl = window.location.href
   const shareKakao = () => {
     Kakao.Share.sendDefault({
@@ -55,8 +56,8 @@ export default function Nav({ userData }) {
 
   return (
     <>
-      <S.Div className="Div">
-        <S.TopDiv className="TopDiv">
+      <S.Div>
+        <S.TopDiv>
           <Link to="/">
             <img
               src={OpenMindLogo}
@@ -91,7 +92,7 @@ export default function Nav({ userData }) {
           </S.Button>
         </S.LinkDiv>
       </S.Div>
-      {alert === true ? (
+      {urlAlert === true ? (
         <S.ToastDiv>
           <Toast />
         </S.ToastDiv>

@@ -90,7 +90,6 @@ const Home = () => {
         imageSource: result.imageSource,
       },
     })
-    // window.location.replace(`/post/${result.id}/answer`)
   }
 
   useEffect(() => {
