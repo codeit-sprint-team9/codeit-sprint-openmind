@@ -1,4 +1,5 @@
 import React from 'react'
+import Loading from './pages/loading/LoadingPage'
 
 const Home = React.lazy(() => import('./pages/home/Home'))
 const Post = React.lazy(() => import('./pages/post/Post'))
@@ -11,6 +12,7 @@ const routes = [
   { path: `/post/:id/*`, element: Post },
   { path: `/*`, element: NotFound },
   { path: '/list', element: List },
+  { path: '/loading', element: Loading },
 ]
 
 export default routes
