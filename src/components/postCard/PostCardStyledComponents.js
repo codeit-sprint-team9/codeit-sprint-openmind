@@ -88,6 +88,13 @@ export const MainContainer = styled.div`
   gap: 1.2rem;
   width: 100%;
 
+  .answerRejected {
+    color: var(--red, #b93333);
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2.2rem;
+  }
+
   .user-icon {
     width: 4.8rem;
     height: 4.8rem;

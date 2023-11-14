@@ -182,7 +182,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
               {isAnswered && !isEdit ? (
                 <>
                   {cardData.answer.isRejected ? (
-                    <div>답변 거절</div>
+                    <div className="answerRejected">답변 거절</div>
                   ) : (
                     <div className="main-content">
                       {cardData.answer.content}
