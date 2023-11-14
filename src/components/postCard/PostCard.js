@@ -8,7 +8,7 @@ import {
   TitleContainer,
 } from './PostCardStyledComponents'
 import OptionIcon from '../../asset/postCard/img_option.svg'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Badge from '../common/Badge'
 import InputTextArea from '../common/InputTextArea'
 import Button from '../common/Button'
@@ -121,10 +121,6 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
       return
     }
   }
-
-  useEffect(() => {
-    console.log(cardData)
-  }, [cardData])
 
   if (errorPutAnswers || errorDeleteAnswers) {
     return (
