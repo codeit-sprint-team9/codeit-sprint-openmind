@@ -57,8 +57,6 @@ export default function PostContent({
               dataLength={items.length}
               next={loadMore}
               hasMore={hasNext}
-              loader={<p>로딩중</p>}
-              endMessage={<p>끝</p>}
               className="infinite"
               style={{
                 overflow: 'visible',
