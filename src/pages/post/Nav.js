@@ -5,15 +5,20 @@ import KakaoImg from '../../asset/post/kakao.svg'
 import FacebookImg from '../../asset/post/facebook.svg'
 import * as S from './PostStyledComponent'
 import Toast from '../../components/common/Toast'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { postUserData } from '../../api/post'
+import useAsync from '../../hooks/useAsync'
 const { Kakao } = window
 
-export default function Nav({ userData }) {
+export default function Nav({ id }) {
   const sharedLink = 'https://20002100.tistory.com/'
   const BASE_URL = 'http://localhost:3000'
   const location = useLocation()
   const [urlAlert, setUrlAlert] = useState(false)
+  const [userData, setUserData] = useState({})
+  const [isUserLoading, isUserError, postUserDataAsync] = useAsync(postUserData)
+  const userInfo = JSON.parse(localStorage.getItem('user'))
 
   const handleCopyClipBoard = async (text) => {
     setUrlAlert(true)
@@ -21,6 +26,14 @@ export default function Nav({ userData }) {
       setUrlAlert(false)
     }, 5000)
     await navigator.clipboard.writeText(text)
+  }
+
+  const handleUserData = async (id) => {
+    const result = await postUserDataAsync(id)
+    if (!result) return
+    setUserData(result)
+    if (isUserLoading) return <div>에러!</div>
+    if (isUserError) return <div>로딩중!</div>
   }
 
   const resultUrl = window.location.href
@@ -54,17 +67,31 @@ export default function Nav({ userData }) {
     Kakao.init('512cd8a8ece57b97899c8cc612089c7d')
   }, [])
 
+  useEffect(() => {
+    handleUserData(id)
+  }, [])
+
+  const navigate = useNavigate()
+
+  const handlePage = () => {
+    if (userInfo) {
+      navigate('/list')
+      return
+    }
+    navigate('/')
+  }
+
   return (
     <>
       <S.Div>
         <S.TopDiv>
-          <Link to="/">
+          <S.LogoDiv onClick={() => handlePage()}>
             <img
               src={OpenMindLogo}
               alt="오픈 마인드 이미지"
               className="openMind-img"
             />
-          </Link>
+          </S.LogoDiv>
           <img src={NavImg} alt="Nav 이미지" className="nav-img" />
         </S.TopDiv>
         <S.CatDiv>

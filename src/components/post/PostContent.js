@@ -1,10 +1,10 @@
 import MessageImg from '../../asset/post/message.svg'
-import * as S from './PostStyledComponent'
+import * as S from '../../pages/post/PostStyledComponent'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useEffect, useState } from 'react'
-import PostCard from '../../components/postCard/PostCard'
-import FloatingButton from '../../components/common/FloatingButton'
-import { device } from '../../components/styles'
+import PostCard from '../postCard/PostCard'
+import FloatingButton from '../common/FloatingButton'
+import { device } from '../styles'
 
 export default function PostContent({
   setIsOpened,
@@ -36,7 +36,7 @@ export default function PostContent({
   const handleModal = () => {
     setIsOpened(true)
   }
-  console.log(cnt, items.length)
+
   useEffect(() => {
     setHasNext(true)
   }, [items])

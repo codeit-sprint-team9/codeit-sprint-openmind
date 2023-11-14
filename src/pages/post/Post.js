@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 import Nav from './Nav'
-import PostContent from './PostContent'
+import PostContent from '../../components/post/PostContent'
 import * as S from './PostStyledComponent'
 import PostModal from '../../components/modal/PostModal'
 import { useEffect, useState } from 'react'
-import PostNoContent from '../post/PostNoContent'
-import PostDeleteButton from './PostDeleteButton'
-import { useLocation, useNavigate } from 'react-router-dom'
+import PostNoContent from '../../components/post/PostNoContent'
+import PostDeleteButton from '../../components/post/PostDeleteButton'
+import { useNavigate, useParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import { postMainData, postMainDelete } from '../../api/post'
 
@@ -17,10 +17,8 @@ const Div = styled.div`
 
 const LIMIT = 4
 
-const Post = () => {
-  const userData = JSON.parse(localStorage.getItem('user'))
-  const id = userData.id
-
+const Post = ({ state }) => {
+  const { id } = useParams()
   const [isOpened, setIsOpened] = useState(false)
   const [cnt, setCnt] = useState(0)
   const [items, setItems] = useState([])
@@ -28,10 +26,9 @@ const Post = () => {
   const [isLoading, isError, postMainDataAsync] = useAsync(postMainData)
   const [isDeleteLoading, isDeleteError, postMainDeleteAsync] =
     useAsync(postMainDelete)
+
   const count = items.length
 
-  const state =
-    useLocation().pathname.split('/').length === 4 ? 'answer' : 'default'
   const navigate = useNavigate()
 
   const handleLoad = async (options = { id: id, offset: 0, limit: LIMIT }) => {
@@ -45,8 +42,6 @@ const Post = () => {
       setItems((prevItems) => [...prevItems, ...results])
     }
     setOffset(options.offset + options.limit)
-    if (isError) return <div>에러!</div>
-    if (isLoading) return <div>로딩중!</div>
   }
 
   const handelLoadMore = () => {
@@ -75,11 +70,14 @@ const Post = () => {
   useEffect(() => {
     handleLoad({ id, offset: 0, limit: LIMIT })
   }, [])
-
+  useEffect(() => {
+    if (isError) navigate('/list')
+  }, [isError])
+  if (isLoading) return <div>로딩중!</div>
   return (
     <>
       <Div>
-        <Nav userData={userData} />
+        <Nav id={id} />
         <S.Div>
           {state === 'answer' && (
             <S.DeleteButton onClick={() => handleDeleteButton(id)}>

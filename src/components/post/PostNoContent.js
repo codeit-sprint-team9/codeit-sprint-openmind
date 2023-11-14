@@ -1,9 +1,9 @@
-import * as S from './PostStyledComponent'
+import * as S from '../../pages/post/PostStyledComponent'
 import MessageImg from '../../asset/post/message.svg'
 import NoQuestionImg from '../../asset/post/no-question-img.svg'
-import FloatingButton from '../../components/common/FloatingButton'
+import FloatingButton from '../common/FloatingButton'
 import { useEffect, useState } from 'react'
-import { device } from '../../components/styles'
+import { device } from '../styles'
 
 export default function PostNoContent({ setIsOpened, isOpened, state }) {
   const handleModal = () => {

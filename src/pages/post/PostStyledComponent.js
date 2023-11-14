@@ -188,3 +188,6 @@ export const ToastDiv = styled.div`
     bottom: 10rem;
   }
 `
+export const LogoDiv = styled.div`
+  cursor: pointer;
+`
