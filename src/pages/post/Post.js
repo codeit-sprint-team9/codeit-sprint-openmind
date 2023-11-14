@@ -68,49 +68,55 @@ const Post = ({ state }) => {
   useEffect(() => {
     handleLoad({ id, offset: 0, limit: LIMIT })
   }, [])
+
   useEffect(() => {
     if (isError) navigate('/list')
   }, [isError])
-  if (isDeleteError) return <div>에러!</div>
-  if (isDeleteLoading) return <div>로딩중!</div>
-  if (isLoading) return <div>로딩중!</div>
-  return (
-    <>
-      <Div>
-        <Nav id={id} />
-        <S.Div>
-          {state === 'answer' && (
-            <S.DeleteButton onClick={() => handleDeleteButton(id)}>
-              <PostDeleteButton />
-            </S.DeleteButton>
-          )}
 
-          {count !== 0 ? (
-            <PostContent
-              setIsOpened={setIsOpened}
-              isOpened={isOpened}
-              state={state}
-              items={items}
-              cnt={cnt}
-              handleLoadMore={handelLoadMore}
-            />
-          ) : (
-            <PostNoContent
-              setIsOpened={setIsOpened}
-              isOpened={isOpened}
-              state={state}
-            />
-          )}
-        </S.Div>
-      </Div>
-      {isOpened && (
-        <PostModal
-          onClick={handleLoad}
-          setIsOpened={setIsOpened}
-          isOpened={isOpened}
-        />
-      )}
-    </>
+  if (isDeleteError) return <div>문제가 발생했습니다.</div>
+  if (isDeleteLoading) return <div>로딩중입니다.</div>
+  if (isLoading) return <div>로딩중입니다.</div>
+
+  return (
+    isError !== null &&
+    !isError && (
+      <>
+        <Div>
+          <Nav id={id} />
+          <S.Div>
+            {state === 'answer' && (
+              <S.DeleteButton onClick={() => handleDeleteButton(id)}>
+                <PostDeleteButton />
+              </S.DeleteButton>
+            )}
+
+            {count !== 0 ? (
+              <PostContent
+                setIsOpened={setIsOpened}
+                isOpened={isOpened}
+                state={state}
+                items={items}
+                cnt={cnt}
+                handleLoadMore={handelLoadMore}
+              />
+            ) : (
+              <PostNoContent
+                setIsOpened={setIsOpened}
+                isOpened={isOpened}
+                state={state}
+              />
+            )}
+          </S.Div>
+        </Div>
+        {isOpened && (
+          <PostModal
+            onClick={handleLoad}
+            setIsOpened={setIsOpened}
+            isOpened={isOpened}
+          />
+        )}
+      </>
+    )
   )
 }
 
