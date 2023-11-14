@@ -144,7 +144,7 @@ const PostCard = ({ state, cardData }) => {
         <TitleContainer>
           <div className="question-ago">질문 · 2주전</div>
 
-          <div className="title">{cardData.title}</div>
+          <div className="title">{cardData.content}</div>
         </TitleContainer>
 
         {!(state === 'default' && !isAnswered) && (

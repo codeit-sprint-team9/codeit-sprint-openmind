@@ -1,28 +1,42 @@
 import styled from 'styled-components'
 import messageIcon from '../../asset/list/Messages.svg'
-import profileImage from '../../asset/list/profileImg.svg'
 import { device } from '../../components/styles'
+import Dropdown from '../../components/common/Dropdown'
+import { Link } from 'react-router-dom'
 
-function CardList() {
+function CardList({ subjectData, handleSort, order, isLoading, isError }) {
+  if (isError) {
+    return <div>에러가 발생했습니다.</div>
+  }
   return (
-    <CardListContainer>
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-    </CardListContainer>
+    <>
+      <Dropdown handleSort={handleSort} order={order} />
+      <CardListContainer>
+        {isLoading ? (
+          <div>로딩 중입니다.</div>
+        ) : (
+          subjectData?.map((subject) => {
+            return (
+              <Link to={`/post/${subject.id}`} key={subject.id}>
+                <UserCard
+                  name={subject.name}
+                  imageSource={subject.imageSource}
+                  questionCount={subject.questionCount}
+                />
+              </Link>
+            )
+          })
+        )}
+      </CardListContainer>
+    </>
   )
 }
-function UserCard() {
+function UserCard({ name, imageSource, questionCount }) {
   return (
     <CardContainer>
       <CardProfile>
-        <img src={profileImage} />
-        <div>아초는 고양이</div>
+        <img src={imageSource} />
+        <div>{name}</div>
       </CardProfile>
 
       <CardContent>
@@ -30,7 +44,7 @@ function UserCard() {
           <img src={messageIcon} />
           <span>받은 질문</span>
         </div>
-        <div>9개</div>
+        <div>{questionCount}개</div>
       </CardContent>
     </CardContainer>
   )
@@ -47,7 +61,7 @@ const CardListContainer = styled.div`
   @media ${device.tablet} {
     width: calc(100% - 6.4rem);
     max-width: 94rem;
-    grid-template-columns: repeat(auto-fit, minmax(18.6rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(18.6rem, 1fr));
     @media (max-width: 868px) {
       max-width: 70rem;
     }
@@ -62,6 +76,7 @@ const CardListContainer = styled.div`
 `
 
 const CardContainer = styled.div`
+  cursor: pointer;
   display: flex;
   height: 18.6rem;
   padding: 2rem;
@@ -69,7 +84,7 @@ const CardContainer = styled.div`
   justify-content: space-between;
   border-radius: 1.6rem;
   border: 0.1rem solid var(--gray-40);
-
+  background-color: var(--gray-10);
   @media ${device.mobile} {
     padding: 1.6rem;
     width: 15.5rem;
@@ -84,6 +99,7 @@ const CardProfile = styled.div`
   img {
     width: 6rem;
     height: 6rem;
+    border-radius: 100%;
   }
 
   div {
@@ -113,6 +129,7 @@ const CardContent = styled.div`
   font-size: 1.6rem;
 
   line-height: 2.2rem;
+  
   img {
     margin-right: 0.4rem;
   }

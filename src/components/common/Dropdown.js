@@ -21,9 +21,7 @@ const DropdownNameItem = styled.div`
   color: ${({ $selected }) =>
     $selected === '이름순'
       ? 'var(--blue, #1877F2);'
-      : 'var(--gray-50, #515151);'}
-
-    }
+      : 'var(--gray-50, #515151);'};
 `
 
 const DropdownNewItem = styled.div`
@@ -73,17 +71,21 @@ const DropdownFlexBoxStyledComponent = styled.div`
   font-weight: 500;
 `
 
-function Dropdown() {
+function Dropdown({ handleSort, order }) {
   const [open, setOpen] = useState(true)
-  const [selected, setSelected] = useState('이름순')
+  const [selected, setSelected] = useState(
+    order === 'time' ? '최신순' : '이름순'
+  )
 
   function handleClick() {
     setOpen(!open)
   }
 
   function handleSelected(e) {
-    setSelected(e.target.textContent)
+    setSelected(e)
+    handleSort(e === '최신순' ? 'time' : 'name')
   }
+
   return (
     <DropdownBoxStyledComponent onClick={handleClick} $open={open}>
       <DropdownFlexBoxStyledComponent>
@@ -95,10 +97,16 @@ function Dropdown() {
         )}
       </DropdownFlexBoxStyledComponent>
       <DropdownItems $open={open}>
-        <DropdownNameItem onClick={handleSelected} $selected={selected}>
+        <DropdownNameItem
+          onClick={() => handleSelected('이름순')}
+          $selected={selected}
+        >
           이름순
         </DropdownNameItem>
-        <DropdownNewItem onClick={handleSelected} $selected={selected}>
+        <DropdownNewItem
+          onClick={() => handleSelected('최신순')}
+          $selected={selected}
+        >
           최신순
         </DropdownNewItem>
       </DropdownItems>

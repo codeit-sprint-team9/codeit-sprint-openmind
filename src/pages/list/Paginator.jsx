@@ -1,74 +1,61 @@
 import Stack from '@mui/material/Stack'
-import { Pagination, createTheme, debounce } from '@mui/material'
-import { makeStyles } from '@mui/styles'
-import { useEffect, useState } from 'react'
+import { Pagination, createTheme } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import { useState } from 'react'
 
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      tablet: 767,
-    },
-  },
-})
-const useStyles = makeStyles({
-  PaginatorContainer: {
-    '& nav > ul > li': {
-      [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-        width: '40px',
-      },
-    },
-    '& nav > ul > li > button': {
-      [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-        fontSize: '1.6rem',
-      },
-
-      color: 'var(--gray-40)',
-      textAlign: 'center',
-      fontSize: '2rem',
-      cursor: 'pointer',
-      fontFamily: 'Actor',
-    },
-
-    '& nav > ul > li > button.Mui-selected': {
-      color: 'var(--brown-40)',
-    },
-  },
+const breakPoint = createTheme({
+  mobile: 767,
 })
 
-function Paginator() {
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  })
+const PaginatorContainer = styled('div')(() => ({
+  '& nav > ul > li > div': {
+    fontSize: '1.6rem',
+  },
+  '& nav > ul > li': {
+    [breakPoint.breakpoints.down(breakPoint.mobile)]: {
+      width: '40px',
+    },
+  },
+  '& nav > ul > li > button': {
+    [breakPoint.breakpoints.down(breakPoint.mobile)]: {
+      fontSize: '1.6rem',
+    },
+    color: 'var(--gray-40)',
+    textAlign: 'center',
+    fontSize: '2rem',
+    cursor: 'pointer',
+    fontFamily: 'Actor',
+  },
+  '& nav > ul > li > button.Mui-selected': {
+    color: 'var(--brown-40)',
+  },
+}))
 
-  const handleResize = debounce(() => {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    })
-  }, 1000)
+const mobileSize = 767
 
-  useEffect(() => {
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
+function Paginator({ lastPage, onClickPage, windowWidth }) {
+  const [page, setPage] = useState(1)
 
-  const classes = useStyles()
+  const handlePage = (_, value) => {
+    onClickPage(Number(value - 1))
+    setPage(value)
+  }
 
   return (
-    <Stack className={classes.PaginatorContainer}>
-      <Pagination
-        isSelected={false}
-        count={34}
-        hidePrevButton
-        hideNextButton
-        size="large"
-        siblingCount={windowSize.width < 767 ? 1 : 2}
-        boundaryCount={1}
-      />
-    </Stack>
+    <PaginatorContainer>
+      <Stack>
+        <Pagination
+          count={lastPage}
+          hidePrevButton
+          hideNextButton
+          size="large"
+          siblingCount={windowWidth <= mobileSize ? 1 : 2}
+          boundaryCount={1}
+          onChange={handlePage}
+          page={page}
+        />
+      </Stack>
+    </PaginatorContainer>
   )
 }
 
