@@ -9,6 +9,8 @@ import PostDeleteButton from '../../components/post/PostDeleteButton'
 import { useNavigate, useParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import { postMainData, postMainDelete } from '../../api/post'
+import { useRecoilValue } from 'recoil'
+import { modalState } from '../../recoil/modal'
 
 const Div = styled.div`
   position: relative;
@@ -19,7 +21,6 @@ const LIMIT = 4
 
 const Post = ({ state }) => {
   const { id } = useParams()
-  const [isOpened, setIsOpened] = useState(false)
   const [cnt, setCnt] = useState(0)
   const [items, setItems] = useState([])
   const [offset, setOffset] = useState(0)
@@ -28,6 +29,7 @@ const Post = ({ state }) => {
     useAsync(postMainDelete)
 
   const count = items.length
+  const { postModal } = useRecoilValue(modalState)
 
   const navigate = useNavigate()
 
@@ -60,10 +62,10 @@ const Post = ({ state }) => {
   }
 
   useEffect(() => {
-    isOpened
+    postModal.display
       ? (document.body.style.overflowY = 'hidden')
       : (document.body.style.overflowY = 'scroll')
-  }, [isOpened])
+  }, [postModal])
 
   useEffect(() => {
     handleLoad({ id, offset: 0, limit: LIMIT })
@@ -90,29 +92,17 @@ const Post = ({ state }) => {
 
             {count !== 0 ? (
               <PostContent
-                setIsOpened={setIsOpened}
-                isOpened={isOpened}
                 state={state}
                 items={items}
                 cnt={cnt}
                 handleLoadMore={handelLoadMore}
               />
             ) : (
-              <PostNoContent
-                setIsOpened={setIsOpened}
-                isOpened={isOpened}
-                state={state}
-              />
+              <PostNoContent state={state} />
             )}
           </S.Div>
         </Div>
-        {isOpened && (
-          <PostModal
-            onClick={handleLoad}
-            setIsOpened={setIsOpened}
-            isOpened={isOpened}
-          />
-        )}
+        {postModal.display && <PostModal onClick={handleLoad} />}
       </>
     )
   )

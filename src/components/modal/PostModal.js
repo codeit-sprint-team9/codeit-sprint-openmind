@@ -10,17 +10,21 @@ import { useState } from 'react'
 import UserIcon from '../../asset/postCard/img_postCardUser.png'
 import useAsync from '../../hooks/useAsync'
 import { postQuestions } from '../../api/postModal'
+import { modalState } from '../../recoil/modal'
+import { useResetRecoilState } from 'recoil'
 
-const PostModal = ({ setIsOpened, onClick }) => {
+const PostModal = ({ onClick }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
   // 홈 부분 병합 후 수정 예정
   const id = JSON.parse(localStorage.getItem('user')).id || 225
+  const resetModalState = useResetRecoilState(modalState)
+
   const handlePostQuestion = async () => {
     const result = await postQuestionAsync(id, question)
 
     if (result) {
-      setIsOpened(false)
+      resetModalState()
       onClick()
     }
   }
@@ -35,7 +39,7 @@ const PostModal = ({ setIsOpened, onClick }) => {
 
   return (
     <Overlay>
-      <OuterModalContainer onClick={() => setIsOpened(false)} />
+      <OuterModalContainer onClick={() => resetModalState()} />
 
       <ModalMainContainer>
         <TitleContainer>
@@ -45,7 +49,7 @@ const PostModal = ({ setIsOpened, onClick }) => {
             src={CloseIcon}
             className="closeIcon"
             alt="closeIcon"
-            onClick={() => setIsOpened(false)}
+            onClick={() => resetModalState()}
           />
         </TitleContainer>
 
