@@ -1,11 +1,11 @@
-import * as S from './PostStyledComponent'
+import * as S from '../../pages/post/PostStyledComponent'
 import MessageImg from '../../asset/post/message.svg'
 import NoQuestionImg from '../../asset/post/no-question-img.svg'
-import FloatingButton from '../../components/common/FloatingButton'
+import FloatingButton from '../common/FloatingButton'
 import { useEffect, useState } from 'react'
-import { device } from '../../components/styles'
+import { device } from '../styles'
 
-export default function PostNoContent({ setIsOpened, isOpened }) {
+export default function PostNoContent({ setIsOpened, isOpened, state }) {
   const handleModal = () => {
     setIsOpened(true)
   }
@@ -23,7 +23,7 @@ export default function PostNoContent({ setIsOpened, isOpened }) {
   }, [])
   return (
     <>
-      <S.ContentWrapper>
+      <S.ContentWrapper $state={state}>
         <S.Content>
           <S.ContentHeader>
             <img
@@ -43,10 +43,12 @@ export default function PostNoContent({ setIsOpened, isOpened }) {
         </S.Content>
       </S.ContentWrapper>
       <S.DivButton $isOpened={isOpened}>
-        <FloatingButton
-          text={text ? '질문 작성' : '질문 작성하기'}
-          onClick={handleModal}
-        />
+        {state === 'default' && (
+          <FloatingButton
+            text={text ? '질문 작성' : '질문 작성하기'}
+            onClick={handleModal}
+          />
+        )}
       </S.DivButton>
     </>
   )

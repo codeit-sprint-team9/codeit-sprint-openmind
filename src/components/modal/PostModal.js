@@ -11,16 +11,18 @@ import UserIcon from '../../asset/postCard/img_postCardUser.png'
 import useAsync from '../../hooks/useAsync'
 import { postQuestions } from '../../api/postModal'
 
-const PostModal = ({ setIsOpened }) => {
+const PostModal = ({ setIsOpened, onClick }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
   // 홈 부분 병합 후 수정 예정
-  const id = localStorage.getItem('userInfo') || 225
-
+  const id = JSON.parse(localStorage.getItem('user')).id || 225
   const handlePostQuestion = async () => {
     const result = await postQuestionAsync(id, question)
 
-    if (result) setIsOpened(false)
+    if (result) {
+      setIsOpened(false)
+      onClick()
+    }
   }
 
   if (isLoading) {
