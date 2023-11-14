@@ -16,7 +16,7 @@ import Button from '../common/Button'
 import Reaction from '../common/Reaction'
 import Edit from '../common/Edit'
 
-const PostCard = ({ state, title }) => {
+const PostCard = ({ state, item }) => {
   const [isOpenOption, setIsOpenOption] = useState(false)
   const [, setSelectedOption] = useState('')
   const [answer, setAnswer] = useState('')
@@ -43,7 +43,7 @@ const PostCard = ({ state, title }) => {
         <TitleContainer>
           <div className="question-ago">질문 · 2주전</div>
 
-          <div className="title">{title}</div>
+          <div className="title">{item.content}</div>
         </TitleContainer>
 
         {!(state === 'default' && !isAnswered) && (
