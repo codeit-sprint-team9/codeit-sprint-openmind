@@ -1,4 +1,4 @@
-import CardList from './UserCard'
+import CardList from './CardList'
 import Paginator from './Paginator'
 import Header from './Header'
 import { useCallback, useEffect, useState } from 'react'
@@ -54,12 +54,14 @@ function List() {
     }
   }, [])
 
+  const cardBreakPoint = 868
+
   useEffect(() => {
-    if (windowWidth < 868) {
+    if (windowWidth < cardBreakPoint) {
       setLimit(6)
       setLastPage(calculatePage(totalPage))
     }
-    if (windowWidth > 868) {
+    if (windowWidth > cardBreakPoint) {
       setLimit(8)
     }
   })
