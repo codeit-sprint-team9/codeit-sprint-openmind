@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled, { css } from 'styled-components'
 import arrowDownIcon from '../../asset/Dropdown/icon-arrow-down.svg'
 import arrowUpIcon from '../../asset/Dropdown/icon-arrow-up.svg'
