@@ -129,6 +129,7 @@ const CardContent = styled.div`
   font-size: 1.6rem;
 
   line-height: 2.2rem;
+  
   img {
     margin-right: 0.4rem;
   }

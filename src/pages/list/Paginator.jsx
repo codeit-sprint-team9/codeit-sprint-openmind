@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack'
-import { Pagination, createTheme, debounce } from '@mui/material'
+import { Pagination, createTheme } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const breakPoint = createTheme({
   mobile: 767,
@@ -29,29 +29,12 @@ const PaginatorContainer = styled('div')(() => ({
 }))
 
 const mobileSize = 767
-function Paginator({ lastPage, handleLoadByPage }) {
+
+function Paginator({ lastPage, onClickPage, windowWidth }) {
   const [page, setPage] = useState(1)
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  })
 
-  const handleResize = debounce(() => {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    })
-  }, 1000)
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  const handlePage = async (_, value) => {
-    await handleLoadByPage(Number(value - 1))
+  const handlePage = (_, value) => {
+    onClickPage(Number(value - 1))
     setPage(value)
   }
 
@@ -63,7 +46,7 @@ function Paginator({ lastPage, handleLoadByPage }) {
           hidePrevButton
           hideNextButton
           size="large"
-          siblingCount={windowSize.width <= mobileSize ? 1 : 2}
+          siblingCount={windowWidth <= mobileSize ? 1 : 2}
           boundaryCount={1}
           onChange={handlePage}
           page={page}

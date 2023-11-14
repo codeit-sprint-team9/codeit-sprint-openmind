@@ -12,6 +12,7 @@ function Header() {
         <Link to="/">
           <img src={logoImage}></img>
         </Link>
+        
         <div className="answer-button">
           <Link to={`/post/${userId}/answer`}>
             <Button text="답변하러 가기" isValue={true} />
@@ -57,6 +58,7 @@ const HeaderBottomContainer = styled.div`
   text-align: center;
   align-items: center;
   gap: 1.2rem;
+
   .answer-who {
     color: var(--gray-60, #000);
     font-size: 4rem;
