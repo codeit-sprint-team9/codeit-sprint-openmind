@@ -36,6 +36,10 @@ export default function PostContent({
   const handleModal = () => {
     setIsOpened(true)
   }
+  console.log(cnt, items.length)
+  useEffect(() => {
+    setHasNext(true)
+  }, [items])
   return (
     <>
       <S.ContentWrapper $state={state}>
@@ -53,6 +57,8 @@ export default function PostContent({
               dataLength={items.length}
               next={loadMore}
               hasMore={hasNext}
+              loader={<p>로딩중</p>}
+              endMessage={<p>끝</p>}
               className="infinite"
               style={{
                 overflow: 'visible',
