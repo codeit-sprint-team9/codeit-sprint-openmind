@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import MessageIcon from '../../asset/postModal/img_message.svg'
-import CloseIcon from '../../asset/postModal/img_close.svg'
+import { ReactComponent as MessageIcon } from '../../asset/postModal/img_message.svg'
+import { ReactComponent as CloseIcon } from '../../asset/postModal/img_close.svg'
 import InputTextArea, {
   InputTextAreaStyledComponent,
 } from '../common/InputTextArea'
@@ -37,14 +37,9 @@ const PostModal = ({ setIsOpened }) => {
 
       <ModalMainContainer>
         <TitleContainer>
-          <img src={MessageIcon} className="messageIcon" alt="messageIcon" />
+          <MessageIcon className="messageIcon" />
           <div className="title">질문을 작성하세요</div>
-          <img
-            src={CloseIcon}
-            className="closeIcon"
-            alt="closeIcon"
-            onClick={() => setIsOpened(false)}
-          />
+          <CloseIcon className="closeIcon" onClick={() => setIsOpened(false)} />
         </TitleContainer>
 
         <ContentContainer>
@@ -130,6 +125,9 @@ export const TitleContainer = styled.div`
       width: 2.2rem;
       height: 2.2rem;
     }
+  }
+  svg > path {
+    fill: white;
   }
 `
 

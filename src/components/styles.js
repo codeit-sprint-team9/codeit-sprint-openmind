@@ -8,20 +8,20 @@ export const device = {
 export const GlobalStyle = createGlobalStyle`
 
 :root{
-    --gray-60:#FFFFFF;
-    --gray-50:#F9F9F9;
-    --gray-40:#CFCFCF;
-    --gray-30:#818181;
-    --gray-20:#515151;
-    --gray-10:#000000;
-    --brown-50:#F5F1EE;
-    --brown-40:#E4D5C9;
-    --brown-30:#C7BBB5;
-    --brown-20:#515151;
-    --brown-10:#000000;
-    --blue:#1877F2;
-    --red:#B93333;
-    --yellow:#FEE500;
+  --gray-10:#FFFFFF;
+  --gray-20:#F9F9F9;
+  --gray-30:#CFCFCF;
+  --gray-40:#818181;
+  --gray-50:#515151;
+  --gray-60:#000000;
+  --brown-10:#F5F1EE;
+  --brown-20:#E4D5C9;
+  --brown-30:#C7BBB5;
+  --brown-40:#542F1A;
+  --brown-50:#341909;
+  --blue:#1877F2;
+  --red:#B93333;
+  --yellow:#FEE500;
 }
 
 *{

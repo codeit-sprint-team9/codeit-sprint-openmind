@@ -6,7 +6,7 @@ export const InputTextAreaStyledComponent = styled.div`
   border-radius: 0.8rem;
   ${({ $isFocus }) =>
     $isFocus && 'border: 0.1rem solid var(--brown-40, #542F1A);'}
-  background: var(--gray-50, #F9F9F9);
+  background: var(--gray-20, #F9F9F9);
   display: flex;
   align-items: center;
   textarea {
@@ -15,7 +15,7 @@ export const InputTextAreaStyledComponent = styled.div`
     resize: none;
     border: none;
     padding: 0;
-    background: var(--gray-50, #f9f9f9);
+    background: var(--gray-20, #f9f9f9);
     font-size: 1.6rem;
     line-height: 2.2rem;
     &:focus {
