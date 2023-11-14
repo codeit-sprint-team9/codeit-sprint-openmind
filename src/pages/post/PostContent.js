@@ -1,4 +1,4 @@
-import MessageImg from '../../asset/post/message.svg'
+import { ReactComponent as MessageImg } from '../../asset/post/message.svg'
 import * as S from './PostStyledComponent'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { getAllReviews, getReviews } from './api'
@@ -73,11 +73,7 @@ export default function PostContent({ setIsOpened, state, isOpened }) {
       <S.ContentWrapper className="wrapper" $state={state}>
         <S.Content className="content">
           <S.ContentHeader>
-            <img
-              src={MessageImg}
-              alt="메세지 이미지"
-              className="content-header-img"
-            />
+            <MessageImg className="content-header-img" />
             <div>{cnt.length}개의 질문이 있습니다</div>
           </S.ContentHeader>
           <S.ContentDiv>

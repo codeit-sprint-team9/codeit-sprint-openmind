@@ -40,7 +40,7 @@ const ButtonBox = styled.div`
 const InputBox = styled.div`
   padding: 3.2rem;
   border-radius: 1.6rem;
-  background: var(--gray-10);
+  background: #fff;
   width: 40rem;
   display: flex;
   flex-direction: column;

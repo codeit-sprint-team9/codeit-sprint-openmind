@@ -135,6 +135,9 @@ export const ContentHeader = styled.div`
       width: 2.2rem;
     }
   }
+  svg > path {
+    fill: white;
+  }
 `
 
 export const ContentDiv = styled.div`

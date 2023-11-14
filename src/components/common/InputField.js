@@ -7,7 +7,7 @@ const InputFieldStyledComponent = styled.div`
   border-radius: 0.8rem;
   border: 0.1rem solid ${({ $isFocus }) =>
     $isFocus ? 'var(--brown-40, #542F1A);' : 'var(--gray-40, #818181);'}
-  background: var(--gray-10, #fff);
+  background: var(--gray-50, #fff);
   display: flex;
   align-items: center;
   gap: 0.4rem;

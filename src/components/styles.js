@@ -14,11 +14,11 @@ export const GlobalStyle = createGlobalStyle`
     --gray-30:#818181;
     --gray-20:#515151;
     --gray-10:#000000;
-    --brown-10:#F5F1EE;
-    --brown-20:#E4D5C9;
+    --brown-50:#F5F1EE;
+    --brown-40:#E4D5C9;
     --brown-30:#C7BBB5;
-    --brown-40:#542F1A;
-    --brown-50:#341909;
+    --brown-20:#515151;
+    --brown-10:#000000;
     --blue:#1877F2;
     --red:#B93333;
     --yellow:#FEE500;
