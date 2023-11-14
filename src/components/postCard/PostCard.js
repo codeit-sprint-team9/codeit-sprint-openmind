@@ -22,6 +22,35 @@ import {
   postReactions,
   putAnswers,
 } from '../../api/postCard'
+import moment from 'moment'
+
+const calculateTimeAgo = (createdAt) => {
+  const createdDate = moment(createdAt, 'YYYY-MM-DDTHH:mm:ss[Z]')
+  const currentDate = moment()
+  const diff = currentDate.diff(createdDate, 'seconds')
+
+  console.log(createdAt)
+
+  if (diff < 120) {
+    return '1 minute ago'
+  } else if (diff <= 3540) {
+    return `${Math.floor(diff / 60)} 분 전`
+  } else if (diff < 3600) {
+    return '1 hour ago'
+  } else if (diff <= 82800) {
+    return `${Math.floor(diff / 3600)} 시간 전`
+  } else if (diff < 86400) {
+    return '1 day ago'
+  } else if (diff <= 2592000) {
+    return `${Math.floor(diff / 86400)} 일 전`
+  } else if (diff <= 28512000) {
+    return `${Math.floor(diff / 2592000)} 달 전`
+  } else if (diff <= 31536000) {
+    return '1 year ago'
+  } else {
+    return `${Math.floor(diff / 31536000)} 년 전`
+  }
+}
 
 const PostCard = ({ state, data, handleDeleteQuestion }) => {
   const [cardData, setCardData] = useState(data)
@@ -161,7 +190,9 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
         </div>
 
         <TitleContainer>
-          <div className="question-ago">질문 · 2주전</div>
+          <div className="question-ago">
+            질문 · {calculateTimeAgo(cardData.createdAt)}
+          </div>
 
           <div className="title">{cardData.content}</div>
         </TitleContainer>
@@ -176,7 +207,9 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
             <div className="main-content-container">
               <div className="content-user-info-container">
                 <div className="user-name">{userInfo.name}</div>
-                <div className="content-ago">2주전</div>
+                <div className="content-ago">
+                  {calculateTimeAgo(cardData.answer?.createdAt)}
+                </div>
               </div>
 
               {isAnswered && !isEdit ? (
