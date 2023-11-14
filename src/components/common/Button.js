@@ -27,11 +27,14 @@ export const ButtonInteractiveStyledComponent = styled.div`
 const ButtonArrowStyledComponent = styled.div`
   ${ButtonFlexBoxStyledComponent}
   cursor: pointer;
-  background: var(--brown-10, #f5f1ee);
+  // background: var(--brown-10, #f5f1ee);
+  background: var(--gray-30);
   color: var(--brown-40, #542f1a);
-  border: 0.1rem solid var(--brown-40, #542f1a);
+  // border: 0.1rem solid var(--brown-40, #542f1a);
+  border: 0.1rem solid var(--gray-10);
   &:hover {
-    border: 0.2rem solid var(--brown-40, #542f1a);
+    // border: 0.2rem solid var(--brown-40, #542f1a);
+    border: 0.2rem solid var(--gray-10);
   }
   &:active {
     background: var(--brown-20, #e4d5c9);

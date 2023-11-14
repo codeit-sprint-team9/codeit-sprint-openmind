@@ -22,7 +22,8 @@ const useStyles = makeStyles({
         fontSize: '1.6rem',
       },
 
-      color: 'var(--gray-40)',
+      // color: 'var(--gray-40)',
+      color: 'var(--gray-10)',
       textAlign: 'center',
       fontSize: '2rem',
       cursor: 'pointer',
@@ -30,7 +31,8 @@ const useStyles = makeStyles({
     },
 
     '& nav > ul > li > button.Mui-selected': {
-      color: 'var(--brown-40)',
+      // color: 'var(--brown-40)',
+      color: 'var(--blue)',
     },
   },
 })

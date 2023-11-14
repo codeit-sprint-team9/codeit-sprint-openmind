@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import messageIcon from '../../asset/list/Messages.svg'
+import { ReactComponent as MessageIcon } from '../../asset/list/Messages.svg'
 import profileImage from '../../asset/list/profileImg.svg'
 import { device } from '../../components/styles'
 
@@ -27,7 +27,7 @@ function UserCard() {
 
       <CardContent>
         <div>
-          <img src={messageIcon} />
+          <MessageIcon className="message" />
           <span>받은 질문</span>
         </div>
         <div>9개</div>
@@ -68,7 +68,8 @@ const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1.6rem;
-  border: 0.1rem solid var(--gray-40);
+  // border: 0.1rem solid var(--gray-40);
+  border: 0.1rem solid var(--gray-10);
 
   @media ${device.mobile} {
     padding: 1.6rem;
@@ -87,7 +88,8 @@ const CardProfile = styled.div`
   }
 
   div {
-    color: var(--gray-60);
+    // color: var(--gray-60);
+    color: var(--gray-10);
     font-size: 2rem;
     font-weight: 400;
     line-height: 2.4rem;
@@ -109,20 +111,23 @@ const CardContent = styled.div`
   display: flex;
   justify-content: space-between;
 
-  color: var(--gray-40);
+  // color: var(--gray-40);
+  color: var(--gray-10);
   font-size: 1.6rem;
 
   line-height: 2.2rem;
-  img {
+  .message {
     margin-right: 0.4rem;
   }
   div {
     text-align: center;
     display: flex;
   }
-
   @media ${device.mobile} {
     font-size: 1.4rem;
+  }
+  svg > g > path {
+    fill: white;
   }
 `
 

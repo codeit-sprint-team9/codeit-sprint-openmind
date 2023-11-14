@@ -14,7 +14,8 @@ export const Button = styled.button`
 `
 export const TopDiv = styled.div`
   width: 100vw;
-  background-color: var(--gray-10, #fff);
+  // background-color: var(--gray-10, #fff);
+  background-color: var(--gray-60, #fff);
   position: relative;
   display: flex;
   justify-content: center;
@@ -135,9 +136,9 @@ export const ContentHeader = styled.div`
       width: 2.2rem;
     }
   }
-  svg > path {
-    fill: white;
-  }
+  // svg > path {
+  //   fill: white;
+  // }
 `
 
 export const ContentDiv = styled.div`

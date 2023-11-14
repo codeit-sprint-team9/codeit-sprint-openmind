@@ -46,7 +46,8 @@ const HeaderBottomContainer = styled.div`
   gap: 1.2rem;
 
   .answer-who {
-    color: var(--gray-60, #000);
+    // color: var(--gray-60, #000);
+    color: var(--gray-10);
     font-size: 4rem;
     font-weight: 400;
   }

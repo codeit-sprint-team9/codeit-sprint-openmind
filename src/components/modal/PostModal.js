@@ -126,9 +126,9 @@ export const TitleContainer = styled.div`
       height: 2.2rem;
     }
   }
-  svg > path {
-    fill: white;
-  }
+  // svg > path {
+  //   fill: white;
+  // }
 `
 
 export const ContentContainer = styled.div`

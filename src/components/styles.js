@@ -33,7 +33,8 @@ html {
   }
   
   body {
-    background: var(--gray-10);
+    // background: var(--gray-10);
+    background: var(--gray-60);
     margin: 0;
     padding: 0;
     display: flex;
