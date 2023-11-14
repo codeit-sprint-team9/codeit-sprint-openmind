@@ -53,8 +53,6 @@ const Post = ({ state }) => {
       const result = await postMainDeleteAsync(id)
       if (!result) return
       window.localStorage.clear()
-      if (isDeleteError) return <div>에러!</div>
-      if (isDeleteLoading) return <div>로딩중!</div>
       navigate('/')
     } else {
       return
@@ -73,6 +71,8 @@ const Post = ({ state }) => {
   useEffect(() => {
     if (isError) navigate('/list')
   }, [isError])
+  if (isDeleteError) return <div>에러!</div>
+  if (isDeleteLoading) return <div>로딩중!</div>
   if (isLoading) return <div>로딩중!</div>
   return (
     <>
