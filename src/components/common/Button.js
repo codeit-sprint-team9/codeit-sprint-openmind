@@ -56,7 +56,7 @@ function Button({ brown = false, text = '질문 받기', isValue, onClick }) {
           {text}
         </ButtonInteractiveStyledComponent>
       ) : (
-        <ButtonArrowStyledComponent>
+        <ButtonArrowStyledComponent onClick={onClick}>
           {text}
           <ArrowIcon />
         </ButtonArrowStyledComponent>

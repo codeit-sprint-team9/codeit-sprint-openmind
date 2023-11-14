@@ -2,7 +2,7 @@ import request from './apiConfig'
 
 export const getSubject = async ({ limit = 8, offset = 0, order = 'time' }) => {
   const query = `limit=${limit}&offset=${offset}&sort=${order}`
-  console.log(query)
+
   try {
     const response = await request.get(`subjects/?${query}`)
     if (response.status == 200) {

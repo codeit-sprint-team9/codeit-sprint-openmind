@@ -1,22 +1,34 @@
 import Button from '../../components/common/Button'
 import logoImage from '../../asset/logo.svg'
 import { device } from '../../components/styles'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { useState } from 'react'
 
 function Header() {
-  const userId = JSON.parse(localStorage.getItem('user')).id
+  const user = JSON.parse(localStorage.getItem('user'))
+  const [isLogin] = useState(user ? true : false)
+  const userId = user?.id
+
+  const navigate = useNavigate()
+
+  const onClickButton = () => {
+    if (isLogin) {
+      navigate(`/post/${userId}/answer`)
+      return
+    }
+    alert('로그인 후 접근할 수 있습니다.')
+    navigate('/')
+  }
   return (
     <>
       <HeaderTopContainer>
         <Link to="/">
           <img src={logoImage}></img>
         </Link>
-        
+
         <div className="answer-button">
-          <Link to={`/post/${userId}/answer`}>
-            <Button text="답변하러 가기" isValue={true} />
-          </Link>
+          <Button text="답변하러 가기" onClick={onClickButton} isValue={true} />
         </div>
       </HeaderTopContainer>
 
