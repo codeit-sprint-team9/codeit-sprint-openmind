@@ -18,6 +18,10 @@ const AnswerPost = () => {
     setIsPending(true)
   }, [])
 
+  useEffect(() => {
+    console.log(isPending)
+  }, [isPending])
+
   if (isPending) return <Post state={'answer'} />
 }
 

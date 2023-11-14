@@ -44,6 +44,10 @@ const Post = ({ state }) => {
     setOffset(options.offset + options.limit)
   }
 
+  useEffect(() => {
+    console.log(isError)
+  }, [])
+
   const handelLoadMore = () => {
     handleLoad({ id, limit: LIMIT, offset })
   }
@@ -78,8 +82,7 @@ const Post = ({ state }) => {
   if (isLoading) return <div>로딩중입니다.</div>
 
   return (
-    isError !== null &&
-    !isError && (
+    isError === false && (
       <>
         <Div>
           <Nav id={id} />
