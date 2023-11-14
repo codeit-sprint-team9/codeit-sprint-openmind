@@ -73,6 +73,7 @@ const Home = () => {
   const nav = useNavigate()
 
   const handlePost = async () => {
+    if (!isValue) return
     const result = await subjectPost(name)
     if (!result) return
     localStorage.setItem(
