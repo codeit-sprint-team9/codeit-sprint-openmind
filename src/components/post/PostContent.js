@@ -20,6 +20,7 @@ export default function PostContent({
     const matches = event.matches
     setText(matches)
   }
+
   useEffect(() => {
     let myMedia = window.matchMedia(device.mobile)
     myMedia.addEventListener('change', screenChange)
@@ -33,6 +34,7 @@ export default function PostContent({
       setHasNext(false)
     }
   }
+
   const handleModal = () => {
     setIsOpened(true)
   }
@@ -40,6 +42,7 @@ export default function PostContent({
   useEffect(() => {
     setHasNext(true)
   }, [items])
+
   return (
     <>
       <S.ContentWrapper $state={state}>
@@ -57,6 +60,7 @@ export default function PostContent({
               dataLength={items.length}
               next={loadMore}
               hasMore={hasNext}
+              loader={<p>로딩중입니다.</p>}
               className="infinite"
               style={{
                 overflow: 'visible',

@@ -23,7 +23,7 @@ const Post = ({ state }) => {
   const [cnt, setCnt] = useState(0)
   const [items, setItems] = useState([])
   const [offset, setOffset] = useState(0)
-  const [isLoading, isError, postMainDataAsync] = useAsync(postMainData)
+  const [, isError, postMainDataAsync] = useAsync(postMainData)
   const [isDeleteLoading, isDeleteError, postMainDeleteAsync] =
     useAsync(postMainDelete)
 
@@ -43,10 +43,6 @@ const Post = ({ state }) => {
     }
     setOffset(options.offset + options.limit)
   }
-
-  useEffect(() => {
-    console.log(isError)
-  }, [])
 
   const handelLoadMore = () => {
     handleLoad({ id, limit: LIMIT, offset })
@@ -79,7 +75,6 @@ const Post = ({ state }) => {
 
   if (isDeleteError) return <div>문제가 발생했습니다.</div>
   if (isDeleteLoading) return <div>로딩중입니다.</div>
-  if (isLoading) return <div>로딩중입니다.</div>
 
   return (
     isError === false && (
