@@ -8,7 +8,7 @@ import {
   TitleContainer,
 } from './PostCardStyledComponents'
 import OptionIcon from '../../asset/postCard/img_option.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Badge from '../common/Badge'
 import InputTextArea from '../common/InputTextArea'
 import Button from '../common/Button'
@@ -17,16 +17,21 @@ import Edit from '../common/Edit'
 import useAsync from '../../hooks/useAsync'
 import {
   deleteAnswers,
-  deleteQuestions,
+  getQuestions,
   postAnswers,
   postReactions,
   putAnswers,
 } from '../../api/postCard'
 
-const PostCard = ({ state, cardData }) => {
+const PostCard = ({ state, data, handleDeleteQuestion }) => {
+  const [cardData, setCardData] = useState(data)
   const [isOpenOption, setIsOpenOption] = useState(false)
   const [answer, setAnswer] = useState(
-    cardData.answer ? cardData.answer.content : ''
+    cardData.answer
+      ? cardData.answer.isRejected
+        ? ''
+        : cardData.answer.content
+      : ''
   )
   const isAnswered = cardData.answer ? true : false
   const [isEdit, setIsEdit] = useState(false)
@@ -43,13 +48,25 @@ const PostCard = ({ state, cardData }) => {
     useAsync(putAnswers)
   const [isLoadingDeleteAnswers, errorDeleteAnswers, deleteAnswersAsync] =
     useAsync(deleteAnswers)
-  const [isLoadingDeleteQuestions, errorDeleteQuestions, deleteQuestionsAsync] =
-    useAsync(deleteQuestions)
+  const [, , getQuestionsAsync] = useAsync(getQuestions)
+
+  const handleGetQuestion = async () => {
+    const response = await getQuestionsAsync(data.id)
+    if (!response) return
+    setCardData(response)
+    setAnswer(
+      response.answer
+        ? response.answer.isRejected
+          ? ''
+          : response.answer.content
+        : ''
+    )
+  }
 
   // 답변 등록, 답변 수정
   const handlePostAnswer = async (isRejected = false) => {
     // 답변 수정
-    if (answer.length < 1) return
+
     if (isAnswered) {
       const result = await putAnswersAsync(
         cardData.answer.id,
@@ -58,6 +75,9 @@ const PostCard = ({ state, cardData }) => {
       )
 
       if (!result) return
+
+      handleGetQuestion()
+      setIsEdit(false)
       return
     }
     const result = await postAnswersAsync(
@@ -67,6 +87,8 @@ const PostCard = ({ state, cardData }) => {
     )
 
     if (!result) return
+    handleGetQuestion()
+    return
   }
 
   // 리액션
@@ -74,6 +96,7 @@ const PostCard = ({ state, cardData }) => {
     const result = await postReactionsAsync(type, cardData.id)
 
     if (!result) return
+    handleGetQuestion()
   }
 
   // option 버튼 - 답변 삭제, 답변 수정, 질문 삭제
@@ -84,13 +107,13 @@ const PostCard = ({ state, cardData }) => {
       return
     }
     if (menu === '답변 삭제') {
-      const result = await deleteAnswersAsync(cardData.answer)
-      if (!result) return
+      await deleteAnswersAsync(cardData.answer.id)
+
+      handleGetQuestion()
       return
     }
     if (menu === '질문 삭제') {
-      const result = await deleteQuestionsAsync(cardData.id)
-      if (!result) return
+      handleDeleteQuestion(cardData.id)
       return
     }
     if (menu === '수정하기') {
@@ -99,7 +122,11 @@ const PostCard = ({ state, cardData }) => {
     }
   }
 
-  if (errorPutAnswers || errorDeleteAnswers || errorDeleteQuestions) {
+  useEffect(() => {
+    console.log(cardData)
+  }, [cardData])
+
+  if (errorPutAnswers || errorDeleteAnswers) {
     return (
       <PostCardWrapper>
         <PostCardContainer>
@@ -109,11 +136,7 @@ const PostCard = ({ state, cardData }) => {
     )
   }
 
-  if (
-    isLoadingPutAnswers ||
-    isLoadingDeleteAnswers ||
-    isLoadingDeleteQuestions
-  ) {
+  if (isLoadingPutAnswers || isLoadingDeleteAnswers) {
     return (
       <PostCardWrapper>
         <PostCardContainer>
@@ -165,13 +188,15 @@ const PostCard = ({ state, cardData }) => {
                   {cardData.answer.isRejected ? (
                     <div>답변 거절</div>
                   ) : (
-                    <div className="main-content">cardData.answer.content</div>
+                    <div className="main-content">
+                      {cardData.answer.content}
+                    </div>
                   )}
                 </>
               ) : (
                 <>
                   {isLoadingAnswers ? (
-                    <isLoadingAnswers />
+                    <LoadingContainer />
                   ) : (
                     <>
                       {errorAnswers ? (
@@ -209,7 +234,7 @@ const PostCard = ({ state, cardData }) => {
               ) : (
                 <Reaction
                   like={cardData.like}
-                  disLike={cardData.disLike}
+                  disLike={cardData.dislike}
                   onClick={handleReactions}
                 />
               )}

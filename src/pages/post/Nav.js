@@ -7,17 +7,14 @@ import * as S from './PostStyledComponent'
 import Toast from '../../components/common/Toast'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { postUserData } from '../../api/post'
-import useAsync from '../../hooks/useAsync'
 const { Kakao } = window
 
-export default function Nav({ id }) {
+export default function Nav({ userData }) {
   const sharedLink = 'https://20002100.tistory.com/'
   const BASE_URL = 'http://localhost:3000'
   const location = useLocation()
   const [urlAlert, setUrlAlert] = useState(false)
-  const [userData, setUserData] = useState({})
-  const [isUserLoading, isUserError, postUserDataAsync] = useAsync(postUserData)
+
   const userInfo = JSON.parse(localStorage.getItem('user'))
 
   const handleCopyClipBoard = async (text) => {
@@ -26,14 +23,6 @@ export default function Nav({ id }) {
       setUrlAlert(false)
     }, 5000)
     await navigator.clipboard.writeText(text)
-  }
-
-  const handleUserData = async (id) => {
-    const result = await postUserDataAsync(id)
-    if (!result) return
-    setUserData(result)
-    if (isUserLoading) return <div>에러!</div>
-    if (isUserError) return <div>로딩중!</div>
   }
 
   const resultUrl = window.location.href
@@ -65,10 +54,6 @@ export default function Nav({ id }) {
   useEffect(() => {
     Kakao.cleanup()
     Kakao.init('512cd8a8ece57b97899c8cc612089c7d')
-  }, [])
-
-  useEffect(() => {
-    handleUserData(id)
   }, [])
 
   const navigate = useNavigate()

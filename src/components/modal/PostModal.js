@@ -7,19 +7,15 @@ import InputTextArea, {
 import Button, { ButtonInteractiveStyledComponent } from '../common/Button'
 import { device } from '../styles'
 import { useState } from 'react'
-import UserIcon from '../../asset/postCard/img_postCardUser.png'
 import useAsync from '../../hooks/useAsync'
 import { postQuestions } from '../../api/postModal'
 
-const PostModal = ({ setIsOpened, onClick }) => {
+const PostModal = ({ setIsOpened, onClick, userData }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
-  const userInfo = localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
-    : 0
 
   const handlePostQuestion = async () => {
-    const result = await postQuestionAsync(userInfo.id, question)
+    const result = await postQuestionAsync(userData.id, question)
 
     if (result) {
       setIsOpened(false)
@@ -54,8 +50,12 @@ const PostModal = ({ setIsOpened, onClick }) => {
         <ContentContainer>
           <div className="userContainer">
             <div className="to">To.</div>
-            <img className="userIcon" src={UserIcon} alt="userIcon" />
-            <div className="userName">아초는고양이</div>
+            <img
+              className="userIcon"
+              src={userData.imageSource}
+              alt="userIcon"
+            />
+            <div className="userName">{userData.name}</div>
           </div>
 
           <InputTextArea setAnswer={setQuestion} />
@@ -159,6 +159,7 @@ export const ContentContainer = styled.div`
     .userIcon {
       width: 2.8rem;
       height: 2.8rem;
+      border-radius: 50%;
     }
 
     .userName {

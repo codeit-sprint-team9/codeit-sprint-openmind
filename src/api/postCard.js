@@ -62,3 +62,14 @@ export const deleteQuestions = async (questionId) => {
     throw new Error(e)
   }
 }
+
+export const getQuestions = async (questionId) => {
+  try {
+    const response = await request.get(`/questions/${questionId}/`)
+    if (response.status === 200) {
+      return response.data
+    }
+  } catch (e) {
+    throw new Error(e)
+  }
+}

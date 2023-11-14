@@ -12,6 +12,7 @@ export default function PostContent({
   isOpened,
   items,
   handleLoadMore,
+  handleDeleteQuestion,
   cnt,
 }) {
   const [text, setText] = useState(window.innerWidth < 767 ? true : false)
@@ -66,8 +67,15 @@ export default function PostContent({
                 overflow: 'visible',
               }}
             >
-              {items.map((item, index) => {
-                return <PostCard key={index} cardData={item} state={state} />
+              {items.map((item) => {
+                return (
+                  <PostCard
+                    key={item.id}
+                    data={item}
+                    state={state}
+                    handleDeleteQuestion={handleDeleteQuestion}
+                  />
+                )
               })}
             </InfiniteScroll>
           </S.ContentDiv>

@@ -8,7 +8,8 @@ import PostNoContent from '../../components/post/PostNoContent'
 import PostDeleteButton from '../../components/post/PostDeleteButton'
 import { useNavigate, useParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
-import { postMainData, postMainDelete } from '../../api/post'
+import { postMainData, postMainDelete, postUserData } from '../../api/post'
+import { deleteQuestions } from '../../api/postCard'
 
 const Div = styled.div`
   position: relative;
@@ -73,6 +74,29 @@ const Post = ({ state }) => {
     if (isError) navigate('/list')
   }, [isError])
 
+  const [userData, setUserData] = useState({})
+
+  const [isUserLoading, isUserError, postUserDataAsync] = useAsync(postUserData)
+
+  const handleUserData = async (id) => {
+    const result = await postUserDataAsync(id)
+    if (!result) return
+    setUserData(result)
+    if (isUserLoading) return <div>에러!</div>
+    if (isUserError) return <div>로딩중!</div>
+  }
+
+  useEffect(() => {
+    handleUserData(id)
+  }, [])
+
+  const [, , deleteQuestionsAsync] = useAsync(deleteQuestions)
+
+  const handleDeleteQuestion = async (questionId) => {
+    await deleteQuestionsAsync(questionId)
+    handleLoad()
+  }
+
   if (isDeleteError) return <div>문제가 발생했습니다.</div>
   if (isDeleteLoading) return <div>로딩중입니다.</div>
 
@@ -80,7 +104,7 @@ const Post = ({ state }) => {
     isError === false && (
       <>
         <Div>
-          <Nav id={id} />
+          <Nav userData={userData} />
           <S.Div>
             {state === 'answer' && (
               <S.DeleteButton onClick={() => handleDeleteButton(id)}>
@@ -96,6 +120,7 @@ const Post = ({ state }) => {
                 items={items}
                 cnt={cnt}
                 handleLoadMore={handelLoadMore}
+                handleDeleteQuestion={handleDeleteQuestion}
               />
             ) : (
               <PostNoContent
@@ -108,6 +133,7 @@ const Post = ({ state }) => {
         </Div>
         {isOpened && (
           <PostModal
+            userData={userData}
             onClick={handleLoad}
             setIsOpened={setIsOpened}
             isOpened={isOpened}
