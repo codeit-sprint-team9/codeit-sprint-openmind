@@ -1,4 +1,4 @@
-import logoImage from '../../asset/logo.svg'
+import { ReactComponent as LogoImage } from '../../asset/logo.svg'
 import styled from 'styled-components'
 import CardList from './UserCard'
 import { device } from '../../components/styles'
@@ -27,6 +27,15 @@ const HeaderTopContainer = styled.div`
       width: 13.1rem;
     }
   }
+  #OPENMIND > path {
+    fill: white;
+  }
+  #Group 10 > path {
+    stroke: white;
+  }
+  #OPENMIND_2 > path {
+    fill: white;
+  }
 `
 
 const HeaderBottomContainer = styled.div`
@@ -45,7 +54,7 @@ const HeaderBottomContainer = styled.div`
   @media ${device.mobile} {
     flex-direction: row;
     gap: 4.2rem;
-    margin-top : 1.2rem;
+    margin-top: 1.2rem;
     .answer-who {
       font-size: 2.4rem;
     }
@@ -56,7 +65,7 @@ function Header() {
     <>
       <HeaderTopContainer>
         <Link to="/">
-          <img src={logoImage}></img>
+          <LogoImage />
         </Link>
         <div className="answer-button">
           <Button text="답변하러 가기" isValue={true} />

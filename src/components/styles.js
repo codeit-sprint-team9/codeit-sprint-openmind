@@ -8,12 +8,12 @@ export const device = {
 export const GlobalStyle = createGlobalStyle`
 
 :root{
-    --gray-10:#FFFFFF;
-    --gray-20:#F9F9F9;
-    --gray-30:#CFCFCF;
-    --gray-40:#818181;
-    --gray-50:#515151;
-    --gray-60:#000000;
+    --gray-60:#FFFFFF;
+    --gray-50:#F9F9F9;
+    --gray-40:#CFCFCF;
+    --gray-30:#818181;
+    --gray-20:#515151;
+    --gray-10:#000000;
     --brown-10:#F5F1EE;
     --brown-20:#E4D5C9;
     --brown-30:#C7BBB5;
@@ -33,7 +33,7 @@ html {
   }
   
   body {
-    background: var(--gray-20);
+    background: var(--gray-10);
     margin: 0;
     padding: 0;
     display: flex;

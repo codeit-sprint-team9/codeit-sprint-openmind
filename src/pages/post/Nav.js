@@ -1,5 +1,5 @@
-import NavImg from '../../asset/post/nav-img.svg'
-import OpenMindLogo from '../../asset/post/openmind-logo.svg'
+import NavImg from '../../asset/post/nav-img-dark.png'
+import { ReactComponent as OpenMindLogo } from '../../asset/logo.svg'
 import CatImg from '../../asset/post/cat.svg'
 import LinkImg from '../../asset/post/link.svg'
 import KakaoImg from '../../asset/post/kakao.svg'
@@ -59,11 +59,7 @@ export default function Nav() {
       <S.Div className="Div">
         <S.TopDiv className="TopDiv">
           <Link to="/">
-            <img
-              src={OpenMindLogo}
-              alt="오픈 마인드 이미지"
-              className="openMind-img"
-            />
+            <OpenMindLogo className="openMind-img" />
           </Link>
           <img src={NavImg} alt="Nav 이미지" className="nav-img" />
         </S.TopDiv>

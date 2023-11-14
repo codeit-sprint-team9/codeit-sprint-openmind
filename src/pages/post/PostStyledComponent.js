@@ -19,6 +19,7 @@ export const TopDiv = styled.div`
   display: flex;
   justify-content: center;
   overflow: hidden;
+
   .nav-img {
     width: 120rem;
     height: 23.4rem;
@@ -40,6 +41,15 @@ export const TopDiv = styled.div`
       height: 4.9rem;
       top: 4rem;
     }
+  }
+  #OPENMIND > path {
+    fill: white;
+  }
+  #Group 10 > path {
+    stroke: white;
+  }
+  #OPENMIND_2 > path {
+    fill: white;
   }
 `
 
