@@ -31,8 +31,8 @@ function Header() {
 
   return (
     <>
-      <HeaderTopContainer onClick={onClickLogo}>
-        <img className="logo" src={logoImage}></img>
+      <HeaderTopContainer>
+        <img onClick={onClickLogo} className="logo" src={logoImage}></img>
 
         <div className="answer-button">
           <Button text="답변하러 가기" onClick={onClickButton} isValue={true} />
