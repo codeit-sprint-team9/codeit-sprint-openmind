@@ -1,7 +1,7 @@
 import Button from '../../components/common/Button'
 import logoImage from '../../asset/logo.svg'
 import { device } from '../../components/styles'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useState } from 'react'
 
@@ -20,12 +20,19 @@ function Header() {
     alert('로그인 후 접근할 수 있습니다.')
     navigate('/')
   }
+
+  const onClickLogo = () => {
+    if (isLogin) {
+      alert('이미 로그인 되어있습니다.')
+      return
+    }
+    navigate('/')
+  }
+
   return (
     <>
-      <HeaderTopContainer>
-        <Link to="/">
-          <img src={logoImage}></img>
-        </Link>
+      <HeaderTopContainer onClick={onClickLogo}>
+        <img className="logo" src={logoImage}></img>
 
         <div className="answer-button">
           <Button text="답변하러 가기" onClick={onClickButton} isValue={true} />
@@ -46,6 +53,9 @@ const HeaderTopContainer = styled.div`
   padding: 4rem 13rem;
   align-items: center;
 
+  .logo {
+    cursor: pointer;
+  }
   .answer-button {
     width: 16.8rem;
   }
