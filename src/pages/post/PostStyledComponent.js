@@ -8,6 +8,7 @@ export const Div = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: var(--gray-55);
 `
 export const Button = styled.button`
   cursor: pointer;
@@ -15,7 +16,7 @@ export const Button = styled.button`
 export const TopDiv = styled.div`
   width: 100vw;
   // background-color: var(--gray-10, #fff);
-  background-color: var(--gray-60, #fff);
+  background-color: var(--gray-60);
   position: relative;
   display: flex;
   justify-content: center;
@@ -72,7 +73,8 @@ export const NavHeader = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 4.3rem;
-  color: var(--gray-60, #000);
+  // color: var(--gray-60, #000);
+  color: var(--gray-10);
   font-size: 3.2rem;
   line-height: 4rem;
   @media (${device.mobile}) {
@@ -103,7 +105,8 @@ export const ContentWrapper = styled.div`
 `
 export const Content = styled.div`
   padding: 1.6rem;
-  background: var(--brown-10, #f5f1ee);
+  // background: var(--brown-10, #f5f1ee);
+  background: var(--gray-50);
   width: 71.6rem;
   display: flex;
   flex-direction: column;
@@ -124,7 +127,8 @@ export const ContentHeader = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  color: var(--brown-40, #542f1a);
+  // color: var(--brown-40, #542f1a);
+  color: var(--gray-10);
   font-size: 2rem;
   line-height: 2.5rem;
   @media (${device.mobile}) {
@@ -136,9 +140,9 @@ export const ContentHeader = styled.div`
       width: 2.2rem;
     }
   }
-  // svg > path {
-  //   fill: white;
-  // }
+  svg > path {
+    fill: white;
+  }
 `
 
 export const ContentDiv = styled.div`

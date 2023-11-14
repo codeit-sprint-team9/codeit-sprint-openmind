@@ -13,7 +13,8 @@ export const GlobalStyle = createGlobalStyle`
   --gray-30:#CFCFCF;
   --gray-40:#818181;
   --gray-50:#515151;
-  --gray-60:#000000;
+  --gray-55:#262626;
+  --gray-60:#202124;
   --brown-10:#F5F1EE;
   --brown-20:#E4D5C9;
   --brown-30:#C7BBB5;
@@ -22,6 +23,8 @@ export const GlobalStyle = createGlobalStyle`
   --blue:#1877F2;
   --red:#B93333;
   --yellow:#FEE500;
+  --orange:#F2B33D;
+  --sky-blue:#CCEFFC;
 }
 
 *{
@@ -34,7 +37,7 @@ html {
   
   body {
     // background: var(--gray-10);
-    background: var(--gray-60);
+    background: #202124;
     margin: 0;
     padding: 0;
     display: flex;

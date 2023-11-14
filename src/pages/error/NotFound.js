@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Button from '../../components/common/Button'
-import bg from '../../asset/Home/bg.png'
-import logo from '../../asset/Home/pc-logo.png'
+import bg from '../../asset/Home/bg-dark.png'
+import logo from '../../asset/Home/pc-logo-dark.png'
 import { Link } from 'react-router-dom'
 
 const HomeBackground = styled.div`
@@ -27,6 +27,7 @@ const ContentText = styled.div`
   font-size: 4rem;
   font-weight: 600;
   text-align: center;
+  color: var(--gray-10);
 `
 
 const MainBox = styled.div`

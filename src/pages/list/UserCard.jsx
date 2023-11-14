@@ -70,6 +70,7 @@ const CardContainer = styled.div`
   border-radius: 1.6rem;
   // border: 0.1rem solid var(--gray-40);
   border: 0.1rem solid var(--gray-10);
+  background: var(--gray-55);
 
   @media ${device.mobile} {
     padding: 1.6rem;

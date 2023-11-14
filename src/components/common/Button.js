@@ -28,8 +28,9 @@ const ButtonArrowStyledComponent = styled.div`
   ${ButtonFlexBoxStyledComponent}
   cursor: pointer;
   // background: var(--brown-10, #f5f1ee);
-  background: var(--gray-30);
-  color: var(--brown-40, #542f1a);
+  background: var(--gray-50);
+  // color: var(--brown-40, #542f1a);
+  color: var(--gray-10);
   // border: 0.1rem solid var(--brown-40, #542f1a);
   border: 0.1rem solid var(--gray-10);
   &:hover {
@@ -38,13 +39,15 @@ const ButtonArrowStyledComponent = styled.div`
   }
   &:active {
     background: var(--brown-20, #e4d5c9);
+    background: var(--gray-55);
   }
   @media ${device.mobile} {
     padding: 0.8rem 1.2rem;
     font-size: 1.4rem;
   }
   svg > g > path {
-    fill: var(--brown-40, #542f1a);
+    // fill: var(--brown-40);
+    fill: var(--gray-10);
   }
 `
 
