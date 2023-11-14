@@ -119,6 +119,7 @@ const Home = () => {
             isValue={isValue}
             setIsValue={setIsValue}
             setName={setName}
+            onKeyDown={() => handlePost()}
           />
           <Button
             className="brown-button"

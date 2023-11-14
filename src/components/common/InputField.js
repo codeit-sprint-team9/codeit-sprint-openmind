@@ -23,7 +23,7 @@ const InputFieldStyledComponent = styled.div`
   } 
 `
 
-function InputField({ isValue, setIsValue, setName }) {
+function InputField({ isValue, setIsValue, setName, onKeyDown }) {
   const [isFocus, setIsFocus] = useState(false)
 
   function handleValue(e) {
@@ -34,6 +34,7 @@ function InputField({ isValue, setIsValue, setName }) {
   function inputFocus() {
     setIsFocus(!isFocus)
   }
+
   return (
     <InputFieldStyledComponent $isFocus={isFocus} $isValue={isValue}>
       <img src={personIcon} alt="personIcon" />
@@ -42,6 +43,9 @@ function InputField({ isValue, setIsValue, setName }) {
         onFocus={inputFocus}
         onBlur={inputFocus}
         onChange={handleValue}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') onKeyDown()
+        }}
       />
     </InputFieldStyledComponent>
   )
