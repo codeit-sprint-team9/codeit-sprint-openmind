@@ -8,6 +8,9 @@ const breakPoint = createTheme({
 })
 
 const PaginatorContainer = styled('div')(() => ({
+  '& nav > ul > li > div': {
+    fontSize: '1.6rem',
+  },
   '& nav > ul > li': {
     [breakPoint.breakpoints.down(breakPoint.mobile)]: {
       width: '40px',
