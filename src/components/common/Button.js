@@ -16,8 +16,10 @@ const ButtonFlexBoxStyledComponent = css`
 
 export const ButtonInteractiveStyledComponent = styled.div`
   ${ButtonFlexBoxStyledComponent}
-  background: ${({ $isValue }) =>
+  // background: ${({ $isValue }) =>
     $isValue ? 'var(--brown-40, #542f1a);' : 'var(--brown-30, #C7BBB5);'}
+  background: ${({ $isValue }) =>
+    $isValue ? 'var(--gray-50);' : 'var(--gray-30);'}
   color: var(--gray-10, #fff);
   ${({ $isValue }) =>
     $isValue &&

@@ -4,7 +4,8 @@ import { device } from '../../components/styles'
 const FloatingButtonStyledComponent = styled.div`
   padding: 1.2rem 2.4rem;
   border-radius: 20rem;
-  background: var(--brown-40, #542f1a);
+  // background: var(--brown-40, #542f1a);
+  background: var(--gray-50, #542f1a);
   box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
   color: var(--gray-10, #fff);
   font-size: 1.5rem;

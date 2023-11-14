@@ -88,6 +88,9 @@ export const LinkDiv = styled.div`
 
   justify-content: center;
   gap: 1.2rem;
+  svg > rect {
+    fill: var(--gray-50);
+  }
 `
 
 export const ContentWrapper = styled.div`

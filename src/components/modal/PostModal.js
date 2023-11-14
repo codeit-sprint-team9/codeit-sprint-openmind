@@ -87,7 +87,8 @@ export const ModalMainContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--gray-10);
+  // background-color: var(--gray-10);
+  background-color: var(--gray-55);
   border-radius: 2.4rem;
   padding: 4rem 4rem 7rem;
   align-items: center;
@@ -108,7 +109,8 @@ export const TitleContainer = styled.div`
   }
 
   .title {
-    color: var(--gray-60);
+    // color: var(--gray-60);
+    color: var(--gray-10);
     font-size: 2.4rem;
     font-weight: 400;
     line-height: 3rem;
@@ -126,9 +128,9 @@ export const TitleContainer = styled.div`
       height: 2.2rem;
     }
   }
-  // svg > path {
-  //   fill: white;
-  // }
+  svg > path {
+    fill: white;
+  }
 `
 
 export const ContentContainer = styled.div`
@@ -141,7 +143,8 @@ export const ContentContainer = styled.div`
     display: flex;
     gap: 0.4rem;
     align-items: center;
-    color: var(--gray-60);
+    // color: var(--gray-60);
+    color: var(--gray-10);
     font-weight: 400;
     margin-bottom: 0.4rem;
 
