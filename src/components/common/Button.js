@@ -11,13 +11,16 @@ const ButtonFlexBoxStyledComponent = css`
   border-radius: 0.8rem;
   font-size: 1.6rem;
   line-height: 2.2rem;
-  height: 5rem;
+  height: 4.6rem;
+  @media ${device.mobile} {
+    height: 3.4rem;
+  }
 `
 
 export const ButtonInteractiveStyledComponent = styled.div`
   ${ButtonFlexBoxStyledComponent}
   background: ${({ $isValue }) =>
-    $isValue ? 'var(--brown-40, #542f1a);' : 'var(--brown-30, #C7BBB5);'}
+    $isValue ? 'var(--brown-40, #542f1a);' : 'var(--brown-30, #C7BBB5);'};
   color: var(--gray-10, #fff);
   ${({ $isValue }) =>
     $isValue &&
@@ -53,7 +56,7 @@ function Button({ brown = false, text = '질문 받기', isValue, onClick }) {
           {text}
         </ButtonInteractiveStyledComponent>
       ) : (
-        <ButtonArrowStyledComponent>
+        <ButtonArrowStyledComponent onClick={onClick}>
           {text}
           <ArrowIcon />
         </ButtonArrowStyledComponent>
