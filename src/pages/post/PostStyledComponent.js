@@ -134,11 +134,16 @@ export const ContentDiv = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-
     @media (${device.mobile}) {
       gap: 1.6rem;
     }
   }
+`
+
+export const Spinner = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const DivButton = styled.div`
@@ -184,8 +189,23 @@ export const ToastDiv = styled.div`
   bottom: 6rem;
   left: 50.5%;
   transform: translate(-50%);
+  animation: fadein 5.1s;
   @media (${device.mobile}) {
     bottom: 10rem;
+  }
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
   }
 `
 export const LogoDiv = styled.div`

@@ -52,7 +52,7 @@ const Post = ({ state }) => {
     if (window.confirm('삭제 하시겠습니까?')) {
       const result = await postMainDeleteAsync(id)
       if (!result) return
-      window.localStorage.clear()
+      window.localStorage.removeItem('user')
       navigate('/')
     } else {
       return
@@ -83,8 +83,8 @@ const Post = ({ state }) => {
           <Nav id={id} />
           <S.Div>
             {state === 'answer' && (
-              <S.DeleteButton onClick={() => handleDeleteButton(id)}>
-                <PostDeleteButton />
+              <S.DeleteButton>
+                <PostDeleteButton onClick={() => handleDeleteButton(id)} />
               </S.DeleteButton>
             )}
 
