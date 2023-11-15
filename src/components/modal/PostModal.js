@@ -6,7 +6,7 @@ import InputTextArea, {
 } from '../common/InputTextArea'
 import Button, { ButtonInteractiveStyledComponent } from '../common/Button'
 import { device } from '../styles'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import UserIcon from '../../asset/postCard/img_postCardUser.png'
 import useAsync from '../../hooks/useAsync'
 import { postQuestions } from '../../api/postModal'
@@ -21,20 +21,24 @@ const PostModal = ({ onClick }) => {
   const resetModalState = useResetRecoilState(modalState)
 
   const handlePostQuestion = async () => {
-    const result = await postQuestionAsync(id, question)
+    if (question !== '') {
+      const result = await postQuestionAsync(id, question)
 
-    if (result) {
-      resetModalState()
-      onClick()
+      if (result) {
+        resetModalState()
+        onClick()
+      }
     }
   }
 
+  useEffect(() => {
+    if (error) {
+      setQuestion('')
+    }
+  }, [error])
+
   if (isLoading) {
     return <div>질문을 올리는 중입니다. 잠시만 기다려 주세요.</div>
-  }
-
-  if (error) {
-    return <div>문제가 발생했습니다.</div>
   }
 
   return (

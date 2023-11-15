@@ -1,8 +1,10 @@
 import { useCallback, useState } from 'react'
+import { useToast } from './useToast'
 
 const useAsync = (asyncFunction) => {
   const [pending, setPending] = useState(false)
   const [isError, setIsError] = useState(null)
+  const { fireToast } = useToast()
 
   const wrappedFunction = useCallback(
     async (...args) => {
@@ -11,6 +13,9 @@ const useAsync = (asyncFunction) => {
       try {
         return await asyncFunction(...args)
       } catch (error) {
+        fireToast({
+          content: '알 수 없는 오류가 발생했습니다. 다시 시도해주세요.',
+        })
         setIsError(true)
       } finally {
         setPending(false)

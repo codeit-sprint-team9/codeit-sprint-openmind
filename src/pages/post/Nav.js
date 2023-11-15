@@ -17,7 +17,7 @@ export default function Nav({ id }) {
   const location = useLocation()
   const [urlAlert, setUrlAlert] = useState(false)
   const [userData, setUserData] = useState({})
-  const [isUserLoading, isUserError, postUserDataAsync] = useAsync(postUserData)
+  const [isUserLoading, , postUserDataAsync] = useAsync(postUserData)
   const userInfo = JSON.parse(localStorage.getItem('user'))
 
   const handleCopyClipBoard = async (text) => {
@@ -32,8 +32,6 @@ export default function Nav({ id }) {
     const result = await postUserDataAsync(id)
     if (!result) return
     setUserData(result)
-    if (isUserLoading) return <div>에러!</div>
-    if (isUserError) return <div>로딩중!</div>
   }
 
   const resultUrl = window.location.href
@@ -80,6 +78,8 @@ export default function Nav({ id }) {
     }
     navigate('/')
   }
+
+  if (isUserLoading) return <div>로딩중!</div>
 
   return (
     <>

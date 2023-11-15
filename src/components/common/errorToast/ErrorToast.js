@@ -15,17 +15,12 @@ export default function ErrorToast({ content, duration }) {
   return (
     <Div $isClosing={isClosing}>
       <img src={errorIcon} alt="에러 아이콘" />
-      <div>
-        {content
-          ? content
-          : '알 수 없는 오류가 발생했습니다. 다시 시도해주세요'}
-      </div>
+      <div>{content}</div>
     </Div>
   )
 }
 
 const Div = styled.div`
-  max-width: 38rem;
   width: fit-content;
   height: 4rem;
   display: flex;
@@ -58,6 +53,6 @@ const Div = styled.div`
       opacity: 0;
     }
   }
-  animation: 0.3s forwards
+  animation: 1s forwards
     ${({ $isClosing }) => ($isClosing ? 'fadeOut' : 'fadeIn')};
 `

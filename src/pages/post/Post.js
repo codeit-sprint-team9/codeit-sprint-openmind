@@ -25,8 +25,7 @@ const Post = ({ state }) => {
   const [items, setItems] = useState([])
   const [offset, setOffset] = useState(0)
   const [, isError, postMainDataAsync] = useAsync(postMainData)
-  const [isDeleteLoading, isDeleteError, postMainDeleteAsync] =
-    useAsync(postMainDelete)
+  const [isDeleteLoading, , postMainDeleteAsync] = useAsync(postMainDelete)
 
   const count = items.length
   const { postModal } = useRecoilValue(modalState)
@@ -72,10 +71,11 @@ const Post = ({ state }) => {
   }, [])
 
   useEffect(() => {
-    if (isError) navigate('/list')
+    if (isError) {
+      navigate('/list')
+    }
   }, [isError])
 
-  if (isDeleteError) return <div>문제가 발생했습니다.</div>
   if (isDeleteLoading) return <div>로딩중입니다.</div>
 
   return (

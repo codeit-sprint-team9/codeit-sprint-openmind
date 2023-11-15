@@ -13,7 +13,7 @@ export function useToast() {
   const fireToast = (toast) => {
     const id = getRandomID()
     setToasts((prev) => [...prev, { ...toast, id: id }])
-    setTimeout(() => removeToast(id), 600 + (toast.duration ?? 1000))
+    setTimeout(() => removeToast(id), 1000 + (toast.duration ?? 5000))
   }
 
   return { toasts, fireToast }
