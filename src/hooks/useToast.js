@@ -6,12 +6,14 @@ const getRandomID = () => String(new Date().getTime())
 export function useToast() {
   const [toasts, setToasts] = useRecoilState(toastState)
 
-  const removeToast = (toastID) =>
+  const removeToast = (toastID) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== toastID))
+  }
 
   const fireToast = (toast) => {
-    setToasts((prev) => [...prev, { ...toast, id: getRandomID() }])
-    setTimeout(() => removeToast(toast.id), 600 + (toast.duration ?? 1000))
+    const id = getRandomID()
+    setToasts((prev) => [...prev, { ...toast, id: id }])
+    setTimeout(() => removeToast(id), 600 + (toast.duration ?? 1000))
   }
 
   return { toasts, fireToast }
