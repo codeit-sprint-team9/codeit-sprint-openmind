@@ -15,11 +15,13 @@ const PostModal = ({ setIsOpened, onClick, userData }) => {
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
 
   const handlePostQuestion = async () => {
-    const result = await postQuestionAsync(userData.id, question)
+    if (question !== '') {
+      const result = await postQuestionAsync(userData.id, question)
 
-    if (result) {
-      setIsOpened(false)
-      onClick()
+      if (result) {
+        setIsOpened(false)
+        onClick()
+      }
     }
   }
 
@@ -58,7 +60,10 @@ const PostModal = ({ setIsOpened, onClick, userData }) => {
             <div className="userName">{userData.name}</div>
           </div>
 
-          <InputTextArea setAnswer={setQuestion} />
+          <InputTextArea
+            setAnswer={setQuestion}
+            onKeyDown={handlePostQuestion}
+          />
 
           <Button
             brown={true}
@@ -119,7 +124,6 @@ export const TitleContainer = styled.div`
   .title {
     color: var(--gray-60);
     font-size: 2.4rem;
-    font-weight: 400;
     line-height: 3rem;
     @media all and ${device.mobile} {
       font-size: 2rem;
@@ -148,7 +152,6 @@ export const ContentContainer = styled.div`
     gap: 0.4rem;
     align-items: center;
     color: var(--gray-60);
-    font-weight: 400;
     margin-bottom: 0.4rem;
 
     .to {

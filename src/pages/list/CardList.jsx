@@ -105,7 +105,6 @@ const CardProfile = styled.div`
   div {
     color: var(--gray-60);
     font-size: 2rem;
-    font-weight: 400;
     line-height: 2.4rem;
   }
 
@@ -129,7 +128,7 @@ const CardContent = styled.div`
   font-size: 1.6rem;
 
   line-height: 2.2rem;
-  
+
   img {
     margin-right: 0.4rem;
   }

@@ -32,6 +32,7 @@ function InputTextArea({
   answer,
   setAnswer,
   placeholder = '질문을 입력해주세요',
+  onKeyDown,
 }) {
   const [isFocus, setIsFocus] = useState(false)
   const [isValue, setIsValue] = useState(false)
@@ -49,6 +50,9 @@ function InputTextArea({
         onChange={(e) => setAnswer(e.target.value)}
         value={answer}
         type="textarea"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') onKeyDown()
+        }}
       />
     </InputTextAreaStyledComponent>
   )

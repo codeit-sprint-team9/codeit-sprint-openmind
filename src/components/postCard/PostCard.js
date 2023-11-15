@@ -8,7 +8,7 @@ import {
   TitleContainer,
 } from './PostCardStyledComponents'
 import OptionIcon from '../../asset/postCard/img_option.svg'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Badge from '../common/Badge'
 import InputTextArea from '../common/InputTextArea'
 import Button from '../common/Button'
@@ -23,32 +23,31 @@ import {
   putAnswers,
 } from '../../api/postCard'
 import moment from 'moment'
+import { debounce } from 'lodash'
 
 const calculateTimeAgo = (createdAt) => {
   const createdDate = moment(createdAt, 'YYYY-MM-DDTHH:mm:ss[Z]')
   const currentDate = moment()
   const diff = currentDate.diff(createdDate, 'seconds')
 
-  console.log(createdAt)
-
   if (diff < 120) {
     return '1 minute ago'
   } else if (diff <= 3540) {
-    return `${Math.floor(diff / 60)} 분 전`
+    return `${Math.floor(diff / 60)}분 전`
   } else if (diff < 3600) {
     return '1 hour ago'
   } else if (diff <= 82800) {
-    return `${Math.floor(diff / 3600)} 시간 전`
+    return `${Math.floor(diff / 3600)}시간 전`
   } else if (diff < 86400) {
     return '1 day ago'
   } else if (diff <= 2592000) {
-    return `${Math.floor(diff / 86400)} 일 전`
+    return `${Math.floor(diff / 86400)}일 전`
   } else if (diff <= 28512000) {
-    return `${Math.floor(diff / 2592000)} 달 전`
+    return `${Math.floor(diff / 2592000)}달 전`
   } else if (diff <= 31536000) {
     return '1 year ago'
   } else {
-    return `${Math.floor(diff / 31536000)} 년 전`
+    return `${Math.floor(diff / 31536000)}년 전`
   }
 }
 
@@ -109,16 +108,24 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
       setIsEdit(false)
       return
     }
-    const result = await postAnswersAsync(
-      cardData.id,
-      isRejected ? 'rejected' : answer,
-      isRejected
-    )
 
-    if (!result) return
-    handleGetQuestion()
-    return
+    if (answer !== '') {
+      const result = await postAnswersAsync(
+        cardData.id,
+        isRejected ? 'rejected' : answer,
+        isRejected
+      )
+
+      if (!result) return
+      handleGetQuestion()
+      return
+    }
   }
+
+  const delayedApi = useCallback(
+    debounce((q) => handleReactions(q), 300),
+    []
+  )
 
   // 리액션
   const handleReactions = async (type) => {
@@ -172,7 +179,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
   }
 
   return (
-    <PostCardWrapper>
+    <PostCardWrapper onClick={() => setIsOpenOption(false)}>
       <PostCardContainer>
         <div className="header-container">
           <Badge isAnswered={isAnswered} />
@@ -236,6 +243,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
                             placeholder="답변을 입력해주세요"
                             setAnswer={setAnswer}
                             answer={answer}
+                            onKeyDown={handlePostAnswer}
                           />
                           <Button
                             onClick={() => handlePostAnswer()}
@@ -264,7 +272,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
                 <Reaction
                   like={cardData.like}
                   disLike={cardData.dislike}
-                  onClick={handleReactions}
+                  onClick={delayedApi}
                 />
               )}
             </>
@@ -272,12 +280,17 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
             <LoadingContainer />
           )}
 
-          {isAnswered && <Edit onClick={handleOptions} />}
+          {isAnswered && state === 'answer' && <Edit onClick={handleOptions} />}
         </BottomContainer>
       </PostCardContainer>
 
       {isOpenOption && (
-        <OptionMenu onClick={handleOptions} isAnswered={isAnswered} />
+        <OptionMenu
+          onClick={handleOptions}
+          setIsOpenOption={setIsOpenOption}
+          isAnswered={isAnswered}
+          isRejected={cardData.answer?.isRejected || false}
+        />
       )}
     </PostCardWrapper>
   )
@@ -294,7 +307,7 @@ const LoadingContainer = () => {
 
 const OptionMenuArr = ['답변 거절', '답변 삭제', '질문 삭제', '수정하기']
 
-const OptionMenu = ({ onClick, isAnswered }) => {
+const OptionMenu = ({ onClick, isAnswered, isRejected }) => {
   return (
     <OptionMenuContainer>
       {OptionMenuArr.map((e, index) => {
@@ -306,7 +319,7 @@ const OptionMenu = ({ onClick, isAnswered }) => {
                 ? e === '답변 삭제' || e === '수정하기'
                   ? false
                   : true
-                : e === '수정하기'
+                : e === '수정하기' || (isRejected && e === '답변 거절')
                 ? false
                 : true
             }

@@ -84,7 +84,6 @@ const HeaderBottomContainer = styled.div`
   .answer-who {
     color: var(--gray-60, #000);
     font-size: 4rem;
-    font-weight: 400;
     margin-bottom: 1.2rem;
   }
 

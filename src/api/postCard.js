@@ -13,10 +13,10 @@ export const postReactions = async (type, questionId) => {
   }
 }
 
-export const postAnswers = async (questionId, contet, isRejected) => {
+export const postAnswers = async (questionId, content, isRejected) => {
   try {
     const response = await request.post(`/questions/${questionId}/answers/`, {
-      content: contet,
+      content: content,
       isRejected: isRejected,
     })
     if (response.status === 201) {

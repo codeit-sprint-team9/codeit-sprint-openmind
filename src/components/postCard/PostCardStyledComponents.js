@@ -74,7 +74,6 @@ export const TitleContainer = styled.div`
   .title {
     color: var(--gray-60);
     font-size: 1.8rem;
-    font-weight: 400;
     line-height: 2.4rem;
     @media all and ${device.mobile} {
       font-size: 1.6rem;
@@ -91,7 +90,6 @@ export const MainContainer = styled.div`
   .answerRejected {
     color: var(--red, #b93333);
     font-size: 1.6rem;
-    font-weight: 400;
     line-height: 2.2rem;
   }
 
@@ -119,7 +117,6 @@ export const MainContainer = styled.div`
       .user-name {
         color: var(--gray-60);
         font-size: 1.8rem;
-        font-weight: 400;
         line-height: 2.4rem;
         @media all and ${device.mobile} {
           font-size: 1.4rem;
@@ -139,7 +136,6 @@ export const MainContainer = styled.div`
     .main-content {
       color: var(--gray-60);
       font-size: 1.6rem;
-      font-weight: 400;
       line-height: 2.2rem;
     }
   }
@@ -185,7 +181,6 @@ export const OptionMenuContainer = styled.div`
 export const OptionMenuItem = styled.div`
   color: #333236;
   font-size: 1.4rem;
-  font-weight: 400;
   background: #fff;
   width: 100%;
   padding: 0.7rem 1.2rem;
