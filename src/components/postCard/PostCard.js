@@ -24,6 +24,7 @@ import {
 } from '../../api/postCard'
 import moment from 'moment'
 import { debounce } from 'lodash'
+import Loading from '../common/Loading'
 
 const calculateTimeAgo = (createdAt) => {
   const createdDate = moment(createdAt, 'YYYY-MM-DDTHH:mm:ss[Z]')
@@ -232,7 +233,9 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
               ) : (
                 <>
                   {isLoadingAnswers ? (
-                    <LoadingContainer />
+                    <div className="loadingContainer">
+                      <Loading />
+                    </div>
                   ) : (
                     <>
                       {errorAnswers ? (
@@ -263,7 +266,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
 
         <div className="divider" />
 
-        <BottomContainer>
+        <BottomContainer $isLoading={isLoadingReactions}>
           {!isLoadingReactions ? (
             <>
               {errorReactions ? (
@@ -277,7 +280,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
               )}
             </>
           ) : (
-            <LoadingContainer />
+            <Loading />
           )}
 
           {isAnswered && state === 'answer' && <Edit onClick={handleOptions} />}

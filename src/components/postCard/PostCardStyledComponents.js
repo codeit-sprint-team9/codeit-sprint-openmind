@@ -87,6 +87,10 @@ export const MainContainer = styled.div`
   gap: 1.2rem;
   width: 100%;
 
+  .loadingContainer {
+    align-self: center;
+  }
+
   .answerRejected {
     color: var(--red, #b93333);
     font-size: 1.6rem;
@@ -153,7 +157,8 @@ export const MainContainer = styled.div`
 export const BottomContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: ${(props) =>
+    props.$isLoading ? 'center' : 'space-between'};
 
   @media all and ${device.mobile} {
     ${EditBoxStyledComponent} {

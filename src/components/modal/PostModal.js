@@ -9,6 +9,7 @@ import { device } from '../styles'
 import { useState } from 'react'
 import useAsync from '../../hooks/useAsync'
 import { postQuestions } from '../../api/postModal'
+import Loading from '../common/Loading'
 
 const PostModal = ({ setIsOpened, onClick, userData }) => {
   const [question, setQuestion] = useState('')
@@ -23,10 +24,6 @@ const PostModal = ({ setIsOpened, onClick, userData }) => {
         onClick()
       }
     }
-  }
-
-  if (isLoading) {
-    return <div>질문을 올리는 중입니다. 잠시만 기다려 주세요.</div>
   }
 
   if (error) {
@@ -60,17 +57,23 @@ const PostModal = ({ setIsOpened, onClick, userData }) => {
             <div className="userName">{userData.name}</div>
           </div>
 
-          <InputTextArea
-            setAnswer={setQuestion}
-            onKeyDown={handlePostQuestion}
-          />
+          {isLoading ? (
+            <Loading className="loading" />
+          ) : (
+            <>
+              <InputTextArea
+                setAnswer={setQuestion}
+                onKeyDown={handlePostQuestion}
+              />
 
-          <Button
-            brown={true}
-            text="질문 보내기"
-            isValue={question !== ''}
-            onClick={handlePostQuestion}
-          />
+              <Button
+                brown={true}
+                text="질문 보내기"
+                isValue={question !== ''}
+                onClick={handlePostQuestion}
+              />
+            </>
+          )}
         </ContentContainer>
       </ModalMainContainer>
     </Overlay>
@@ -146,6 +149,10 @@ export const ContentContainer = styled.div`
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
+
+  .loading {
+    align-self: center;
+  }
 
   .userContainer {
     display: flex;
