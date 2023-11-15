@@ -11,7 +11,6 @@ const { Kakao } = window
 import LogoImg from '../../asset/post/logo.png'
 
 export default function PostHeader({ userData }) {
-  const sharedLink = 'https://20002100.tistory.com/'
   const BASE_URL = 'http://localhost:3000'
   const location = useLocation()
   const [urlAlert, setUrlAlert] = useState(false)
@@ -50,7 +49,7 @@ export default function PostHeader({ userData }) {
   }
 
   const onClickFacebook = () => {
-    window.open(`http://www.facebook.com/sharer.php?u=${sharedLink}`)
+    window.open(`http://www.facebook.com/sharer.php?u=${BASE_URL}/`)
   }
   useEffect(() => {
     Kakao.cleanup()

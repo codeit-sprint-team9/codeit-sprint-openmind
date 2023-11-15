@@ -23,8 +23,12 @@ const FloatingButtonStyledComponent = styled.div`
   }
 `
 
-function PostDeleteButton() {
-  return <FloatingButtonStyledComponent>삭제하기</FloatingButtonStyledComponent>
+function PostDeleteButton({ onClick }) {
+  return (
+    <FloatingButtonStyledComponent onClick={onClick}>
+      삭제하기
+    </FloatingButtonStyledComponent>
+  )
 }
 
 export default PostDeleteButton
