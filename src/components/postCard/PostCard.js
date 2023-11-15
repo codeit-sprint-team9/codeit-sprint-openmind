@@ -169,11 +169,11 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
     )
   }
 
-  if (isLoadingPutAnswers || isLoadingDeleteAnswers) {
+  if (isLoadingDeleteAnswers) {
     return (
       <PostCardWrapper>
         <PostCardContainer>
-          <LoadingContainer />
+          <Loading />
         </PostCardContainer>
       </PostCardWrapper>
     )
@@ -232,7 +232,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
                 </>
               ) : (
                 <>
-                  {isLoadingAnswers ? (
+                  {isLoadingAnswers || isLoadingPutAnswers ? (
                     <div className="loadingContainer">
                       <Loading />
                     </div>
@@ -302,10 +302,6 @@ export default PostCard
 
 const ErrorContainer = () => {
   return <div className="error">문제가 발생했습니다. 다시 시도해주세요.</div>
-}
-
-const LoadingContainer = () => {
-  return <div className="loading">로딩중입니다. 잠시만 기다려주세요.</div>
 }
 
 const OptionMenuArr = ['답변 거절', '답변 삭제', '질문 삭제', '수정하기']
