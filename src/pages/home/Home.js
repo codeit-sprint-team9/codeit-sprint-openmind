@@ -96,7 +96,7 @@ const Home = () => {
   useEffect(() => {
     if (localStorage.getItem('user')) {
       alert(
-        '이미 질문대상이 존재합니다.\n 삭제 후 새로운 질문 대상을 만들어주세요'
+        '이미 질문대상이 존재합니다.\n삭제 후 새로운 질문 대상을 만들어주세요'
       )
       nav('/list')
     }
