@@ -94,6 +94,7 @@ const HeaderBottomContainer = styled.div`
     color: var(--gray-10);
     font-size: 4rem;
     font-weight: 400;
+    margin-bottom: 1.2rem;
   }
 
   @media ${device.mobile} {

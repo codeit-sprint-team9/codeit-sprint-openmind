@@ -1,6 +1,6 @@
 import * as S from '../../pages/post/PostStyledComponent'
-import MessageImg from '../../asset/post/message.svg'
-import NoQuestionImg from '../../asset/post/no-question-img.svg'
+import { ReactComponent as MessageImg } from '../../asset/post/message.svg'
+import { ReactComponent as NoQuestionImg } from '../../asset/post/no-question-img.svg'
 import FloatingButton from '../common/FloatingButton'
 import { useEffect, useState } from 'react'
 import { device } from '../styles'
@@ -26,19 +26,11 @@ export default function PostNoContent({ setIsOpened, isOpened, state }) {
       <S.ContentWrapper $state={state}>
         <S.Content>
           <S.ContentHeader>
-            <img
-              src={MessageImg}
-              alt="메세지 이미지"
-              className="content-header-img"
-            />
+            <MessageImg className="content-header-img" />
             <div>아직 질문이 없습니다</div>
           </S.ContentHeader>
           <S.ContentNoQuestion>
-            <img
-              src={NoQuestionImg}
-              alt="질문이 없습니다"
-              className="no-question-img"
-            />
+            <NoQuestionImg className="no-question-img" />
           </S.ContentNoQuestion>
         </S.Content>
       </S.ContentWrapper>

@@ -173,6 +173,9 @@ export const ContentNoQuestion = styled.div`
   @media (${device.mobile}) {
     padding: 5rem 0 9rem;
   }
+  svg > path {
+    stroke: white;
+  }
 `
 
 export const CardDiv = styled.div`

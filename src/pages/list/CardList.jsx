@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import messageIcon from '../../asset/list/Messages.svg'
+import { ReactComponent as MessageIcon } from '../../asset/list/Messages.svg'
 import { device } from '../../components/styles'
 import Dropdown from '../../components/common/Dropdown'
 import { Link } from 'react-router-dom'
@@ -41,7 +41,7 @@ function UserCard({ name, imageSource, questionCount }) {
 
       <CardContent>
         <div>
-          <img src={messageIcon} />
+          <MessageIcon className="icon" />
           <span>받은 질문</span>
         </div>
         <div>{questionCount}개</div>
@@ -83,8 +83,10 @@ const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1.6rem;
-  border: 0.1rem solid var(--gray-40);
-  background-color: var(--gray-10);
+  // border: 0.1rem solid var(--gray-40);
+  border: 0.1rem solid var(--gray-10);
+  // background-color: var(--gray-10);
+  background-color: var(--gray-55);
   @media ${device.mobile} {
     padding: 1.6rem;
     width: 15.5rem;
@@ -103,7 +105,8 @@ const CardProfile = styled.div`
   }
 
   div {
-    color: var(--gray-60);
+    // color: var(--gray-60);
+    color: var(--gray-10);
     font-size: 2rem;
     font-weight: 400;
     line-height: 2.4rem;
@@ -125,12 +128,13 @@ const CardContent = styled.div`
   display: flex;
   justify-content: space-between;
 
-  color: var(--gray-40);
+  // color: var(--gray-40);
+  color: var(--gray-10);
   font-size: 1.6rem;
 
   line-height: 2.2rem;
 
-  img {
+  .icon {
     margin-right: 0.4rem;
   }
   div {
@@ -140,6 +144,9 @@ const CardContent = styled.div`
 
   @media ${device.mobile} {
     font-size: 1.4rem;
+  }
+  svg > g > path {
+    fill: white;
   }
 `
 
