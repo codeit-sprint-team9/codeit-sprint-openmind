@@ -88,7 +88,7 @@ export default function Nav({ id }) {
 
   return (
     <>
-      <S.Div>
+      <S.Div $theme={theme}>
         <S.TopDiv $theme={theme}>
           <S.LogoDiv onClick={() => handlePage()}>
             <OpenMindLogo className="openMind-img" />

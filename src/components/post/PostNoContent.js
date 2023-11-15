@@ -32,7 +32,7 @@ export default function PostNoContent({ setIsOpened, isOpened, state }) {
             <MessageImg className="content-header-img" />
             <div>아직 질문이 없습니다</div>
           </S.ContentHeader>
-          <S.ContentNoQuestion>
+          <S.ContentNoQuestion $theme={theme}>
             <NoQuestionImg className="no-question-img" />
           </S.ContentNoQuestion>
         </S.Content>

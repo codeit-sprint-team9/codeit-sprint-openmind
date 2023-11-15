@@ -9,6 +9,8 @@ import PostDeleteButton from '../../components/post/PostDeleteButton'
 import { useNavigate, useParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import { postMainData, postMainDelete } from '../../api/post'
+import { darkMode } from '../../atom/atom'
+import { useRecoilValue } from 'recoil'
 
 const Div = styled.div`
   position: relative;
@@ -26,9 +28,9 @@ const Post = ({ state }) => {
   const [, isError, postMainDataAsync] = useAsync(postMainData)
   const [isDeleteLoading, isDeleteError, postMainDeleteAsync] =
     useAsync(postMainDelete)
-
   const count = items.length
   const navigate = useNavigate()
+  const theme = useRecoilValue(darkMode)
 
   const handleLoad = async (options = { id: id, offset: 0, limit: LIMIT }) => {
     const result = await postMainDataAsync(options)
@@ -78,9 +80,9 @@ const Post = ({ state }) => {
   return (
     isError === false && (
       <>
-        <Div>
+        <Div $theme={theme}>
           <Nav id={id} />
-          <S.Div>
+          <S.Div $theme={theme}>
             {state === 'answer' && (
               <S.DeleteButton onClick={() => handleDeleteButton(id)}>
                 <PostDeleteButton />

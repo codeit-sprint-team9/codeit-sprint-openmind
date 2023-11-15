@@ -36,8 +36,8 @@ html {
   }
   
   body {
-    background: var(--gray-20); // dark
-    // background: var(--gray-60);
+    // background: var(--gray-20); // dark
+    // // background: var(--gray-60);
     margin: 0;
     padding: 0;
     display: flex;

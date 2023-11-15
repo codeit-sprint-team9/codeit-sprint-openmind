@@ -50,7 +50,7 @@ const PostCard = ({ state, item }) => {
         </TitleContainer>
 
         {!(state === 'default' && !isAnswered) && (
-          <MainContainer $isAnswered={isAnswered}>
+          <MainContainer $isAnswered={isAnswered} $theme={theme}>
             <img src={UserImg} className="user-icon" alt="userIcon" />
             <div className="main-content-container">
               <div className="content-user-info-container">

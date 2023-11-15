@@ -8,6 +8,8 @@ export const Div = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-20);' : 'var(--gray-55);'};
 `
 export const Button = styled.button`
   cursor: pointer;
@@ -84,7 +86,8 @@ export const LinkDiv = styled.div`
 
   justify-content: center;
   gap: 1.2rem;
-  ${({ $theme }) => ($theme ? '' : 'svg > rect {fill: var(--gray-50);}')}
+  ${({ $theme }) =>
+    $theme === 'light' ? '' : 'svg > rect {fill: var(--gray-50);}'}
 `
 
 export const ContentWrapper = styled.div`
@@ -163,9 +166,7 @@ export const ContentNoQuestion = styled.div`
   @media (${device.mobile}) {
     padding: 5rem 0 9rem;
   }
-  svg > path {
-    stroke: white;
-  }
+  ${({ $theme }) => ($theme === 'light' ? '' : 'svg > path {stroke: white;}')}
 `
 
 export const CardDiv = styled.div`

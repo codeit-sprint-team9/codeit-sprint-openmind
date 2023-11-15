@@ -12,7 +12,7 @@ export const PostCardContainer = styled.div`
   flex-direction: column;
   border-radius: 1.6rem;
   background: ${({ $theme }) =>
-    $theme ? 'var(--gray-10);' : 'var(--gray-55);'}
+    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-55);'}
   box-shadow: 0 0.4rem 0.4rem 0 rgba(140, 140, 140, 0.25);
   padding: 3.2rem;
   width: 68.4rem;
@@ -55,14 +55,16 @@ export const TitleContainer = styled.div`
   width: 100%;
 
   .question-ago {
-    color: ${({ $theme }) => ($theme ? 'var(--gray-40);' : 'var(--gray-10);')}
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-40);' : 'var(--gray-10);'}
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 1.8rem;
   }
 
   .title {
-    color: ${({ $theme }) => ($theme ? 'var(--gray-60);' : 'var(--gray-10);')}
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 1.8rem;
     font-weight: 400;
     line-height: 2.4rem;
@@ -119,7 +121,8 @@ export const MainContainer = styled.div`
     }
 
     .main-content {
-      color: var(--gray-60);
+      color: ${({ $theme }) =>
+        $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
       font-size: 1.6rem;
       font-weight: 400;
       line-height: 2.2rem;

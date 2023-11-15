@@ -48,7 +48,6 @@ const ButtonArrowStyledComponent = styled.div`
 
 function Button({ brown = false, text = '질문 받기', isValue, onClick }) {
   const theme = useRecoilValue(darkMode)
-  console.log(theme)
   return (
     <>
       {brown ? (
