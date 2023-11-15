@@ -8,8 +8,9 @@ import Toast from '../../components/common/Toast'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 const { Kakao } = window
+import LogoImg from '../../asset/post/logo.png'
 
-export default function Nav({ userData }) {
+export default function PostHeader({ userData }) {
   const sharedLink = 'https://20002100.tistory.com/'
   const BASE_URL = 'http://localhost:3000'
   const location = useLocation()
@@ -32,7 +33,7 @@ export default function Nav({ userData }) {
       content: {
         title: 'OpenMind',
         description: 'open',
-        imageUrl: 'https://i.ibb.co/XVh88Vs/image.jpg',
+        imageUrl: LogoImg,
         link: {
           mobileWebUrl: resultUrl,
         },

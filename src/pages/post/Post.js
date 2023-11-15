@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Nav from './Nav'
 import PostContent from '../../components/post/PostContent'
 import * as S from './PostStyledComponent'
 import PostModal from '../../components/modal/PostModal'
@@ -10,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import { postMainData, postMainDelete, postUserData } from '../../api/post'
 import { deleteQuestions } from '../../api/postCard'
+import PostHeader from './PostHeader'
 
 const Div = styled.div`
   position: relative;
@@ -104,7 +104,7 @@ const Post = ({ state }) => {
     isError === false && (
       <>
         <Div>
-          <Nav userData={userData} />
+          <PostHeader userData={userData} />
           <S.Div>
             {state === 'answer' && (
               <S.DeleteButton onClick={() => handleDeleteButton(id)}>
