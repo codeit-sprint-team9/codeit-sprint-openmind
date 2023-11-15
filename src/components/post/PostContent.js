@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import PostCard from '../postCard/PostCard'
 import FloatingButton from '../common/FloatingButton'
 import { device } from '../styles'
+import Loading from '../common/Loading'
 
 export default function PostContent({
   setIsOpened,
@@ -60,7 +61,11 @@ export default function PostContent({
               dataLength={items.length}
               next={loadMore}
               hasMore={hasNext}
-              loader={<p>로딩중입니다.</p>}
+              loader={
+                <S.Spinner>
+                  <Loading />
+                </S.Spinner>
+              }
               className="infinite"
               style={{
                 overflow: 'visible',
