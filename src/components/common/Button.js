@@ -11,7 +11,10 @@ const ButtonFlexBoxStyledComponent = css`
   border-radius: 0.8rem;
   font-size: 1.6rem;
   line-height: 2.2rem;
-  height: 5rem;
+  height: 4.6rem;
+  @media ${device.mobile} {
+    height: 3.4rem;
+  }
 `
 
 export const ButtonInteractiveStyledComponent = styled.div`
@@ -61,7 +64,7 @@ function Button({ brown = false, text = '질문 받기', isValue, onClick }) {
           {text}
         </ButtonInteractiveStyledComponent>
       ) : (
-        <ButtonArrowStyledComponent>
+        <ButtonArrowStyledComponent onClick={onClick}>
           {text}
           <ArrowIcon />
         </ButtonArrowStyledComponent>

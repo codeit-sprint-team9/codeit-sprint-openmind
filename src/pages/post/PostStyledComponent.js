@@ -63,7 +63,9 @@ export const CatDiv = styled.div`
   @media (${device.mobile}) {
     top: 10.1rem;
   }
-  .cat-img {
+  .profile-img {
+    width: 13.6rem;
+    border-radius: 70%;
     @media (${device.mobile}) {
       width: 10.4rem;
     }
@@ -153,6 +155,7 @@ export const ContentDiv = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
     @media (${device.mobile}) {
       gap: 1.6rem;
     }
@@ -161,7 +164,7 @@ export const ContentDiv = styled.div`
 
 export const DivButton = styled.div`
   position: fixed;
-  right: ${({ $isOpened }) => ($isOpened ? '4.25rem' : '2.4rem')};
+  right: 2.4rem;
   bottom: 2.4rem;
 `
 
@@ -205,4 +208,7 @@ export const ToastDiv = styled.div`
   @media (${device.mobile}) {
     bottom: 10rem;
   }
+`
+export const LogoDiv = styled.div`
+  cursor: pointer;
 `

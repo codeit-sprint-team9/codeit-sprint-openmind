@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { device } from '../../components/styles'
+import { device } from '../styles'
 
 const FloatingButtonStyledComponent = styled.div`
   padding: 1.2rem 2.4rem;

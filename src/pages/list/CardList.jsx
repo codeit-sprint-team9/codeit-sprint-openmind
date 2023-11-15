@@ -1,36 +1,50 @@
 import styled from 'styled-components'
-import { ReactComponent as MessageIcon } from '../../asset/list/Messages.svg'
-import profileImage from '../../asset/list/profileImg.svg'
+import messageIcon from '../../asset/list/Messages.svg'
 import { device } from '../../components/styles'
+import Dropdown from '../../components/common/Dropdown'
+import { Link } from 'react-router-dom'
+import Loading from '../../components/common/Loading'
 
-function CardList() {
+function CardList({ subjectData, handleSort, order, isLoading, isError }) {
+  if (isError) {
+    return <div>에러가 발생했습니다.</div>
+  }
   return (
-    <CardListContainer>
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-    </CardListContainer>
+    <>
+      <Dropdown handleSort={handleSort} order={order} />
+
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <CardListContainer>
+          {subjectData?.map((subject) => (
+            <Link to={`/post/${subject.id}`} key={subject.id}>
+              <UserCard
+                name={subject.name}
+                imageSource={subject.imageSource}
+                questionCount={subject.questionCount}
+              />
+            </Link>
+          ))}
+        </CardListContainer>
+      )}
+    </>
   )
 }
-function UserCard() {
+function UserCard({ name, imageSource, questionCount }) {
   return (
     <CardContainer>
       <CardProfile>
-        <img src={profileImage} />
-        <div>아초는 고양이</div>
+        <img src={imageSource} />
+        <div>{name}</div>
       </CardProfile>
 
       <CardContent>
         <div>
-          <MessageIcon className="message" />
+          <img src={messageIcon} />
           <span>받은 질문</span>
         </div>
-        <div>9개</div>
+        <div>{questionCount}개</div>
       </CardContent>
     </CardContainer>
   )
@@ -47,7 +61,7 @@ const CardListContainer = styled.div`
   @media ${device.tablet} {
     width: calc(100% - 6.4rem);
     max-width: 94rem;
-    grid-template-columns: repeat(auto-fit, minmax(18.6rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(18.6rem, 1fr));
     @media (max-width: 868px) {
       max-width: 70rem;
     }
@@ -62,16 +76,15 @@ const CardListContainer = styled.div`
 `
 
 const CardContainer = styled.div`
+  cursor: pointer;
   display: flex;
   height: 18.6rem;
   padding: 2rem;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1.6rem;
-  // border: 0.1rem solid var(--gray-40);
-  border: 0.1rem solid var(--gray-10);
-  background: var(--gray-55);
-
+  border: 0.1rem solid var(--gray-40);
+  background-color: var(--gray-10);
   @media ${device.mobile} {
     padding: 1.6rem;
     width: 15.5rem;
@@ -86,11 +99,11 @@ const CardProfile = styled.div`
   img {
     width: 6rem;
     height: 6rem;
+    border-radius: 100%;
   }
 
   div {
-    // color: var(--gray-60);
-    color: var(--gray-10);
+    color: var(--gray-60);
     font-size: 2rem;
     font-weight: 400;
     line-height: 2.4rem;
@@ -112,23 +125,21 @@ const CardContent = styled.div`
   display: flex;
   justify-content: space-between;
 
-  // color: var(--gray-40);
-  color: var(--gray-10);
+  color: var(--gray-40);
   font-size: 1.6rem;
 
   line-height: 2.2rem;
-  .message {
+
+  img {
     margin-right: 0.4rem;
   }
   div {
     text-align: center;
     display: flex;
   }
+
   @media ${device.mobile} {
     font-size: 1.4rem;
-  }
-  svg > g > path {
-    fill: white;
   }
 `
 
