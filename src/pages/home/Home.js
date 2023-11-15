@@ -75,6 +75,7 @@ const Home = () => {
   const { fireToast } = useToast()
 
   const handlePost = async () => {
+    if (!isValue) return
     const result = await subjectPost(name)
     if (!result) return
     localStorage.setItem(
@@ -123,6 +124,7 @@ const Home = () => {
             isValue={isValue}
             setIsValue={setIsValue}
             setName={setName}
+            onKeyDown={() => handlePost()}
           />
           <Button
             className="brown-button"

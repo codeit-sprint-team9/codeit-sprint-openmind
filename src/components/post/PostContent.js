@@ -7,6 +7,7 @@ import FloatingButton from '../common/FloatingButton'
 import { device } from '../styles'
 import { modalState } from '../../recoil/modal'
 import { useRecoilState } from 'recoil'
+import Loading from '../common/Loading'
 
 export default function PostContent({ state, items, handleLoadMore, cnt }) {
   const [modalOpened, setModalOpened] = useRecoilState(modalState)
@@ -62,7 +63,11 @@ export default function PostContent({ state, items, handleLoadMore, cnt }) {
               dataLength={items.length}
               next={loadMore}
               hasMore={hasNext}
-              loader={<p>로딩중입니다.</p>}
+              loader={
+                <S.Spinner>
+                  <Loading />
+                </S.Spinner>
+              }
               className="infinite"
               style={{
                 overflow: 'visible',
