@@ -12,7 +12,7 @@ export const PostCardContainer = styled.div`
   flex-direction: column;
   border-radius: 1.6rem;
   background: var(--gray-55);
-  // background: var(--gray-10);
+  // background: var(--gray-10); // dark
   box-shadow: 0 0.4rem 0.4rem 0 rgba(140, 140, 140, 0.25);
   padding: 3.2rem;
   width: 68.4rem;
@@ -38,7 +38,7 @@ export const PostCardContainer = styled.div`
   }
 
   .divider {
-    // background: var(--gray-30);
+    // background: var(--gray-30); // dark
     background: var(--gray-10);
     width: 100%;
     height: 0.1rem;
@@ -55,7 +55,7 @@ export const TitleContainer = styled.div`
   width: 100%;
 
   .question-ago {
-    // color: var(--gray-40);
+    // color: var(--gray-40); // dark
     color: var(--gray-10);
     font-size: 1.4rem;
     font-weight: 500;
@@ -63,7 +63,7 @@ export const TitleContainer = styled.div`
   }
 
   .title {
-    // color: var(--gray-60);
+    // color: var(--gray-60); // dark
     color: var(--gray-10);
     font-size: 1.8rem;
     font-weight: 400;

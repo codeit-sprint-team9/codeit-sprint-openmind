@@ -15,7 +15,7 @@ export const Button = styled.button`
 `
 export const TopDiv = styled.div`
   width: 100vw;
-  // background-color: var(--gray-10, #fff);
+  // background-color: var(--gray-10, #fff); // dark
   background-color: var(--gray-60);
   position: relative;
   display: flex;
@@ -75,7 +75,7 @@ export const NavHeader = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 4.3rem;
-  // color: var(--gray-60, #000);
+  // color: var(--gray-60, #000); // dark
   color: var(--gray-10);
   font-size: 3.2rem;
   line-height: 4rem;
@@ -110,7 +110,7 @@ export const ContentWrapper = styled.div`
 `
 export const Content = styled.div`
   padding: 1.6rem;
-  // background: var(--brown-10, #f5f1ee);
+  // background: var(--brown-10, #f5f1ee); // dark
   background: var(--gray-50);
   width: 71.6rem;
   display: flex;
@@ -132,7 +132,7 @@ export const ContentHeader = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  // color: var(--brown-40, #542f1a);
+  // color: var(--brown-40, #542f1a); // dark
   color: var(--gray-10);
   font-size: 2rem;
   line-height: 2.5rem;

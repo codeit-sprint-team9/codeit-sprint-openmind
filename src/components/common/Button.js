@@ -19,8 +19,9 @@ const ButtonFlexBoxStyledComponent = css`
 
 export const ButtonInteractiveStyledComponent = styled.div`
   ${ButtonFlexBoxStyledComponent}
-  // background: ${({ $isValue }) =>
-    $isValue ? 'var(--brown-40, #542f1a);' : 'var(--brown-30, #C7BBB5);'}
+  // background: ${(
+    { $isValue } // dark
+  ) => ($isValue ? 'var(--brown-40, #542f1a);' : 'var(--brown-30, #C7BBB5);')}
   background: ${({ $isValue }) =>
     $isValue ? 'var(--gray-50);' : 'var(--gray-30);'}
   color: var(--gray-10, #fff);
@@ -32,18 +33,18 @@ export const ButtonInteractiveStyledComponent = styled.div`
 const ButtonArrowStyledComponent = styled.div`
   ${ButtonFlexBoxStyledComponent}
   cursor: pointer;
-  // background: var(--brown-10, #f5f1ee);
+  // background: var(--brown-10, #f5f1ee); // dark
   background: var(--gray-50);
-  // color: var(--brown-40, #542f1a);
+  // color: var(--brown-40, #542f1a); // dark
   color: var(--gray-10);
-  // border: 0.1rem solid var(--brown-40, #542f1a);
+  // border: 0.1rem solid var(--brown-40, #542f1a); // dark
   border: 0.1rem solid var(--gray-10);
   &:hover {
-    // border: 0.2rem solid var(--brown-40, #542f1a);
+    // border: 0.2rem solid var(--brown-40, #542f1a); // dark
     border: 0.2rem solid var(--gray-10);
   }
   &:active {
-    background: var(--brown-20, #e4d5c9);
+    // background: var(--brown-20, #e4d5c9); // dark
     background: var(--gray-55);
   }
   @media ${device.mobile} {
@@ -51,7 +52,7 @@ const ButtonArrowStyledComponent = styled.div`
     font-size: 1.4rem;
   }
   svg > g > path {
-    // fill: var(--brown-40);
+    // fill: var(--brown-40); // dark
     fill: var(--gray-10);
   }
 `

@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Loading from './pages/loading/LoadingPage'
+import { RecoilRoot } from 'recoil'
 
 const loading = <Loading />
 
@@ -13,15 +14,17 @@ const DefaultLayout = React.lazy(() =>
 function App() {
   document.documentElement.setAttribute('color-theme', 'light')
   return (
-    <BrowserRouter>
-      <Suspense fallback={loading}>
-        <Routes>
-          <Route path="/404" element={<Page404 />} />
-          <Route path="/500" element={<Page500 />} />
-          <Route path="/*" element={<DefaultLayout />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Suspense fallback={loading}>
+          <Routes>
+            <Route path="/404" element={<Page404 />} />
+            <Route path="/500" element={<Page500 />} />
+            <Route path="/*" element={<DefaultLayout />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </RecoilRoot>
   )
 }
 

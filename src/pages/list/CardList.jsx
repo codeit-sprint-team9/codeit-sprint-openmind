@@ -83,9 +83,9 @@ const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1.6rem;
-  // border: 0.1rem solid var(--gray-40);
+  // border: 0.1rem solid var(--gray-40); // dark
   border: 0.1rem solid var(--gray-10);
-  // background-color: var(--gray-10);
+  // background-color: var(--gray-10); // dark
   background-color: var(--gray-55);
   @media ${device.mobile} {
     padding: 1.6rem;
@@ -105,7 +105,7 @@ const CardProfile = styled.div`
   }
 
   div {
-    // color: var(--gray-60);
+    // color: var(--gray-60); // dark
     color: var(--gray-10);
     font-size: 2rem;
     font-weight: 400;
@@ -128,7 +128,7 @@ const CardContent = styled.div`
   display: flex;
   justify-content: space-between;
 
-  // color: var(--gray-40);
+  // color: var(--gray-40); // dark
   color: var(--gray-10);
   font-size: 1.6rem;
 
