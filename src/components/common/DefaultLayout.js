@@ -1,8 +1,9 @@
 import { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import routes from '../../routes'
+import Loading from '../../pages/loading/LoadingPage'
 
-const loading = <div>화면을 불러오는 중 입니다.</div>
+const loading = <Loading />
 
 const DefaultLayout = () => {
   return (

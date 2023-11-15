@@ -3,6 +3,7 @@ import messageIcon from '../../asset/list/Messages.svg'
 import { device } from '../../components/styles'
 import Dropdown from '../../components/common/Dropdown'
 import { Link } from 'react-router-dom'
+import Loading from '../../components/common/Loading'
 
 function CardList({ subjectData, handleSort, order, isLoading, isError }) {
   if (isError) {
@@ -11,23 +12,22 @@ function CardList({ subjectData, handleSort, order, isLoading, isError }) {
   return (
     <>
       <Dropdown handleSort={handleSort} order={order} />
-      <CardListContainer>
-        {isLoading ? (
-          <div>로딩 중입니다.</div>
-        ) : (
-          subjectData?.map((subject) => {
-            return (
-              <Link to={`/post/${subject.id}`} key={subject.id}>
-                <UserCard
-                  name={subject.name}
-                  imageSource={subject.imageSource}
-                  questionCount={subject.questionCount}
-                />
-              </Link>
-            )
-          })
-        )}
-      </CardListContainer>
+
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <CardListContainer>
+          {subjectData?.map((subject) => (
+            <Link to={`/post/${subject.id}`} key={subject.id}>
+              <UserCard
+                name={subject.name}
+                imageSource={subject.imageSource}
+                questionCount={subject.questionCount}
+              />
+            </Link>
+          ))}
+        </CardListContainer>
+      )}
     </>
   )
 }
@@ -129,7 +129,7 @@ const CardContent = styled.div`
   font-size: 1.6rem;
 
   line-height: 2.2rem;
-  
+
   img {
     margin-right: 0.4rem;
   }
