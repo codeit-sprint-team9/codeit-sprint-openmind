@@ -3,14 +3,22 @@ import { Route, Routes } from 'react-router-dom'
 import routes from '../../routes'
 import Loading from '../../pages/loading/LoadingPage'
 import { darkMode } from '../../atom/atom'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { useEffect } from 'react'
 const loading = <Loading />
 
 const DefaultLayout = () => {
-  const theme = useRecoilValue(darkMode)
-
+  const [theme, setTheme] = useRecoilState(darkMode)
   useEffect(() => {
+    const localTheme = localStorage.getItem('darkMode')
+    if (!localTheme) {
+      localStorage.setItem('darkMode', 'light')
+      setTheme('light')
+    } else if (localTheme) {
+      if (localTheme === 'dark') {
+        setTheme('dark')
+      }
+    }
     theme === 'light'
       ? (document.body.style.background = 'var(--gray-20)')
       : (document.body.style.background = 'var(--gray-60)')

@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { darkMode } from '../../atom/atom'
 import { useRecoilValue } from 'recoil'
+import ToggleButton from '../../components/common/ToggleButton'
 
 function Header() {
   const user = JSON.parse(localStorage.getItem('user'))
@@ -35,6 +36,9 @@ function Header() {
   return (
     <>
       <HeaderTopContainer $theme={theme}>
+        <div style={{ width: 168 }}>
+          <ToggleButton />
+        </div>
         <LogoImage className="logo" onClick={onClickLogo} />
         <div className="answer-button">
           <Button text="답변하러 가기" onClick={onClickButton} isValue={true} />

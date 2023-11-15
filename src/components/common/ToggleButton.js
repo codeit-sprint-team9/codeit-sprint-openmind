@@ -42,8 +42,10 @@ function ToggleButton() {
 
   function handleTheme() {
     if (theme === 'light') {
+      localStorage.setItem('darkMode', 'dark')
       setTheme('dark')
     } else if (theme === 'dark') {
+      localStorage.setItem('darkMode', 'light')
       setTheme('light')
     }
   }
