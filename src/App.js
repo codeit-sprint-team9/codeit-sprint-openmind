@@ -1,13 +1,14 @@
-import React, { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { Suspense } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Loading from './pages/loading/LoadingPage'
 
-const loading = <div>화면을 불러오는 중 입니다.</div>;
+const loading = <Loading />
 
-const Page404 = React.lazy(() => import("./pages/error/Page404"));
-const Page500 = React.lazy(() => import("./pages/error/Page500"));
+const Page404 = React.lazy(() => import('./pages/error/Page404'))
+const Page500 = React.lazy(() => import('./pages/error/Page500'))
 const DefaultLayout = React.lazy(() =>
-  import("./components/common/DefaultLayout")
-);
+  import('./components/common/DefaultLayout')
+)
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         </Routes>
       </Suspense>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
