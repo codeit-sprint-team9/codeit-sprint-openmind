@@ -11,8 +11,8 @@ export const PostCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 1.6rem;
-  background: var(--gray-55);
-  // background: var(--gray-10); // dark
+  background: ${({ $theme }) =>
+    $theme ? 'var(--gray-10);' : 'var(--gray-55);'}
   box-shadow: 0 0.4rem 0.4rem 0 rgba(140, 140, 140, 0.25);
   padding: 3.2rem;
   width: 68.4rem;
@@ -38,8 +38,8 @@ export const PostCardContainer = styled.div`
   }
 
   .divider {
-    // background: var(--gray-30); // dark
-    background: var(--gray-10);
+    background: ${({ $theme }) =>
+      $theme ? 'var(--gray-30);' : 'var(--gray-10);'}
     width: 100%;
     height: 0.1rem;
     margin-bottom: -0.8rem;
@@ -55,16 +55,14 @@ export const TitleContainer = styled.div`
   width: 100%;
 
   .question-ago {
-    // color: var(--gray-40); // dark
-    color: var(--gray-10);
+    color: ${({ $theme }) => ($theme ? 'var(--gray-40);' : 'var(--gray-10);')}
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 1.8rem;
   }
 
   .title {
-    // color: var(--gray-60); // dark
-    color: var(--gray-10);
+    color: ${({ $theme }) => ($theme ? 'var(--gray-60);' : 'var(--gray-10);')}
     font-size: 1.8rem;
     font-weight: 400;
     line-height: 2.4rem;

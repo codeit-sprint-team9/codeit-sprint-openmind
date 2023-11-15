@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import PostCard from '../postCard/PostCard'
 import FloatingButton from '../common/FloatingButton'
 import { device } from '../styles'
+import { darkMode } from '../../atom/atom'
+import { useRecoilValue } from 'recoil'
 
 export default function PostContent({
   setIsOpened,
@@ -20,6 +22,7 @@ export default function PostContent({
     const matches = event.matches
     setText(matches)
   }
+  const theme = useRecoilValue(darkMode)
 
   useEffect(() => {
     let myMedia = window.matchMedia(device.mobile)
@@ -46,8 +49,8 @@ export default function PostContent({
   return (
     <>
       <S.ContentWrapper $state={state}>
-        <S.Content>
-          <S.ContentHeader>
+        <S.Content $theme={theme}>
+          <S.ContentHeader $theme={theme}>
             <MessageImg className="content-header-img" />
             <div>{cnt}개의 질문이 있습니다</div>
           </S.ContentHeader>

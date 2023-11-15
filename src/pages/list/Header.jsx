@@ -4,11 +4,14 @@ import { device } from '../../components/styles'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useState } from 'react'
+import { darkMode } from '../../atom/atom'
+import { useRecoilValue } from 'recoil'
 
 function Header() {
   const user = JSON.parse(localStorage.getItem('user'))
   const [isLogin] = useState(user ? true : false)
   const userId = user?.id
+  const theme = useRecoilValue(darkMode)
 
   const navigate = useNavigate()
 
@@ -31,14 +34,14 @@ function Header() {
 
   return (
     <>
-      <HeaderTopContainer>
+      <HeaderTopContainer $theme={theme}>
         <LogoImage className="logo" onClick={onClickLogo} />
         <div className="answer-button">
           <Button text="답변하러 가기" onClick={onClickButton} isValue={true} />
         </div>
       </HeaderTopContainer>
 
-      <HeaderBottomContainer>
+      <HeaderBottomContainer $theme={theme}>
         <div className="answer-who">누구에게 질문할까요?</div>
       </HeaderBottomContainer>
     </>
@@ -71,15 +74,10 @@ const HeaderTopContainer = styled.div`
       width: 13.1rem;
     }
   }
-  #OPENMIND > path {
-    fill: white;
-  }
-  #Group 10 > path {
-    stroke: white;
-  }
-  #OPENMIND_2 > path {
-    fill: white;
-  }
+  ${({ $theme }) =>
+    $theme === 'light'
+      ? ''
+      : '#OPENMIND > path { fill: white; } #Group 10 > path { stroke: white; } #OPENMIND_2 > path { fill: white; }'}
 `
 
 const HeaderBottomContainer = styled.div`
@@ -90,8 +88,8 @@ const HeaderBottomContainer = styled.div`
   gap: 1.2rem;
 
   .answer-who {
-    // color: var(--gray-60, #000); // dark
-    color: var(--gray-10);
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 4rem;
     font-weight: 400;
     margin-bottom: 1.2rem;

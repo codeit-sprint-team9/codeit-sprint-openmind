@@ -15,16 +15,19 @@ import InputTextArea from '../common/InputTextArea'
 import Button from '../common/Button'
 import Reaction from '../common/Reaction'
 import Edit from '../common/Edit'
+import { darkMode } from '../../atom/atom'
+import { useRecoilValue } from 'recoil'
 
 const PostCard = ({ state, item }) => {
   const [isOpenOption, setIsOpenOption] = useState(false)
   const [, setSelectedOption] = useState('')
   const [answer, setAnswer] = useState('')
   const [isAnswered] = useState(false)
+  const theme = useRecoilValue(darkMode)
 
   return (
     <PostCardWrapper>
-      <PostCardContainer>
+      <PostCardContainer $theme={theme}>
         <div className="header-container">
           <Badge isAnswered={isAnswered} />
           {state !== 'answer' && (
@@ -40,7 +43,7 @@ const PostCard = ({ state, item }) => {
           )}
         </div>
 
-        <TitleContainer>
+        <TitleContainer $theme={theme}>
           <div className="question-ago">질문 · 2주전</div>
 
           <div className="title">{item.content}</div>

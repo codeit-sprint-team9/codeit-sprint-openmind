@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Loading from './pages/loading/LoadingPage'
 import { RecoilRoot } from 'recoil'
+import { GlobalStyle } from './components/styles'
 
 const loading = <Loading />
 
@@ -12,9 +13,9 @@ const DefaultLayout = React.lazy(() =>
 )
 
 function App() {
-  document.documentElement.setAttribute('color-theme', 'light')
   return (
     <RecoilRoot>
+      <GlobalStyle />
       <BrowserRouter>
         <Suspense fallback={loading}>
           <Routes>

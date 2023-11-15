@@ -4,6 +4,8 @@ import { device } from '../../components/styles'
 import Dropdown from '../../components/common/Dropdown'
 import { Link } from 'react-router-dom'
 import Loading from '../../components/common/Loading'
+import { darkMode } from '../../atom/atom'
+import { useRecoilValue } from 'recoil'
 
 function CardList({ subjectData, handleSort, order, isLoading, isError }) {
   if (isError) {
@@ -32,14 +34,15 @@ function CardList({ subjectData, handleSort, order, isLoading, isError }) {
   )
 }
 function UserCard({ name, imageSource, questionCount }) {
+  const theme = useRecoilValue(darkMode)
   return (
-    <CardContainer>
-      <CardProfile>
+    <CardContainer $theme={theme}>
+      <CardProfile $theme={theme}>
         <img src={imageSource} />
         <div>{name}</div>
       </CardProfile>
 
-      <CardContent>
+      <CardContent $theme={theme}>
         <div>
           <MessageIcon className="icon" />
           <span>받은 질문</span>
@@ -83,10 +86,11 @@ const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1.6rem;
-  // border: 0.1rem solid var(--gray-40); // dark
-  border: 0.1rem solid var(--gray-10);
-  // background-color: var(--gray-10); // dark
-  background-color: var(--gray-55);
+  ${({ $theme }) =>
+    $theme === 'light'
+      ? 'background-color: var(--gray-10); border: 0.1rem solid var(--gray-40);'
+      : 'background-color: var(--gray-55); border: 0.1rem solid var(--gray-10);'}}
+  
   @media ${device.mobile} {
     padding: 1.6rem;
     width: 15.5rem;
@@ -105,8 +109,8 @@ const CardProfile = styled.div`
   }
 
   div {
-    // color: var(--gray-60); // dark
-    color: var(--gray-10);
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 2rem;
     font-weight: 400;
     line-height: 2.4rem;
@@ -128,8 +132,8 @@ const CardContent = styled.div`
   display: flex;
   justify-content: space-between;
 
-  // color: var(--gray-40); // dark
-  color: var(--gray-10);
+  color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-40);' : 'var(--gray-10);'}
   font-size: 1.6rem;
 
   line-height: 2.2rem;
@@ -144,9 +148,6 @@ const CardContent = styled.div`
 
   @media ${device.mobile} {
     font-size: 1.4rem;
-  }
-  svg > g > path {
-    fill: white;
   }
 `
 

@@ -3,17 +3,21 @@ import { device } from '../../components/styles'
 import styled from 'styled-components'
 import InputField from '../../components/common/InputField'
 import Button from '../../components/common/Button'
-import bg from '../../asset/Home/bg-dark.png'
-import logo from '../../asset/Home/pc-logo-dark.png'
+import bg from '../../asset/Home/bg.png'
+import bgDark from '../../asset/Home/bg-dark.png'
+import logo from '../../asset/Home/pc-logo.png'
+import logoDark from '../../asset/Home/pc-logo-dark.png'
 import { Link, useNavigate } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import postSubject from '../../api/home'
 import ToggleButton from '../../components/common/ToggleButton'
+import { darkMode } from '../../atom/atom'
+import { useRecoilValue } from 'recoil'
 
 const HomeBackground = styled.div`
   width: 100vw;
   height: 100vh;
-  background-image: url(${bg});
+  background-image: url(${({ $theme }) => ($theme === 'light' ? bg : bgDark)});
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: 100%;
@@ -40,7 +44,8 @@ const ButtonBox = styled.div`
 const InputBox = styled.div`
   padding: 3.2rem;
   border-radius: 1.6rem;
-  background: #fff;
+  background: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-55);'}
   width: 40rem;
   display: flex;
   flex-direction: column;
@@ -77,6 +82,7 @@ const Home = () => {
   const [name, setName] = useState('')
   const [subjectPending, subjectError, subjectPost] = useAsync(postSubject)
   const nav = useNavigate()
+  const theme = useRecoilValue(darkMode)
 
   const handlePost = async () => {
     const result = await subjectPost(name)
@@ -109,7 +115,7 @@ const Home = () => {
   if (subjectError) return <div>애러가 발생했습니다. 새로고침해주세요.</div>
   if (subjectPending) return <div>로딩중입니다. 잠시만 기다려주십시요.</div>
   return (
-    <HomeBackground>
+    <HomeBackground $theme={theme}>
       <MainBox>
         <Link to="/list">
           <ButtonBox>
@@ -117,9 +123,13 @@ const Home = () => {
           </ButtonBox>
         </Link>
         <Link to="/">
-          <img className="logo" src={logo} alt="logo" />
+          {theme === 'light' ? (
+            <img className="logo" src={logo} alt="logo" />
+          ) : (
+            <img className="logo" src={logoDark} alt="logo" />
+          )}
         </Link>
-        <InputBox>
+        <InputBox $theme={theme}>
           <InputField
             isValue={isValue}
             setIsValue={setIsValue}

@@ -1,4 +1,5 @@
-import NavImg from '../../asset/post/nav-img-dark.png'
+import NavImg from '../../asset/post/nav-img.svg'
+import NavImgDark from '../../asset/post/nav-img-dark.png'
 import { ReactComponent as OpenMindLogo } from '../../asset/logo.svg'
 import { ReactComponent as LinkImg } from '../../asset/post/link.svg'
 import KakaoImg from '../../asset/post/kakao.svg'
@@ -9,6 +10,9 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { postUserData } from '../../api/post'
 import useAsync from '../../hooks/useAsync'
+import { darkMode } from '../../atom/atom'
+import { useRecoilValue } from 'recoil'
+
 const { Kakao } = window
 
 export default function Nav({ id }) {
@@ -19,6 +23,7 @@ export default function Nav({ id }) {
   const [userData, setUserData] = useState({})
   const [isUserLoading, isUserError, postUserDataAsync] = useAsync(postUserData)
   const userInfo = JSON.parse(localStorage.getItem('user'))
+  const theme = useRecoilValue(darkMode)
 
   const handleCopyClipBoard = async (text) => {
     setUrlAlert(true)
@@ -84,11 +89,15 @@ export default function Nav({ id }) {
   return (
     <>
       <S.Div>
-        <S.TopDiv>
+        <S.TopDiv $theme={theme}>
           <S.LogoDiv onClick={() => handlePage()}>
             <OpenMindLogo className="openMind-img" />
           </S.LogoDiv>
-          <img src={NavImg} alt="Nav 이미지" className="nav-img" />
+          {theme === 'light' ? (
+            <img src={NavImg} alt="Nav 이미지" className="nav-img" />
+          ) : (
+            <img src={NavImgDark} alt="Nav 이미지" className="nav-img" />
+          )}
         </S.TopDiv>
         <S.CatDiv>
           <img
@@ -97,8 +106,8 @@ export default function Nav({ id }) {
             className="profile-img"
           />
         </S.CatDiv>
-        <S.NavHeader>{userData.name}</S.NavHeader>
-        <S.LinkDiv>
+        <S.NavHeader $theme={theme}>{userData.name}</S.NavHeader>
+        <S.LinkDiv $theme={theme}>
           <S.Button
             className="button-container"
             onClick={() =>

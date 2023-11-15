@@ -2,50 +2,56 @@ import styled from 'styled-components'
 import { ReactComponent as Moon } from '../../asset/ToggleButton/Moon.svg'
 import { ReactComponent as Button } from '../../asset/ToggleButton/Button.svg'
 import { ReactComponent as Sun } from '../../asset/ToggleButton/Sun.svg'
-import { useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { darkMode } from '../../atom/atom'
 
 const ToggleBox = styled.div`
   width: 8rem;
   height: 4.1rem;
   border-radius: 4rem;
-  background: ${({ $mode }) => ($mode ? '#ffc261;' : '#fff;')}
+  background: ${({ $theme }) => ($theme === 'light' ? '#ffc261;' : '#fff;')}
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   position: relative;
-  svg > circle{ fill: ${({ $mode }) => ($mode ? '#fff;' : '#000;')}}
+  svg > circle{ fill: ${({ $theme }) =>
+    $theme === 'light' ? '#fff;' : '#000;'}}
   .button {
     position: absolute;
     top: 3px;
-    left: ${({ $mode }) => ($mode ? '3px;' : '42px;')}
+    left: ${({ $theme }) => ($theme === 'light' ? '3px;' : '42px;')}
     transition: all 0.3s ease-in-out;
   }
   .dark-icon{
     position: absolute;
     top: 3px;
     left: 3px;
-    visibility: ${({ $mode }) => ($mode ? 'hidden;' : 'visible;')}
+    visibility: ${({ $theme }) => ($theme === 'light' ? 'hidden;' : 'visible;')}
     transition: all 0.3s ease-in-out;
   }
   .sun-icon{
     position: absolute;
     top: 3px;
     left: 42px;
-    visibility: ${({ $mode }) => ($mode ? 'visible;' : 'hidden;')}
+    visibility: ${({ $theme }) => ($theme === 'light' ? 'visible;' : 'hidden;')}
     transition: all 0.3s ease-in-out;
   }
 `
 
 function ToggleButton() {
-  const [mode, setMode] = useState(true)
+  const [theme, setTheme] = useRecoilState(darkMode)
 
-  function handleMode() {
-    setMode(!mode)
+  function handleTheme() {
+    if (theme === 'light') {
+      setTheme('dark')
+    } else if (theme === 'dark') {
+      setTheme('light')
+    }
   }
   return (
-    <ToggleBox $mode={mode} onClick={handleMode}>
-      {mode ? '' : <Moon className="dark-icon" />}
+    <ToggleBox $theme={theme} onClick={handleTheme}>
+      {theme === 'light' ? '' : <Moon className="dark-icon" />}
       <Button className="button" />
-      {mode ? <Sun className="sun-icon" /> : ''}
+      {theme === 'light' ? <Sun className="sun-icon" /> : ''}
     </ToggleBox>
   )
 }

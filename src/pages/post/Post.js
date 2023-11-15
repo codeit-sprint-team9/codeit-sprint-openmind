@@ -28,7 +28,6 @@ const Post = ({ state }) => {
     useAsync(postMainDelete)
 
   const count = items.length
-
   const navigate = useNavigate()
 
   const handleLoad = async (options = { id: id, offset: 0, limit: LIMIT }) => {

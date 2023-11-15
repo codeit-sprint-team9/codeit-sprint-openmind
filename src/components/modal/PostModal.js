@@ -10,10 +10,13 @@ import { useState } from 'react'
 import UserIcon from '../../asset/postCard/img_postCardUser.png'
 import useAsync from '../../hooks/useAsync'
 import { postQuestions } from '../../api/postModal'
+import { darkMode } from '../../atom/atom'
+import { useRecoilValue } from 'recoil'
 
 const PostModal = ({ setIsOpened, onClick }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
+  const theme = useRecoilValue(darkMode)
   // 홈 부분 병합 후 수정 예정
   const id = JSON.parse(localStorage.getItem('user')).id || 225
   const handlePostQuestion = async () => {
@@ -37,14 +40,14 @@ const PostModal = ({ setIsOpened, onClick }) => {
     <Overlay>
       <OuterModalContainer onClick={() => setIsOpened(false)} />
 
-      <ModalMainContainer>
-        <TitleContainer>
+      <ModalMainContainer $theme={theme}>
+        <TitleContainer $theme={theme}>
           <MessageIcon className="messageIcon" />
           <div className="title">질문을 작성하세요</div>
           <CloseIcon className="closeIcon" onClick={() => setIsOpened(false)} />
         </TitleContainer>
 
-        <ContentContainer>
+        <ContentContainer $theme={theme}>
           <div className="userContainer">
             <div className="to">To.</div>
             <img className="userIcon" src={UserIcon} alt="userIcon" />
@@ -89,8 +92,8 @@ export const ModalMainContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  // background-color: var(--gray-10); // dark
-  background-color: var(--gray-55);
+  background-color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-55);'}
   border-radius: 2.4rem;
   padding: 4rem 4rem 7rem;
   align-items: center;
@@ -111,8 +114,7 @@ export const TitleContainer = styled.div`
   }
 
   .title {
-    // color: var(--gray-60); // dark
-    color: var(--gray-10);
+    color: ${({ $theme }) => ($theme ? 'var(--gray-60);' : 'var(--gray-10);')}
     font-size: 2.4rem;
     font-weight: 400;
     line-height: 3rem;
@@ -130,9 +132,7 @@ export const TitleContainer = styled.div`
       height: 2.2rem;
     }
   }
-  svg > path {
-    fill: white; // dark
-  }
+  ${({ $theme }) => ($theme === 'light' ? '' : 'svg > path {fill: white;}')}
 `
 
 export const ContentContainer = styled.div`
@@ -145,8 +145,8 @@ export const ContentContainer = styled.div`
     display: flex;
     gap: 0.4rem;
     align-items: center;
-    // color: var(--gray-60); // dark
-    color: var(--gray-10);
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-weight: 400;
     margin-bottom: 0.4rem;
 
