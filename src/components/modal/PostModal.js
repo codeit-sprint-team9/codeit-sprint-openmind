@@ -111,7 +111,7 @@ export const ModalMainContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: ${({ $theme }) =>
-    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-50);'}
+    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-40);'}
   border-radius: 2.4rem;
   padding: 4rem 4rem 7rem;
   align-items: center;
