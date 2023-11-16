@@ -36,7 +36,6 @@ const calculateTimeAgo = (createdAt) => {
 
 const PostCard = ({ state, data, handleDeleteQuestion }) => {
   const [cardData, setCardData] = useState(data)
-  // const [isOpenOption, setIsOpenOption] = useState(false)
   const [answer, setAnswer] = useState(
     cardData.answer
       ? cardData.answer.isRejected
