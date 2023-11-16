@@ -157,8 +157,7 @@ export const MainContainer = styled.div`
 export const BottomContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: ${(props) =>
-    props.$isLoading ? 'center' : 'space-between'};
+  justify-content: space-between;
 
   @media all and ${device.mobile} {
     ${EditBoxStyledComponent} {

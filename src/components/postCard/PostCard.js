@@ -49,10 +49,8 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
     ? JSON.parse(localStorage.getItem('user'))
     : 0
 
-  const [isLoadingReactions, errorReactions, postReactionsAsync] =
-    useAsync(postReactions)
-  const [isLoadingAnswers, errorAnswers, postAnswersAsync] =
-    useAsync(postAnswers)
+  const [isLoadingReactions, , postReactionsAsync] = useAsync(postReactions)
+  const [isLoadingAnswers, , postAnswersAsync] = useAsync(postAnswers)
   const [isLoadingPutAnswers, , putAnswersAsync] = useAsync(putAnswers)
   const [isLoadingDeleteAnswers, , deleteAnswersAsync] = useAsync(deleteAnswers)
   const [, , getQuestionsAsync] = useAsync(getQuestions)
@@ -206,24 +204,20 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
                     </div>
                   ) : (
                     <>
-                      {errorAnswers ? (
-                        <ErrorContainer />
-                      ) : (
-                        <div className="textarea-container">
-                          <InputTextArea
-                            placeholder="답변을 입력해주세요"
-                            setAnswer={setAnswer}
-                            answer={answer}
-                            onKeyDown={handlePostAnswer}
-                          />
-                          <Button
-                            onClick={() => handlePostAnswer()}
-                            isValue={answer !== ''}
-                            brown={true}
-                            text="답변 완료"
-                          />
-                        </div>
-                      )}
+                      <div className="textarea-container">
+                        <InputTextArea
+                          placeholder="답변을 입력해주세요"
+                          setAnswer={setAnswer}
+                          answer={answer}
+                          onKeyDown={handlePostAnswer}
+                        />
+                        <Button
+                          onClick={() => handlePostAnswer()}
+                          isValue={answer !== ''}
+                          brown={true}
+                          text="답변 완료"
+                        />
+                      </div>
                     </>
                   )}
                 </>
@@ -234,21 +228,17 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
 
         <div className="divider" />
 
-        <BottomContainer $isLoading={isLoadingReactions}>
+        <BottomContainer>
           {!isLoadingReactions ? (
-            <>
-              {errorReactions ? (
-                <ErrorContainer />
-              ) : (
-                <Reaction
-                  like={cardData.like}
-                  disLike={cardData.dislike}
-                  onClick={delayedApi}
-                />
-              )}
-            </>
+            <Reaction
+              like={cardData.like}
+              disLike={cardData.dislike}
+              onClick={delayedApi}
+            />
           ) : (
-            <Loading />
+            <div className="loadingContainer">
+              <Loading />
+            </div>
           )}
 
           {isAnswered && state === 'answer' && <Edit onClick={handleOptions} />}
@@ -267,10 +257,6 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
   )
 }
 export default PostCard
-
-const ErrorContainer = () => {
-  return <div className="error">문제가 발생했습니다. 다시 시도해주세요.</div>
-}
 
 const OptionMenuArr = ['답변 거절', '답변 삭제', '질문 삭제', '수정하기']
 
