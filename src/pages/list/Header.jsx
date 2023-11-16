@@ -70,7 +70,7 @@ const HeaderTopContainer = styled.div`
   .toggle-button {
     width: 16.8rem;
     @media ${device.mobile} {
-      position: fixed;
+      position: absolute;
       top: 4.5rem;
       left: 4.4rem;
     }
