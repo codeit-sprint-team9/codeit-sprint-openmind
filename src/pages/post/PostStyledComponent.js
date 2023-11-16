@@ -8,17 +8,21 @@ export const Div = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-20);' : 'var(--gray-55);'};
 `
 export const Button = styled.button`
   cursor: pointer;
 `
 export const TopDiv = styled.div`
   width: 100vw;
-  background-color: var(--gray-10, #fff);
+  background-color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-60);'}
   position: relative;
   display: flex;
   justify-content: center;
   overflow: hidden;
+
   .nav-img {
     width: 120rem;
     height: 23.4rem;
@@ -63,7 +67,8 @@ export const NavHeader = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 4.3rem;
-  color: var(--gray-60, #000);
+  color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
   font-size: 3.2rem;
   line-height: 4rem;
   @media (${device.mobile}) {
@@ -77,6 +82,8 @@ export const LinkDiv = styled.div`
 
   justify-content: center;
   gap: 1.2rem;
+  ${({ $theme }) =>
+    $theme === 'light' ? '' : 'svg > rect {fill: var(--gray-50);}'}
 `
 
 export const ContentWrapper = styled.div`
@@ -94,7 +101,8 @@ export const ContentWrapper = styled.div`
 `
 export const Content = styled.div`
   padding: 1.6rem;
-  background: var(--brown-10, #f5f1ee);
+  background: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--brown-10);' : 'var(--gray-50);'}
   width: 71.6rem;
   display: flex;
   flex-direction: column;
@@ -115,7 +123,8 @@ export const ContentHeader = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  color: var(--brown-40, #542f1a);
+  color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--brown-40);' : 'var(--gray-10);'}
   font-size: 2rem;
   line-height: 2.5rem;
   @media (${device.mobile}) {
@@ -127,6 +136,7 @@ export const ContentHeader = styled.div`
       width: 2.2rem;
     }
   }
+  ${({ $theme }) => ($theme === 'light' ? '' : 'svg > path {fill: white;}')}
 `
 
 export const ContentDiv = styled.div`
@@ -157,6 +167,7 @@ export const ContentNoQuestion = styled.div`
   @media (${device.mobile}) {
     padding: 5rem 0 9rem;
   }
+  ${({ $theme }) => ($theme === 'light' ? '' : 'svg > path {stroke: white;}')}
 `
 
 export const CardDiv = styled.div`
@@ -210,4 +221,8 @@ export const ToastDiv = styled.div`
 `
 export const LogoDiv = styled.div`
   cursor: pointer;
+  ${({ $theme }) =>
+    $theme === 'light'
+      ? ''
+      : '#OPENMIND > path {fill: white;} #Group 10 > path {stroke: white;} #OPENMIND_2 > path {fill: white;}'}
 `

@@ -1,9 +1,11 @@
 import styled from 'styled-components'
-import messageIcon from '../../asset/list/Messages.svg'
+import { ReactComponent as MessageIcon } from '../../asset/list/Messages.svg'
 import { device } from '../../components/styles'
 import Dropdown from '../../components/common/Dropdown'
 import { Link } from 'react-router-dom'
 import Loading from '../../components/common/Loading'
+import { darkMode } from '../../recoil/theme'
+import { useRecoilValue } from 'recoil'
 
 function CardList({ subjectData, handleSort, order, isLoading }) {
   return (
@@ -11,7 +13,9 @@ function CardList({ subjectData, handleSort, order, isLoading }) {
       <Dropdown handleSort={handleSort} order={order} />
 
       {isLoading ? (
-        <Loading />
+        <div style={{ marginTop: '17rem' }}>
+          <Loading />
+        </div>
       ) : (
         <CardListContainer>
           {subjectData?.map((subject) => (
@@ -29,16 +33,17 @@ function CardList({ subjectData, handleSort, order, isLoading }) {
   )
 }
 function UserCard({ name, imageSource, questionCount }) {
+  const theme = useRecoilValue(darkMode)
   return (
-    <CardContainer>
-      <CardProfile>
+    <CardContainer $theme={theme}>
+      <CardProfile $theme={theme}>
         <img src={imageSource} />
-        <div>{name}</div>
+        <div className="user-name">{name}</div>
       </CardProfile>
 
-      <CardContent>
+      <CardContent $theme={theme}>
         <div>
-          <img src={messageIcon} />
+          <MessageIcon className="icon" />
           <span>받은 질문</span>
         </div>
         <div>{questionCount}개</div>
@@ -80,8 +85,11 @@ const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1.6rem;
-  border: 0.1rem solid var(--gray-40);
-  background-color: var(--gray-10);
+  ${({ $theme }) =>
+    $theme === 'light'
+      ? 'background-color: var(--gray-10); border: 0.1rem solid var(--gray-40);'
+      : 'background-color: var(--gray-55); border: 0.1rem solid var(--gray-10);'}}
+  
   @media ${device.mobile} {
     padding: 1.6rem;
     width: 15.5rem;
@@ -93,6 +101,15 @@ const CardProfile = styled.div`
   flex-direction: column;
   gap: 1.2rem;
 
+  .user-name {
+  overflow: hidden;  	
+  text-overflow: ellipsis;  
+  white-space: nowrap; 		
+  word-break:break-all;
+
+}
+
+  
   img {
     width: 6rem;
     height: 6rem;
@@ -100,7 +117,8 @@ const CardProfile = styled.div`
   }
 
   div {
-    color: var(--gray-60);
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 2rem;
     line-height: 2.4rem;
   }
@@ -121,12 +139,13 @@ const CardContent = styled.div`
   display: flex;
   justify-content: space-between;
 
-  color: var(--gray-40);
+  color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-40);' : 'var(--gray-10);'}
   font-size: 1.6rem;
 
   line-height: 2.2rem;
 
-  img {
+  .icon {
     margin-right: 0.4rem;
   }
   div {

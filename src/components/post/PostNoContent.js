@@ -1,9 +1,11 @@
 import * as S from '../../pages/post/PostStyledComponent'
-import MessageImg from '../../asset/post/message.svg'
-import NoQuestionImg from '../../asset/post/no-question-img.svg'
+import { ReactComponent as MessageImg } from '../../asset/post/message.svg'
+import { ReactComponent as NoQuestionImg } from '../../asset/post/no-question-img.svg'
 import FloatingButton from '../common/FloatingButton'
 import { useEffect, useState } from 'react'
 import { device } from '../styles'
+import { darkMode } from '../../recoil/theme'
+import { useRecoilValue } from 'recoil'
 import { modalState } from '../../recoil/modal'
 import { useRecoilState } from 'recoil'
 
@@ -20,6 +22,7 @@ export default function PostNoContent({ state }) {
     }))
   }
   const [text, setText] = useState(window.innerWidth < 767 ? true : false)
+  const theme = useRecoilValue(darkMode)
 
   const screenChange = (event) => {
     const matches = event.matches
@@ -34,21 +37,13 @@ export default function PostNoContent({ state }) {
   return (
     <>
       <S.ContentWrapper $state={state}>
-        <S.Content>
-          <S.ContentHeader>
-            <img
-              src={MessageImg}
-              alt="메세지 이미지"
-              className="content-header-img"
-            />
+        <S.Content $theme={theme}>
+          <S.ContentHeader $theme={theme}>
+            <MessageImg className="content-header-img" />
             <div>아직 질문이 없습니다</div>
           </S.ContentHeader>
-          <S.ContentNoQuestion>
-            <img
-              src={NoQuestionImg}
-              alt="질문이 없습니다"
-              className="no-question-img"
-            />
+          <S.ContentNoQuestion $theme={theme}>
+            <NoQuestionImg className="no-question-img" />
           </S.ContentNoQuestion>
         </S.Content>
       </S.ContentWrapper>

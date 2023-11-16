@@ -1,4 +1,4 @@
-import MessageImg from '../../asset/post/message.svg'
+import { ReactComponent as MessageImg } from '../../asset/post/message.svg'
 import * as S from '../../pages/post/PostStyledComponent'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useEffect, useState } from 'react'
@@ -8,6 +8,8 @@ import { device } from '../styles'
 import { modalState } from '../../recoil/modal'
 import { useRecoilState } from 'recoil'
 import Loading from '../common/Loading'
+import { darkMode } from '../../recoil/theme'
+import { useRecoilValue } from 'recoil'
 
 export default function PostContent({
   state,
@@ -24,6 +26,7 @@ export default function PostContent({
     const matches = event.matches
     setText(matches)
   }
+  const theme = useRecoilValue(darkMode)
 
   useEffect(() => {
     let myMedia = window.matchMedia(device.mobile)
@@ -56,15 +59,12 @@ export default function PostContent({
   return (
     <>
       <S.ContentWrapper $state={state}>
-        <S.Content>
+        <S.Content $theme={theme}>
           {cnt ? (
             <>
-              <S.ContentHeader>
-                <img
-                  src={MessageImg}
-                  alt="메세지 이미지"
-                  className="content-header-img"
-                />
+              {' '}
+              <S.ContentHeader $theme={theme}>
+                <MessageImg className="content-header-img" />
                 <div>{cnt}개의 질문이 있습니다</div>
               </S.ContentHeader>
               <S.ContentDiv>

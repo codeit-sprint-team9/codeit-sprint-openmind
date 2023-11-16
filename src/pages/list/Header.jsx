@@ -1,15 +1,19 @@
 import Button from '../../components/common/Button'
-import logoImage from '../../asset/logo.svg'
+import { ReactComponent as LogoImage } from '../../asset/logo.svg'
 import { device } from '../../components/styles'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useState } from 'react'
+import { darkMode } from '../../recoil/theme'
+import { useRecoilValue } from 'recoil'
+import ToggleButton from '../../components/common/ToggleButton'
 import { useToast } from '../../hooks/useToast'
 
 function Header() {
   const user = JSON.parse(localStorage.getItem('user'))
   const [isLogin] = useState(user ? true : false)
   const userId = user?.id
+  const theme = useRecoilValue(darkMode)
   const { fireToast } = useToast()
 
   const navigate = useNavigate()
@@ -32,15 +36,17 @@ function Header() {
 
   return (
     <>
-      <HeaderTopContainer>
-        <img onClick={onClickLogo} className="logo" src={logoImage}></img>
-
+      <HeaderTopContainer $theme={theme}>
+        <div className="toggle-button">
+          <ToggleButton />
+        </div>
+        <LogoImage className="logo" onClick={onClickLogo} />
         <div className="answer-button">
           <Button text="답변하러 가기" onClick={onClickButton} isValue={true} />
         </div>
       </HeaderTopContainer>
 
-      <HeaderBottomContainer>
+      <HeaderBottomContainer $theme={theme}>
         <div className="answer-who">누구에게 질문할까요?</div>
       </HeaderBottomContainer>
     </>
@@ -61,6 +67,15 @@ const HeaderTopContainer = styled.div`
     width: 16.8rem;
   }
 
+  .toggle-button {
+    width: 16.8rem;
+    @media ${device.mobile} {
+      position: absolute;
+      top: 4.5rem;
+      left: 4.4rem;
+    }
+  }
+
   @media ${device.tablet} {
     padding: 4rem 5rem;
   }
@@ -73,6 +88,10 @@ const HeaderTopContainer = styled.div`
       width: 13.1rem;
     }
   }
+  ${({ $theme }) =>
+    $theme === 'light'
+      ? ''
+      : '#OPENMIND > path { fill: white; } #Group 10 > path { stroke: white; } #OPENMIND_2 > path { fill: white; }'}
 `
 
 const HeaderBottomContainer = styled.div`
@@ -83,7 +102,8 @@ const HeaderBottomContainer = styled.div`
   gap: 1.2rem;
 
   .answer-who {
-    color: var(--gray-60, #000);
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 4rem;
     margin-bottom: 1.2rem;
   }

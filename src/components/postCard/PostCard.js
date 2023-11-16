@@ -7,13 +7,15 @@ import {
   PostCardWrapper,
   TitleContainer,
 } from './PostCardStyledComponents'
-import OptionIcon from '../../asset/postCard/img_option.svg'
+import { ReactComponent as OptionIcon } from '../../asset/postCard/img_option.svg'
 import { useCallback, useState } from 'react'
 import Badge from '../common/Badge'
 import InputTextArea from '../common/InputTextArea'
 import Button from '../common/Button'
 import Reaction from '../common/Reaction'
 import Edit from '../common/Edit'
+import { darkMode } from '../../recoil/theme'
+import { useRecoilValue } from 'recoil'
 import useAsync from '../../hooks/useAsync'
 import {
   deleteAnswers,
@@ -45,6 +47,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
   )
   const isAnswered = cardData.answer ? true : false
   const [isEdit, setIsEdit] = useState(false)
+  const theme = useRecoilValue(darkMode)
 
   const userInfo = localStorage.getItem('user')
     ? JSON.parse(localStorage.getItem('user'))
@@ -151,14 +154,12 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
 
   return (
     <PostCardWrapper>
-      <PostCardContainer>
+      <PostCardContainer $theme={theme}>
         <div className="header-container">
           <Badge isAnswered={isAnswered} />
           {state === 'answer' && (
-            <img
+            <OptionIcon
               className="option-btn"
-              src={OptionIcon}
-              alt="optionIcon"
               onClick={(e) => {
                 e.stopPropagation()
                 setOpenModal((prev) => ({
@@ -173,7 +174,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
           )}
         </div>
 
-        <TitleContainer>
+        <TitleContainer $theme={theme}>
           <div className="question-ago">
             질문 · {calculateTimeAgo(cardData.createdAt)}
           </div>
@@ -182,7 +183,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
         </TitleContainer>
 
         {!(state === 'default' && !isAnswered) && (
-          <MainContainer $isAnswered={isAnswered}>
+          <MainContainer $isAnswered={isAnswered} $theme={theme}>
             <img
               src={userInfo.imageSource}
               className="user-icon"

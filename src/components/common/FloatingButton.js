@@ -1,12 +1,15 @@
 import styled from 'styled-components'
 import { device } from '../styles'
+import { darkMode } from '../../recoil/theme'
+import { useRecoilValue } from 'recoil'
 
 const FloatingButtonStyledComponent = styled.div`
   padding: 1.2rem 2.4rem;
   border-radius: 20rem;
-  background: var(--brown-40, #542f1a);
+  background: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--brown-40);' : '#666666;'}
   box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
-  color: var(--gray-10, #fff);
+  color: var(--gray-10);
   font-size: 2rem;
   text-align: center;
   cursor: pointer;
@@ -21,8 +24,9 @@ const FloatingButtonStyledComponent = styled.div`
 `
 
 function FloatingButton({ text = '질문 작성하기', onClick }) {
+  const theme = useRecoilValue(darkMode)
   return (
-    <FloatingButtonStyledComponent onClick={onClick}>
+    <FloatingButtonStyledComponent onClick={onClick} $theme={theme}>
       {text}
     </FloatingButtonStyledComponent>
   )

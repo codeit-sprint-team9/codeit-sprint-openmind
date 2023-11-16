@@ -23,7 +23,8 @@ export const PostCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 1.6rem;
-  background: var(--gray-10);
+  background: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-55);'}
   box-shadow: 0 0.4rem 0.4rem 0 rgba(140, 140, 140, 0.25);
   padding: 3.2rem;
   width: 68.4rem;
@@ -49,7 +50,8 @@ export const PostCardContainer = styled.div`
   }
 
   .divider {
-    background: var(--gray-30);
+    background: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-30);' : 'var(--gray-10);'}
     width: 100%;
     height: 0.1rem;
     margin-bottom: -0.8rem;
@@ -57,6 +59,8 @@ export const PostCardContainer = styled.div`
       margin-bottom: 0;
     }
   }
+  ${({ $theme }) =>
+    $theme === 'light' ? '' : 'svg > circle {fill: var(--gray-10);}'}
 `
 export const TitleContainer = styled.div`
   display: flex;
@@ -65,14 +69,16 @@ export const TitleContainer = styled.div`
   width: 100%;
 
   .question-ago {
-    color: var(--gray-40);
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-40);' : 'var(--gray-10);'}
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 1.8rem;
   }
 
   .title {
-    color: var(--gray-60);
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 1.8rem;
     line-height: 2.4rem;
     @media all and ${device.mobile} {
@@ -119,7 +125,8 @@ export const MainContainer = styled.div`
       align-items: center;
 
       .user-name {
-        color: var(--gray-60);
+        color: ${({ $theme }) =>
+          $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
         font-size: 1.8rem;
         line-height: 2.4rem;
         @media all and ${device.mobile} {
@@ -130,7 +137,8 @@ export const MainContainer = styled.div`
 
       .content-ago {
         display: ${(props) => (props.$isAnswered ? 'block' : 'none')};
-        color: var(--gray-40);
+        color: ${({ $theme }) =>
+          $theme === 'light' ? 'var(--gray-40);' : 'var(--gray-10);'}
         font-size: 1.4rem;
         font-weight: 500;
         line-height: 1.8rem;
@@ -138,7 +146,8 @@ export const MainContainer = styled.div`
     }
 
     .main-content {
-      color: var(--gray-60);
+      color: ${({ $theme }) =>
+        $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
       font-size: 1.6rem;
       line-height: 2.2rem;
     }
@@ -161,7 +170,7 @@ export const BottomContainer = styled.div`
   align-items: center;
 
   ${EditBoxStyledComponent} {
-    diplay: flex;
+    display: flex;
     height: 3.8rem;
     @media all and ${device.mobile} {
       display: none;

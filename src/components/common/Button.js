@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components'
 import { ReactComponent as ArrowIcon } from '../../asset/Button/button-icon-arrow-right.svg'
 import { device } from '../styles'
+import { darkMode } from '../../recoil/theme'
+import { useRecoilValue } from 'recoil'
 
 const ButtonFlexBoxStyledComponent = css`
   display: flex;
@@ -19,44 +21,45 @@ const ButtonFlexBoxStyledComponent = css`
 
 export const ButtonInteractiveStyledComponent = styled.div`
   ${ButtonFlexBoxStyledComponent}
-  background: ${({ $isValue }) =>
-    $isValue ? 'var(--brown-40, #542f1a);' : 'var(--brown-30, #C7BBB5);'};
   color: var(--gray-10, #fff);
-  ${({ $isValue }) =>
-    $isValue &&
-    'cursor: pointer; &:hover {border: 0.2rem solid var(--brown-50, #341909)}; &:active {background: var(--brown-50, #341909);}'}
+  ${({ $theme, $isValue }) =>
+    $theme === 'light'
+      ? $isValue
+        ? 'background: var(--brown-40); cursor: pointer; &:hover {border: 0.2rem solid var(--brown-50)}; &:active {background: var(--brown-50);}'
+        : 'background: var(--brown-30);'
+      : $isValue
+      ? 'background: var(--gray-50); cursor: pointer; &:hover { border: 0.2rem solid var(--gray-10); } &:active { background: var(--gray-55);}'
+      : 'background: var(--gray-30);'}
 `
 
 const ButtonArrowStyledComponent = styled.div`
   ${ButtonFlexBoxStyledComponent}
   cursor: pointer;
-  background: var(--brown-10, #f5f1ee);
-  color: var(--brown-40, #542f1a);
-  border: 0.1rem solid var(--brown-40, #542f1a);
-  &:hover {
-    border: 0.2rem solid var(--brown-40, #542f1a);
-  }
-  &:active {
-    background: var(--brown-20, #e4d5c9);
-  }
+  ${({ $theme }) =>
+    $theme === 'light'
+      ? 'background: var(--brown-10); color: var(--brown-40); border: 0.1rem solid var(--brown-40); &:hover { border: 0.2rem solid var(--brown-40); } &:active { background: var(--brown-20); } svg > g > path { fill: var(--brown-40); }'
+      : 'background: var(--gray-50); color: var(--gray-10); border: 0.1rem solid var(--gray-10); &:hover { border: 0.2rem solid var(--gray-10); } &:active { background: var(--gray-55); } svg > g > path { fill: var(--gray-10); }'}
+
   @media ${device.mobile} {
     padding: 0.8rem 1.2rem;
     font-size: 1.4rem;
   }
-  svg > g > path {
-    fill: var(--brown-40, #542f1a);
-  }
 `
 
 function Button({ brown = false, text = '질문 받기', isValue, onClick }) {
+  const theme = useRecoilValue(darkMode)
   return (
     <>
       {brown ? (
-        <ButtonInteractiveStyledComponent $isValue={isValue} onClick={onClick}>
+        <ButtonInteractiveStyledComponent
+          $theme={theme}
+          $isValue={isValue}
+          onClick={onClick}
+        >
           {text}
         </ButtonInteractiveStyledComponent>
       ) : (
-        <ButtonArrowStyledComponent onClick={onClick}>
+        <ButtonArrowStyledComponent $theme={theme} onClick={onClick}>
           {text}
           <ArrowIcon />
         </ButtonArrowStyledComponent>

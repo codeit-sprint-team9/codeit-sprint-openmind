@@ -4,17 +4,22 @@ import styled from 'styled-components'
 import InputField from '../../components/common/InputField'
 import Button from '../../components/common/Button'
 import bg from '../../asset/Home/bg.png'
+import bgDark from '../../asset/Home/bg-dark.png'
 import logo from '../../asset/Home/pc-logo.png'
+import logoDark from '../../asset/Home/pc-logo-dark.png'
 import { Link, useNavigate } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import postSubject from '../../api/home'
 import { useToast } from '../../hooks/useToast'
 import LoadingPage from '../loading/LoadingPage'
+import ToggleButton from '../../components/common/ToggleButton'
+import { darkMode } from '../../recoil/theme'
+import { useRecoilValue } from 'recoil'
 
 const HomeBackground = styled.div`
   width: 100vw;
   height: 100vh;
-  background-image: url(${bg});
+  background-image: url(${({ $theme }) => ($theme === 'light' ? bg : bgDark)});
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: 100%;
@@ -41,7 +46,8 @@ const ButtonBox = styled.div`
 const InputBox = styled.div`
   padding: 3.2rem;
   border-radius: 1.6rem;
-  background: var(--gray-10, #fff);
+  background: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-55);'}
   width: 40rem;
   display: flex;
   flex-direction: column;
@@ -66,6 +72,17 @@ const MainBox = styled.div`
       order: -1;
     }
   }
+  .toggle-button {
+    position: fixed;
+    top: 4.5rem;
+    left: 12.5rem;
+    @media ${device.tablet} {
+      left: 4.4rem;
+    }
+    @media ${device.mobile} {
+      left: 4.4rem;
+    }
+  }
 `
 
 const Home = () => {
@@ -74,6 +91,7 @@ const Home = () => {
   const [subjectPending, , subjectPost] = useAsync(postSubject)
   const nav = useNavigate()
   const { fireToast } = useToast()
+  const theme = useRecoilValue(darkMode)
 
   const handlePost = async () => {
     if (!isValue) return
@@ -87,13 +105,7 @@ const Home = () => {
         imageSource: result.imageSource,
       })
     )
-    nav(`/post/${result.id}/answer`, {
-      state: {
-        id: result.id,
-        name: result.name,
-        imageSource: result.imageSource,
-      },
-    })
+    nav(`/post/${result.id}/answer`)
   }
 
   useEffect(() => {
@@ -111,33 +123,42 @@ const Home = () => {
   }
 
   return (
-    <HomeBackground>
-      <MainBox>
-        <Link to="/list">
-          <ButtonBox>
-            <Button text="질문하러 가기" />
-          </ButtonBox>
-        </Link>
-        <Link to="/">
-          <img className="logo" src={logo} alt="logo" />
-        </Link>
-        <InputBox>
-          <InputField
-            isValue={isValue}
-            setIsValue={setIsValue}
-            setName={setName}
-            onKeyDown={() => handlePost()}
-          />
-          <Button
-            className="brown-button"
-            brown
-            text="질문 받기"
-            isValue={isValue}
-            onClick={() => handlePost()}
-          />
-        </InputBox>
-      </MainBox>
-    </HomeBackground>
+    !localStorage.getItem('user') && (
+      <HomeBackground $theme={theme}>
+        <MainBox>
+          <Link to="/list">
+            <ButtonBox>
+              <Button text="질문하러 가기" />
+            </ButtonBox>
+          </Link>
+          <Link to="/">
+            {theme === 'light' ? (
+              <img className="logo" src={logo} alt="logo" />
+            ) : (
+              <img className="logo" src={logoDark} alt="logo" />
+            )}
+          </Link>
+          <InputBox $theme={theme}>
+            <InputField
+              isValue={isValue}
+              setIsValue={setIsValue}
+              setName={setName}
+              onKeyDown={() => handlePost()}
+            />
+            <Button
+              className="brown-button"
+              brown
+              text="질문 받기"
+              isValue={isValue}
+              onClick={() => handlePost()}
+            />
+          </InputBox>
+          <div className="toggle-button">
+            <ToggleButton />
+          </div>
+        </MainBox>
+      </HomeBackground>
+    )
   )
 }
 

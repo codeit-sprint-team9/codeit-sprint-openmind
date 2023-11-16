@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import MessageIcon from '../../asset/postModal/img_message.svg'
-import CloseIcon from '../../asset/postModal/img_close.svg'
+import { ReactComponent as MessageIcon } from '../../asset/postModal/img_message.svg'
+import { ReactComponent as CloseIcon } from '../../asset/postModal/img_close.svg'
 import InputTextArea, {
   InputTextAreaStyledComponent,
 } from '../common/InputTextArea'
@@ -13,10 +13,13 @@ import Loading from '../common/Loading'
 import { useEffect } from 'react'
 import { modalState } from '../../recoil/modal'
 import { useResetRecoilState } from 'recoil'
+import { darkMode } from '../../recoil/theme'
+import { useRecoilValue } from 'recoil'
 
 const PostModal = ({ onClick, userData }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
+  const theme = useRecoilValue(darkMode)
   const resetModalState = useResetRecoilState(modalState)
 
   const handlePostQuestion = async () => {
@@ -38,21 +41,16 @@ const PostModal = ({ onClick, userData }) => {
 
   return (
     <Overlay>
-      <OuterModalContainer onClick={() => resetModalState()} />
+      <OuterModalContainer onClick={() => resetModalState()} $theme={theme} />
 
-      <ModalMainContainer>
-        <TitleContainer>
-          <img src={MessageIcon} className="messageIcon" alt="messageIcon" />
+      <ModalMainContainer $theme={theme}>
+        <TitleContainer $theme={theme}>
+          <MessageIcon className="messageIcon" />
           <div className="title">질문을 작성하세요</div>
-          <img
-            src={CloseIcon}
-            className="closeIcon"
-            alt="closeIcon"
-            onClick={() => resetModalState()}
-          />
+          <CloseIcon className="closeIcon" onClick={() => resetModalState()} />
         </TitleContainer>
 
-        <ContentContainer>
+        <ContentContainer $theme={theme}>
           <div className="userContainer">
             <div className="to">To.</div>
             <img
@@ -100,8 +98,9 @@ export const Overlay = styled.div`
 export const OuterModalContainer = styled.div`
   width: 100%;
   height: 100%;
-  background-color: var(--gray-60);
-  opacity: 0.4;
+  background-color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-50);'}
+  opacity: ${({ $theme }) => ($theme === 'light' ? '0.4;' : '0.5;')}
 `
 export const ModalMainContainer = styled.div`
   display: flex;
@@ -112,7 +111,8 @@ export const ModalMainContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--gray-10);
+  background-color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-55);'}
   border-radius: 2.4rem;
   padding: 4rem 4rem 7rem;
   align-items: center;
@@ -133,7 +133,8 @@ export const TitleContainer = styled.div`
   }
 
   .title {
-    color: var(--gray-60);
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 2.4rem;
     line-height: 3rem;
     @media all and ${device.mobile} {
@@ -150,6 +151,7 @@ export const TitleContainer = styled.div`
       height: 2.2rem;
     }
   }
+  ${({ $theme }) => ($theme === 'light' ? '' : 'svg > path {fill: white;}')}
 `
 
 export const ContentContainer = styled.div`
@@ -166,7 +168,9 @@ export const ContentContainer = styled.div`
     display: flex;
     gap: 0.4rem;
     align-items: center;
-    color: var(--gray-60);
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
+    font-weight: 400;
     margin-bottom: 0.4rem;
 
     .to {

@@ -8,8 +8,9 @@ import PostDeleteButton from '../../components/post/PostDeleteButton'
 import { useNavigate, useParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import { postMainData, postMainDelete, postUserData } from '../../api/post'
-import { deleteQuestions } from '../../api/postCard'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
+import { deleteQuestions } from '../../api/postCard'
 import { modalState } from '../../recoil/modal'
 import LoadingPage from '../loading/LoadingPage'
 import PostHeader from './PostHeader'
@@ -35,6 +36,7 @@ const Post = ({ state }) => {
   const resetModalState = useResetRecoilState(modalState)
 
   const navigate = useNavigate()
+  const theme = useRecoilValue(darkMode)
 
   const handleLoad = async (options = { id: id, offset: 0, limit: LIMIT }) => {
     const result = await postMainDataAsync(options)
@@ -115,9 +117,9 @@ const Post = ({ state }) => {
     <>
       {isError === false && (
         <>
-          <Div onClick={handleOption}>
+          <Div $theme={theme} onClick={handleOption}>
             <PostHeader userData={userData} />
-            <S.Div>
+            <S.Div $theme={theme}>
               {state === 'answer' && (
                 <S.DeleteButton>
                   <PostDeleteButton onClick={() => handleDeleteButton(id)} />
