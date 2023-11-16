@@ -8,7 +8,6 @@ const loading = <LoadingPage />
 const DefaultLayout = () => {
   return (
     <>
-      {/* 헤더 자리 */}
       {
         <Suspense fallback={loading}>
           <Routes>
@@ -26,7 +25,6 @@ const DefaultLayout = () => {
           </Routes>
         </Suspense>
       }
-      {/* 푸터 자리 */}
     </>
   )
 }

@@ -7,6 +7,7 @@ import * as S from './PostStyledComponent'
 import Toast from '../../components/common/Toast'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useToast } from '../../hooks/useToast'
 const { Kakao } = window
 
 export default function PostHeader({ userData }) {
@@ -56,9 +57,11 @@ export default function PostHeader({ userData }) {
   }, [])
 
   const navigate = useNavigate()
+  const { fireToast } = useToast()
 
   const handlePage = () => {
     if (userInfo) {
+      fireToast({ content: '로그인된 계정이 아닙니다.' })
       navigate('/list')
       return
     }
