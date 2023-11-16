@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import postSubject from '../../api/home'
 import { useToast } from '../../hooks/useToast'
+import LoadingPage from '../loading/LoadingPage'
 
 const HomeBackground = styled.div`
   width: 100vw;
@@ -105,7 +106,9 @@ const Home = () => {
     }
   }, [nav])
 
-  if (subjectPending) return <div>로딩중입니다. 잠시만 기다려주십시요.</div>
+  if (subjectPending) {
+    return <LoadingPage />
+  }
 
   return (
     <HomeBackground>

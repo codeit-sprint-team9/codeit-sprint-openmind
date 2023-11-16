@@ -14,6 +14,7 @@ const useAsync = (asyncFunction) => {
         return await asyncFunction(...args)
       } catch (error) {
         fireToast({
+          state: 'apiError',
           content: '알 수 없는 오류가 발생했습니다. 다시 시도해주세요.',
         })
         setIsError(true)
