@@ -61,7 +61,7 @@ export default function PostHeader({ userData }) {
 
   const handlePage = () => {
     if (userInfo) {
-      fireToast({ content: '로그인된 계정이 아닙니다.' })
+      fireToast({ content: '이미 로그인 되어있습니다.' })
       navigate('/list')
       return
     }
