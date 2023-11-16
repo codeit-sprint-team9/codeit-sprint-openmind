@@ -72,7 +72,7 @@ export default function PostHeader({ userData }) {
   return (
     <>
       <S.Div $theme={theme}>
-        <S.TopDiv>
+        <S.TopDiv $theme={theme}>
           <S.LogoDiv onClick={() => handlePage()} $theme={theme}>
             <OpenMindLogo className="openMind-img" />
           </S.LogoDiv>
@@ -89,7 +89,7 @@ export default function PostHeader({ userData }) {
             className="profile-img"
           />
         </S.CatDiv>
-        <S.NavHeader>{userData.name}</S.NavHeader>
+        <S.NavHeader $theme={theme}>{userData.name}</S.NavHeader>
         <S.LinkDiv>
           <S.Button
             className="button-container"

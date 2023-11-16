@@ -51,7 +51,7 @@ export const PostCardContainer = styled.div`
 
   .divider {
     background: ${({ $theme }) =>
-      $theme ? 'var(--gray-30);' : 'var(--gray-10);'}
+      $theme === 'light' ? 'var(--gray-30);' : 'var(--gray-10);'}
     width: 100%;
     height: 0.1rem;
     margin-bottom: -0.8rem;
@@ -59,6 +59,8 @@ export const PostCardContainer = styled.div`
       margin-bottom: 0;
     }
   }
+  ${({ $theme }) =>
+    $theme === 'light' ? '' : 'svg > circle {fill: var(--gray-10);}'}
 `
 export const TitleContainer = styled.div`
   display: flex;

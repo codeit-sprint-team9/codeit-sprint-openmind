@@ -7,7 +7,7 @@ import {
   PostCardWrapper,
   TitleContainer,
 } from './PostCardStyledComponents'
-import OptionIcon from '../../asset/postCard/img_option.svg'
+import { ReactComponent as OptionIcon } from '../../asset/postCard/img_option.svg'
 import { useCallback, useState } from 'react'
 import Badge from '../common/Badge'
 import InputTextArea from '../common/InputTextArea'
@@ -154,10 +154,8 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
         <div className="header-container">
           <Badge isAnswered={isAnswered} />
           {state === 'answer' && (
-            <img
+            <OptionIcon
               className="option-btn"
-              src={OptionIcon}
-              alt="optionIcon"
               onClick={(e) => {
                 e.stopPropagation()
                 setIsOpenOption(!isOpenOption)
