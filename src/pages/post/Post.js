@@ -8,9 +8,10 @@ import PostNoContent from '../../components/post/PostNoContent'
 import PostDeleteButton from '../../components/post/PostDeleteButton'
 import { useNavigate, useParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
-import { postMainData, postMainDelete } from '../../api/post'
+import { postMainData, postMainDelete, postUserData } from '../../api/post'
 import { useRecoilValue } from 'recoil'
 import { modalState } from '../../recoil/modal'
+import LoadingPage from '../loading/LoadingPage'
 
 const Div = styled.div`
   position: relative;
@@ -60,6 +61,18 @@ const Post = ({ state }) => {
     }
   }
 
+  const [isPostUserDataLoading, isPostUserDataError, postUserDataAsync] =
+    useAsync(postUserData)
+  const [userData, setUserData] = useState({})
+
+  const handleUserData = async (id) => {
+    const result = await postUserDataAsync(id)
+
+    if (!result) return
+
+    setUserData(result)
+  }
+
   useEffect(() => {
     postModal.display
       ? (document.body.style.overflowY = 'hidden')
@@ -67,44 +80,54 @@ const Post = ({ state }) => {
   }, [postModal])
 
   useEffect(() => {
-    handleLoad({ id, offset: 0, limit: LIMIT })
+    handleUserData(id)
   }, [])
 
   useEffect(() => {
-    if (isError) {
+    if (isPostUserDataError === false && !isPostUserDataLoading) {
+      handleLoad({ id, offset: 0, limit: LIMIT })
+    }
+  }, [isPostUserDataError, isPostUserDataLoading])
+
+  useEffect(() => {
+    if (isError || isPostUserDataError) {
       navigate('/list')
     }
-  }, [isError])
+  }, [isError, isPostUserDataError])
 
   if (isDeleteLoading) return <div>로딩중입니다.</div>
 
-  return (
-    isError === false && (
-      <>
-        <Div>
-          <Nav id={id} />
-          <S.Div>
-            {state === 'answer' && (
-              <S.DeleteButton>
-                <PostDeleteButton onClick={() => handleDeleteButton(id)} />
-              </S.DeleteButton>
-            )}
+  return isPostUserDataLoading ? (
+    <LoadingPage />
+  ) : (
+    <>
+      {isError === false && (
+        <>
+          <Div>
+            <Nav userData={userData} />
+            <S.Div>
+              {state === 'answer' && (
+                <S.DeleteButton>
+                  <PostDeleteButton onClick={() => handleDeleteButton(id)} />
+                </S.DeleteButton>
+              )}
 
-            {count !== 0 ? (
-              <PostContent
-                state={state}
-                items={items}
-                cnt={cnt}
-                handleLoadMore={handelLoadMore}
-              />
-            ) : (
-              <PostNoContent state={state} />
-            )}
-          </S.Div>
-        </Div>
-        {postModal.display && <PostModal onClick={handleLoad} />}
-      </>
-    )
+              {count !== 0 ? (
+                <PostContent
+                  state={state}
+                  items={items}
+                  cnt={cnt}
+                  handleLoadMore={handelLoadMore}
+                />
+              ) : (
+                <PostNoContent state={state} />
+              )}
+            </S.Div>
+          </Div>
+          {postModal.display && <PostModal onClick={handleLoad} />}
+        </>
+      )}
+    </>
   )
 }
 

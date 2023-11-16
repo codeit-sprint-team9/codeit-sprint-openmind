@@ -2,14 +2,14 @@ import styled from 'styled-components'
 import errorIcon from '../../../asset/Error/error-icon.svg'
 import { useEffect, useState } from 'react'
 
-export default function ErrorToast({ content, duration }) {
+export default function ErrorToast({ content }) {
   const [isClosing, setIsClosing] = useState(false)
 
   useEffect(() => {
     const setExistTimeout = setTimeout(() => {
       setIsClosing(true)
       clearTimeout(setExistTimeout)
-    }, duration ?? 1000)
+    }, 1500)
   })
 
   return (
