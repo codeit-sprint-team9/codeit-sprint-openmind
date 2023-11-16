@@ -25,31 +25,11 @@ import {
 import moment from 'moment'
 import { debounce } from 'lodash'
 import Loading from '../common/Loading'
+import 'moment/locale/ko'
 
 const calculateTimeAgo = (createdAt) => {
-  const createdDate = moment(createdAt, 'YYYY-MM-DDTHH:mm:ss[Z]')
-  const currentDate = moment()
-  const diff = currentDate.diff(createdDate, 'seconds')
-
-  if (diff < 120) {
-    return '1 minute ago'
-  } else if (diff <= 3540) {
-    return `${Math.floor(diff / 60)}분 전`
-  } else if (diff < 3600) {
-    return '1 hour ago'
-  } else if (diff <= 82800) {
-    return `${Math.floor(diff / 3600)}시간 전`
-  } else if (diff < 86400) {
-    return '1 day ago'
-  } else if (diff <= 2592000) {
-    return `${Math.floor(diff / 86400)}일 전`
-  } else if (diff <= 28512000) {
-    return `${Math.floor(diff / 2592000)}달 전`
-  } else if (diff <= 31536000) {
-    return '1 year ago'
-  } else {
-    return `${Math.floor(diff / 31536000)}년 전`
-  }
+  const diff = moment(createdAt).fromNow()
+  return diff
 }
 
 const PostCard = ({ state, data, handleDeleteQuestion }) => {
