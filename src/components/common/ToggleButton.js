@@ -3,7 +3,7 @@ import { ReactComponent as Moon } from '../../asset/ToggleButton/Moon.svg'
 import { ReactComponent as Button } from '../../asset/ToggleButton/Button.svg'
 import { ReactComponent as Sun } from '../../asset/ToggleButton/Sun.svg'
 import { useRecoilState } from 'recoil'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 
 const ToggleBox = styled.div`
   width: 8rem;

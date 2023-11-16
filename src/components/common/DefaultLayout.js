@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import routes from '../../routes'
 import LoadingPage from '../../pages/loading/LoadingPage'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilState } from 'recoil'
 import { useEffect } from 'react'
 const loading = <LoadingPage />

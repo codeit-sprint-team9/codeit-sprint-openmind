@@ -14,7 +14,7 @@ import InputTextArea from '../common/InputTextArea'
 import Button from '../common/Button'
 import Reaction from '../common/Reaction'
 import Edit from '../common/Edit'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
 import useAsync from '../../hooks/useAsync'
 import {

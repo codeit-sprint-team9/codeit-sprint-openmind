@@ -4,7 +4,7 @@ import { device } from '../../components/styles'
 import Dropdown from '../../components/common/Dropdown'
 import { Link } from 'react-router-dom'
 import Loading from '../../components/common/Loading'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
 
 function CardList({ subjectData, handleSort, order, isLoading }) {

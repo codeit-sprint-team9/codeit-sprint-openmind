@@ -4,7 +4,7 @@ import { ReactComponent as NoQuestionImg } from '../../asset/post/no-question-im
 import FloatingButton from '../common/FloatingButton'
 import { useEffect, useState } from 'react'
 import { device } from '../styles'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
 import { modalState } from '../../recoil/modal'
 import { useRecoilState } from 'recoil'

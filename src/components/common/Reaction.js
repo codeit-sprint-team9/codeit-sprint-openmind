@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { ReactComponent as LikeIcon } from '../../asset/Reaction/icon-thumbs-up.svg'
 import { ReactComponent as DisLikeIcon } from '../../asset/Reaction/icon-thumbs-down.svg'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
 
 const ReactionStyledComponent = styled.div`

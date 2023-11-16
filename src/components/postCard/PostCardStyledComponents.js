@@ -123,7 +123,8 @@ export const MainContainer = styled.div`
       align-items: center;
 
       .user-name {
-        color: var(--gray-60);
+        color: ${({ $theme }) =>
+          $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
         font-size: 1.8rem;
         line-height: 2.4rem;
         @media all and ${device.mobile} {
@@ -134,7 +135,8 @@ export const MainContainer = styled.div`
 
       .content-ago {
         display: ${(props) => (props.$isAnswered ? 'block' : 'none')};
-        color: var(--gray-40);
+        color: ${({ $theme }) =>
+          $theme === 'light' ? 'var(--gray-40);' : 'var(--gray-10);'}
         font-size: 1.4rem;
         font-weight: 500;
         line-height: 1.8rem;
@@ -166,7 +168,7 @@ export const BottomContainer = styled.div`
   align-items: center;
 
   ${EditBoxStyledComponent} {
-    diplay: flex;
+    display: flex;
     height: 3.8rem;
     @media all and ${device.mobile} {
       display: none;

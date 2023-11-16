@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { ReactComponent as ArrowIcon } from '../../asset/Button/button-icon-arrow-right.svg'
 import { device } from '../styles'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
 
 const ButtonFlexBoxStyledComponent = css`

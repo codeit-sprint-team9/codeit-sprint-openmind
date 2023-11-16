@@ -13,7 +13,7 @@ import postSubject from '../../api/home'
 import { useToast } from '../../hooks/useToast'
 import LoadingPage from '../loading/LoadingPage'
 import ToggleButton from '../../components/common/ToggleButton'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
 
 const HomeBackground = styled.div`

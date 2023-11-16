@@ -8,7 +8,7 @@ import { device } from '../styles'
 import { modalState } from '../../recoil/modal'
 import { useRecoilState } from 'recoil'
 import Loading from '../common/Loading'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
 
 export default function PostContent({

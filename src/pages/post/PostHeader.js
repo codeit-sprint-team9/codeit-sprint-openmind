@@ -1,5 +1,6 @@
 import NavImg from '../../asset/post/nav-img.svg'
-import OpenMindLogo from '../../asset/post/openmind-logo.svg'
+import NavImgDark from '../../asset/post/nav-img-dark.png'
+import { ReactComponent as OpenMindLogo } from '../../asset/logo.svg'
 import LinkImg from '../../asset/post/link.svg'
 import KakaoImg from '../../asset/post/kakao.svg'
 import FacebookImg from '../../asset/post/facebook.svg'
@@ -7,12 +8,15 @@ import * as S from './PostStyledComponent'
 import Toast from '../../components/common/Toast'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { darkMode } from '../../recoil/theme'
+import { useRecoilValue } from 'recoil'
 const { Kakao } = window
 
 export default function PostHeader({ userData }) {
   const BASE_URL = 'http://localhost:3000'
   const location = useLocation()
   const [urlAlert, setUrlAlert] = useState(false)
+  const theme = useRecoilValue(darkMode)
 
   const userInfo = JSON.parse(localStorage.getItem('user'))
 
@@ -30,7 +34,7 @@ export default function PostHeader({ userData }) {
       objectType: 'feed',
       content: {
         title: 'OpenMind',
-        description: 'open',
+        description: '질문과 답변을 통해 마음을 열고 대화 나누는 소통 플랫폼',
         imageUrl: 'https://i.ibb.co/7pPSpgR/logo.png',
         link: {
           mobileWebUrl: resultUrl,
@@ -67,16 +71,16 @@ export default function PostHeader({ userData }) {
 
   return (
     <>
-      <S.Div>
+      <S.Div $theme={theme}>
         <S.TopDiv>
-          <S.LogoDiv onClick={() => handlePage()}>
-            <img
-              src={OpenMindLogo}
-              alt="오픈 마인드 이미지"
-              className="openMind-img"
-            />
+          <S.LogoDiv onClick={() => handlePage()} $theme={theme}>
+            <OpenMindLogo className="openMind-img" />
           </S.LogoDiv>
-          <img src={NavImg} alt="Nav 이미지" className="nav-img" />
+          {theme === 'light' ? (
+            <img src={NavImg} alt="Nav 이미지" className="nav-img" />
+          ) : (
+            <img src={NavImgDark} alt="Nav 이미지" className="nav-img" />
+          )}
         </S.TopDiv>
         <S.CatDiv>
           <img

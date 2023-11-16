@@ -45,10 +45,6 @@ export const TopDiv = styled.div`
       top: 4rem;
     }
   }
-  ${({ $theme }) =>
-    $theme === 'light'
-      ? ''
-      : '#OPENMIND > path {fill: white;} #Group 10 > path {stroke: white;} #OPENMIND_2 > path {fill: white;}'}
 `
 
 export const CatDiv = styled.div`
@@ -225,4 +221,8 @@ export const ToastDiv = styled.div`
 `
 export const LogoDiv = styled.div`
   cursor: pointer;
+  ${({ $theme }) =>
+    $theme === 'light'
+      ? ''
+      : '#OPENMIND > path {fill: white;} #Group 10 > path {stroke: white;} #OPENMIND_2 > path {fill: white;}'}
 `

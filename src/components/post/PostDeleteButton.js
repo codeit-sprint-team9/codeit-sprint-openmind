@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { device } from '../styles'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
 
 const FloatingButtonStyledComponent = styled.div`

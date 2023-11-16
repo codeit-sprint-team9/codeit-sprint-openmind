@@ -13,7 +13,7 @@ import Loading from '../common/Loading'
 import { useEffect } from 'react'
 import { modalState } from '../../recoil/modal'
 import { useResetRecoilState } from 'recoil'
-import { darkMode } from '../../atom/atom'
+import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
 
 const PostModal = ({ onClick, userData }) => {
@@ -109,7 +109,7 @@ export const ModalMainContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: ${({ $theme }) =>
-    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-55);'}
+    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-50);'}
   border-radius: 2.4rem;
   padding: 4rem 4rem 7rem;
   align-items: center;
@@ -130,7 +130,8 @@ export const TitleContainer = styled.div`
   }
 
   .title {
-    color: ${({ $theme }) => ($theme ? 'var(--gray-60);' : 'var(--gray-10);')}
+    color: ${({ $theme }) =>
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 2.4rem;
     line-height: 3rem;
     @media all and ${device.mobile} {
