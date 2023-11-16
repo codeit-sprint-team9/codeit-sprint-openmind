@@ -9,10 +9,11 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 const { Kakao } = window
 
-export default function Nav({ userData }) {
+export default function PostHeader({ userData }) {
   const BASE_URL = 'http://localhost:3000'
   const location = useLocation()
   const [urlAlert, setUrlAlert] = useState(false)
+
   const userInfo = JSON.parse(localStorage.getItem('user'))
 
   const handleCopyClipBoard = async (text) => {
@@ -30,7 +31,7 @@ export default function Nav({ userData }) {
       content: {
         title: 'OpenMind',
         description: 'open',
-        imageUrl: 'https://i.ibb.co/XVh88Vs/image.jpg',
+        imageUrl: 'https://i.ibb.co/7pPSpgR/logo.png',
         link: {
           mobileWebUrl: resultUrl,
         },
@@ -51,12 +52,8 @@ export default function Nav({ userData }) {
   }
   useEffect(() => {
     Kakao.cleanup()
-    Kakao.init('512cd8a8ece57b97899c8cc612089c7d')
+    Kakao.init('5fb0b78f5665095c59a459a1e6c76559')
   }, [])
-
-  // useEffect(() => {
-  //   handleUserData(id)
-  // }, [])
 
   const navigate = useNavigate()
 

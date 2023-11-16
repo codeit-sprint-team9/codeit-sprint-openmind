@@ -9,7 +9,13 @@ import { modalState } from '../../recoil/modal'
 import { useRecoilState } from 'recoil'
 import Loading from '../common/Loading'
 
-export default function PostContent({ state, items, handleLoadMore, cnt }) {
+export default function PostContent({
+  state,
+  items,
+  handleLoadMore,
+  handleDeleteQuestion,
+  cnt,
+}) {
   const [modalOpened, setModalOpened] = useRecoilState(modalState)
 
   const [text, setText] = useState(window.innerWidth < 767 ? true : false)
@@ -73,8 +79,15 @@ export default function PostContent({ state, items, handleLoadMore, cnt }) {
                 overflow: 'visible',
               }}
             >
-              {items.map((item, index) => {
-                return <PostCard key={index} item={item} state={state} />
+              {items.map((item) => {
+                return (
+                  <PostCard
+                    key={item.id}
+                    data={item}
+                    state={state}
+                    handleDeleteQuestion={handleDeleteQuestion}
+                  />
+                )
               })}
             </InfiniteScroll>
           </S.ContentDiv>

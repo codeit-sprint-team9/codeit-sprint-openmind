@@ -13,32 +13,35 @@ const LikeStyledComponent = styled.div`
   align-items: center;
   gap: 0.6rem;
   color: ${({ $count }) =>
-    $count === '0' ? 'var(--gray-40, #818181);' : 'var(--blue, #1877F2);'};
+    $count === 0 ? 'var(--gray-40, #818181);' : 'var(--blue, #1877F2);'};
   font-size: 1.4rem;
   font-weight: 500;
   cursor: pointer;
   svg > g > path {
-    fill: ${({ $count }) => ($count === '0' ? '' : 'var(--blue, #1877F2);')};
+    fill: ${({ $count }) => ($count === 0 ? '' : 'var(--blue, #1877F2);')};
   }
 `
 
 const DisLikeStyledComponent = styled(LikeStyledComponent)`
   color: ${({ $count }) =>
-    $count === '0' ? 'var(--gray-40, #818181);' : 'var(--gray-60, #000);'};
+    $count === 0 ? 'var(--gray-40, #818181);' : 'var(--gray-60, #000);'};
   svg > g > path {
-    fill: ${({ $count }) => ($count === '0' ? '' : 'var(--gray-60, #000);')};
+    fill: ${({ $count }) => ($count === 0 ? '' : 'var(--gray-60, #000);')};
   }
 `
 
-function Reaction({ like = '0', disLike = '0' }) {
+function Reaction({ like = 0, disLike = 0, onClick }) {
   // like 있으면 파란색 disLike 있으면 검은색
   return (
     <ReactionStyledComponent>
-      <LikeStyledComponent $count={like}>
+      <LikeStyledComponent $count={like} onClick={() => onClick('like')}>
         <LikeIcon />
-        좋아요 {like !== '0' ? like : ''}
+        좋아요 {like !== 0 ? like : ''}
       </LikeStyledComponent>
-      <DisLikeStyledComponent $count={disLike}>
+      <DisLikeStyledComponent
+        $count={disLike}
+        onClick={() => onClick('dislike')}
+      >
         <DisLikeIcon />
         싫어요
       </DisLikeStyledComponent>

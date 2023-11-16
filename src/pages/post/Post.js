@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Nav from './Nav'
 import PostContent from '../../components/post/PostContent'
 import * as S from './PostStyledComponent'
 import PostModal from '../../components/modal/PostModal'
@@ -9,9 +8,11 @@ import PostDeleteButton from '../../components/post/PostDeleteButton'
 import { useNavigate, useParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import { postMainData, postMainDelete, postUserData } from '../../api/post'
+import { deleteQuestions } from '../../api/postCard'
 import { useRecoilValue } from 'recoil'
 import { modalState } from '../../recoil/modal'
 import LoadingPage from '../loading/LoadingPage'
+import PostHeader from './PostHeader'
 
 const Div = styled.div`
   position: relative;
@@ -26,7 +27,7 @@ const Post = ({ state }) => {
   const [items, setItems] = useState([])
   const [offset, setOffset] = useState(0)
   const [, isError, postMainDataAsync] = useAsync(postMainData)
-  const [isDeleteLoading, , postMainDeleteAsync] = useAsync(postMainDelete)
+  const [, , postMainDeleteAsync] = useAsync(postMainDelete)
 
   const count = items.length
   const { postModal } = useRecoilValue(modalState)
@@ -80,10 +81,6 @@ const Post = ({ state }) => {
   }, [postModal])
 
   useEffect(() => {
-    handleUserData(id)
-  }, [])
-
-  useEffect(() => {
     if (isPostUserDataError === false && !isPostUserDataLoading) {
       handleLoad({ id, offset: 0, limit: LIMIT })
     }
@@ -95,7 +92,16 @@ const Post = ({ state }) => {
     }
   }, [isError, isPostUserDataError])
 
-  if (isDeleteLoading) return <div>로딩중입니다.</div>
+  useEffect(() => {
+    handleUserData(id)
+  }, [])
+
+  const [, , deleteQuestionsAsync] = useAsync(deleteQuestions)
+
+  const handleDeleteQuestion = async (questionId) => {
+    await deleteQuestionsAsync(questionId)
+    handleLoad()
+  }
 
   return isPostUserDataLoading ? (
     <LoadingPage />
@@ -104,7 +110,7 @@ const Post = ({ state }) => {
       {isError === false && (
         <>
           <Div>
-            <Nav userData={userData} />
+            <PostHeader userData={userData} />
             <S.Div>
               {state === 'answer' && (
                 <S.DeleteButton>
@@ -118,13 +124,16 @@ const Post = ({ state }) => {
                   items={items}
                   cnt={cnt}
                   handleLoadMore={handelLoadMore}
+                  handleDeleteQuestion={handleDeleteQuestion}
                 />
               ) : (
                 <PostNoContent state={state} />
               )}
             </S.Div>
           </Div>
-          {postModal.display && <PostModal onClick={handleLoad} />}
+          {postModal.display && (
+            <PostModal onClick={handleLoad} userData={userData} />
+          )}
         </>
       )}
     </>

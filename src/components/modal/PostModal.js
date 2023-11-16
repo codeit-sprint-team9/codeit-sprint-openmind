@@ -6,23 +6,22 @@ import InputTextArea, {
 } from '../common/InputTextArea'
 import Button, { ButtonInteractiveStyledComponent } from '../common/Button'
 import { device } from '../styles'
-import { useEffect, useState } from 'react'
-import UserIcon from '../../asset/postCard/img_postCardUser.png'
+import { useState } from 'react'
 import useAsync from '../../hooks/useAsync'
 import { postQuestions } from '../../api/postModal'
+import Loading from '../common/Loading'
+import { useEffect } from 'react'
 import { modalState } from '../../recoil/modal'
 import { useResetRecoilState } from 'recoil'
 
-const PostModal = ({ onClick }) => {
+const PostModal = ({ onClick, userData }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
-  // 홈 부분 병합 후 수정 예정
-  const id = JSON.parse(localStorage.getItem('user')).id || 225
   const resetModalState = useResetRecoilState(modalState)
 
   const handlePostQuestion = async () => {
     if (question !== '') {
-      const result = await postQuestionAsync(id, question)
+      const result = await postQuestionAsync(userData.id, question)
 
       if (result) {
         resetModalState()
@@ -36,10 +35,6 @@ const PostModal = ({ onClick }) => {
       setQuestion('')
     }
   }, [error])
-
-  if (isLoading) {
-    return <div>질문을 올리는 중입니다. 잠시만 기다려 주세요.</div>
-  }
 
   return (
     <Overlay>
@@ -60,18 +55,31 @@ const PostModal = ({ onClick }) => {
         <ContentContainer>
           <div className="userContainer">
             <div className="to">To.</div>
-            <img className="userIcon" src={UserIcon} alt="userIcon" />
-            <div className="userName">아초는고양이</div>
+            <img
+              className="userIcon"
+              src={userData.imageSource}
+              alt="userIcon"
+            />
+            <div className="userName">{userData.name}</div>
           </div>
 
-          <InputTextArea setAnswer={setQuestion} />
+          {isLoading ? (
+            <Loading className="loading" />
+          ) : (
+            <>
+              <InputTextArea
+                setAnswer={setQuestion}
+                onKeyDown={handlePostQuestion}
+              />
 
-          <Button
-            brown={true}
-            text="질문 보내기"
-            isValue={question !== ''}
-            onClick={handlePostQuestion}
-          />
+              <Button
+                brown={true}
+                text="질문 보내기"
+                isValue={question !== ''}
+                onClick={handlePostQuestion}
+              />
+            </>
+          )}
         </ContentContainer>
       </ModalMainContainer>
     </Overlay>
@@ -125,7 +133,6 @@ export const TitleContainer = styled.div`
   .title {
     color: var(--gray-60);
     font-size: 2.4rem;
-    font-weight: 400;
     line-height: 3rem;
     @media all and ${device.mobile} {
       font-size: 2rem;
@@ -149,12 +156,15 @@ export const ContentContainer = styled.div`
   gap: 0.8rem;
   width: 100%;
 
+  .loading {
+    align-self: center;
+  }
+
   .userContainer {
     display: flex;
     gap: 0.4rem;
     align-items: center;
     color: var(--gray-60);
-    font-weight: 400;
     margin-bottom: 0.4rem;
 
     .to {
@@ -165,6 +175,7 @@ export const ContentContainer = styled.div`
     .userIcon {
       width: 2.8rem;
       height: 2.8rem;
+      border-radius: 50%;
     }
 
     .userName {

@@ -102,7 +102,6 @@ const CardProfile = styled.div`
   div {
     color: var(--gray-60);
     font-size: 2rem;
-    font-weight: 400;
     line-height: 2.4rem;
   }
 

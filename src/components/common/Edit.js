@@ -37,9 +37,9 @@ const EditStyledComponent = styled.div`
   gap: 0.8rem;
 `
 
-function Edit() {
+function Edit({ onClick }) {
   return (
-    <EditBoxStyledComponent>
+    <EditBoxStyledComponent onClick={() => onClick('수정하기')}>
       <EditStyledComponent>
         <EditIcon />
         수정하기
