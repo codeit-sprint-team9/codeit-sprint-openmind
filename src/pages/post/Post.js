@@ -9,10 +9,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import { postMainData, postMainDelete, postUserData } from '../../api/post'
 import { deleteQuestions } from '../../api/postCard'
-import PostHeader from './PostHeader'
 import { useRecoilValue } from 'recoil'
 import { modalState } from '../../recoil/modal'
 import LoadingPage from '../loading/LoadingPage'
+import PostHeader from './PostHeader'
 
 const Div = styled.div`
   position: relative;
@@ -131,7 +131,9 @@ const Post = ({ state }) => {
               )}
             </S.Div>
           </Div>
-          {postModal.display && <PostModal onClick={handleLoad} />}
+          {postModal.display && (
+            <PostModal onClick={handleLoad} userData={userData} />
+          )}
         </>
       )}
     </>

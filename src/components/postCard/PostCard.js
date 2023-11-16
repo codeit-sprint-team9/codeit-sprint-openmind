@@ -53,10 +53,8 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
     useAsync(postReactions)
   const [isLoadingAnswers, errorAnswers, postAnswersAsync] =
     useAsync(postAnswers)
-  const [isLoadingPutAnswers, errorPutAnswers, putAnswersAsync] =
-    useAsync(putAnswers)
-  const [isLoadingDeleteAnswers, errorDeleteAnswers, deleteAnswersAsync] =
-    useAsync(deleteAnswers)
+  const [isLoadingPutAnswers, , putAnswersAsync] = useAsync(putAnswers)
+  const [isLoadingDeleteAnswers, , deleteAnswersAsync] = useAsync(deleteAnswers)
   const [, , getQuestionsAsync] = useAsync(getQuestions)
 
   const handleGetQuestion = async () => {
@@ -90,7 +88,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
       return
     }
 
-    if (answer !== '') {
+    if (answer !== '' || isRejected) {
       const result = await postAnswersAsync(
         cardData.id,
         isRejected ? 'rejected' : answer,
@@ -137,16 +135,6 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
       setIsEdit(true)
       return
     }
-  }
-
-  if (errorPutAnswers || errorDeleteAnswers) {
-    return (
-      <PostCardWrapper>
-        <PostCardContainer>
-          <ErrorContainer />
-        </PostCardContainer>
-      </PostCardWrapper>
-    )
   }
 
   if (isLoadingDeleteAnswers) {
