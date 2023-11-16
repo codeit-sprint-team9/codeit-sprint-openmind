@@ -23,4 +23,8 @@ const ToastContainer = styled.div`
   position: fixed;
   z-index: 1000;
   transform: translate(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `
