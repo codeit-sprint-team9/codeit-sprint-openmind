@@ -41,7 +41,7 @@ const PostModal = ({ onClick, userData }) => {
 
   return (
     <Overlay>
-      <OuterModalContainer onClick={() => resetModalState()} />
+      <OuterModalContainer onClick={() => resetModalState()} $theme={theme} />
 
       <ModalMainContainer $theme={theme}>
         <TitleContainer $theme={theme}>
@@ -98,8 +98,9 @@ export const Overlay = styled.div`
 export const OuterModalContainer = styled.div`
   width: 100%;
   height: 100%;
-  background-color: var(--gray-60);
-  opacity: 0.4;
+  background-color: ${({ $theme }) =>
+    $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-50);'}
+  opacity: ${({ $theme }) => ($theme === 'light' ? '0.4;' : '0.5;')}
 `
 export const ModalMainContainer = styled.div`
   display: flex;
@@ -111,7 +112,7 @@ export const ModalMainContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: ${({ $theme }) =>
-    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-40);'}
+    $theme === 'light' ? 'var(--gray-10);' : 'var(--gray-55);'}
   border-radius: 2.4rem;
   padding: 4rem 4rem 7rem;
   align-items: center;
