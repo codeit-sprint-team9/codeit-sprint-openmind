@@ -5,6 +5,7 @@ import { EditBoxStyledComponent } from '../common/Edit'
 
 export const PostCardWrapper = styled.div`
   position: relative;
+  background: red;
 
   .loading {
     color: var(--blue);
@@ -98,7 +99,6 @@ export const MainContainer = styled.div`
   }
 
   .answerRejected {
-    color: var(--red, #b93333);
     font-size: 1.6rem;
     line-height: 2.2rem;
   }

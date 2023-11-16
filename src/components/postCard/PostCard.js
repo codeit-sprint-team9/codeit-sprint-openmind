@@ -145,7 +145,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
   if (isLoadingDeleteAnswers) {
     return (
       <PostCardWrapper>
-        <PostCardContainer>
+        <PostCardContainer $theme={theme}>
           <Loading />
         </PostCardContainer>
       </PostCardWrapper>
