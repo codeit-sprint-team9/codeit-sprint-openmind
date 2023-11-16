@@ -8,7 +8,6 @@ import Toast from '../../components/common/Toast'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 const { Kakao } = window
-import LogoImg from '../../asset/post/logo.png'
 
 export default function PostHeader({ userData }) {
   const BASE_URL = 'http://localhost:3000'
@@ -32,7 +31,7 @@ export default function PostHeader({ userData }) {
       content: {
         title: 'OpenMind',
         description: 'open',
-        imageUrl: LogoImg,
+        imageUrl: 'https://i.ibb.co/7pPSpgR/logo.png',
         link: {
           mobileWebUrl: resultUrl,
         },
