@@ -130,6 +130,7 @@ const Post = ({ state }) => {
                 <PostNoContent state={state} />
               ) : (
                 <PostContent
+                  userData={userData}
                   state={state}
                   items={items}
                   cnt={cnt}

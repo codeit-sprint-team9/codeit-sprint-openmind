@@ -36,7 +36,7 @@ const calculateTimeAgo = (createdAt) => {
   return diff
 }
 
-const PostCard = ({ state, data, handleDeleteQuestion }) => {
+const PostCard = ({ state, data, handleDeleteQuestion, userData }) => {
   const [cardData, setCardData] = useState(data)
   const [answer, setAnswer] = useState(
     cardData.answer
@@ -48,10 +48,6 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
   const isAnswered = cardData.answer ? true : false
   const [isEdit, setIsEdit] = useState(false)
   const theme = useRecoilValue(darkMode)
-
-  const userInfo = localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))
-    : 0
 
   const [isLoadingReactions, , postReactionsAsync] = useAsync(postReactions)
   const [isLoadingAnswers, , postAnswersAsync] = useAsync(postAnswers)
@@ -79,7 +75,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
   const handlePostAnswer = async (isRejected = false) => {
     // 답변 수정
 
-    if (isAnswered && answer !== '') {
+    if (isAnswered && answer !== '' && ![...answer].every((e) => e === `\n`)) {
       const result = await putAnswersAsync(
         cardData.answer.id,
         answer,
@@ -93,7 +89,10 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
       return
     }
 
-    if (answer !== '' || isRejected) {
+    if (
+      (answer !== '' && ![...answer].every((e) => e === `\n`)) ||
+      isRejected
+    ) {
       const result = await postAnswersAsync(
         cardData.id,
         isRejected ? 'rejected' : answer,
@@ -185,13 +184,13 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
         {!(state === 'default' && !isAnswered) && (
           <MainContainer $isAnswered={isAnswered} $theme={theme}>
             <img
-              src={userInfo.imageSource}
+              src={userData.imageSource}
               className="user-icon"
               alt="userIcon"
             />
             <div className="main-content-container">
               <div className="content-user-info-container">
-                <div className="user-name">{userInfo.name}</div>
+                <div className="user-name">{userData.name}</div>
                 <div className="content-ago">
                   {calculateTimeAgo(cardData.answer?.createdAt)}
                 </div>
@@ -287,7 +286,7 @@ const OptionMenu = ({ onClick, isAnswered, isRejected }) => {
                 ? false
                 : true
             }
-            $isEdit={e === '수정하기'}
+            $isEdit={isAnswered && e === '수정하기'}
             className="optionMenuItem"
             onClick={() => onClick(e)}
           >

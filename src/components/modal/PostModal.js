@@ -23,7 +23,7 @@ const PostModal = ({ onClick, userData }) => {
   const resetModalState = useResetRecoilState(modalState)
 
   const handlePostQuestion = async () => {
-    if (question !== '') {
+    if (question !== '' && ![...question].every((e) => e === `\n`)) {
       const result = await postQuestionAsync(userData.id, question)
 
       if (result) {
