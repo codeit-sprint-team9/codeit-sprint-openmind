@@ -47,6 +47,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
   )
   const isAnswered = cardData.answer ? true : false
   const [isEdit, setIsEdit] = useState(false)
+  const theme = useRecoilValue(darkMode)
 
   const userInfo = localStorage.getItem('user')
     ? JSON.parse(localStorage.getItem('user'))
@@ -150,7 +151,6 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
       </PostCardWrapper>
     )
   }
-  const theme = useRecoilValue(darkMode)
 
   return (
     <PostCardWrapper>
