@@ -7,10 +7,7 @@ import Loading from '../../components/common/Loading'
 import { darkMode } from '../../atom/atom'
 import { useRecoilValue } from 'recoil'
 
-function CardList({ subjectData, handleSort, order, isLoading, isError }) {
-  if (isError) {
-    return <div>에러가 발생했습니다.</div>
-  }
+function CardList({ subjectData, handleSort, order, isLoading }) {
   return (
     <>
       <Dropdown handleSort={handleSort} order={order} />
@@ -114,7 +111,6 @@ const CardProfile = styled.div`
     color: ${({ $theme }) =>
       $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 2rem;
-    font-weight: 400;
     line-height: 2.4rem;
   }
 

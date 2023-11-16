@@ -7,61 +7,77 @@ import InputTextArea, {
 import Button, { ButtonInteractiveStyledComponent } from '../common/Button'
 import { device } from '../styles'
 import { useState } from 'react'
-import UserIcon from '../../asset/postCard/img_postCardUser.png'
 import useAsync from '../../hooks/useAsync'
 import { postQuestions } from '../../api/postModal'
+import Loading from '../common/Loading'
+import { useEffect } from 'react'
+import { modalState } from '../../recoil/modal'
+import { useResetRecoilState } from 'recoil'
 import { darkMode } from '../../atom/atom'
 import { useRecoilValue } from 'recoil'
 
-const PostModal = ({ setIsOpened, onClick }) => {
+const PostModal = ({ onClick, userData }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
   const theme = useRecoilValue(darkMode)
-  // 홈 부분 병합 후 수정 예정
-  const id = JSON.parse(localStorage.getItem('user')).id || 225
-  const handlePostQuestion = async () => {
-    const result = await postQuestionAsync(id, question)
+  const resetModalState = useResetRecoilState(modalState)
 
-    if (result) {
-      setIsOpened(false)
-      onClick()
+  const handlePostQuestion = async () => {
+    if (question !== '') {
+      const result = await postQuestionAsync(userData.id, question)
+
+      if (result) {
+        resetModalState()
+        onClick()
+      }
     }
   }
 
-  if (isLoading) {
-    return <div>질문을 올리는 중입니다. 잠시만 기다려 주세요.</div>
-  }
-
-  if (error) {
-    return <div>문제가 발생했습니다.</div>
-  }
+  useEffect(() => {
+    if (error) {
+      setQuestion('')
+    }
+  }, [error])
 
   return (
     <Overlay>
-      <OuterModalContainer onClick={() => setIsOpened(false)} />
+      <OuterModalContainer onClick={() => resetModalState()} />
 
       <ModalMainContainer $theme={theme}>
         <TitleContainer $theme={theme}>
           <MessageIcon className="messageIcon" />
           <div className="title">질문을 작성하세요</div>
-          <CloseIcon className="closeIcon" onClick={() => setIsOpened(false)} />
+          <CloseIcon className="closeIcon" onClick={() => resetModalState()} />
         </TitleContainer>
 
         <ContentContainer $theme={theme}>
           <div className="userContainer">
             <div className="to">To.</div>
-            <img className="userIcon" src={UserIcon} alt="userIcon" />
-            <div className="userName">아초는고양이</div>
+            <img
+              className="userIcon"
+              src={userData.imageSource}
+              alt="userIcon"
+            />
+            <div className="userName">{userData.name}</div>
           </div>
 
-          <InputTextArea setAnswer={setQuestion} />
+          {isLoading ? (
+            <Loading className="loading" />
+          ) : (
+            <>
+              <InputTextArea
+                setAnswer={setQuestion}
+                onKeyDown={handlePostQuestion}
+              />
 
-          <Button
-            brown={true}
-            text="질문 보내기"
-            isValue={question !== ''}
-            onClick={handlePostQuestion}
-          />
+              <Button
+                brown={true}
+                text="질문 보내기"
+                isValue={question !== ''}
+                onClick={handlePostQuestion}
+              />
+            </>
+          )}
         </ContentContainer>
       </ModalMainContainer>
     </Overlay>
@@ -116,7 +132,6 @@ export const TitleContainer = styled.div`
   .title {
     color: ${({ $theme }) => ($theme ? 'var(--gray-60);' : 'var(--gray-10);')}
     font-size: 2.4rem;
-    font-weight: 400;
     line-height: 3rem;
     @media all and ${device.mobile} {
       font-size: 2rem;
@@ -141,6 +156,10 @@ export const ContentContainer = styled.div`
   gap: 0.8rem;
   width: 100%;
 
+  .loading {
+    align-self: center;
+  }
+
   .userContainer {
     display: flex;
     gap: 0.4rem;
@@ -158,6 +177,7 @@ export const ContentContainer = styled.div`
     .userIcon {
       width: 2.8rem;
       height: 2.8rem;
+      border-radius: 50%;
     }
 
     .userName {

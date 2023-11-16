@@ -1,6 +1,6 @@
 import FadeLoader from 'react-spinners/FadeLoader'
 
-function Loading() {
+function LoadingPage() {
   return (
     <div
       style={{
@@ -16,4 +16,4 @@ function Loading() {
   )
 }
 
-export default Loading
+export default LoadingPage

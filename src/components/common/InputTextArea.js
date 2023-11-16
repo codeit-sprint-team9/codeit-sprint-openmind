@@ -28,7 +28,12 @@ export const InputTextAreaStyledComponent = styled.div`
   }
 `
 
-function InputTextArea({ setAnswer, placeholder = '질문을 입력해주세요' }) {
+function InputTextArea({
+  answer,
+  setAnswer,
+  placeholder = '질문을 입력해주세요',
+  onKeyDown,
+}) {
   const [isFocus, setIsFocus] = useState(false)
   const [isValue, setIsValue] = useState(false)
 
@@ -43,7 +48,11 @@ function InputTextArea({ setAnswer, placeholder = '질문을 입력해주세요'
         onFocus={inputFocus}
         onBlur={inputFocus}
         onChange={(e) => setAnswer(e.target.value)}
+        value={answer}
         type="textarea"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') onKeyDown()
+        }}
       />
     </InputTextAreaStyledComponent>
   )

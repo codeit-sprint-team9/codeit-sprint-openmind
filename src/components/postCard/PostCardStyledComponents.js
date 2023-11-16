@@ -5,6 +5,18 @@ import { EditBoxStyledComponent } from '../common/Edit'
 
 export const PostCardWrapper = styled.div`
   position: relative;
+
+  .loading {
+    color: var(--blue);
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  .error {
+    color: var(--red);
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
 `
 
 export const PostCardContainer = styled.div`
@@ -66,7 +78,6 @@ export const TitleContainer = styled.div`
     color: ${({ $theme }) =>
       $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 1.8rem;
-    font-weight: 400;
     line-height: 2.4rem;
     @media all and ${device.mobile} {
       font-size: 1.6rem;
@@ -80,9 +91,20 @@ export const MainContainer = styled.div`
   gap: 1.2rem;
   width: 100%;
 
+  .loadingContainer {
+    align-self: center;
+  }
+
+  .answerRejected {
+    color: var(--red, #b93333);
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+  }
+
   .user-icon {
     width: 4.8rem;
     height: 4.8rem;
+    border-radius: 50%;
     @media all and ${device.mobile} {
       width: 3.2rem;
       height: 3.2rem;
@@ -103,7 +125,6 @@ export const MainContainer = styled.div`
       .user-name {
         color: var(--gray-60);
         font-size: 1.8rem;
-        font-weight: 400;
         line-height: 2.4rem;
         @media all and ${device.mobile} {
           font-size: 1.4rem;
@@ -124,7 +145,6 @@ export const MainContainer = styled.div`
       color: ${({ $theme }) =>
         $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
       font-size: 1.6rem;
-      font-weight: 400;
       line-height: 2.2rem;
     }
   }
@@ -143,9 +163,12 @@ export const BottomContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 
-  @media all and ${device.mobile} {
-    ${EditBoxStyledComponent} {
+  ${EditBoxStyledComponent} {
+    diplay: flex;
+    height: 3.8rem;
+    @media all and ${device.mobile} {
       display: none;
     }
   }
@@ -170,7 +193,6 @@ export const OptionMenuContainer = styled.div`
 export const OptionMenuItem = styled.div`
   color: #333236;
   font-size: 1.4rem;
-  font-weight: 400;
   background: #fff;
   width: 100%;
   padding: 0.7rem 1.2rem;
@@ -183,6 +205,7 @@ export const OptionMenuItem = styled.div`
   }
 
   @media all and ${device.mobile} {
-    display: block;
+    display: ${(props) =>
+      props.$display ? 'block' : props.$isEdit ? 'block' : 'none'};
   }
 `

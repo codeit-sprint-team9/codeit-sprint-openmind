@@ -7,9 +7,8 @@ import {
   PostCardWrapper,
   TitleContainer,
 } from './PostCardStyledComponents'
-import UserImg from '../../asset/postCard/img_postCardUser.png'
 import OptionIcon from '../../asset/postCard/img_option.svg'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Badge from '../common/Badge'
 import InputTextArea from '../common/InputTextArea'
 import Button from '../common/Button'
@@ -17,20 +16,144 @@ import Reaction from '../common/Reaction'
 import Edit from '../common/Edit'
 import { darkMode } from '../../atom/atom'
 import { useRecoilValue } from 'recoil'
+import useAsync from '../../hooks/useAsync'
+import {
+  deleteAnswers,
+  getQuestions,
+  postAnswers,
+  postReactions,
+  putAnswers,
+} from '../../api/postCard'
+import moment from 'moment'
+import { debounce } from 'lodash'
+import Loading from '../common/Loading'
+import 'moment/locale/ko'
 
-const PostCard = ({ state, item }) => {
+const calculateTimeAgo = (createdAt) => {
+  const diff = moment(createdAt).fromNow()
+  return diff
+}
+
+const PostCard = ({ state, data, handleDeleteQuestion }) => {
+  const [cardData, setCardData] = useState(data)
   const [isOpenOption, setIsOpenOption] = useState(false)
-  const [, setSelectedOption] = useState('')
-  const [answer, setAnswer] = useState('')
-  const [isAnswered] = useState(false)
+  const [answer, setAnswer] = useState(
+    cardData.answer
+      ? cardData.answer.isRejected
+        ? ''
+        : cardData.answer.content
+      : ''
+  )
+  const isAnswered = cardData.answer ? true : false
+  const [isEdit, setIsEdit] = useState(false)
+
+  const userInfo = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))
+    : 0
+
+  const [isLoadingReactions, , postReactionsAsync] = useAsync(postReactions)
+  const [isLoadingAnswers, , postAnswersAsync] = useAsync(postAnswers)
+  const [isLoadingPutAnswers, , putAnswersAsync] = useAsync(putAnswers)
+  const [isLoadingDeleteAnswers, , deleteAnswersAsync] = useAsync(deleteAnswers)
+  const [, , getQuestionsAsync] = useAsync(getQuestions)
+
+  const handleGetQuestion = async () => {
+    const response = await getQuestionsAsync(data.id)
+    if (!response) return
+    setCardData(response)
+    setAnswer(
+      response.answer
+        ? response.answer.isRejected
+          ? ''
+          : response.answer.content
+        : ''
+    )
+  }
+
+  // 답변 등록, 답변 수정
+  const handlePostAnswer = async (isRejected = false) => {
+    // 답변 수정
+
+    if (isAnswered) {
+      const result = await putAnswersAsync(
+        cardData.answer.id,
+        answer,
+        isRejected
+      )
+
+      if (!result) return
+
+      handleGetQuestion()
+      setIsEdit(false)
+      return
+    }
+
+    if (answer !== '' || isRejected) {
+      const result = await postAnswersAsync(
+        cardData.id,
+        isRejected ? 'rejected' : answer,
+        isRejected
+      )
+
+      if (!result) return
+      handleGetQuestion()
+      return
+    }
+  }
+
+  const delayedApi = useCallback(
+    debounce((q) => handleReactions(q), 300),
+    []
+  )
+
+  // 리액션
+  const handleReactions = async (type) => {
+    const result = await postReactionsAsync(type, cardData.id)
+
+    if (!result) return
+    handleGetQuestion()
+  }
+
+  // option 버튼 - 답변 삭제, 답변 수정, 질문 삭제
+  const handleOptions = async (menu) => {
+    setIsOpenOption(false)
+    if (menu === '답변 거절') {
+      handlePostAnswer(true)
+      return
+    }
+    if (menu === '답변 삭제') {
+      await deleteAnswersAsync(cardData.answer.id)
+
+      handleGetQuestion()
+      return
+    }
+    if (menu === '질문 삭제') {
+      handleDeleteQuestion(cardData.id)
+      return
+    }
+    if (menu === '수정하기') {
+      setIsEdit(true)
+      return
+    }
+  }
+
+  if (isLoadingDeleteAnswers) {
+    return (
+      <PostCardWrapper>
+        <PostCardContainer>
+          <Loading />
+        </PostCardContainer>
+      </PostCardWrapper>
+    )
+  }
   const theme = useRecoilValue(darkMode)
 
   return (
-    <PostCardWrapper>
+    <PostCardWrapper onClick={() => setIsOpenOption(false)}>
       <PostCardContainer $theme={theme}>
         <div className="header-container">
           <Badge isAnswered={isAnswered} />
-          {state !== 'answer' && (
+          {state === 'answer' && (
             <img
               className="option-btn"
               src={OptionIcon}
@@ -44,45 +167,63 @@ const PostCard = ({ state, item }) => {
         </div>
 
         <TitleContainer $theme={theme}>
-          <div className="question-ago">질문 · 2주전</div>
+          <div className="question-ago">
+            질문 · {calculateTimeAgo(cardData.createdAt)}
+          </div>
 
-          <div className="title">{item.content}</div>
+          <div className="title">{cardData.content}</div>
         </TitleContainer>
 
         {!(state === 'default' && !isAnswered) && (
           <MainContainer $isAnswered={isAnswered} $theme={theme}>
-            <img src={UserImg} className="user-icon" alt="userIcon" />
+            <img
+              src={userInfo.imageSource}
+              className="user-icon"
+              alt="userIcon"
+            />
             <div className="main-content-container">
               <div className="content-user-info-container">
-                <div className="user-name">아초는고양이</div>
-                <div className="content-ago">2주전</div>
+                <div className="user-name">{userInfo.name}</div>
+                <div className="content-ago">
+                  {calculateTimeAgo(cardData.answer?.createdAt)}
+                </div>
               </div>
 
-              {isAnswered ? (
-                <div className="main-content">
-                  그들을 불러 귀는 이상의 오직 피고, 가슴이 이상, 못할
-                  봄바람이다. 찾아다녀도, 전인 방황하였으며, 대한 바이며,
-                  이것이야말로 가치를 청춘의 따뜻한 그리하였는가? 몸이 열락의
-                  청춘의 때문이다. 천고에 피어나는 간에 밝은 이상, 인생의 만물은
-                  피다. 대중을 이성은 방황하여도, 그리하였는가? 크고 평화스러운
-                  품에 방황하였으며, 말이다. 이상은 들어 예수는 크고 긴지라
-                  역사를 피다. 얼음에 있음으로써 꽃 보배를 곧 가는 교향악이다.
-                  우는 새 예가 우리의 것은 피다. 피가 그것을 어디 앞이 기쁘며,
-                  이상의 열락의 위하여서 끝까지 것이다. 있는 봄바람을
-                  방황하여도, 우리의 것은 작고 아니한 영원히 듣기만 운다.
-                </div>
+              {isAnswered && !isEdit ? (
+                <>
+                  {cardData.answer.isRejected ? (
+                    <div className="answerRejected">답변 거절</div>
+                  ) : (
+                    <div className="main-content">
+                      {cardData.answer.content}
+                    </div>
+                  )}
+                </>
               ) : (
-                <div className="textarea-container">
-                  <InputTextArea
-                    placeholder="답변을 입력해주세요"
-                    setAnswer={setAnswer}
-                  />
-                  <Button
-                    isValue={answer !== ''}
-                    brown={true}
-                    text="답변 완료"
-                  />
-                </div>
+                <>
+                  {isLoadingAnswers || isLoadingPutAnswers ? (
+                    <div className="loadingContainer">
+                      <Loading />
+                    </div>
+                  ) : (
+                    <>
+                      <div className="textarea-container">
+                        <InputTextArea
+                          placeholder="답변을 입력해주세요"
+                          setAnswer={setAnswer}
+                          answer={answer}
+                          onKeyDown={handlePostAnswer}
+                        />
+                        <Button
+                          onClick={() => handlePostAnswer()}
+                          isValue={answer !== ''}
+                          brown={true}
+                          text="답변 완료"
+                        />
+                      </div>
+                    </>
+                  )}
+                </>
               )}
             </div>
           </MainContainer>
@@ -91,29 +232,56 @@ const PostCard = ({ state, item }) => {
         <div className="divider" />
 
         <BottomContainer>
-          <Reaction />
-          {isAnswered && <Edit />}
+          {!isLoadingReactions ? (
+            <Reaction
+              like={cardData.like}
+              disLike={cardData.dislike}
+              onClick={delayedApi}
+            />
+          ) : (
+            <div className="loadingContainer">
+              <Loading />
+            </div>
+          )}
+
+          {isAnswered && state === 'answer' && <Edit onClick={handleOptions} />}
         </BottomContainer>
       </PostCardContainer>
 
-      {isOpenOption && <OptionMenu setSelectOption={setSelectedOption} />}
+      {isOpenOption && (
+        <OptionMenu
+          onClick={handleOptions}
+          setIsOpenOption={setIsOpenOption}
+          isAnswered={isAnswered}
+          isRejected={cardData.answer?.isRejected || false}
+        />
+      )}
     </PostCardWrapper>
   )
 }
 export default PostCard
 
-const OptionMenuArr = ['답변 거절', '답변 삭제', '질문 거절', '수정하기']
+const OptionMenuArr = ['답변 거절', '답변 삭제', '질문 삭제', '수정하기']
 
-const OptionMenu = (props) => {
+const OptionMenu = ({ onClick, isAnswered, isRejected }) => {
   return (
     <OptionMenuContainer>
       {OptionMenuArr.map((e, index) => {
         return (
           <OptionMenuItem
             key={index}
-            $display={e !== '수정하기'}
+            $display={
+              !isAnswered
+                ? e === '답변 삭제' || e === '수정하기'
+                  ? false
+                  : true
+                : e === '수정하기' || (isRejected && e === '답변 거절')
+                ? false
+                : true
+            }
+            $isEdit={e === '수정하기'}
             className="optionMenuItem"
-            onClick={() => props.setSelectOption(e)}
+            onClick={() => onClick(e)}
           >
             {e}
           </OptionMenuItem>

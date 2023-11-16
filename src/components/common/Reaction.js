@@ -39,15 +39,23 @@ const DisLikeStyledComponent = styled(LikeStyledComponent)`
       : 'svg > g > path {fill: var(--orange);} color: var(--orange);'}
 `
 
-function Reaction({ like = '0', disLike = '0' }) {
+function Reaction({ like = '0', disLike = '0', onClick }) {
   const theme = useRecoilValue(darkMode)
   return (
     <ReactionStyledComponent>
-      <LikeStyledComponent $count={like} $theme={theme}>
+      <LikeStyledComponent
+        $count={like}
+        $theme={theme}
+        onClick={() => onClick('like')}
+      >
         <LikeIcon />
-        좋아요 {like !== '0' ? like : ''}
+        좋아요 {like !== 0 ? like : ''}
       </LikeStyledComponent>
-      <DisLikeStyledComponent $count={disLike} $theme={theme}>
+      <DisLikeStyledComponent
+        $count={disLike}
+        $theme={theme}
+        onClick={() => onClick('dislike')}
+      >
         <DisLikeIcon />
         싫어요
       </DisLikeStyledComponent>

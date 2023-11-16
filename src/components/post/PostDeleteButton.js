@@ -11,7 +11,6 @@ const FloatingButtonStyledComponent = styled.div`
   box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
   color: var(--gray-10, #fff);
   font-size: 1.5rem;
-  font-weight: 400;
   text-align: center;
   cursor: pointer;
   width: 10rem;
@@ -27,10 +26,10 @@ const FloatingButtonStyledComponent = styled.div`
   }
 `
 
-function PostDeleteButton() {
+function PostDeleteButton({ onClick }) {
   const theme = useRecoilValue(darkMode)
   return (
-    <FloatingButtonStyledComponent $theme={theme}>
+    <FloatingButtonStyledComponent onClick={onClick} $theme={theme}>
       삭제하기
     </FloatingButtonStyledComponent>
   )

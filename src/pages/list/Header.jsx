@@ -7,12 +7,14 @@ import { useState } from 'react'
 import { darkMode } from '../../atom/atom'
 import { useRecoilValue } from 'recoil'
 import ToggleButton from '../../components/common/ToggleButton'
+import { useToast } from '../../hooks/useToast'
 
 function Header() {
   const user = JSON.parse(localStorage.getItem('user'))
   const [isLogin] = useState(user ? true : false)
   const userId = user?.id
   const theme = useRecoilValue(darkMode)
+  const { fireToast } = useToast()
 
   const navigate = useNavigate()
 
@@ -21,13 +23,12 @@ function Header() {
       navigate(`/post/${userId}/answer`)
       return
     }
-    alert('로그인 후 접근할 수 있습니다.')
-    navigate('/')
+    fireToast({ content: '로그인 후 접근할 수 있습니다.' })
   }
 
   const onClickLogo = () => {
     if (isLogin) {
-      alert('이미 로그인 되어있습니다.')
+      fireToast({ content: '이미 로그인 되어있습니다.' })
       return
     }
     navigate('/')
@@ -95,7 +96,6 @@ const HeaderBottomContainer = styled.div`
     color: ${({ $theme }) =>
       $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
     font-size: 4rem;
-    font-weight: 400;
     margin-bottom: 1.2rem;
   }
 

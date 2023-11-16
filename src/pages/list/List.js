@@ -18,8 +18,7 @@ function List() {
   const calculatePage = (num) => {
     return Math.ceil(num / limit)
   }
-  const [isSubjectLoading, isSubjectError, getSubjectAsync] =
-    useAsync(getSubject)
+  const [isSubjectLoading, , getSubjectAsync] = useAsync(getSubject)
 
   const handleLoad = useCallback(
     async (options) => {
@@ -74,7 +73,6 @@ function List() {
         order={order}
         handleSort={handleSort}
         isLoading={isSubjectLoading}
-        isError={isSubjectError}
       />
       <Paginator
         lastPage={lastPage}

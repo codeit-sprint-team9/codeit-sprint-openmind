@@ -1,29 +1,20 @@
 import NavImg from '../../asset/post/nav-img.svg'
-import NavImgDark from '../../asset/post/nav-img-dark.png'
-import { ReactComponent as OpenMindLogo } from '../../asset/logo.svg'
-import { ReactComponent as LinkImg } from '../../asset/post/link.svg'
+import OpenMindLogo from '../../asset/post/openmind-logo.svg'
+import LinkImg from '../../asset/post/link.svg'
 import KakaoImg from '../../asset/post/kakao.svg'
 import FacebookImg from '../../asset/post/facebook.svg'
 import * as S from './PostStyledComponent'
 import Toast from '../../components/common/Toast'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { postUserData } from '../../api/post'
-import useAsync from '../../hooks/useAsync'
-import { darkMode } from '../../atom/atom'
-import { useRecoilValue } from 'recoil'
-
 const { Kakao } = window
 
-export default function Nav({ id }) {
-  const sharedLink = 'https://20002100.tistory.com/'
+export default function PostHeader({ userData }) {
   const BASE_URL = 'http://localhost:3000'
   const location = useLocation()
   const [urlAlert, setUrlAlert] = useState(false)
-  const [userData, setUserData] = useState({})
-  const [isUserLoading, isUserError, postUserDataAsync] = useAsync(postUserData)
+
   const userInfo = JSON.parse(localStorage.getItem('user'))
-  const theme = useRecoilValue(darkMode)
 
   const handleCopyClipBoard = async (text) => {
     setUrlAlert(true)
@@ -33,14 +24,6 @@ export default function Nav({ id }) {
     await navigator.clipboard.writeText(text)
   }
 
-  const handleUserData = async (id) => {
-    const result = await postUserDataAsync(id)
-    if (!result) return
-    setUserData(result)
-    if (isUserLoading) return <div>에러!</div>
-    if (isUserError) return <div>로딩중!</div>
-  }
-
   const resultUrl = window.location.href
   const shareKakao = () => {
     Kakao.Share.sendDefault({
@@ -48,7 +31,7 @@ export default function Nav({ id }) {
       content: {
         title: 'OpenMind',
         description: 'open',
-        imageUrl: 'https://i.ibb.co/XVh88Vs/image.jpg',
+        imageUrl: 'https://i.ibb.co/7pPSpgR/logo.png',
         link: {
           mobileWebUrl: resultUrl,
         },
@@ -65,15 +48,11 @@ export default function Nav({ id }) {
   }
 
   const onClickFacebook = () => {
-    window.open(`http://www.facebook.com/sharer.php?u=${sharedLink}`)
+    window.open(`http://www.facebook.com/sharer.php?u=${BASE_URL}/`)
   }
   useEffect(() => {
     Kakao.cleanup()
-    Kakao.init('512cd8a8ece57b97899c8cc612089c7d')
-  }, [])
-
-  useEffect(() => {
-    handleUserData(id)
+    Kakao.init('5fb0b78f5665095c59a459a1e6c76559')
   }, [])
 
   const navigate = useNavigate()
@@ -88,16 +67,16 @@ export default function Nav({ id }) {
 
   return (
     <>
-      <S.Div $theme={theme}>
-        <S.TopDiv $theme={theme}>
+      <S.Div>
+        <S.TopDiv>
           <S.LogoDiv onClick={() => handlePage()}>
-            <OpenMindLogo className="openMind-img" />
+            <img
+              src={OpenMindLogo}
+              alt="오픈 마인드 이미지"
+              className="openMind-img"
+            />
           </S.LogoDiv>
-          {theme === 'light' ? (
-            <img src={NavImg} alt="Nav 이미지" className="nav-img" />
-          ) : (
-            <img src={NavImgDark} alt="Nav 이미지" className="nav-img" />
-          )}
+          <img src={NavImg} alt="Nav 이미지" className="nav-img" />
         </S.TopDiv>
         <S.CatDiv>
           <img
@@ -106,15 +85,15 @@ export default function Nav({ id }) {
             className="profile-img"
           />
         </S.CatDiv>
-        <S.NavHeader $theme={theme}>{userData.name}</S.NavHeader>
-        <S.LinkDiv $theme={theme}>
+        <S.NavHeader>{userData.name}</S.NavHeader>
+        <S.LinkDiv>
           <S.Button
             className="button-container"
             onClick={() =>
               handleCopyClipBoard(`${BASE_URL}${location.pathname}`)
             }
           >
-            <LinkImg />
+            <img src={LinkImg} alt="링크 이미지" />
           </S.Button>
           <S.Button onClick={shareKakao}>
             <img src={KakaoImg} alt="카카오 이미지" />
