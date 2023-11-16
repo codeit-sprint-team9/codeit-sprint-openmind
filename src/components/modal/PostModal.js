@@ -6,36 +6,44 @@ import InputTextArea, {
 } from '../common/InputTextArea'
 import Button, { ButtonInteractiveStyledComponent } from '../common/Button'
 import { device } from '../styles'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import UserIcon from '../../asset/postCard/img_postCardUser.png'
 import useAsync from '../../hooks/useAsync'
 import { postQuestions } from '../../api/postModal'
+import { modalState } from '../../recoil/modal'
+import { useResetRecoilState } from 'recoil'
 
-const PostModal = ({ setIsOpened, onClick }) => {
+const PostModal = ({ onClick }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
   // 홈 부분 병합 후 수정 예정
   const id = JSON.parse(localStorage.getItem('user')).id || 225
-  const handlePostQuestion = async () => {
-    const result = await postQuestionAsync(id, question)
+  const resetModalState = useResetRecoilState(modalState)
 
-    if (result) {
-      setIsOpened(false)
-      onClick()
+  const handlePostQuestion = async () => {
+    if (question !== '') {
+      const result = await postQuestionAsync(id, question)
+
+      if (result) {
+        resetModalState()
+        onClick()
+      }
     }
   }
+
+  useEffect(() => {
+    if (error) {
+      setQuestion('')
+    }
+  }, [error])
 
   if (isLoading) {
     return <div>질문을 올리는 중입니다. 잠시만 기다려 주세요.</div>
   }
 
-  if (error) {
-    return <div>문제가 발생했습니다.</div>
-  }
-
   return (
     <Overlay>
-      <OuterModalContainer onClick={() => setIsOpened(false)} />
+      <OuterModalContainer onClick={() => resetModalState()} />
 
       <ModalMainContainer>
         <TitleContainer>
@@ -45,7 +53,7 @@ const PostModal = ({ setIsOpened, onClick }) => {
             src={CloseIcon}
             className="closeIcon"
             alt="closeIcon"
-            onClick={() => setIsOpened(false)}
+            onClick={() => resetModalState()}
           />
         </TitleContainer>
 

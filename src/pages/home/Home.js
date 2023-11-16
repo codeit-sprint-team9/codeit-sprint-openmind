@@ -8,6 +8,8 @@ import logo from '../../asset/Home/pc-logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
 import postSubject from '../../api/home'
+import { useToast } from '../../hooks/useToast'
+import LoadingPage from '../loading/LoadingPage'
 
 const HomeBackground = styled.div`
   width: 100vw;
@@ -69,8 +71,9 @@ const MainBox = styled.div`
 const Home = () => {
   const [isValue, setIsValue] = useState(false)
   const [name, setName] = useState('')
-  const [subjectPending, subjectError, subjectPost] = useAsync(postSubject)
+  const [subjectPending, , subjectPost] = useAsync(postSubject)
   const nav = useNavigate()
+  const { fireToast } = useToast()
 
   const handlePost = async () => {
     if (!isValue) return
@@ -95,14 +98,18 @@ const Home = () => {
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
-      alert(
-        '이미 질문대상이 존재합니다.\n삭제 후 새로운 질문 대상을 만들어주세요'
-      )
       nav('/list')
+      fireToast({
+        content:
+          '이미 질문대상이 존재합니다. 삭제 후 새로운 질문 대상을 만들어주세요',
+      })
     }
   }, [nav])
-  if (subjectError) return <div>애러가 발생했습니다. 새로고침해주세요.</div>
-  if (subjectPending) return <div>로딩중입니다. 잠시만 기다려주십시요.</div>
+
+  if (subjectPending) {
+    return <LoadingPage />
+  }
+
   return (
     <HomeBackground>
       <MainBox>

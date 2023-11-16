@@ -5,10 +5,7 @@ import Dropdown from '../../components/common/Dropdown'
 import { Link } from 'react-router-dom'
 import Loading from '../../components/common/Loading'
 
-function CardList({ subjectData, handleSort, order, isLoading, isError }) {
-  if (isError) {
-    return <div>에러가 발생했습니다.</div>
-  }
+function CardList({ subjectData, handleSort, order, isLoading }) {
   return (
     <>
       <Dropdown handleSort={handleSort} order={order} />

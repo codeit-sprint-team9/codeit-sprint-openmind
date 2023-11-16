@@ -4,11 +4,13 @@ import { device } from '../../components/styles'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useState } from 'react'
+import { useToast } from '../../hooks/useToast'
 
 function Header() {
   const user = JSON.parse(localStorage.getItem('user'))
   const [isLogin] = useState(user ? true : false)
   const userId = user?.id
+  const { fireToast } = useToast()
 
   const navigate = useNavigate()
 
@@ -17,13 +19,12 @@ function Header() {
       navigate(`/post/${userId}/answer`)
       return
     }
-    alert('로그인 후 접근할 수 있습니다.')
-    navigate('/')
+    fireToast({ content: '로그인 후 접근할 수 있습니다.' })
   }
 
   const onClickLogo = () => {
     if (isLogin) {
-      alert('이미 로그인 되어있습니다.')
+      fireToast({ content: '이미 로그인 되어있습니다.' })
       return
     }
     navigate('/')

@@ -8,7 +8,10 @@ import PostNoContent from '../../components/post/PostNoContent'
 import PostDeleteButton from '../../components/post/PostDeleteButton'
 import { useNavigate, useParams } from 'react-router-dom'
 import useAsync from '../../hooks/useAsync'
-import { postMainData, postMainDelete } from '../../api/post'
+import { postMainData, postMainDelete, postUserData } from '../../api/post'
+import { useRecoilValue } from 'recoil'
+import { modalState } from '../../recoil/modal'
+import LoadingPage from '../loading/LoadingPage'
 
 const Div = styled.div`
   position: relative;
@@ -19,15 +22,14 @@ const LIMIT = 4
 
 const Post = ({ state }) => {
   const { id } = useParams()
-  const [isOpened, setIsOpened] = useState(false)
   const [cnt, setCnt] = useState(0)
   const [items, setItems] = useState([])
   const [offset, setOffset] = useState(0)
   const [, isError, postMainDataAsync] = useAsync(postMainData)
-  const [isDeleteLoading, isDeleteError, postMainDeleteAsync] =
-    useAsync(postMainDelete)
+  const [isDeleteLoading, , postMainDeleteAsync] = useAsync(postMainDelete)
 
   const count = items.length
+  const { postModal } = useRecoilValue(modalState)
 
   const navigate = useNavigate()
 
@@ -59,62 +61,73 @@ const Post = ({ state }) => {
     }
   }
 
-  useEffect(() => {
-    isOpened
-      ? (document.body.style.overflowY = 'hidden')
-      : (document.body.style.overflowY = 'scroll')
-  }, [isOpened])
+  const [isPostUserDataLoading, isPostUserDataError, postUserDataAsync] =
+    useAsync(postUserData)
+  const [userData, setUserData] = useState({})
+
+  const handleUserData = async (id) => {
+    const result = await postUserDataAsync(id)
+
+    if (!result) return
+
+    setUserData(result)
+  }
 
   useEffect(() => {
-    handleLoad({ id, offset: 0, limit: LIMIT })
+    postModal.display
+      ? (document.body.style.overflowY = 'hidden')
+      : (document.body.style.overflowY = 'scroll')
+  }, [postModal])
+
+  useEffect(() => {
+    handleUserData(id)
   }, [])
 
   useEffect(() => {
-    if (isError) navigate('/list')
-  }, [isError])
+    if (isPostUserDataError === false && !isPostUserDataLoading) {
+      handleLoad({ id, offset: 0, limit: LIMIT })
+    }
+  }, [isPostUserDataError, isPostUserDataLoading])
 
-  if (isDeleteError) return <div>문제가 발생했습니다.</div>
+  useEffect(() => {
+    if (isError || isPostUserDataError) {
+      navigate('/list')
+    }
+  }, [isError, isPostUserDataError])
+
   if (isDeleteLoading) return <div>로딩중입니다.</div>
 
-  return (
-    isError === false && (
-      <>
-        <Div>
-          <Nav id={id} />
-          <S.Div>
-            {state === 'answer' && (
-              <S.DeleteButton>
-                <PostDeleteButton onClick={() => handleDeleteButton(id)} />
-              </S.DeleteButton>
-            )}
+  return isPostUserDataLoading ? (
+    <LoadingPage />
+  ) : (
+    <>
+      {isError === false && (
+        <>
+          <Div>
+            <Nav userData={userData} />
+            <S.Div>
+              {state === 'answer' && (
+                <S.DeleteButton>
+                  <PostDeleteButton onClick={() => handleDeleteButton(id)} />
+                </S.DeleteButton>
+              )}
 
-            {count !== 0 ? (
-              <PostContent
-                setIsOpened={setIsOpened}
-                isOpened={isOpened}
-                state={state}
-                items={items}
-                cnt={cnt}
-                handleLoadMore={handelLoadMore}
-              />
-            ) : (
-              <PostNoContent
-                setIsOpened={setIsOpened}
-                isOpened={isOpened}
-                state={state}
-              />
-            )}
-          </S.Div>
-        </Div>
-        {isOpened && (
-          <PostModal
-            onClick={handleLoad}
-            setIsOpened={setIsOpened}
-            isOpened={isOpened}
-          />
-        )}
-      </>
-    )
+              {count !== 0 ? (
+                <PostContent
+                  state={state}
+                  items={items}
+                  cnt={cnt}
+                  handleLoadMore={handelLoadMore}
+                />
+              ) : (
+                <PostNoContent state={state} />
+              )}
+            </S.Div>
+          </Div>
+          {postModal.display && <PostModal onClick={handleLoad} />}
+        </>
+      )}
+    </>
   )
 }
 
