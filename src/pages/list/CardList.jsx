@@ -38,7 +38,7 @@ function UserCard({ name, imageSource, questionCount }) {
     <CardContainer $theme={theme}>
       <CardProfile $theme={theme}>
         <img src={imageSource} />
-        <div>{name}</div>
+        <div className="user-name">{name}</div>
       </CardProfile>
 
       <CardContent $theme={theme}>
@@ -101,6 +101,15 @@ const CardProfile = styled.div`
   flex-direction: column;
   gap: 1.2rem;
 
+  .user-name {
+  overflow: hidden;  	
+  text-overflow: ellipsis;  
+  white-space: nowrap; 		
+  word-break:break-all;
+
+}
+
+  
   img {
     width: 6rem;
     height: 6rem;
