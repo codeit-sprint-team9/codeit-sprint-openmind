@@ -25,7 +25,6 @@ const DefaultLayout = () => {
   }, [theme])
   return (
     <>
-      {/* 헤더 자리 */}
       {
         <Suspense fallback={loading}>
           <Routes>
@@ -43,7 +42,6 @@ const DefaultLayout = () => {
           </Routes>
         </Suspense>
       }
-      {/* 푸터 자리 */}
     </>
   )
 }

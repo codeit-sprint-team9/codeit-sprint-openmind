@@ -12,7 +12,8 @@ import { useRecoilState } from 'recoil'
 export default function PostNoContent({ state }) {
   const [modalOpened, setModalOpened] = useRecoilState(modalState)
 
-  const handleModal = () => {
+  const handleModal = (e) => {
+    e.stopPropagation()
     setModalOpened((prev) => ({
       ...prev,
       postModal: {

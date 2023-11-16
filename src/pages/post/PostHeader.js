@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { darkMode } from '../../recoil/theme'
 import { useRecoilValue } from 'recoil'
+import { useToast } from '../../hooks/useToast'
 const { Kakao } = window
 
 export default function PostHeader({ userData }) {
@@ -60,9 +61,11 @@ export default function PostHeader({ userData }) {
   }, [])
 
   const navigate = useNavigate()
+  const { fireToast } = useToast()
 
   const handlePage = () => {
     if (userInfo) {
+      fireToast({ content: '이미 로그인 되어있습니다.' })
       navigate('/list')
       return
     }

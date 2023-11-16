@@ -62,7 +62,9 @@ const PostModal = ({ onClick, userData }) => {
           </div>
 
           {isLoading ? (
-            <Loading className="loading" />
+            <div className="loadingContainer">
+              <Loading />
+            </div>
           ) : (
             <>
               <InputTextArea
@@ -157,7 +159,7 @@ export const ContentContainer = styled.div`
   gap: 0.8rem;
   width: 100%;
 
-  .loading {
+  .loadingContainer {
     align-self: center;
   }
 
