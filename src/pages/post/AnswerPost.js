@@ -14,7 +14,7 @@ const AnswerPost = () => {
     setIsPending(false)
     if (userInfo) {
       if (userInfo.id.toString() !== id) {
-        fireToast({ content: '로그인된 계정으로만 접근이 가능합니다.' })
+        fireToast({ content: '로그인된 계정이 아닙니다.' })
         navigate('/list')
       }
     } else {

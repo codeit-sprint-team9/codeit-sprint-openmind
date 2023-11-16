@@ -10,7 +10,7 @@ export default function ErrorToast({ content, state }) {
     const setExistTimeout = setTimeout(() => {
       setIsClosing(true)
       clearTimeout(setExistTimeout)
-    }, 6500)
+    }, 1500)
   })
 
   return (
