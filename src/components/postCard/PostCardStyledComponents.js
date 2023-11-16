@@ -98,9 +98,9 @@ export const MainContainer = styled.div`
   }
 
   .answerRejected {
-    color: var(--red, #b93333);
     font-size: 1.6rem;
     line-height: 2.2rem;
+    color: var(--red);
   }
 
   .user-icon {

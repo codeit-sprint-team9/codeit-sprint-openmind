@@ -93,8 +93,11 @@ const Home = () => {
   const { fireToast } = useToast()
   const theme = useRecoilValue(darkMode)
 
+  const blank_pattern = /^\s+|\s+$/g
+
   const handlePost = async () => {
     if (!isValue) return
+    if (name.replace(blank_pattern, '') == '') return
     const result = await subjectPost(name)
     if (!result) return
     localStorage.setItem(
