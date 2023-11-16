@@ -109,9 +109,6 @@ const Post = ({ state }) => {
     resetModalState()
   }
 
-  useEffect(() => {
-    console.log(modalState)
-  }, [modalState])
   return isPostUserDataLoading ? (
     <LoadingPage />
   ) : (
