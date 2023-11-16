@@ -13,7 +13,7 @@ function CardList({ subjectData, handleSort, order, isLoading }) {
       <Dropdown handleSort={handleSort} order={order} />
 
       {isLoading ? (
-        <div style={{ marginTop: '17rem' }}>
+        <div style={{ margin: '20rem 0 ' }}>
           <Loading />
         </div>
       ) : (
@@ -88,7 +88,7 @@ const CardContainer = styled.div`
   ${({ $theme }) =>
     $theme === 'light'
       ? 'background-color: var(--gray-10); border: 0.1rem solid var(--gray-40);'
-      : 'background-color: var(--gray-55); border: 0.1rem solid var(--gray-10);'}}
+      : 'background-color: var(--gray-55); border: 0.1rem solid var(--gray-10);'}};
   
   @media ${device.mobile} {
     padding: 1.6rem;
@@ -102,14 +102,12 @@ const CardProfile = styled.div`
   gap: 1.2rem;
 
   .user-name {
-  overflow: hidden;  	
-  text-overflow: ellipsis;  
-  white-space: nowrap; 		
-  word-break:break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+  }
 
-}
-
-  
   img {
     width: 6rem;
     height: 6rem;
@@ -118,7 +116,7 @@ const CardProfile = styled.div`
 
   div {
     color: ${({ $theme }) =>
-      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'}
+      $theme === 'light' ? 'var(--gray-60);' : 'var(--gray-10);'};
     font-size: 2rem;
     line-height: 2.4rem;
   }
@@ -140,7 +138,7 @@ const CardContent = styled.div`
   justify-content: space-between;
 
   color: ${({ $theme }) =>
-    $theme === 'light' ? 'var(--gray-40);' : 'var(--gray-10);'}
+    $theme === 'light' ? 'var(--gray-40);' : 'var(--gray-10);'};
   font-size: 1.6rem;
 
   line-height: 2.2rem;
