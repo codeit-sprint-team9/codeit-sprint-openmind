@@ -13,6 +13,7 @@ import { useRecoilValue } from 'recoil'
 import { modalState } from '../../recoil/modal'
 import LoadingPage from '../loading/LoadingPage'
 import PostHeader from './PostHeader'
+import { useResetRecoilState } from 'recoil'
 
 const Div = styled.div`
   position: relative;
@@ -31,6 +32,7 @@ const Post = ({ state }) => {
   const [, , postMainDeleteAsync] = useAsync(postMainDelete)
 
   const { postModal } = useRecoilValue(modalState)
+  const resetModalState = useResetRecoilState(modalState)
 
   const navigate = useNavigate()
 
@@ -103,13 +105,17 @@ const Post = ({ state }) => {
     handleLoad()
   }
 
+  const handleOption = () => {
+    resetModalState()
+  }
+
   return isPostUserDataLoading ? (
     <LoadingPage />
   ) : (
     <>
       {isError === false && (
         <>
-          <Div>
+          <Div onClick={handleOption}>
             <PostHeader userData={userData} />
             <S.Div>
               {state === 'answer' && (

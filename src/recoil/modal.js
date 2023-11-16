@@ -6,5 +6,9 @@ export const modalState = atom({
     postModal: {
       display: false,
     },
+    optionModal: {
+      id: -1,
+      display: false,
+    },
   },
 })

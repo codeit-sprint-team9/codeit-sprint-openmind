@@ -26,6 +26,8 @@ import moment from 'moment'
 import { debounce } from 'lodash'
 import Loading from '../common/Loading'
 import 'moment/locale/ko'
+import { useRecoilState, useResetRecoilState } from 'recoil'
+import { modalState } from '../../recoil/modal'
 
 const calculateTimeAgo = (createdAt) => {
   const diff = moment(createdAt).fromNow()
@@ -34,7 +36,7 @@ const calculateTimeAgo = (createdAt) => {
 
 const PostCard = ({ state, data, handleDeleteQuestion }) => {
   const [cardData, setCardData] = useState(data)
-  const [isOpenOption, setIsOpenOption] = useState(false)
+  // const [isOpenOption, setIsOpenOption] = useState(false)
   const [answer, setAnswer] = useState(
     cardData.answer
       ? cardData.answer.isRejected
@@ -54,6 +56,9 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
   const [isLoadingPutAnswers, , putAnswersAsync] = useAsync(putAnswers)
   const [isLoadingDeleteAnswers, , deleteAnswersAsync] = useAsync(deleteAnswers)
   const [, , getQuestionsAsync] = useAsync(getQuestions)
+
+  const [openModal, setOpenModal] = useRecoilState(modalState)
+  const resetModal = useResetRecoilState(modalState)
 
   const handleGetQuestion = async () => {
     const response = await getQuestionsAsync(data.id)
@@ -114,7 +119,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
 
   // option 버튼 - 답변 삭제, 답변 수정, 질문 삭제
   const handleOptions = async (menu) => {
-    setIsOpenOption(false)
+    resetModal()
     if (menu === '답변 거절') {
       handlePostAnswer(true)
       return
@@ -146,7 +151,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
   }
 
   return (
-    <PostCardWrapper onClick={() => setIsOpenOption(false)}>
+    <PostCardWrapper>
       <PostCardContainer>
         <div className="header-container">
           <Badge isAnswered={isAnswered} />
@@ -157,7 +162,13 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
               alt="optionIcon"
               onClick={(e) => {
                 e.stopPropagation()
-                setIsOpenOption(!isOpenOption)
+                setOpenModal((prev) => ({
+                  ...prev,
+                  optionModal: {
+                    id: cardData.id,
+                    display: true,
+                  },
+                }))
               }}
             />
           )}
@@ -245,14 +256,14 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
         </BottomContainer>
       </PostCardContainer>
 
-      {isOpenOption && (
-        <OptionMenu
-          onClick={handleOptions}
-          setIsOpenOption={setIsOpenOption}
-          isAnswered={isAnswered}
-          isRejected={cardData.answer?.isRejected || false}
-        />
-      )}
+      {openModal.optionModal.display &&
+        openModal.optionModal.id === cardData.id && (
+          <OptionMenu
+            onClick={handleOptions}
+            isAnswered={isAnswered}
+            isRejected={cardData.answer?.isRejected || false}
+          />
+        )}
     </PostCardWrapper>
   )
 }
