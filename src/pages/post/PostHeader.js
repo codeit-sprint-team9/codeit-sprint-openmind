@@ -52,7 +52,7 @@ export default function PostHeader({ userData }) {
   }
   useEffect(() => {
     Kakao.cleanup()
-    Kakao.init('512cd8a8ece57b97899c8cc612089c7d')
+    Kakao.init('5fb0b78f5665095c59a459a1e6c76559')
   }, [])
 
   const navigate = useNavigate()
