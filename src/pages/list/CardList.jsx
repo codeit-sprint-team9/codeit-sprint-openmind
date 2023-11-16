@@ -16,7 +16,9 @@ function CardList({ subjectData, handleSort, order, isLoading, isError }) {
       <Dropdown handleSort={handleSort} order={order} />
 
       {isLoading ? (
-        <Loading />
+        <div style={{ marginTop: '17rem' }}>
+          <Loading />
+        </div>
       ) : (
         <CardListContainer>
           {subjectData?.map((subject) => (
