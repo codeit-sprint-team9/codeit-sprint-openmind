@@ -23,15 +23,15 @@ const ToggleBox = styled.div`
   }
   .dark-icon{
     position: absolute;
-    top: 3px;
-    left: 3px;
+    top: 5px;
+    left: 5px;
     visibility: ${({ $theme }) => ($theme === 'light' ? 'hidden;' : 'visible;')}
     transition: all 0.3s ease-in-out;
   }
   .sun-icon{
     position: absolute;
-    top: 3px;
-    left: 42px;
+    top: 5px;
+    left: 44px;
     visibility: ${({ $theme }) => ($theme === 'light' ? 'visible;' : 'hidden;')}
     transition: all 0.3s ease-in-out;
   }
