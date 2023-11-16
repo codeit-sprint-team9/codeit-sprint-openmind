@@ -39,7 +39,8 @@ export default function PostContent({
     }
   }
 
-  const handleModal = () => {
+  const handleModal = (e) => {
+    e.stopPropagation()
     setModalOpened((prev) => ({
       ...prev,
       postModal: {

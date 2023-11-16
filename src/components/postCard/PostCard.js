@@ -77,7 +77,7 @@ const PostCard = ({ state, data, handleDeleteQuestion }) => {
   const handlePostAnswer = async (isRejected = false) => {
     // 답변 수정
 
-    if (isAnswered) {
+    if (isAnswered && answer !== '') {
       const result = await putAnswersAsync(
         cardData.answer.id,
         answer,
