@@ -17,6 +17,7 @@ export default function PostContent({
   handleLoadMore,
   handleDeleteQuestion,
   cnt,
+  userData,
 }) {
   const [modalOpened, setModalOpened] = useRecoilState(modalState)
 
@@ -88,6 +89,7 @@ export default function PostContent({
                         key={item.id}
                         data={item}
                         state={state}
+                        userData={userData}
                         handleDeleteQuestion={handleDeleteQuestion}
                       />
                     )

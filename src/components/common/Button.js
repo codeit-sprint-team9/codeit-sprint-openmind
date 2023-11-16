@@ -14,9 +14,6 @@ const ButtonFlexBoxStyledComponent = css`
   font-size: 1.6rem;
   line-height: 2.2rem;
   height: 4.6rem;
-  @media ${device.mobile} {
-    height: 3.4rem;
-  }
 `
 
 export const ButtonInteractiveStyledComponent = styled.div`
@@ -43,6 +40,7 @@ const ButtonArrowStyledComponent = styled.div`
   @media ${device.mobile} {
     padding: 0.8rem 1.2rem;
     font-size: 1.4rem;
+    height: 3.4rem;
   }
 `
 
