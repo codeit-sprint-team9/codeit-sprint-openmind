@@ -56,41 +56,47 @@ export default function PostContent({
     <>
       <S.ContentWrapper $state={state}>
         <S.Content>
-          <S.ContentHeader>
-            <img
-              src={MessageImg}
-              alt="메세지 이미지"
-              className="content-header-img"
-            />
-            <div>{cnt}개의 질문이 있습니다</div>
-          </S.ContentHeader>
-          <S.ContentDiv>
-            <InfiniteScroll
-              dataLength={items.length}
-              next={loadMore}
-              hasMore={hasNext}
-              loader={
-                <S.Spinner>
-                  <Loading />
-                </S.Spinner>
-              }
-              className="infinite"
-              style={{
-                overflow: 'visible',
-              }}
-            >
-              {items.map((item) => {
-                return (
-                  <PostCard
-                    key={item.id}
-                    data={item}
-                    state={state}
-                    handleDeleteQuestion={handleDeleteQuestion}
-                  />
-                )
-              })}
-            </InfiniteScroll>
-          </S.ContentDiv>
+          {cnt ? (
+            <>
+              <S.ContentHeader>
+                <img
+                  src={MessageImg}
+                  alt="메세지 이미지"
+                  className="content-header-img"
+                />
+                <div>{cnt}개의 질문이 있습니다</div>
+              </S.ContentHeader>
+              <S.ContentDiv>
+                <InfiniteScroll
+                  dataLength={items.length}
+                  next={loadMore}
+                  hasMore={hasNext}
+                  loader={
+                    <S.Spinner>
+                      <Loading />
+                    </S.Spinner>
+                  }
+                  className="infinite"
+                  style={{
+                    overflow: 'visible',
+                  }}
+                >
+                  {items.map((item) => {
+                    return (
+                      <PostCard
+                        key={item.id}
+                        data={item}
+                        state={state}
+                        handleDeleteQuestion={handleDeleteQuestion}
+                      />
+                    )
+                  })}
+                </InfiniteScroll>
+              </S.ContentDiv>
+            </>
+          ) : (
+            <Loading />
+          )}
         </S.Content>
       </S.ContentWrapper>
       <S.DivButton $isOpened={modalOpened.postModal.display}>
