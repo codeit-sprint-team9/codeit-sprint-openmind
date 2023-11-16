@@ -13,6 +13,7 @@ import { useRecoilValue } from 'recoil'
 import { modalState } from '../../recoil/modal'
 import LoadingPage from '../loading/LoadingPage'
 import PostHeader from './PostHeader'
+import { useResetRecoilState } from 'recoil'
 
 const Div = styled.div`
   position: relative;
@@ -23,14 +24,15 @@ const LIMIT = 4
 
 const Post = ({ state }) => {
   const { id } = useParams()
-  const [cnt, setCnt] = useState(0)
+  const [cnt, setCnt] = useState(null)
   const [items, setItems] = useState([])
   const [offset, setOffset] = useState(0)
-  const [, isError, postMainDataAsync] = useAsync(postMainData)
+  const [isPostMainDataLoading, isError, postMainDataAsync] =
+    useAsync(postMainData)
   const [, , postMainDeleteAsync] = useAsync(postMainDelete)
 
-  const count = items.length
   const { postModal } = useRecoilValue(modalState)
+  const resetModalState = useResetRecoilState(modalState)
 
   const navigate = useNavigate()
 
@@ -103,13 +105,17 @@ const Post = ({ state }) => {
     handleLoad()
   }
 
+  const handleOption = () => {
+    resetModalState()
+  }
+
   return isPostUserDataLoading ? (
     <LoadingPage />
   ) : (
     <>
       {isError === false && (
         <>
-          <Div>
+          <Div onClick={handleOption}>
             <PostHeader userData={userData} />
             <S.Div>
               {state === 'answer' && (
@@ -118,7 +124,9 @@ const Post = ({ state }) => {
                 </S.DeleteButton>
               )}
 
-              {count !== 0 ? (
+              {cnt === 0 && isPostMainDataLoading === false ? (
+                <PostNoContent state={state} />
+              ) : (
                 <PostContent
                   state={state}
                   items={items}
@@ -126,8 +134,6 @@ const Post = ({ state }) => {
                   handleLoadMore={handelLoadMore}
                   handleDeleteQuestion={handleDeleteQuestion}
                 />
-              ) : (
-                <PostNoContent state={state} />
               )}
             </S.Div>
           </Div>
