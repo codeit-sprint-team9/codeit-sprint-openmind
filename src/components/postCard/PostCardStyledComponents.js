@@ -158,9 +158,12 @@ export const BottomContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 
-  @media all and ${device.mobile} {
-    ${EditBoxStyledComponent} {
+  ${EditBoxStyledComponent} {
+    diplay: flex;
+    height: 3.8rem;
+    @media all and ${device.mobile} {
       display: none;
     }
   }
