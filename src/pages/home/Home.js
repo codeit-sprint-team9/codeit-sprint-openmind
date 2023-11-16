@@ -70,7 +70,7 @@ const MainBox = styled.div`
 const Home = () => {
   const [isValue, setIsValue] = useState(false)
   const [name, setName] = useState('')
-  const [subjectPending, subjectError, subjectPost] = useAsync(postSubject)
+  const [subjectPending, , subjectPost] = useAsync(postSubject)
   const nav = useNavigate()
   const { fireToast } = useToast()
 
@@ -105,7 +105,6 @@ const Home = () => {
     }
   }, [nav])
 
-  if (subjectError) return <div>애러가 발생했습니다. 새로고침해주세요.</div>
   if (subjectPending) return <div>로딩중입니다. 잠시만 기다려주십시요.</div>
 
   return (
