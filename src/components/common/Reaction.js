@@ -20,10 +20,10 @@ const LikeStyledComponent = styled.div`
 
   ${({ $theme, $count }) =>
     $theme === 'light'
-      ? $count === '0'
+      ? $count === 0
         ? 'color: var(--gray-40);'
         : 'svg > g > path {fill: var(--blue);} color: var(--blue);'
-      : $count === '0'
+      : $count === 0
       ? 'svg > g > path {fill: var(--gray-10);} color: var(--gray-10);'
       : 'svg > g > path {fill: var(--sky-blue);} color: var(--sky-blue);'}
 `
@@ -31,15 +31,15 @@ const LikeStyledComponent = styled.div`
 const DisLikeStyledComponent = styled(LikeStyledComponent)`
   ${({ $theme, $count }) =>
     $theme === 'light'
-      ? $count === '0'
+      ? $count === 0
         ? 'color: var(--gray-40);'
         : 'svg > g > path {fill: var(--gray-60);} color: var(--gray-60);'
-      : $count === '0'
+      : $count === 0
       ? 'svg > g > path {fill: var(--gray-10);} color: var(--gray-10);'
       : 'svg > g > path {fill: var(--orange);} color: var(--orange);'}
 `
 
-function Reaction({ like = '0', disLike = '0', onClick }) {
+function Reaction({ like = 0, disLike = 0, onClick }) {
   const theme = useRecoilValue(darkMode)
   return (
     <ReactionStyledComponent>

@@ -76,6 +76,12 @@ const MainBox = styled.div`
     position: fixed;
     top: 4.5rem;
     left: 12.5rem;
+    @media ${device.tablet} {
+      left: 4.4rem;
+    }
+    @media ${device.mobile} {
+      left: 4.4rem;
+    }
   }
 `
 

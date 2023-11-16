@@ -37,7 +37,7 @@ function Header() {
   return (
     <>
       <HeaderTopContainer $theme={theme}>
-        <div style={{ width: 168 }}>
+        <div className="toggle-button">
           <ToggleButton />
         </div>
         <LogoImage className="logo" onClick={onClickLogo} />
@@ -65,6 +65,15 @@ const HeaderTopContainer = styled.div`
   }
   .answer-button {
     width: 16.8rem;
+  }
+
+  .toggle-button {
+    width: 16.8rem;
+    @media ${device.mobile} {
+      position: fixed;
+      top: 4.5rem;
+      left: 4.4rem;
+    }
   }
 
   @media ${device.tablet} {

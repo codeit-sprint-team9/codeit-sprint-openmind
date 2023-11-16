@@ -1,7 +1,7 @@
 import NavImg from '../../asset/post/nav-img.svg'
 import NavImgDark from '../../asset/post/nav-img-dark.png'
 import { ReactComponent as OpenMindLogo } from '../../asset/logo.svg'
-import LinkImg from '../../asset/post/link.svg'
+import { ReactComponent as LinkImg } from '../../asset/post/link.svg'
 import KakaoImg from '../../asset/post/kakao.svg'
 import FacebookImg from '../../asset/post/facebook.svg'
 import * as S from './PostStyledComponent'
@@ -90,14 +90,14 @@ export default function PostHeader({ userData }) {
           />
         </S.CatDiv>
         <S.NavHeader $theme={theme}>{userData.name}</S.NavHeader>
-        <S.LinkDiv>
+        <S.LinkDiv $theme={theme}>
           <S.Button
             className="button-container"
             onClick={() =>
               handleCopyClipBoard(`${BASE_URL}${location.pathname}`)
             }
           >
-            <img src={LinkImg} alt="링크 이미지" />
+            <LinkImg />
           </S.Button>
           <S.Button onClick={shareKakao}>
             <img src={KakaoImg} alt="카카오 이미지" />
