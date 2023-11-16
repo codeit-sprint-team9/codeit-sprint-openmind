@@ -5,17 +5,19 @@ import { useEffect, useState } from 'react'
 import PostCard from '../postCard/PostCard'
 import FloatingButton from '../common/FloatingButton'
 import { device } from '../styles'
+import { modalState } from '../../recoil/modal'
+import { useRecoilState } from 'recoil'
 import Loading from '../common/Loading'
 
 export default function PostContent({
-  setIsOpened,
   state,
-  isOpened,
   items,
   handleLoadMore,
   handleDeleteQuestion,
   cnt,
 }) {
+  const [modalOpened, setModalOpened] = useRecoilState(modalState)
+
   const [text, setText] = useState(window.innerWidth < 767 ? true : false)
   const [hasNext, setHasNext] = useState(true)
   const screenChange = (event) => {
@@ -38,7 +40,12 @@ export default function PostContent({
   }
 
   const handleModal = () => {
-    setIsOpened(true)
+    setModalOpened((prev) => ({
+      ...prev,
+      postModal: {
+        display: true,
+      },
+    }))
   }
 
   useEffect(() => {
@@ -86,7 +93,7 @@ export default function PostContent({
           </S.ContentDiv>
         </S.Content>
       </S.ContentWrapper>
-      <S.DivButton $isOpened={isOpened}>
+      <S.DivButton $isOpened={modalOpened.postModal.display}>
         {state === 'default' && (
           <FloatingButton
             text={text ? '질문 작성' : '질문 작성하기'}

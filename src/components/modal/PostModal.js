@@ -10,29 +10,35 @@ import { useState } from 'react'
 import useAsync from '../../hooks/useAsync'
 import { postQuestions } from '../../api/postModal'
 import Loading from '../common/Loading'
+import { useEffect } from 'react'
+import { modalState } from '../../recoil/modal'
+import { useResetRecoilState } from 'recoil'
 
-const PostModal = ({ setIsOpened, onClick, userData }) => {
+const PostModal = ({ onClick, userData }) => {
   const [question, setQuestion] = useState('')
   const [isLoading, error, postQuestionAsync] = useAsync(postQuestions)
+  const resetModalState = useResetRecoilState(modalState)
 
   const handlePostQuestion = async () => {
     if (question !== '') {
       const result = await postQuestionAsync(userData.id, question)
 
       if (result) {
-        setIsOpened(false)
+        resetModalState()
         onClick()
       }
     }
   }
 
-  if (error) {
-    return <div>문제가 발생했습니다.</div>
-  }
+  useEffect(() => {
+    if (error) {
+      setQuestion('')
+    }
+  }, [error])
 
   return (
     <Overlay>
-      <OuterModalContainer onClick={() => setIsOpened(false)} />
+      <OuterModalContainer onClick={() => resetModalState()} />
 
       <ModalMainContainer>
         <TitleContainer>
@@ -42,7 +48,7 @@ const PostModal = ({ setIsOpened, onClick, userData }) => {
             src={CloseIcon}
             className="closeIcon"
             alt="closeIcon"
-            onClick={() => setIsOpened(false)}
+            onClick={() => resetModalState()}
           />
         </TitleContainer>
 

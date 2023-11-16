@@ -4,10 +4,19 @@ import NoQuestionImg from '../../asset/post/no-question-img.svg'
 import FloatingButton from '../common/FloatingButton'
 import { useEffect, useState } from 'react'
 import { device } from '../styles'
+import { modalState } from '../../recoil/modal'
+import { useRecoilState } from 'recoil'
 
-export default function PostNoContent({ setIsOpened, isOpened, state }) {
+export default function PostNoContent({ state }) {
+  const [modalOpened, setModalOpened] = useRecoilState(modalState)
+
   const handleModal = () => {
-    setIsOpened(true)
+    setModalOpened((prev) => ({
+      ...prev,
+      postModal: {
+        display: true,
+      },
+    }))
   }
   const [text, setText] = useState(window.innerWidth < 767 ? true : false)
 
@@ -42,7 +51,7 @@ export default function PostNoContent({ setIsOpened, isOpened, state }) {
           </S.ContentNoQuestion>
         </S.Content>
       </S.ContentWrapper>
-      <S.DivButton $isOpened={isOpened}>
+      <S.DivButton $isOpened={modalOpened.postModal.display}>
         {state === 'default' && (
           <FloatingButton
             text={text ? '질문 작성' : '질문 작성하기'}

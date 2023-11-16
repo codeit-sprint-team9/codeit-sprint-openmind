@@ -1,9 +1,9 @@
 import { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import routes from '../../routes'
-import Loading from '../../pages/loading/LoadingPage'
+import LoadingPage from '../../pages/loading/LoadingPage'
 
-const loading = <Loading />
+const loading = <LoadingPage />
 
 const DefaultLayout = () => {
   return (

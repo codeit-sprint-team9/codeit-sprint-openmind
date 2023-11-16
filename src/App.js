@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Loading from './pages/loading/LoadingPage'
+import LoadingPage from './pages/loading/LoadingPage'
 
-const loading = <Loading />
+const loading = <LoadingPage />
 const DefaultLayout = React.lazy(() =>
   import('./components/common/DefaultLayout')
 )
