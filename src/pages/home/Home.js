@@ -117,40 +117,42 @@ const Home = () => {
   }
 
   return (
-    <HomeBackground $theme={theme}>
-      <MainBox>
-        <Link to="/list">
-          <ButtonBox>
-            <Button text="질문하러 가기" />
-          </ButtonBox>
-        </Link>
-        <Link to="/">
-          {theme === 'light' ? (
-            <img className="logo" src={logo} alt="logo" />
-          ) : (
-            <img className="logo" src={logoDark} alt="logo" />
-          )}
-        </Link>
-        <InputBox $theme={theme}>
-          <InputField
-            isValue={isValue}
-            setIsValue={setIsValue}
-            setName={setName}
-            onKeyDown={() => handlePost()}
-          />
-          <Button
-            className="brown-button"
-            brown
-            text="질문 받기"
-            isValue={isValue}
-            onClick={() => handlePost()}
-          />
-        </InputBox>
-        <div className="toggle-button">
-          <ToggleButton />
-        </div>
-      </MainBox>
-    </HomeBackground>
+    !localStorage.getItem('user') && (
+      <HomeBackground $theme={theme}>
+        <MainBox>
+          <Link to="/list">
+            <ButtonBox>
+              <Button text="질문하러 가기" />
+            </ButtonBox>
+          </Link>
+          <Link to="/">
+            {theme === 'light' ? (
+              <img className="logo" src={logo} alt="logo" />
+            ) : (
+              <img className="logo" src={logoDark} alt="logo" />
+            )}
+          </Link>
+          <InputBox $theme={theme}>
+            <InputField
+              isValue={isValue}
+              setIsValue={setIsValue}
+              setName={setName}
+              onKeyDown={() => handlePost()}
+            />
+            <Button
+              className="brown-button"
+              brown
+              text="질문 받기"
+              isValue={isValue}
+              onClick={() => handlePost()}
+            />
+          </InputBox>
+          <div className="toggle-button">
+            <ToggleButton />
+          </div>
+        </MainBox>
+      </HomeBackground>
+    )
   )
 }
 
