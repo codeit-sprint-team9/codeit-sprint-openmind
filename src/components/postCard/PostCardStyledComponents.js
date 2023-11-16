@@ -5,7 +5,6 @@ import { EditBoxStyledComponent } from '../common/Edit'
 
 export const PostCardWrapper = styled.div`
   position: relative;
-  background: red;
 
   .loading {
     color: var(--blue);
