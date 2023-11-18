@@ -105,11 +105,12 @@ recoil - 전역 상태 관리
 ### 페이지네이션 index 1로 고정되는 현상
 
 - 원인
-  - loading 처리를 return으로 처리해서 특정 페이지를 클릭하면 request 호출로 로딩이 발생
-  - page index의 state가 1로 초기화되어서 1로 고정되는 현상이 발생함
+  - ListPage라는 상위 컴포넌트에 CardList, Paginator라는 하위 컴포넌트가 존재하는 상황
+  - 특정 페이지를 클릭하면 request 호출로 로딩이 발생 → loading 처리를 ListPage 컴포넌트에서 return문으로 처리해버려서 얼리 리턴으로 인해 Paginator가 언마운트 되었다가 다시 마운트 됨
+  - 따라서 데이터가 불러와지면서 로딩이 발생할 때마다 page index의 state가 1로 초기화되어서 1로 고정되는 현상이 발생함
 - 해결
-  - 데이터가 화면에 보이는 부분은 cardList 컴포넌트고 그 상위에서 처리했기 때문에
-  - 로딩의 대한 처리를 cardList로 위임해서 처리함
+  - 데이터가 화면에 보이는 부분은 CardList 컴포넌트이기에
+  - 로딩의 대한 처리를 props를 통해 CardList로 넘겨서 처리함
 
 ### 좋아요 버튼 연속 클릭
 
