@@ -2,6 +2,12 @@
 
 # Codeit-sprint-team9-openmind
 
+## 노션
+
+<a href="https://sable-wavelength-4a8.notion.site/9-a526328efb6244e9b979f0e513678a04">
+  <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
+</a>
+
 ## 팀원
 
 <div style="display:flex; justify-content:space-between; align-items: center; text-align:center;;">
@@ -95,7 +101,7 @@ recoil - 전역 상태 관리
 ### 에러 처리로 화면 이동할 시 화면이 렌더링 되는 문제
 
 - 원인
-  - post 페이지에서 잘못된 접근을 시도 → post 페이지 이동 → nav로 이동
+  - post 페이지에서 잘못된 접근을 시도 → post 페이지 이동 → list로 이동
   - 검사하고 이동하는 함수가 useEffect 함수 내부에 있다 보니 렌더링을 하면서 동시에 실행함
   - post 페이지 한 곳에서 잘못된 접근 모든 경우의 수를 다뤄주다 보니 post 페이지에 잠깐이라도 들르게 됨
 - 해결
@@ -146,9 +152,3 @@ recoil - 전역 상태 관리
 ### 다크 모드
 
 <img src="./src/asset/etc/다크모드.gif">
-
-## 노션
-
-<a href="https://sable-wavelength-4a8.notion.site/9-a526328efb6244e9b979f0e513678a04">
-  <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
-</a>
