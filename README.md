@@ -1,6 +1,6 @@
 <img src='./src/asset/post/nav-img.svg' >
 
-# Codeit-sprint-team9-openmind
+# <img src='./public/favicon.png' width=25px heght=25px> Codeit-sprint-team9-openmind
 
 ## 노션
 
@@ -10,40 +10,14 @@
 
 ## 팀원
 
-<div style="display:flex; justify-content:space-between; align-items: center; text-align:center;;">
-    <div>
-        <a href="https://github.com/Accept77">
-            <img src='https://avatars.githubusercontent.com/u/101549519?v=4' width=150px height=150px style='border-radius: 100px; background:white;'>
-        </a>
-        <h3>양진수</h3>
-    </div>
-    <div>
-        <a href="https://github.com/zermzerm">
-            <img src='https://avatars.githubusercontent.com/u/91651812?v=4' width=150px height=150px style='border-radius: 100px'>
-        </a>
-        <h3>박경서</h3>
-    </div>
-    <div>
-        <a href="https://github.com/SoobinJ">
-            <img src='https://avatars.githubusercontent.com/u/77039033?v=4' width=150px height=150px style='border-radius: 100px'>
-        </a>
-        <h3>전수빈</h3>
-    </div>
-    <div>
-        <a href="https://github.com/youdame">
-            <img src='https://avatars.githubusercontent.com/u/112458620?v=4' width=150px height=150px style='border-radius: 100px'>
-        </a>
-        <h3>조유담</h3>
-    </div>
-</div>
+|<a href="https://github.com/Accept77"> <img src='https://avatars.githubusercontent.com/u/101549519?v=4' width=150px height=150px></a>|<a href="https://github.com/zermzerm"><img src='https://avatars.githubusercontent.com/u/91651812?v=4' width=150px height=150px></a>|<a href="https://github.com/SoobinJ"><img src='https://avatars.githubusercontent.com/u/77039033?v=4' width=150px height=150px></a>|<a href="https://github.com/youdame"><img src='https://avatars.githubusercontent.com/u/112458620?v=4' width=150px height=150px></a>|
+|:---:|:---:|:---:|:---:|
+|<h3>양진수</h3>|<h3>박경서</h3>|<h3>전수빈</h3>|<h3>조유담</h3>|
 
-## 기능 구현
+## 프로젝트 정보
 
-### 주제 선정
-
-- 오픈마인드와 롤링 사이에 큰 기능적 차이는 없다고 판단함(무한 스크롤, 페이지 네이션)
-- 하지만 롤링에는 이모지 박스 등 처리해야할 요소가 많음
-- 빠르게 오픈 마인드를 개발하고 추가 기능을 개발하는 방향으로 잡음
+### 개발 기간
+> 2023.11.03 ~ 2023.11.17
 
 ### 주요 라이브러리
 
@@ -60,21 +34,13 @@ recoil - 전역 상태 관리
 
 ### 기술 스택
 
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
-<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
-<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
-
-<img src="https://img.shields.io/badge/reactrouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
-<img src="https://img.shields.io/badge/nodedotjs-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
-<img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white">
-<img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white">
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"><img src="https://img.shields.io/badge/reactrouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white"><img src="https://img.shields.io/badge/nodedotjs-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"><img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white"><img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white">
 
 ## 데이터의 흐름
 
 <img src="./src/asset/etc/데이터 흐름.png">
 
-## 문제 및 해결 방법
+## 개발 중 있었던 문제 및 해결 방법
 
 ### 글꼴 문제
 
