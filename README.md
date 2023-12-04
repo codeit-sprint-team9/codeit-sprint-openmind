@@ -2,6 +2,10 @@
 
 # <img src='./public/favicon.png' width=25px heght=25px> Codeit-sprint-team9-openmind
 
+## 배포 사이트
+
+https://open-mind-nu.vercel.app/
+
 ## 노션
 
 <a href="https://sable-wavelength-4a8.notion.site/9-a526328efb6244e9b979f0e513678a04">
