@@ -3,12 +3,12 @@
 # <img src='./public/favicon.png' width=25px heght=25px> Codeit-sprint-team9-openmind
 
 ## 노션 & 배포 사이트
-
 <a href="https://sable-wavelength-4a8.notion.site/9-a526328efb6244e9b979f0e513678a04">
-  <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
+  노션
 </a>
+<br>
 <a href="https://open-mind-nu.vercel.app">
-  <img src="https://img.shields.io/badge/vercel-ffffff?style=for-the-badge&logo=Vercel&logoColor=black">
+  배포 사이트
 </a>
 
 ## 팀원
