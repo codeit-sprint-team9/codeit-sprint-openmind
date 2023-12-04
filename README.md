@@ -4,7 +4,7 @@
 
 ## 배포 사이트
 
-https://open-mind-nu.vercel.app/
+[오픈마인드] (https://open-mind-nu.vercel.app/)
 
 ## 노션
 
