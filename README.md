@@ -4,12 +4,10 @@
 
 ## 노션 & 배포 사이트
 <a href="https://sable-wavelength-4a8.notion.site/9-a526328efb6244e9b979f0e513678a04">
-  노션
+  <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
 </a>
-<br>
-<a href="https://open-mind-nu.vercel.app">
-  배포 사이트
-</a>
+
+[OPENMIND](https://open-mind-nu.vercel.app/)
 
 ## 팀원
 
